@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
-
+//Hei
 namespace Mvc_oblig.Models
 {
     public class IndexViewModel
