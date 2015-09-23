@@ -22,3 +22,15 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.onehundred {
+
+    padding-top:100px;
+
+}
+
+.fifty{
+
+    padding-top:50px;
+
+}
