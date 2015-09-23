@@ -16,7 +16,7 @@ namespace Mvc_oblig
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Customer", action = "ListAllCustomeres", id = UrlParameter.Optional }
+                defaults: new { controller = "Customer", action = "GetAllCustomeres", id = UrlParameter.Optional }
             );
         }
     }
