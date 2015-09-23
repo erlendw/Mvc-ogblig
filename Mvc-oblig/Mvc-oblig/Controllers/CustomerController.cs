@@ -9,7 +9,7 @@ namespace Mvc_oblig.Controllers
     public class CustomerController : Controller
     {
         // GET: Customer
-        public ActionResult Index()
+        public ActionResult getAllCustomers()
         {
             return View();
         }

@@ -26,7 +26,7 @@ namespace Mvc_oblig.Models
 
         [Key]
         public string ZipCode { get; set; }
-        public string PostalArea { get; set; }
+        public string PostalArea_ { get; set; }
 
 
     }
