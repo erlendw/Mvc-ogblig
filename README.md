@@ -2,7 +2,7 @@
 
 <ul>
 
-#hva må gjøres?
+# hva må gjøres?
 
 <li>Dynamisk loade alle varer</li>
 
