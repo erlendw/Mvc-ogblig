@@ -1,5 +1,5 @@
 ﻿
-@model Mvc_oblig.Models.Customer 
+@model List<Mvc_oblig.Models.Customer> 
     
 <!--//dash is not allowed here, use underscore-->
 
@@ -17,8 +17,22 @@
 </head>
 <body>
     <div>
-
-   
+    <h3>List of users:</h3>
+        <table>
+            @foreach (var customer in Model)
+            {
+                <tr>
+                    <td>@customer.CustomerId</td>
+                    <td>@customer.FirstName</td>
+                    <td>@customer.LastName</td>
+                    <td>@customer.Address</td>
+                    <td>@customer.PostalArea</td>
+                    <td>@customer.PostalArea.ZipCode</td>
+                </tr>
+            }
+        </table>
+        @ViewBag.Message
+        <a href= "/Customer/CreateCustomer">Create customer</a>
 
     </div>
 </body>
