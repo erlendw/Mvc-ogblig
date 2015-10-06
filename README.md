@@ -7,7 +7,7 @@
 <li>Lage design</li>
 <li>Finne varer</li>
 <li>Implementere betaling/checkout</li>
-<li>Lage handlekurv(Den som får tid først)</li>
+<li>Lage handlekurv (Den som får tid først)</li>
 <li>Make it pretty</li>
 <li>Lage produktmodell og fikse tabell (Daniel og trym)</li>
 </ul>
