@@ -2,7 +2,7 @@
 <ul>
 <li>Lage log in</li>
 <li>Dynamisk loade alle varer</li>
-<li>~~Oprette database~~</li>
+<li><del>Oprette database</del></li>
 <li>Finne menystruktur</li>
 <li>Lage design</li>
 <li>Finne varer</li>
@@ -16,7 +16,7 @@
 
 <ul>
 <li>Brukeroversikt (?)</li>
-<li>~~Brukere~~</li>
+<li><del>Brukere</del></li>
 <li>Bestillinger</li>
 <li>Handlevogn</li>
 <li>Vareliste (må ha kategorifelt)</li>
