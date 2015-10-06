@@ -34,6 +34,8 @@ namespace Mvc_oblig.Controllers
                     newCustomer.FirstName = inList["FirstName"];
                     newCustomer.LastName = inList["LastName"];
                     newCustomer.Address = inList["Address"];
+                    newCustomer.mail = inList["Mail"];
+                    newCustomer.Password = inList["Password"];
                     // kan ikke bruke dette array i LINQ nedenfor
                     string inZip = inList["ZipCode"];
 

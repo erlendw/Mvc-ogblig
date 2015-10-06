@@ -20,17 +20,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Erlend og Mads sin tebutikk", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Erlend, Mads, Trym og Daniel sin tebutikk", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             
             
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Register customer","CreateCustomer", "Customer")</li>
                 </ul>
-              
-            </div>
-        
+            </div>        
        </div>
     </div>
     
@@ -43,7 +42,7 @@
         
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Erlend og Mads sin tebutikk</p>
+            <p>&copy; @DateTime.Now.Year - Erlend, Mads, Trym og Daniel sin tebutikk</p>
         </footer>
     </div>
 
