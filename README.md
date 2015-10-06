@@ -1,15 +1,18 @@
 # hva må gjøres?
 <ul>
-<li>Lage log in</li>
-<li>Dynamisk loade alle varer</li>
+<li>Lage log in (erlend og mads)</li>
+<li>Dynamisk loade alle varer (erlend og mads)</li>
 <li><del>Oprette database</del></li>
 <li>Finne menystruktur</li>
 <li>Lage design</li>
 <li>Finne varer</li>
 <li>Implementere betaling/checkout</li>
-<li>Lage handlekurv</li>
+<li>Lage handlekurv(Den som får tid først)</li>
 <li>Make it pretty</li>
+<li>Lage produktmodell og fikse tabell(Daniel og trym)</li>
 </ul>
+
+
 
 # Liste over objekter som skal bli stappa i database
 
