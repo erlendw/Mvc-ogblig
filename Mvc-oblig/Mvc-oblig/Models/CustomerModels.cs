@@ -27,6 +27,8 @@ namespace Mvc_oblig.Models
         public string LastName { get; set; }
         public string Address { get; set; }
 
+        public string Salt { get; set; }
+
         public virtual PostalArea PostalArea { get; set; } //lazy loader
 
     }
