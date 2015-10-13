@@ -9,11 +9,15 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 namespace Mvc_oblig.Models
 {
     public class Customer
-    {
+    {        
 
         [Key]
         public int CustomerId { get; set; }
+        public string mail { get; set; }
+        [Required(ErrorMessage = "Name required")]
         public string FirstName { get; set; }
+        [Required(ErrorMessage = "Passwrod required")]
+        public string Password { get; set; }
         public string LastName { get; set; }
         public string Address { get; set; }
 
