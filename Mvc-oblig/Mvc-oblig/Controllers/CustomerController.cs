@@ -37,8 +37,7 @@ namespace Mvc_oblig.Controllers
                     // kan ikke bruke dette array i LINQ nedenfor
                     string inZip = inList["ZipCode"];
 
-                    var foundPostalArea = db.PostalArea
-                   .FirstOrDefault(p => p.ZipCode == inZip);
+                    var foundPostalArea = db.PostalArea.FirstOrDefault(p => p.ZipCode == inZip);
                     if (foundPostalArea == null) // fant ikke poststed, må legge inn et nytt
                     {
                         var newPostalArea = new Models.PostalArea();
@@ -59,6 +58,7 @@ namespace Mvc_oblig.Controllers
             }
             catch (Exception e)
             {
+                System.Diagnostics.Debug.WriteLine("failer her");
                 return View();
             }
         }
