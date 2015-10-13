@@ -4,12 +4,15 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
+//alt klikker ved endring i modellen, workaround var å droppe migration history fra databasen ... http://stackoverflow.com/questions/21852121/the-model-backing-the-context-context-has-changed-since-the-database-was-cre
+
 namespace Mvc_oblig.Controllers
 {
     public class CustomerController : Controller
     {
         // GET: Customer
-        public ActionResult GetAllCustomers()
+        public ActionResult GetAllCustomers() 
         {
             var db = new Models.CustomerContext();
             List<Models.Customer> GetAllCustomers = db.Customer.ToList();
@@ -34,8 +37,6 @@ namespace Mvc_oblig.Controllers
                     newCustomer.FirstName = inList["FirstName"];
                     newCustomer.LastName = inList["LastName"];
                     newCustomer.Address = inList["Address"];
-                    newCustomer.mail = inList["Mail"];
-                    newCustomer.Password = inList["Password"];
                     // kan ikke bruke dette array i LINQ nedenfor
                     string inZip = inList["ZipCode"];
 
