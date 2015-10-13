@@ -13,10 +13,10 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>ListAlleBrukere</title>
+    <title>ListAllCustomers</title>
 </head>
 <body>
-    <div>
+    <div class="onehundred">
     <h3>List of users:</h3>
         <table>
             @foreach (var customer in Model)
@@ -28,11 +28,16 @@
                     <td>@customer.Address</td>
                     <td>@customer.PostalArea</td>
                     <td>@customer.PostalArea.ZipCode</td>
+                    <td>@customer.Mail</td>
+                    <td>@customer.Password</td>
+                    <td>@customer.Salt</td>
                 </tr>
             }
         </table>
-        @ViewBag.Message
-        <a href= "/Customer/CreateCustomer">Create customer</a>
+
+        <div class="onehundred"></div>
+
+        <a href= "/Customer/CreateCustomer">Register here!</a>
 
     </div>
 </body>

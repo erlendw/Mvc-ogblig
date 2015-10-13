@@ -1,21 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
+
+
+//alt klikker ved endring i modellen, workaround var å droppe migration history fra databasen ... http://stackoverflow.com/questions/21852121/the-model-backing-the-context-context-has-changed-since-the-database-was-cre
 
 namespace Mvc_oblig.Controllers
 {
     public class CustomerController : Controller
     {
         // GET: Customer
-        public ActionResult GetAllCustomers()
+        public ActionResult GetAllCustomers() 
         {
             var db = new Models.CustomerContext();
             List<Models.Customer> GetAllCustomers = db.Customer.ToList();
             ViewData.Model = GetAllCustomers;
-            //ViewBag.Message = "Click here " + GetAllCustomers[0].FirstName;
-            ViewData["Message"] = "Do some stuff..and some shit: ";
             return View();
         }
         public ActionResult CreateCustomer()
@@ -30,17 +32,21 @@ namespace Mvc_oblig.Controllers
             {
                 using (var db = new Models.CustomerContext())
                 {
+                    String salt = GenerateSalt(32);
+
                     var newCustomer = new Models.Customer();
+                    newCustomer.Mail = inList["Email"];
+                    newCustomer.Password = HashPassword(inList["Password"], salt);//inList["Password"];
                     newCustomer.FirstName = inList["FirstName"];
                     newCustomer.LastName = inList["LastName"];
                     newCustomer.Address = inList["Address"];
-                    newCustomer.mail = inList["Mail"];
-                    newCustomer.Password = inList["Password"];
+
+                    newCustomer.Salt = salt;
+
                     // kan ikke bruke dette array i LINQ nedenfor
                     string inZip = inList["ZipCode"];
 
-                    var foundPostalArea = db.PostalArea
-                   .FirstOrDefault(p => p.ZipCode == inZip);
+                    var foundPostalArea = db.PostalArea.FirstOrDefault(p => p.ZipCode == inZip);
                     if (foundPostalArea == null) // fant ikke poststed, må legge inn et nytt
                     {
                         var newPostalArea = new Models.PostalArea();
@@ -61,8 +67,29 @@ namespace Mvc_oblig.Controllers
             }
             catch (Exception e)
             {
+                System.Diagnostics.Debug.WriteLine("failer her");
                 return View();
             }
+        }
+
+        public String GenerateSalt(int size)
+        {
+
+            var RandomNumberGenerator = new System.Security.Cryptography.RNGCryptoServiceProvider();
+            var buffer = new byte[size];
+            RandomNumberGenerator.GetBytes(buffer);
+            return Convert.ToBase64String(buffer);
+        }
+
+        public String HashPassword(String Password, string Salt)
+        {
+
+            byte[] bytes = System.Text.Encoding.UTF8.GetBytes(Password + Salt);
+            SHA256Managed SHA256String = new SHA256Managed();
+            byte[] hash = SHA256String.ComputeHash(bytes);
+
+            return Convert.ToBase64String(hash);
+
         }
     }
 }
