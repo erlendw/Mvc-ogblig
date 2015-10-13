@@ -1,0 +1,51 @@
+﻿@model Mvc_oblig.Models.Order
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CardNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CardNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CVC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CVC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpiryDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpiryDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HolderName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HolderName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
