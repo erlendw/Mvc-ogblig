@@ -14,7 +14,8 @@ namespace Mvc_oblig.Models
         [Key]
         public int CustomerId { get; set; }
 
-        public string mail { get; set; }
+        [Required(ErrorMessage = "Email")]
+        public string Mail { get; set; }
 
         [Required(ErrorMessage = "Name required")]
         public string FirstName { get; set; }

@@ -17,8 +17,6 @@ namespace Mvc_oblig.Controllers
             var db = new Models.CustomerContext();
             List<Models.Customer> GetAllCustomers = db.Customer.ToList();
             ViewData.Model = GetAllCustomers;
-            //ViewBag.Message = "Click here " + GetAllCustomers[0].FirstName;
-            ViewData["Message"] = "Do some stuff..and some shit: ";
             return View();
         }
         public ActionResult CreateCustomer()
@@ -34,6 +32,8 @@ namespace Mvc_oblig.Controllers
                 using (var db = new Models.CustomerContext())
                 {
                     var newCustomer = new Models.Customer();
+                    newCustomer.Mail = inList["Email"];
+                    newCustomer.Password = inList["Password"];
                     newCustomer.FirstName = inList["FirstName"];
                     newCustomer.LastName = inList["LastName"];
                     newCustomer.Address = inList["Address"];

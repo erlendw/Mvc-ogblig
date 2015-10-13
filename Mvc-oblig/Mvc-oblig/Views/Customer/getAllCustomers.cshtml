@@ -16,7 +16,7 @@
     <title>ListAllCustomers</title>
 </head>
 <body>
-    <div>
+    <div class="onehundred">
     <h3>List of users:</h3>
         <table>
             @foreach (var customer in Model)
@@ -31,8 +31,10 @@
                 </tr>
             }
         </table>
-        @ViewBag.Message
-        <a href= "/Customer/CreateCustomer">Create customer</a>
+
+        <div class="onehundred"></div>
+
+        <a href= "/Customer/CreateCustomer">Register here!</a>
 
     </div>
 </body>
