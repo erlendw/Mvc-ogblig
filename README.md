@@ -25,4 +25,6 @@
 <li>Vareliste (må ha kategorifelt)</li>
 </ul>
 
+![](http://i.imgur.com/WE9rD1U.png)
+
 En bruker har en liste over sine bestillinger, de kan også ha en handlekurvliste. Butikken har en liste over alle bestillinger, og alle varer samt en komplett liste over alle registrerte brukere.
