@@ -31,4 +31,6 @@ En bruker har en liste over sine bestillinger, de kan også ha en handlekurvlist
 
 # Vi er kule bønner
 
+Gruppen er: Erlend, Trym, Mads og Daniel
+
 ![](http://i.imgur.com/WE9rD1U.png)
