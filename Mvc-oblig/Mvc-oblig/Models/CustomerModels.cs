@@ -33,6 +33,15 @@ namespace Mvc_oblig.Models
 
     }
 
+    public class DbCustomer
+    {
+
+        [Key]
+        public string Username;
+        public string Password;
+
+    }
+
     public class PostalArea
     {
 
