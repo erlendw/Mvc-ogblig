@@ -110,8 +110,6 @@ namespace Mvc_oblig.Controllers
             if (customer != null)
             {
 
-                
-
                 String OldHash = customer.Password;
                 String ReHash = HashPassword(inList["Password"], customer.Salt);
 
@@ -119,25 +117,27 @@ namespace Mvc_oblig.Controllers
                 {
 
                     Session["loggedin"] = true;
-                    ViewBag.LoggedIn = true;
 
                     Debug.WriteLine("get logged in son");
+                    return RedirectToAction("GetAllCustomers");
 
                 }
                 else
                 {
                     Session["loggedin"] = false;
-                    ViewBag.LoggedIn = false;
 
+                    Debug.WriteLine("null funk");
+                    
                 }
 
-                return RedirectToAction("GetAllCustomers");
+                
 
             }
 
-            else Debug.WriteLine("null funk");
 
-            return RedirectToAction("GetAllCustomers");
+            return RedirectToAction("Login", "Login");
+
+
 
         }
 
