@@ -48,7 +48,7 @@ namespace Mvc_oblig.Models
 
         public CustomerContext() : base("name=customer")
         {
-            Database.CreateIfNotExists();
+            //Database.CreateIfNotExists();
 
         }
 
