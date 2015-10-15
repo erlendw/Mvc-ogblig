@@ -29,5 +29,7 @@ namespace Mvc_oblig.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Mvc_oblig.Models.Customer> Customers { get; set; }
     }
 }

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
+using Mvc_oblig.Models;
+using System.Diagnostics;
 
 
 //alt klikker ved endring i modellen, workaround var å droppe migration history fra databasen ... http://stackoverflow.com/questions/21852121/the-model-backing-the-context-context-has-changed-since-the-database-was-cre
@@ -13,6 +15,8 @@ namespace Mvc_oblig.Controllers
     public class CustomerController : Controller
     {
         // GET: Customer
+
+
         public ActionResult GetAllCustomers() 
         {
             var db = new Models.CustomerContext();
@@ -20,11 +24,14 @@ namespace Mvc_oblig.Controllers
             ViewData.Model = GetAllCustomers;
             return View();
         }
+
+
         public ActionResult CreateCustomer()
         {
 
             return View();
         }
+
         [HttpPost]
         public ActionResult CreateCustomer(FormCollection inList)
         {
@@ -32,6 +39,7 @@ namespace Mvc_oblig.Controllers
             {
                 using (var db = new Models.CustomerContext())
                 {
+
                     String salt = GenerateSalt(32);
 
                     var newCustomer = new Models.Customer();
@@ -40,7 +48,6 @@ namespace Mvc_oblig.Controllers
                     newCustomer.FirstName = inList["FirstName"];
                     newCustomer.LastName = inList["LastName"];
                     newCustomer.Address = inList["Address"];
-
                     newCustomer.Salt = salt;
 
                     // kan ikke bruke dette array i LINQ nedenfor
@@ -60,14 +67,16 @@ namespace Mvc_oblig.Controllers
                     { // fant poststedet, legger det inn i den nye brukeren
                         newCustomer.PostalArea = foundPostalArea;
                     }
+
                     db.Customer.Add(newCustomer);
                     db.SaveChanges();
                     return RedirectToAction("GetAllCustomers");
+
                 }
             }
+
             catch (Exception e)
             {
-                System.Diagnostics.Debug.WriteLine("failer her");
                 return View();
             }
         }
@@ -91,5 +100,68 @@ namespace Mvc_oblig.Controllers
             return Convert.ToBase64String(hash);
 
         }
+
+
+        [HttpPost]
+        public ActionResult ValidateUser(FormCollection inList)
+        {
+            Customer customer = FindCustomerByEmail(inList["Email"]);
+
+            if (customer != null)
+            {
+
+                
+
+                String OldHash = customer.Password;
+                String ReHash = HashPassword(inList["Password"], customer.Salt);
+
+                if(OldHash == ReHash)
+                {
+
+                    Session["loggedin"] = true;
+                    ViewBag.LoggedIn = true;
+
+                    Debug.WriteLine("get logged in son");
+
+                }
+                else
+                {
+                    Session["loggedin"] = false;
+                    ViewBag.LoggedIn = false;
+
+                }
+
+                return RedirectToAction("GetAllCustomers");
+
+            }
+
+            else Debug.WriteLine("null funk");
+
+            return RedirectToAction("GetAllCustomers");
+
+        }
+
+        public Customer FindCustomerByEmail(string Email)
+        {
+
+            var db = new Models.CustomerContext();
+            List<Models.Customer> GetAllCustomers = db.Customer.ToList();
+
+            for(int i = 0; i < GetAllCustomers.Count; i++)
+            {
+
+                if(GetAllCustomers[i].Mail == Email)
+                {
+
+                    return GetAllCustomers[i];
+
+                }
+
+            }
+
+            return null;
+
+        }
+      
     }
 }
