@@ -5,14 +5,15 @@ namespace Mvc_oblig.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Mvc_oblig.Models.CustomerContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<Mvc_oblig.Models.OrderModel>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
+            ContextKey = "Mvc_oblig.Models.OrderModel";
         }
 
-        protected override void Seed(Mvc_oblig.Models.CustomerContext context)
+        protected override void Seed(Mvc_oblig.Models.OrderModel context)
         {
             //  This method will be called after migrating to the latest version.
 
