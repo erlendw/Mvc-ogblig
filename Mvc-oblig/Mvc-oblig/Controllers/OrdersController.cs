@@ -46,7 +46,7 @@ namespace Mvc_oblig.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,CardNumber,CVC,ExpiryDate,HolderName")] Order order)
+        public ActionResult Create([Bind(Include = "id")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace Mvc_oblig.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,CardNumber,CVC,ExpiryDate,HolderName")] Order order)
+        public ActionResult Edit([Bind(Include = "id")] Order order)
         {
             if (ModelState.IsValid)
             {

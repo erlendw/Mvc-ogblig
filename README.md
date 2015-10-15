@@ -25,4 +25,12 @@
 <li>Vareliste (må ha kategorifelt)</li>
 </ul>
 
+
+
 En bruker har en liste over sine bestillinger, de kan også ha en handlekurvliste. Butikken har en liste over alle bestillinger, og alle varer samt en komplett liste over alle registrerte brukere.
+
+# Vi er kule bønner
+
+Gruppen er: Erlend, Trym, Mads og Daniel
+
+![](http://i.imgur.com/WE9rD1U.png)
