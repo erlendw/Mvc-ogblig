@@ -26,6 +26,8 @@ namespace Mvc_oblig.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+            Database.SetInitializer<Mvc_oblig.Models.CustomerContext>(null);
         }
     }
 }
