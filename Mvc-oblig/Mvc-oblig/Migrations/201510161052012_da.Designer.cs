@@ -7,13 +7,13 @@ namespace Mvc_oblig.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddPasswordAndUsername : IMigrationMetadata
+    public sealed partial class da : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddPasswordAndUsername));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(da));
         
         string IMigrationMetadata.Id
         {
-            get { return "201510131014018_AddPasswordAndUsername"; }
+            get { return "201510161052012_da"; }
         }
         
         string IMigrationMetadata.Source

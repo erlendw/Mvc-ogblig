@@ -179,13 +179,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201510131014018_AddPasswordAndUsername.cs" />
-    <Compile Include="Migrations\201510131014018_AddPasswordAndUsername.Designer.cs">
-      <DependentUpon>201510131014018_AddPasswordAndUsername.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510151532223_InitialCreate.cs" />
-    <Compile Include="Migrations\201510151532223_InitialCreate.Designer.cs">
-      <DependentUpon>201510151532223_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201510161052012_da.cs" />
+    <Compile Include="Migrations\201510161052012_da.Designer.cs">
+      <DependentUpon>201510161052012_da.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -268,11 +264,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201510131014018_AddPasswordAndUsername.resx">
-      <DependentUpon>201510131014018_AddPasswordAndUsername.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510151532223_InitialCreate.resx">
-      <DependentUpon>201510151532223_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201510161052012_da.resx">
+      <DependentUpon>201510161052012_da.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
