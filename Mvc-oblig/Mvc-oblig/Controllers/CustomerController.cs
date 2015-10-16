@@ -89,7 +89,6 @@ namespace Mvc_oblig.Controllers
 
         public String GenerateSalt(int size)
         {
-
             var RandomNumberGenerator = new System.Security.Cryptography.RNGCryptoServiceProvider();
             var buffer = new byte[size];
             RandomNumberGenerator.GetBytes(buffer);
@@ -135,16 +134,8 @@ namespace Mvc_oblig.Controllers
                     Debug.WriteLine("null funk");
                     
                 }
-
-                
-
             }
-
-
             return RedirectToAction("Login", "Login");
-
-
-
         }
 
         public Customer FindCustomerByEmail(string Email)
@@ -155,19 +146,12 @@ namespace Mvc_oblig.Controllers
 
             for(int i = 0; i < GetAllCustomers.Count; i++)
             {
-
                 if(GetAllCustomers[i].Mail == Email)
                 {
-
                     return GetAllCustomers[i];
-
                 }
-
             }
-
             return null;
-
         }
-      
     }
 }
