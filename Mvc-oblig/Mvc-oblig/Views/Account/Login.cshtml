@@ -37,8 +37,24 @@
         </div>
     
     </div>
+
+
 }
 
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<body>
+    <div class="form-group onehundred">
+        <form action="/Customer/ValidateUser" method="post">
+            <table>
+
+                <tr><td>Email : </td><td><input type="text" name="Email" /></td></tr>
+                <tr><td>Password : </td><td><input type="password" name="Password" /></td></tr>
+                <tr><td><input type="submit" value="Create customer" /></td></tr>
+
+            </table>
+        </form>
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
