@@ -32,6 +32,12 @@ namespace Mvc_oblig.Controllers
             return View();
         }
 
+        public ActionResult Login()
+        {
+
+            return View();
+        }
+
         [HttpPost]
         public ActionResult CreateCustomer(FormCollection inList)
         {
