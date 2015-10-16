@@ -1,0 +1,45 @@
+﻿
+@model List<Mvc_oblig.Models.Customer> 
+    
+<!--//dash is not allowed here, use underscore-->
+
+
+@{
+    ViewBag.Title = "GetAllCustomers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ListAllCustomers</title>
+</head>
+<body>
+    <div class="onehundred">
+    <h3>List of users:</h3>
+        <table>
+            @foreach (var customer in Model)
+            {
+                <tr>
+                    <td>@customer.CustomerId</td>
+                    <td>@customer.FirstName</td>
+                    <td>@customer.LastName</td>
+                    <td>@customer.Address</td>
+                    <td>@customer.PostalArea</td>
+                    <td>@customer.PostalArea.ZipCode</td>
+                    <td>@customer.Mail</td>
+                    <td>@customer.Password</td>
+                    <td>@customer.Salt</td>
+                </tr>
+            }
+        </table>
+
+        <div class="onehundred"></div>
+
+        <a href= "/Customer/CreateCustomer">Register here!</a>
+
+    </div>
+</body>
+</html>
+

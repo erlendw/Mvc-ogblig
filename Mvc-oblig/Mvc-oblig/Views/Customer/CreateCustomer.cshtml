@@ -1,0 +1,29 @@
+﻿@model Mvc_oblig.Models.Customer
+@{
+    ViewBag.Title = "CreateCustomer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CreateCustomer</title>
+</head>
+<body>
+    <div class="form-group onehundred">
+        <form action="/Customer/CreateCustomer" method="post">
+            <table>
+
+                <tr><td>Email : </td><td><input type="text" name="Email" /></td></tr>
+                <tr><td>First name : </td><td><input type="text" name="FirstName" /></td></tr>
+                <tr><td>Last name :</td><td><input type="text" name="LastName" /></td></tr>
+                <tr><td>Address : </td><td><input type="text" name="Address" /></td></tr>
+                <tr><td>Zip code : </td><td><input type="text" name="ZipCode" /></td></tr>
+                <tr><td>Postal area :</td><td><input type="text" name="PostalArea" /></td></tr>
+                <tr><td>Password : </td><td><input type="password" name="Password" /></td></tr>
+                <tr><td><input type="submit" value="Create customer" /></td></tr>
+
+            </table>
+        </form>
+    </div>
+</body>
+</html>
