@@ -116,14 +116,21 @@ namespace Mvc_oblig.Controllers
             {
 
                 Customer customer = FindCustomerByEmail(c.Mail);
-                customer.FirstName = inList["FirstName"];
-                customer.LastName = inList["LastName"];
-                customer.Address = inList["Address"];
-                customer.Mail = inList["Mail"];
+           
+                    customer.FirstName = inList["FirstName"];
+       
+                    customer.LastName = inList["LastName"];
+                
+          
+                    customer.Address = inList["Address"];
+            
+                    //customer.Mail = inList["Mail"];
+                
+                
                 db.SaveChanges();
                 HttpContext.Session["CurrentUser"] = customer;
                 
-                    return RedirectToAction("UserProfile");
+                return RedirectToAction("UserProfile");
             }
             catch (Exception e)
             {
