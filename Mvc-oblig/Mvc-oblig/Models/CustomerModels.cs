@@ -30,7 +30,7 @@ namespace Mvc_oblig.Models
         public string Salt { get; set; }
 
         public virtual PostalArea PostalArea { get; set; } //lazy loader
-
+        public string ZipCode { get; set; }
     }
 
     public class DbCustomer
@@ -48,14 +48,14 @@ namespace Mvc_oblig.Models
         [Key]
         public string ZipCode { get; set; }
         public string PostalArea_ { get; set; }
-
+        public virtual List<Customer> Customers {get;set; }
 
     }
 
     public class CustomerContext : DbContext
     {
 
-        public CustomerContext() : base("name=customer")
+        public CustomerContext() : base("name=Customer")
         {
             //Database.CreateIfNotExists();
 

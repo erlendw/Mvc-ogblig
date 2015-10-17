@@ -10,19 +10,24 @@ using System.Diagnostics;
 
 //alt klikker ved endring i modellen, workaround var å droppe migration history fra databasen ... http://stackoverflow.com/questions/21852121/the-model-backing-the-context-context-has-changed-since-the-database-was-cre
 
+
 namespace Mvc_oblig.Controllers
 {
+    
     public class CustomerController : Controller
     {
-        // GET: Customer
+        private CustomerContext db = new CustomerContext();        // GET: Customer
 
 
         public ActionResult GetAllCustomers() 
         {
-            var db = new Models.CustomerContext();
-            List<Models.Customer> GetAllCustomers = db.Customer.ToList();
-            ViewData.Model = GetAllCustomers;
-            return View();
+            
+                List<Models.Customer> GetAllCustomers = db.Customer.ToList();
+                ViewData.Model = GetAllCustomers;
+                return View();
+            
+
+                
         }
 
 
@@ -59,8 +64,7 @@ namespace Mvc_oblig.Controllers
         {
             try
             {
-                using (var db = new Models.CustomerContext())
-                {
+                
 
                     String salt = GenerateSalt(32);
 
@@ -94,7 +98,7 @@ namespace Mvc_oblig.Controllers
                     db.SaveChanges();
                     return RedirectToAction("GetAllCustomers");
 
-                }
+                
             }
 
             catch (Exception e)
@@ -109,17 +113,21 @@ namespace Mvc_oblig.Controllers
             Customer c = (Customer)HttpContext.Session["CurrentUser"];
 
             try
-            {  
-                using (var db = new CustomerContext())
-                {
+            {
 
-                }
-
+                Customer customer = FindCustomerByEmail(c.Mail);
+                customer.FirstName = inList["FirstName"];
+                customer.LastName = inList["LastName"];
+                customer.Address = inList["Address"];
+                customer.Mail = inList["Mail"];
+                db.SaveChanges();
+                HttpContext.Session["CurrentUser"] = customer;
+                
                     return RedirectToAction("UserProfile");
             }
             catch (Exception e)
             {
-                return View();
+                return RedirectToAction("UserProfile");
             }
            
         }
@@ -177,18 +185,18 @@ namespace Mvc_oblig.Controllers
 
         public Customer FindCustomerByEmail(string Email)
         {
+            
+                List<Models.Customer> GetAllCustomers = db.Customer.ToList();
 
-            var db = new Models.CustomerContext();
-            List<Models.Customer> GetAllCustomers = db.Customer.ToList();
-
-            for(int i = 0; i < GetAllCustomers.Count; i++)
-            {
-                if(GetAllCustomers[i].Mail == Email)
+                for (int i = 0; i < GetAllCustomers.Count; i++)
                 {
-                    return GetAllCustomers[i];
+                    if (GetAllCustomers[i].Mail == Email)
+                    {
+                        return GetAllCustomers[i];
+                    }
                 }
-            }
-            return null;
+                return null;
+                 
         }
     }
 }
