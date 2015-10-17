@@ -116,16 +116,33 @@ namespace Mvc_oblig.Controllers
             {
 
                 Customer customer = FindCustomerByEmail(c.Mail);
-           
+
+                if (!(String.IsNullOrEmpty(inList["Mail"])))
+                {
+                    customer.Mail = inList["Mail"];
+                }
+
+                if (!(String.IsNullOrEmpty(inList["FirstName"])))
+                {
                     customer.FirstName = inList["FirstName"];
-       
+                }
+
+                if (!(String.IsNullOrEmpty(inList["LastName"])))
+                {
                     customer.LastName = inList["LastName"];
-                
-          
+                }
+
+                if (!(String.IsNullOrEmpty(inList["Address"])))
+                {
                     customer.Address = inList["Address"];
+                }
+
+
+                //customer.LastName = inList["LastName"];
+                
+                //customer.Address = inList["Address"];
             
                     //customer.Mail = inList["Mail"];
-                
                 
                 db.SaveChanges();
                 HttpContext.Session["CurrentUser"] = customer;
