@@ -28,13 +28,19 @@ namespace Mvc_oblig.Controllers
 
         public ActionResult CreateCustomer()
         {
-
             return View();
         }
 
         public ActionResult Login()
         {
-
+            if (Session["loggedin"] == null)
+            {
+                Session["loggedin"] = false;
+            }
+            else
+            {
+                ViewBag.loggedin = (bool)Session["loggedin"];
+            }
             return View();
         }
 
@@ -122,7 +128,7 @@ namespace Mvc_oblig.Controllers
                 {
 
                     Session["loggedin"] = true;
-
+                    Session["CurrentUser"] = customer;
                     Debug.WriteLine("get logged in son");
                     return RedirectToAction("GetAllCustomers");
 
@@ -130,7 +136,7 @@ namespace Mvc_oblig.Controllers
                 else
                 {
                     Session["loggedin"] = false;
-
+                    Session["CurrentUser"] = null;
                     Debug.WriteLine("null funk");
                     
                 }

@@ -9,7 +9,7 @@ namespace Mvc_oblig.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(Mvc_oblig.Models.CustomerContext context)
@@ -26,8 +26,6 @@ namespace Mvc_oblig.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-
-            Database.SetInitializer<Mvc_oblig.Models.CustomerContext>(null);
         }
     }
 }

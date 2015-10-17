@@ -7,13 +7,13 @@ namespace Mvc_oblig.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class test : IMigrationMetadata
+    public sealed partial class Customer : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(test));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Customer));
         
         string IMigrationMetadata.Id
         {
-            get { return "201510161134242_test"; }
+            get { return "201510161203544_Customer"; }
         }
         
         string IMigrationMetadata.Source

@@ -7,10 +7,10 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Order</h4>
         <hr />
@@ -28,6 +28,10 @@
         </div>
     </div>
 }
+
+@{Mvc_oblig.Models.Customer customer = (Mvc_oblig.Models.Customer)HttpContext.Current.Session["CurrentUser"]; }
+
+@customer.Mail
 
 <div>
     @Html.ActionLink("Back to List", "Index")
