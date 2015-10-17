@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+}
+
+@{Mvc_oblig.Models.Customer customer = (Mvc_oblig.Models.Customer)HttpContext.Current.Session["CurrentUser"]; }
+
+<ul class="list-group fifty">
+
+    <li class="list-group-item active">
+        <h2>Edit</h2>
+    </li>
+    <form action="/Customer/UpdateCustomer" method="post">
+        <table>
+
+            <tr><td>Email : </td><td><input type="text" name="Email" /></td></tr>
+            <tr><td>First name : </td><td><input type="text" name="FirstName" /></td></tr>
+        </table>
+        <tr><td><input type="submit" value="Update information" /></td></tr>
+    </form>
+</ul>
+

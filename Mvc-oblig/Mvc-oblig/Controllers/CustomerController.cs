@@ -36,6 +36,11 @@ namespace Mvc_oblig.Controllers
             return View();
         }
 
+        public ActionResult Edit()
+        {
+            return View();
+        }
+
         public ActionResult Login()
         {
             if (Session["loggedin"] == null)
@@ -96,6 +101,27 @@ namespace Mvc_oblig.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpPost]
+        public ActionResult UpdateCustomer(FormCollection inList)
+        {
+            Customer c = (Customer)HttpContext.Session["CurrentUser"];
+
+            try
+            {  
+                using (var db = new CustomerContext())
+                {
+
+                }
+
+                    return RedirectToAction("UserProfile");
+            }
+            catch (Exception e)
+            {
+                return View();
+            }
+           
         }
 
         public String GenerateSalt(int size)
