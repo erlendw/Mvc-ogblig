@@ -28,8 +28,19 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Register customer","CreateCustomer", "Customer")</li>
-                    <li>@Html.ActionLink("Log in", "Login", "Account")</li>
-                    <li>@Html.ActionLink("Checkout", "Create", "Orders")</li>
+                    @if ((Mvc_oblig.Models.Customer)HttpContext.Current.Session["CurrentUser"] == null)
+                    {
+                        <li>@Html.ActionLink("Log in", "Login", "Account")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Your profile", "UserProfile", "Account")</li>
+                    }
+                    @if ((Mvc_oblig.Models.Customer)HttpContext.Current.Session["CurrentUser"] != null)
+                    {
+                        <li>@Html.ActionLink("Checkout", "Create", "Orders")</li>
+                    }
+                    
                 </ul>
             </div>        
        </div>

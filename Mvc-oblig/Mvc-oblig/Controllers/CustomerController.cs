@@ -31,6 +31,11 @@ namespace Mvc_oblig.Controllers
             return View();
         }
 
+        public ActionResult UserProfile()
+        {
+            return View();
+        }
+
         public ActionResult Login()
         {
             if (Session["loggedin"] == null)

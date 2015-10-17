@@ -1,0 +1,12 @@
+﻿@model Mvc_oblig.Models.Customer
+
+@{
+    ViewBag.Title = "UserProfile";
+}
+
+<h2>UserProfile</h2>
+
+@{Mvc_oblig.Models.Customer customer = (Mvc_oblig.Models.Customer)HttpContext.Current.Session["CurrentUser"]; }
+
+@customer.Mail
+
