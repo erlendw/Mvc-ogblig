@@ -9,23 +9,29 @@
 </head>
 <div class="spacer">
     <h2>Her er alle dataene til kundetabellen:</h2>
-    <div> 
-        <table>
-            <tr>
-                <th>Produktnavn</th>
-                <th>Pris</th>
-                <th>Kategori</th>
-            </tr>
+    <div class="col-md-12">
+        <div class="row">
+
             @foreach (var product in Model)
             {
-                <tr>
-                    <td>@product.productname</td>
-                    <td>@product.price</td>
-                    <td>@product.category</td>
-                </tr>
+                <div class="col-sm-4 col-lg-4 col-md-4">
+                    
+                    <div class="thumbnail">
+                        <img src="http://placehold.it/320x150" alt="">
+                        <div class="caption">
+                            <h4 class="pull-right">$@product.price</h4>
+
+                            <h4>
+                                <a href="#">@product.productname</a>
+                            </h4>
+                            <p>@product.category</p>
+                        </div>
+                        <a href="#" class="btn btn-primary btn-success" id="tea_@product.productid"><span class="glyphicon glyphicon-usd"></span> Buy Now!</a>
+                      </div>
+                       </div>
             }
-        </table>
+        </div>
         <a href="/Product/RegProduct">Registrer nytt produkt</a>
-    </div>
-</div>
+
+     
 </html>
