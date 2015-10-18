@@ -1,11 +1,12 @@
 
-    using System;
-    using System.Data.Entity;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Data.Entity.ModelConfiguration.Conventions;
-    using System.Web;
+using System;
+using System.Data.Entity;
+using System.Linq;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Web;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace nettButikkpls.Models
 {
@@ -37,6 +38,14 @@ namespace nettButikkpls.Models
         public float Price { get; set; } 
         public string Category { get; set; }
     }
+    public class Orders
+    {
+        [Key]
+        public int OrderId { get; set; }
+        public virtual Customers Mail { get; set; }
+        public virtual Products ProductID { get; set; }
+        public string Timestamp { get; set; }
+    }
     public class NettbutikkContext : DbContext
     {
         
@@ -48,10 +57,11 @@ namespace nettButikkpls.Models
         public DbSet<Customers> Customers{ get; set; }
         public DbSet<PostalAreas> PostalAreas { get; set; }
         public DbSet<Products> Products { get; set; }
+        public DbSet<Orders> Orders { get; set; }
         
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+           // modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
     }
 }

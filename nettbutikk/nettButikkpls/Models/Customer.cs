@@ -10,7 +10,7 @@ namespace nettButikkpls.Models
     {
 
         public int customerId { get; set; }
-        public string mail { get; set; }
+        public string email { get; set; }
         public string password { get; set; }
         public string firstname { get; set; }
         public string lastname { get; set; }
