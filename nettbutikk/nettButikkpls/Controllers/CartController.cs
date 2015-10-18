@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using nettButikkpls.Models;
+using System.Diagnostics;
 
 namespace nettButikkpls.Controllers
 {
@@ -31,5 +32,17 @@ namespace nettButikkpls.Controllers
             
             return RedirectToAction("ListProducts");
         }
+
+        [HttpPost]
+        public string SubmitSubscription(string Name, string Address)
+        {
+            if (!String.IsNullOrEmpty(Name) && !String.IsNullOrEmpty(Address))
+                //TODO: Save the data in database
+                return "Thank you " + Name + ". Record Saved.";
+            else
+                return "Please complete the form.";
+
+        }
+
     }
 }
