@@ -8,11 +8,13 @@ namespace nettButikkpls
 {
     public class DbProduct
     {
-        public List<Product> allProducts()
+        public IEnumerable<Product> allProducts()
         {
             using (var db = new NettbutikkContext())
             {
-                List<Product> allProducts = db.Products.Select(p => new Product
+                var allProducts = db.Products
+                .ToList()
+                .Select(p=>new Product
                 {
                     productname = p.Productname,
                     price = p.Price,
@@ -28,6 +30,7 @@ namespace nettButikkpls
                 try
                 {
                     var newProductRow = new Products();
+                    newProductRow.ProductId = inProduct.productid;
                     newProductRow.Productname = inProduct.productname;
                     newProductRow.Price = inProduct.price;
                     newProductRow.Category = inProduct.category;
