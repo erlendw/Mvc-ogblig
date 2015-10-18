@@ -43,8 +43,10 @@ namespace nettButikkpls.Models
         [Key]
         public int OrderId { get; set; }
         public virtual Customers Mail { get; set; }
+        public virtual List<Product> products { get; set; }
         public virtual Products ProductID { get; set; }
         public string Timestamp { get; set; }
+
     }
     public class NettbutikkContext : DbContext
     {
