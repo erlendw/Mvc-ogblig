@@ -30,7 +30,7 @@
                     <li>@Html.ActionLink("Register customer", "CreateCustomer", "Customer")</li>
                     
                     
-                    @if ((nettButikkpls.Models.Customer)HttpContext.Current.Session["CurrentUser"] == null)
+                    @if ((nettButikkpls.Models.Customers)HttpContext.Current.Session["CurrentUser"] == null)
                     {
                         <li>@Html.ActionLink("Log in", "Login", "Account")</li>
                     }
