@@ -104,7 +104,7 @@ namespace nettButikkpls.Controllers
         [HttpPost]
         public ActionResult ValidateUser(FormCollection inList)
         {
-            Customers customer = FindCustomerByEmail(inList["Email"]);
+            Customers customer = FindCustomerByEmail(inList["Mail"]);
 
             var dbCm = new DbCustomer();
             if(customer != null)
@@ -124,9 +124,10 @@ namespace nettButikkpls.Controllers
                     Session["loggedin"] = false;
                     Session["CurrentUser"] = null;
                     Debug.WriteLine("Kunne ikke logge inn");
+                    return RedirectToAction("Reg");
                 }
             }
-            return RedirectToAction("List");
+            return RedirectToAction("Login");
         }
 
     }
