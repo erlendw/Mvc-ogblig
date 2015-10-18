@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Optimization;
 using System.Web.Routing;
 
 namespace nettButikkpls
@@ -13,6 +14,9 @@ namespace nettButikkpls
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        //http://stackoverflow.com/questions/21668280/how-do-i-add-bundleconfig-cs-to-my-project fix the bundle
     }
 }
