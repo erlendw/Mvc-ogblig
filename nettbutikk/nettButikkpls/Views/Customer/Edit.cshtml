@@ -1,9 +1,4 @@
-﻿
-@{
-    Layout = null;
-}
-
-@{nettButikkpls.Models.Customers customer = (nettButikkpls.Models.Customers)HttpContext.Current.Session["CurrentUser"]; }
+﻿@{nettButikkpls.Models.Customers customer = (nettButikkpls.Models.Customers)HttpContext.Current.Session["CurrentUser"]; }
 <form action="/Customer/UpdateCustomer" method="post">
     <ul class="list-group fifty">
         <li class="list-group-item active">
