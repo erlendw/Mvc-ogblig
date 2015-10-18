@@ -27,12 +27,12 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Register customer", "CreateCustomer", "Customer")</li>
+                    <li>@Html.ActionLink("Register customer", "Reg", "Customer")</li>
                     
                     
                     @if ((nettButikkpls.Models.Customers)HttpContext.Current.Session["CurrentUser"] == null)
                     {
-                        <li>@Html.ActionLink("Log in", "Login", "Account")</li>
+                        <li>@Html.ActionLink("Log in", "Login", "Customer")</li>
                     }
 
                     else
