@@ -1,0 +1,22 @@
+﻿
+@{
+    Layout = null;
+}
+
+@{nettButikkpls.Models.Customers customer = (nettButikkpls.Models.Customers)HttpContext.Current.Session["CurrentUser"]; }
+<form action="/Customer/UpdateCustomer" method="post">
+    <ul class="list-group fifty">
+        <li class="list-group-item active">
+            <h2>Edit</h2>
+        </li>
+    </ul>
+
+        <table>
+            <tr><td>Email:</td><td><input type="text" placeholder="@customer.Mail" name="Email" /></td></tr>
+            <tr><td>First name:</td><td><input type="text" placehlder="@customer.Firstname" name="Firstname" /></td></tr>
+            <tr><td>Last name:</td><td><input type="text" placeholder="@customer.Lastname" name="Lastname" /></td></tr>
+            <tr><td>Address:</td><td><input type="text" placeholder="@customer.Address" name="Address" /></td></tr>
+            <tr><td><input type="submit" value="Update information" /></td></tr>
+        </table>
+</form>
+

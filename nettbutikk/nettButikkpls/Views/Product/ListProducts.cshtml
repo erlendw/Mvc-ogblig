@@ -1,0 +1,35 @@
+﻿@model List<nettButikkpls.Models.Product>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ListProducts</title>
+</head>
+<body>
+    <h2>Her er alle dataene til kundetabellen:</h2>
+    <div> 
+        <table>
+            <tr>
+                <th>Produktnavn</th>
+                <th>Pris</th>
+                <th>Kategori</th>
+            </tr>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.productname</td>
+                    <td>@product.price</td>
+                    <td>@product.category</td>
+                </tr>
+            }
+        </table>
+        <a href="/Product/RegProduct">Registrer nytt produkt</a>
+    </div>
+</body>
+</html>
