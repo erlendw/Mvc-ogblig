@@ -22,7 +22,7 @@ namespace nettButikkpls
                     address = c.Address,
                     zipcode = c.Zipcode,
                     postalarea = c.Postalareas.Postalarea,
-                    mail = c.Mail,
+                    email = c.Mail,
                     password = c.Password,
                     salt = c.Salt
                 }).ToList();
@@ -38,7 +38,7 @@ namespace nettButikkpls
                     String salt = GenerateSalt(32);
 
                     var newCustomerRow = new Customers();
-                    newCustomerRow.Mail = inCustomer.mail;
+                    newCustomerRow.Mail = inCustomer.email;
                     newCustomerRow.Password = HashPassword(inCustomer.password, salt);
                     newCustomerRow.Firstname = inCustomer.firstname;
                     newCustomerRow.Lastname = inCustomer.lastname;

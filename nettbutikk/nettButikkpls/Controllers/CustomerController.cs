@@ -11,6 +11,7 @@ namespace nettButikkpls.Controllers
 {
     public class CustomerController : Controller
     {
+        NettbutikkContext bmx = new NettbutikkContext();
         public ActionResult List()
         {
             var db = new DbCustomer();
@@ -45,7 +46,6 @@ namespace nettButikkpls.Controllers
         [HttpPost]
         public ActionResult UpdateCustomer(FormCollection inList)
         {
-            var db = new NettbutikkContext();
             Customers c = (Customers)HttpContext.Session["CurrentUser"];
             
             try
@@ -67,7 +67,7 @@ namespace nettButikkpls.Controllers
                 {
                     customer.Address = inList["Address"];
                 }
-                db.SaveChanges();
+                bmx.SaveChanges();
                 HttpContext.Session["CurrentUser"] = customer;
 
                 return RedirectToAction("List");    
@@ -78,8 +78,7 @@ namespace nettButikkpls.Controllers
         }
         public Customers FindCustomerByEmail (string Email)
         {
-            var db = new NettbutikkContext();
-            List<Customers> GetAllCustomers = db.Customers.ToList();
+            List<Customers> GetAllCustomers = bmx.Customers.ToList();
             for(int i = 0; i < GetAllCustomers.Count; i++)
             {
                 if(GetAllCustomers[i].Mail == Email)
