@@ -23,6 +23,25 @@ namespace nettButikkpls.Controllers
             return View();
         }
 
+        public ActionResult Checkout()
+        {
+            return View();
+        }
+        public ActionResult AddOrder()
+        {
+            Debug.WriteLine("FYRER AV");
+            return RedirectToRoute("UserProfile");
+        }
+        [HttpPost]
+        public ActionResult AddOrder(Order order)
+        {
+            Debug.WriteLine("FYRER AV VOL2");
+            var db = new DbOrder();
+            bool OK = db.saveOrder(order);
+            return RedirectToRoute("UserProfile");
+        }
+         
+
         [HttpPost]
         public ActionResult Reg(Customer inCustomer)
         {
