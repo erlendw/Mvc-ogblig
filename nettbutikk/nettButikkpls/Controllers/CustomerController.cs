@@ -104,7 +104,7 @@ namespace nettButikkpls.Controllers
         [HttpPost]
         public ActionResult ValidateUser(FormCollection inList)
         {
-            Customers customer = FindCustomerByEmail(inList["Mail"]);
+            Customers customer = FindCustomerByEmail(inList["Email"]);
 
             var dbCm = new DbCustomer();
             if(customer != null)
