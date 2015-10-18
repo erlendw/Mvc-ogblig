@@ -9,8 +9,7 @@ namespace nettButikkpls.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
-            ContextKey = "nettButikkpls.Models.NettbutikkContext";
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(nettButikkpls.Models.NettbutikkContext context)
