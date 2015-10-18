@@ -15,5 +15,21 @@ namespace nettButikkpls.Controllers
         {
             return View();
         }
+        public ActionResult Add(Product product)
+        {
+            if (Session["Cart"] == null)
+            {
+                Cart cart = new Cart();
+                cart.products.Add(product);
+                Session["Cart"] = cart;
+            }
+            else
+            {
+                Cart cart = (Cart)HttpContext.Session["Cart"];
+                cart.products.Add(product);
+            }
+            
+            return RedirectToAction("ListProducts");
+        }
     }
 }
