@@ -12,7 +12,9 @@ namespace nettButikkpls.Controllers
         public ActionResult ListProducts()
         {
             var db = new DbProduct();
+
             IEnumerable<Product> allProducts = db.allProducts();
+
             return View(allProducts);
         }
 

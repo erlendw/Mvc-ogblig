@@ -34,14 +34,13 @@ namespace nettButikkpls.Controllers
         }
 
         [HttpPost]
-        public string SubmitSubscription(string Name, string Address)
+        public void SubmitSubscription(string Name)
         {
-            if (!String.IsNullOrEmpty(Name) && !String.IsNullOrEmpty(Address))
-                //TODO: Save the data in database
-                return "Thank you " + Name + ". Record Saved.";
-            else
-                return "Please complete the form.";
 
+            Debug.WriteLine(Name);
+
+                
+            
         }
 
     }
