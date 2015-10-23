@@ -25,6 +25,13 @@
 <li>Vareliste (må ha kategorifelt)</li>
 </ul>
 
+# Fordeling Oblig 2!
+
+<ul>
+<li>Erlend: Frontend Bror</li>
+<li>Mads og Trym: Testsjefer</li>
+<li>Daniel: Backend og Lagdelig Bror</li>
+</ul>
 
 
 En bruker har en liste over sine bestillinger, de kan også ha en handlekurvliste. Butikken har en liste over alle bestillinger, og alle varer samt en komplett liste over alle registrerte brukere.
