@@ -36,6 +36,15 @@
 
 En bruker har en liste over sine bestillinger, de kan også ha en handlekurvliste. Butikken har en liste over alle bestillinger, og alle varer samt en komplett liste over alle registrerte brukere.
 
+Ting vi mangler:
+<ul>
+<li>Ikke la bruker endre profil uten å være pålogget. Ender nå i exception, og kan sikkert fikses med enkel validering</li>
+<li>Controllernavn bør fikses, Controllers som peker til View, som igjen peker til Controller, bør ha samme navn</li>
+<li>Haugevis av validering</li>
+<li>Sikker masse annet</li>
+<li>Klem fra Daniel</li>
+
+
 # Vi er kule bønner
 
 Gruppen er: Erlend, Trym, Mads og Daniel
