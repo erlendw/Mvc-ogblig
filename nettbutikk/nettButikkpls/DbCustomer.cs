@@ -18,6 +18,7 @@ namespace nettButikkpls
             {
                 List<Customer> allCustomers = db.Customers.Select(c => new Customer
                 {
+                    customerId = c.CustomerId,
                     firstname = c.Firstname,
                     lastname = c.Lastname,
                     address = c.Address,
@@ -140,7 +141,7 @@ namespace nettButikkpls
             return false;
             //return RedirectToAction("Login");
         }
-    public String GenerateSalt(int size)
+        public String GenerateSalt(int size)
         {
             var RandomNumberGenerator = new System.Security.Cryptography.RNGCryptoServiceProvider();
             var buffer = new byte[size];
