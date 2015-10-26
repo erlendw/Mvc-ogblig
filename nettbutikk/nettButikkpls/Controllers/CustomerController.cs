@@ -68,43 +68,26 @@ namespace nettButikkpls.Controllers
         }
         public ActionResult Login()
         {
-            if (Session["loggedin"] == null)
+            var db = new DbCustomer();
+            bool loggedIn = db.Login();
+            if (loggedIn)
             {
-                Session["loggedin"] = false;
+                ViewBag.loggedin = true; //Forklar meg dette den so lagde det
+                return RedirectToAction("List");
             }
-            else
-            {
-                ViewBag.loggedin = (bool)Session["loggedin"];
-            }
-            return View();
+            return View(); //Implisitt else
         }
         [HttpPost]
         public ActionResult ValidateUser(FormCollection inList)
         {
-            Customers customer = FindCustomerByEmail(inList["Email"]);
-
-            var dbCm = new DbCustomer();
-            if(customer != null)
-            {
-                String OldHash = customer.Password;
-                String ReHash = dbCm.HashPassword(inList["Password"], customer.Salt);
-
-                if(OldHash == ReHash)
+                //Trenger feilmelding når brukervalidering feiler.
+                var db = new DbCustomer();
+                bool loggedIn = db.ValidateUser(inList);
+                if (loggedIn)
                 {
-                    Session["loggedin"] = true;
-                    Session["CurrentUser"] = customer;
-                    Debug.WriteLine("Du er nå logget inn");
                     return RedirectToAction("List");
                 }
-                else
-                {
-                    Session["loggedin"] = false;
-                    Session["CurrentUser"] = null;
-                    Debug.WriteLine("Kunne ikke logge inn");
-                    return RedirectToAction("Reg");
-                }
-            }
-            return RedirectToAction("Login");
+            return RedirectToAction("Login");//Implisitt else
         }
 
     }

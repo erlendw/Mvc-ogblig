@@ -111,8 +111,36 @@ namespace nettButikkpls
             }
             return false;
         }
+        public bool ValidateUser(FormCollection inList)
+        {
+            Customers customer = FindCustomerByEmail(inList["Email"]);
 
-        public String GenerateSalt(int size)
+            if (customer != null)
+            {
+                String OldHash = customer.Password;
+                String ReHash = HashPassword(inList["Password"], customer.Salt);
+                HttpContext context = HttpContext.Current;
+                if (OldHash == ReHash)
+                {
+                    context.Session["loggedin"] = true;
+                    context.Session["CurrentUser"] = customer;
+                    Debug.WriteLine("Du er nå logget inn");
+                    return true;
+                    // return RedirectToAction("List");
+                }
+                else
+                {
+                    context.Session["loggedin"] = false;
+                    context.Session["CurrentUser"] = null;
+                    Debug.WriteLine("Kunne ikke logge inn");
+                    return false;
+                    //return RedirectToAction("Reg");
+                }
+            }
+            return false;
+            //return RedirectToAction("Login");
+        }
+    public String GenerateSalt(int size)
         {
             var RandomNumberGenerator = new System.Security.Cryptography.RNGCryptoServiceProvider();
             var buffer = new byte[size];
