@@ -80,15 +80,15 @@ namespace nettButikkpls.Controllers
         [HttpPost]
         public ActionResult ValidateUser(FormCollection inList)
         {
-                //Trenger feilmelding når brukervalidering feiler.
-                var db = new DbCustomer();
-                bool loggedIn = db.ValidateUser(inList);
-                if (loggedIn)
-                {
-                    return RedirectToAction("List");
-                }
+            //Trenger feilmelding når brukervalidering feiler.
+            var db = new DbCustomer();
+            bool loggedIn = db.ValidateUser(inList);
+            if (loggedIn)
+            {
+                return RedirectToAction("List");
+            }
             return RedirectToAction("Login");//Implisitt else
-        }
+    }
 
     }
 }

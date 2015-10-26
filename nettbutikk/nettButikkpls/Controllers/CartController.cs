@@ -36,11 +36,7 @@ namespace nettButikkpls.Controllers
         [HttpPost]
         public void SubmitSubscription(string Name)
         {
-
             Debug.WriteLine(Name);
-
-                
-            
         }
 
     }
