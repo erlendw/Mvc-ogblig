@@ -7,8 +7,20 @@
     <meta name="viewport" content="width=device-width" />
     <title>ListProducts</title>
 </head>
-<div class="spacer">
-    <div class="col-md-12">
+
+
+<!-- Full Width Image Header -->
+<header class="header-image">
+    <div class="headline">
+        <div class="container">
+            <h1>Organic Health Tea</h1>
+            <h2>Cleansing your soul, one drop at a time</h2>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="col-md-12 spacer">
         <div class="row">
 
             @foreach (var product in Model)
@@ -33,7 +45,7 @@
         </div>
         <a href="/Product/RegProduct">Registrer nytt produkt</a>
 
-     
+
 </html>
 
 @Scripts.Render("~/bundles/jquery")
