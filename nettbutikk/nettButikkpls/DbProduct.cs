@@ -16,6 +16,7 @@ namespace nettButikkpls
                 .ToList()
                 .Select(p=>new Product
                 {
+                    productid = p.ProductId,
                     productname = p.Productname,
                     price = p.Price,
                     category = p.Category
