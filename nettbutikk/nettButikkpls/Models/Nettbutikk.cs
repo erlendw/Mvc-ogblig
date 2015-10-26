@@ -42,10 +42,15 @@ namespace nettButikkpls.Models
     {
         [Key]
         public int OrderId { get; set; }
-        public virtual Customers Mail { get; set; }
-        public virtual List<Product> Products { get; set; }
-        public string Timestamp { get; set; }
-
+        public int CustomerId { get; set; }
+        public string TimeStamp { get; set; }
+    }
+    public class OrderLists
+    {
+        public int OrderID { get; set; }
+        public int ProductID { get; set; }
+        public float UnitPrice { get; set; }
+        public int Quantity { get; set; }
     }
     public class NettbutikkContext : DbContext
     {
@@ -59,10 +64,14 @@ namespace nettButikkpls.Models
         public DbSet<PostalAreas> PostalAreas { get; set; }
         public DbSet<Products> Products { get; set; }
         public DbSet<Orders> Orders { get; set; }
+        public DbSet<OrderLists> OrderLists { get; set; }
         
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-           modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
+            modelBuilder.Entity<OrderLists>()
+                .HasKey(c => new { c.OrderID, c.ProductID });
         }
     }
 }

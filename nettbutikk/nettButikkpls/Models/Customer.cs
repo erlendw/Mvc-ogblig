@@ -8,7 +8,6 @@ namespace nettButikkpls.Models
 {
     public class Customer
     {
-
         public int customerId { get; set; }
         public string email { get; set; }
         public string password { get; set; }

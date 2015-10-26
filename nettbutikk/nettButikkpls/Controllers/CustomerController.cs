@@ -46,35 +46,13 @@ namespace nettButikkpls.Controllers
         [HttpPost]
         public ActionResult UpdateCustomer(FormCollection inList)
         {
-            Customers c = (Customers)HttpContext.Session["CurrentUser"];
-            
-            try
-            {
-                Customers customer = FindCustomerByEmail(c.Mail);
-                if (!(String.IsNullOrEmpty(inList["Mail"])))
-                {
-                    customer.Mail = inList["Mail"];
-                }
-                if (!(String.IsNullOrEmpty(inList["Firstname"])))
-                {
-                    customer.Firstname = inList["Firstname"];
-                }
-                if (!(String.IsNullOrEmpty(inList["Lastname"])))
-                {
-                    customer.Lastname = inList["Lastname"];
-                }
-                if (!(String.IsNullOrEmpty(inList["Address"])))
-                {
-                    customer.Address = inList["Address"];
-                }
-                bmx.SaveChanges();
-                HttpContext.Session["CurrentUser"] = customer;
-
-                return RedirectToAction("List");    
-            }catch(Exception e)
+            var db = new DbCustomer();
+            bool OK = db.EditCustomer(inList);
+            if(OK)
             {
                 return RedirectToAction("List");
             }
+            return View();
         }
         public Customers FindCustomerByEmail (string Email)
         {

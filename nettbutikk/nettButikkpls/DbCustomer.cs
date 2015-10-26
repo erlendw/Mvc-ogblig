@@ -11,6 +11,7 @@ namespace nettButikkpls
 {
     public class DbCustomer
     {
+       NettbutikkContext bmx = new NettbutikkContext();
         public List<Customer> allCustomers()
         {
             using (var db = new NettbutikkContext())
@@ -63,6 +64,54 @@ namespace nettButikkpls
                 }                   
             }  
         }
+
+        public bool EditCustomer(FormCollection inList)
+        {
+                try
+                {
+                    HttpContext context = HttpContext.Current;
+                    Customers c = (Customers)context.Session["CurrentUser"];
+
+                    Customers customer = FindCustomerByEmail(c.Mail);
+                    if (!(String.IsNullOrEmpty(inList["Mail"])))
+                    {
+                        customer.Mail = inList["Mail"];
+                    }
+                    if (!(String.IsNullOrEmpty(inList["Firstname"])))
+                    {
+                        customer.Firstname = inList["Firstname"];
+                    }
+                    if (!(String.IsNullOrEmpty(inList["Lastname"])))
+                    {
+                        customer.Lastname = inList["Lastname"];
+                    }
+                    if (!(String.IsNullOrEmpty(inList["Address"])))
+                    {
+                        customer.Address = inList["Address"];
+                    }
+                    bmx.SaveChanges();
+                    context.Session["CurrentUser"] = customer;
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    return false;   
+                }
+        }
+        public bool Login()
+        {
+            HttpContext context = HttpContext.Current;
+            if (context.Session["loggedin"] == null)
+            {
+                context.Session["loggedin"] = false;
+            }
+            else
+            {
+               return (bool)context.Session["loggedin"];
+            }
+            return false;
+        }
+
         public String GenerateSalt(int size)
         {
             var RandomNumberGenerator = new System.Security.Cryptography.RNGCryptoServiceProvider();
@@ -79,6 +128,18 @@ namespace nettButikkpls
 
             return Convert.ToBase64String(hash);
 
+        }
+        public Customers FindCustomerByEmail(string email)
+        {
+            List<Customers> GetAllCustomers = bmx.Customers.ToList();
+            for (int i = 0; i < GetAllCustomers.Count; i++)
+            {
+                if (GetAllCustomers[i].Mail == email)
+                {
+                    return GetAllCustomers[i];
+                }
+            }
+            return null;
         }
     }
 }
