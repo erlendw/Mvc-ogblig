@@ -1,16 +1,19 @@
 ﻿@model nettButikkpls.Models.Customers
 
-<div class="spacer">
+<div class="container">
 
-    <h2>Innlogging</h2>
-    
-    <div class="form-group onehundred">
-        <form action="/Customer/ValidateUser" method="post">
-            <table>
-                <tr><td>Email</td><td><input type="text" name="Email" /></td></tr>
-                <tr><td>Password:</td><td><input type="password" name="Password" /></td></tr>
-                <tr><td><input type="submit" value="Log in" name="login" /></td></tr>
-            </table>
-        </form>
+    <div class="spacer">
+
+        <h2>Innlogging</h2>
+
+        <div class="form-group onehundred">
+            <form action="/Customer/ValidateUser" method="post">
+                <table>
+                    <tr><td>Email</td><td><input type="text" name="Email" /></td></tr>
+                    <tr><td>Password:</td><td><input type="password" name="Password" /></td></tr>
+                    <tr><td><input type="submit" value="Log in" name="login" /></td></tr>
+                </table>
+            </form>
+        </div>
     </div>
-</div>
+    </div>

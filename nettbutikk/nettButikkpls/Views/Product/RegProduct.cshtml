@@ -7,25 +7,29 @@
     <meta name="viewport" content="width=device-width" />
     <title>RegProduct</title>
 </head>
-<div class="spacer">
-    <div> 
-        <form action="/Product/RegProduct" method="post">
-            <table>
-                <tr>
-                    <td>Produktnavn</td>
-                    <td><input type="text" name="productname" /></td>
-                </tr>
-                <tr>
-                    <td>Pris</td>
-                    <td><input type="text" name="price" /></td>
-                </tr>
-                <tr>
-                    <td>Kategori</td>
-                    <td><input type="text" name="category" /></td>
-                </tr>
-            </table>
-            <input type="submit" name="RegProduct" value="Registrer"/>
-        </form>
-        <a href="/Product/ListProducts">Vis oversikt over produkter</a>
+
+<div class="container">
+
+    <div class="spacer">
+        <div>
+            <form action="/Product/RegProduct" method="post">
+                <table>
+                    <tr>
+                        <td>Produktnavn</td>
+                        <td><input type="text" name="productname" /></td>
+                    </tr>
+                    <tr>
+                        <td>Pris</td>
+                        <td><input type="text" name="price" /></td>
+                    </tr>
+                    <tr>
+                        <td>Kategori</td>
+                        <td><input type="text" name="category" /></td>
+                    </tr>
+                </table>
+                <input type="submit" name="RegProduct" value="Registrer" />
+            </form>
+            <a href="/Product/ListProducts">Vis oversikt over produkter</a>
+        </div>
     </div>
-</div>
+    </div>

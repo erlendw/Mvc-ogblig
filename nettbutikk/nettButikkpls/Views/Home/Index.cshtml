@@ -1,36 +1,39 @@
 ﻿@model List<nettButikkpls.Models.Product>
 
+<div class="container">
 
-<div class="spacer">
-    <h2>Subscription</h2>
+    <div class="spacer">
+        <h2>Subscription</h2>
 
-    <p>
-        Enter your name
-        <br />
-        @Html.TextBox("Name")
-    </p>
-    <p>
-        Enter your address
-        <br />
-        @Html.TextBox("Address")
-    </p>
+        <p>
+            Enter your name
+            <br />
+            @Html.TextBox("Name")
+        </p>
+        <p>
+            Enter your address
+            <br />
+            @Html.TextBox("Address")
+        </p>
 
-    <input type="button" value="Save" id="Save" />
-    <span id="msg" style="color:red;" /> 
-       
-</div>
+        <input type="button" value="Save" id="Save" />
+        <span id="msg" style="color:red;" />
 
-<!--http://stackoverflow.com/questions/12173799/asp-net-mvc4-jquery-not-working-->
+    </div>
 
-@Scripts.Render("~/bundles/jquery")
+    <!--http://stackoverflow.com/questions/12173799/asp-net-mvc4-jquery-not-working-->
 
-<script type="text/javascript">
-    $('#Save').click(function () {
-        var url = "/Cart/SubmitSubscription";
-        var name = $("#Name").val();
-        var address = $("#Address").val();
-        $.post(url, { Name: name, Address: address }, function (data) {
-            $("#msg").html(data);
-        });
-    })
-</script>
+    @Scripts.Render("~/bundles/jquery")
+
+    <script type="text/javascript">
+        $('#Save').click(function () {
+            var url = "/Cart/SubmitSubscription";
+            var name = $("#Name").val();
+            var address = $("#Address").val();
+            $.post(url, { Name: name, Address: address }, function (data) {
+                $("#msg").html(data);
+            });
+        })
+    </script>
+
+    </div>

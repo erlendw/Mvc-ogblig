@@ -1,29 +1,33 @@
 ﻿@{nettButikkpls.Models.Customers customer = (nettButikkpls.Models.Customers)HttpContext.Current.Session["CurrentUser"]; }
 
-<div class="spacer">
 
-    <ul class="list-group fifty">
+<div class="container">
 
-        <li class="list-group-item active">
-            <h2>User Profile</h2>
-        </li>
+    <div class="spacer">
 
-        <li class="list-group-item">
-            Mail address: @customer.Mail
-        </li>
-        <li class="list-group-item">
-            First name: @customer.Firstname
-        </li>
-        <li class="list-group-item">
-            Last name: @customer.Lastname
-        </li>
-        <li class="list-group-item">
-            Address: @customer.Address
-        </li>
+        <ul class="list-group fifty">
 
-    </ul>
-    <div>
-        <a href="/Customer/Edit">Update user information</a>
+            <li class="list-group-item active">
+                <h2>User Profile</h2>
+            </li>
+
+            <li class="list-group-item">
+                Mail address: @customer.Mail
+            </li>
+            <li class="list-group-item">
+                First name: @customer.Firstname
+            </li>
+            <li class="list-group-item">
+                Last name: @customer.Lastname
+            </li>
+            <li class="list-group-item">
+                Address: @customer.Address
+            </li>
+
+        </ul>
+        <div>
+            <a href="/Customer/Edit">Update user information</a>
+        </div>
+
     </div>
-
-    </div>
+</div>
