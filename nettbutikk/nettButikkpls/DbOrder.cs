@@ -16,19 +16,23 @@ namespace nettButikkpls
             if (context.Session["Cart"] == null)
             {
                 Cart cart = new Cart();
-                cart.productids[0].Add(productid);
-                cart.productids[1].Add(quantity);
-                context.Session["Cart"] = cart;
+                for (int i = 0; i < quantity; i++)
+                {
+                    cart.productids.Add(productid);
+                }
+                context.Session["Cart"] = cart;     
             }
             else
             {
                 Cart cart = (Cart)context.Session["Cart"];
-                cart.productids[0].Add(productid);
-                cart.productids[1].Add(quantity);
+                for (int i = 0; i < quantity; i++)
+                {
+                    cart.productids.Add(productid);
+                }
                 context.Session["Cart"] = cart;
             }
         }
-        public bool saveOrer(Order inOrder)
+        public int saveOrer(float price)
         {
             using (var db = new NettbutikkContext())
             {
@@ -41,13 +45,16 @@ namespace nettButikkpls
                     var newOrderRow = new Orders();
                     newOrderRow.CustomerId = c.customerId;
                     newOrderRow.TimeStamp = timeStamp;
+                    newOrderRow.SumTotal = price;
                     db.Orders.Add(newOrderRow);
                     db.SaveChanges();
-                    return true;
+
+                    List<Orders> GetAllOrders = db.Orders.ToList();
+                    return GetAllOrders.Count;
                 }
                 catch (Exception feil)
                 {
-                    return false;
+                    return 0;
                 }
             }
         }

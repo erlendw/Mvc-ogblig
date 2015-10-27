@@ -39,24 +39,31 @@ namespace nettButikkpls.Controllers
         public ActionResult AddOrder()
         {
             var db = new DbOrder();
-            Order order = new Order();
             Cart cart = (Cart)HttpContext.Session["Cart"];
-            int SumTotal = 0;
+            float sumTotal = TotalPrice(cart.productids);
+            int orderid = db.saveOrer(sumTotal);
+            if (orderid!=0)
+            {
+                // metode(orderid); som legger inn i orderlist
+                return RedirectToAction("Product", "ListProducts");
+            }
+            return RedirectToAction("Customer", "List");
             
-            
-                
-            
-            return null;
-            //fix
+        }
+        public float TotalPrice(List<int> pid)
+        {
+            float price = 0;
+            foreach (var i in pid)
+            {
+                price += FindProduct(i).price;
+            }
+            return price;
         }
         public Product FindProduct(int productid)
         {
             var db = new DbOrder();
             return db.FindProduct(productid);
         }
-        public int TotalPrice()
-        {
-            return 0; //fix
-        }
+        
     }
 }
