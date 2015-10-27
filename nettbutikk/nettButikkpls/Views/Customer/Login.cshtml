@@ -4,16 +4,34 @@
 
     <div class="spacer">
 
-        <h2>Innlogging</h2>
+        <div class="col-md-6 col-md-offset-3">
 
-        <div class="form-group onehundred">
-            <form action="/Customer/ValidateUser" method="post">
-                <table>
-                    <tr><td>Email</td><td><input type="text" name="Email" /></td></tr>
-                    <tr><td>Password:</td><td><input type="password" name="Password" /></td></tr>
-                    <tr><td><input type="submit" value="Log in" name="login" /></td></tr>
-                </table>
+            <h2 class="form-signin-heading">Please sign in</h2>
+
+            <form class="form-horizontal" action="/Customer/ValidateUser" method="post">
+                <div class="form-group">
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" id="inputEmail" placeholder="Email" name="Email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-10">
+                        <input class="btn btn-lg btn-primary btn-block" type="submit" value="Log in!" />
+                    </div>
+                </div>
             </form>
+
         </div>
+
+
     </div>
-    </div>
+
+</div>
+
+
+
