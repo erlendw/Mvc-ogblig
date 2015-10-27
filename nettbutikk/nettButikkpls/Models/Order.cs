@@ -10,5 +10,6 @@ namespace nettButikkpls.Models
         public int OrderId { get; set; }
         public int CustomerId { get; set; }
         public string TimeStamp { get; set; }
+        public float SumTotal { get; set; }
     }
 }

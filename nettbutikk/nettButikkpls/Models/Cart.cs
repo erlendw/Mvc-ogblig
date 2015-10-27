@@ -8,8 +8,7 @@ namespace nettButikkpls.Models
 {
     public class Cart
     {
-
-        public string timestamp { get; set; }
-        public List<Product> products { get; set; }
+        public int customerid { get; set; }
+        public List<int> productids { get; set; }
     }
 }

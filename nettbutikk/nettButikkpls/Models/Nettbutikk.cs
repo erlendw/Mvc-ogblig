@@ -44,6 +44,7 @@ namespace nettButikkpls.Models
         public int OrderId { get; set; }
         public int CustomerId { get; set; }
         public string TimeStamp { get; set; }
+        public float SumTotal { get; set; }
     }
     public class OrderLists
     {
@@ -53,8 +54,7 @@ namespace nettButikkpls.Models
         public int Quantity { get; set; }
     }
     public class NettbutikkContext : DbContext
-    {
-        
+    {   
         public NettbutikkContext()
             : base("name=Nettbutikk")
         {
