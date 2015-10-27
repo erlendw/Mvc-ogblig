@@ -2,7 +2,6 @@
 
 <!DOCTYPE html>
 
-<html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Liste</title>
@@ -12,40 +11,38 @@
     <div class="spacer">
 
         <h2>Her er alle dataene til kundetabellen:</h2>
-        <div>
-            <table>
-                <tr>
-                    <th>ID</th>
-                    <th>Fornavn</th>
-                    <th>Etternavn</th>
-                    <th>Adreese</th>
-                    <th>Postnummer</th>
-                    <th>Poststed</th>
-                    <th>E-postadresse</th>
-                    <th>Passord</th>
-                    <th>Salt</th>
-                </tr>
+        
 
                 @foreach (var customer in Model)
             {
-                    <tr>
-                        <td>@customer.customerId</td>
-                        <td>@customer.firstname</td>
-                        <td>@customer.lastname</td>
-                        <td>@customer.address</td>
-                        <td>@customer.zipcode</td>
-                        <td>@customer.postalarea</td>
-                        <td>@customer.email</td>
-                        <td>@customer.password</td>
-                        <td>@customer.salt</td>
-                    </tr>
+                    
+
+                    <ul class="list-group fifty">
+
+                        <li class="list-group-item active">
+                            <h2>@customer.firstname @customer.lastname</h2>
+                        </li>
+
+                        <li class="list-group-item">
+                            Mail address: @customer.email
+                        </li>
+                        <li class="list-group-item">
+                            First name: @customer.address
+                        </li>
+                        <li class="list-group-item">
+                            Last name: @customer.zipcode
+                        </li>
+                        <li class="list-group-item">
+                            Address: @customer.address
+                        </li>
+
+                    </ul>
+
                 }
-            </table>
+            
             <a href="/Customer/Reg">Legg til ny kunde</a>
             <a href="/Product/RegProduct">Legg til nytt produkt</a>
             <a href="/Customer/Login">Login</a>
             <a href="/Customer/Edit">Endre</a>
         </div>
     </div>
-    </div>
-</html>
