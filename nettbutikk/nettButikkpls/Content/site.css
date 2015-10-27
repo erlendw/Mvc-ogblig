@@ -76,7 +76,7 @@ body {
     display: block;
     width: 100%;
     text-align: center;
-    background: url('http://i.imgur.com/DJCCL56.gif') no-repeat center center scroll; /* http://i.imgur.com/XLX45a6.gif */
+    background: url('http://i.imgur.com/y7c9VLK.gif') no-repeat center center scroll; /* http://i.imgur.com/XLX45a6.gif */
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -90,13 +90,13 @@ body {
 .headline h1 {
     font-size: 130px;
     background: #fff;
-    background: rgba(255,255,255,0.9);
+    background: rgba(255,255,255,0.4);
 }
 
 .headline h2 {
     font-size: 77px;
     background: #fff;
-    background: rgba(255,255,255,0.9);
+    background: rgba(255,255,255,0.4);
 }
 
 .featurette-divider {
