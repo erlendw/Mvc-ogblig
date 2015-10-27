@@ -39,7 +39,14 @@ namespace nettButikkpls.Controllers
         [HttpPost]
         public ActionResult AddOrder()
         {
+            var db = new DbOrder();
             Order order = new Order();
+            Cart cart = (Cart)HttpContext.Session["Cart"];
+            int SumTotal = 0;
+            
+            
+                
+            
             return null;
             //fix
         }
