@@ -19,15 +19,18 @@ namespace nettButikkpls.Controllers
 
         public ActionResult SaveDropzoneJsUploadedFiles()
         {
-            bool isSavedSuccessfully = false;
+            
 
-            foreach (string fileName in Request.Files)
+            foreach (string FileName in Request.Files)
             {
-                HttpPostedFileBase file = Request.Files[fileName];
+                HttpPostedFileBase file = Request.Files[FileName];
 
-                //You can Save the file content here
+                var _FileName = Path.GetFileName(file.FileName);
 
-                isSavedSuccessfully = true;
+                var _Path = Path.Combine(Server.MapPath("~/App_Data/Images"), _FileName);
+
+                file.SaveAs(_Path);
+
 
                 Debug.Print(file.FileName);
 

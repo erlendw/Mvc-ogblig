@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using nettButikkpls.Models;
+using System.Diagnostics;
+using System.IO;
 
 namespace nettButikkpls.Controllers
 {
@@ -23,6 +25,7 @@ namespace nettButikkpls.Controllers
         [HttpPost]
         public ActionResult RegProduct(Product inProduct)
         {
+
             var db = new DbProduct();
             bool OK = db.saveProduct(inProduct);
             if(OK)
@@ -30,6 +33,30 @@ namespace nettButikkpls.Controllers
                 return RedirectToAction("ListProducts");
             }
             return View();
+
+            /*Denne thrower plutselig en exception*/
+        }
+
+        public ActionResult SaveImagesToServer()
+        {
+
+
+            foreach (string FileName in Request.Files)
+            {
+                HttpPostedFileBase file = Request.Files[FileName];
+
+                var _FileName = Path.GetFileName(file.FileName);
+
+                var _Path = Path.Combine(Server.MapPath("~/App_Data/Images"), _FileName);
+
+                file.SaveAs(_Path);
+
+                Debug.Print(file.FileName);
+
+            }
+
+            return Json(new { Message = string.Empty });
+
         }
     }
 }
