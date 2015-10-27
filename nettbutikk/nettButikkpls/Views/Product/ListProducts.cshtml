@@ -36,13 +36,17 @@
                                 <a href="#">@product.productname</a>
                             </h4>
 
-                            <h4>
-                                <a href="#">@product.productid</a>
-                            </h4>
-
                             <p>@product.category</p>
                         </div>
+                        
+                        <div class="col-md-3 pull-left">
+
+                            <input type="text" class="form-control" value="1" id="@product.productid">
+
+                        </div>
+                        
                         <a href="#" class="btn btn-primary btn-success" id="button" onclick="testClick('@product.productid') "><span class="glyphicon glyphicon-usd"></span> Buy Now!</a>
+                        
                     </div>
                 </div>
 
@@ -62,9 +66,12 @@
 
     function testClick(inn) {
 
+        var quantity = document.getElementById(inn).value;
+
+        
         var url = "/Orders/addToCart";
 
-        $.post(url, { Name: inn}, function (data) {
+        $.post(url, { Name: inn, Quantity : quantity}, function (data) {
             console.log(data);
         });
     }
