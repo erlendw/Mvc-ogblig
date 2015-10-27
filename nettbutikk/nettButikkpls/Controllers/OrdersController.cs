@@ -15,7 +15,6 @@ namespace nettButikkpls.Controllers
             db.addToCart(productid, quantity);
             return RedirectToAction("Shared", "Layout");
 
-
             /*if (Session["Cart"] == null)
             {
                 Cart cart = new Cart();
@@ -25,7 +24,7 @@ namespace nettButikkpls.Controllers
             }
             else
             {
-                Cart cart = (Cart)HttpContext.Session["Cart"];
+                Cart cart = (Cart)HttpContext.Session["Cart "];
                 cart.productids[0].Add(productid);
                 cart.productids[1].Add(quantity);
                 Session["Cart"] = cart;
