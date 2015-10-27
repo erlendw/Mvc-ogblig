@@ -32,12 +32,11 @@ namespace nettButikkpls
                 context.Session["Cart"] = cart;
             }
         }
-        public bool addOrderToList(OrderList list)
+        public bool addOrderList(int orderid)
         {
             HttpContext context = HttpContext.Current;
             Cart cart = (Cart)context.Session["Cart"];
             
-
             return false;
         }
         public int saveOrer(float price)

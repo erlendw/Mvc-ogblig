@@ -10,6 +10,5 @@ namespace nettButikkpls.Models
         public int OrderID { get; set; }
         public int ProductID { get; set; }
         public float UnitPrice { get; set; }
-        public int Quantity { get; set; }
     }
 }
