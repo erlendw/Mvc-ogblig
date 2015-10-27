@@ -42,7 +42,7 @@
                     }
                     @if ((nettButikkpls.Models.Customers)HttpContext.Current.Session["CurrentUser"] != null)
                     {
-                        <li>@Html.ActionLink("Checkout", "Orders", "Checkout")</li>
+                        <li>@Html.ActionLink("Checkout", "addOrder", "Orders")</li>
                     }
 
                 </ul>
