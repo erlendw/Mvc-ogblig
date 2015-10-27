@@ -33,8 +33,6 @@ namespace nettButikkpls.Controllers
                 return RedirectToAction("ListProducts");
             }
             return View();
-
-            /*Denne thrower plutselig en exception*/
         }
 
         public ActionResult SaveImagesToServer()
