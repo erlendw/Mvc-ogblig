@@ -9,6 +9,6 @@ namespace nettButikkpls.Models
     public class Cart
     {
         public int customerid { get; set; }
-        public List<int> productids { get; set; }
+        public List<List<int>> productids { get; set; }
     }
 }
