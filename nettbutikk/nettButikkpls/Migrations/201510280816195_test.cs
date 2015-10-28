@@ -7,10 +7,12 @@ namespace nettButikkpls.Migrations
     {
         public override void Up()
         {
+            DropColumn("dbo.OrderLists", "Quantity");
         }
         
         public override void Down()
         {
+            AddColumn("dbo.OrderLists", "Quantity", c => c.Int(nullable: false));
         }
     }
 }

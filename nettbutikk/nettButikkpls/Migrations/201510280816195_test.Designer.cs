@@ -13,7 +13,7 @@ namespace nettButikkpls.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201510271139336_test"; }
+            get { return "201510280816195_test"; }
         }
         
         string IMigrationMetadata.Source
