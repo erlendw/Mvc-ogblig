@@ -36,6 +36,14 @@ namespace nettButikkpls
         {
             HttpContext context = HttpContext.Current;
             Cart cart = (Cart)context.Session["Cart"];
+            OrderList orderlist = new OrderList();
+            List<int> pid = cart.productids;
+            pid.Sort();
+
+        
+
+
+         
             
             return false;
         }
