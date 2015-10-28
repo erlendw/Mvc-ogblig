@@ -32,7 +32,8 @@
                             <h4 class="pull-right">$@product.price</h4>
 
                             <h4>
-                                <a href="/Product/ShowProduct">@product.productname</a>
+                                <a onclick="goToProduct(@product.productid)">@product.productname</a>
+                                @Html.ActionLink("product.productname",  "ShowProduct", "Product", new { id = product.productid }, null);
                             </h4>
 
                             <p>@product.category</p>
@@ -48,7 +49,7 @@
 
                             <div class="col-md-6">
 
-                                <a class="btn btn-primary btn-success" id="button" onclick="testClick('@product.productid') "><span class="glyphicon glyphicon-usd"></span> Buy Now!</a>
+                                <a class="btn btn-primary btn-success" id="button" onclick="buyButton('@product.productid') "><span class="glyphicon glyphicon-usd"></span> Buy Now!</a>
 
                             </div>
 
@@ -75,16 +76,13 @@
 
 <script type="text/javascript">
 
-    function testClick(inn) {
+    function buyButton(inn) {
 
         var quantity = document.getElementById(inn).value;
 
-        
         var url = "/Orders/addToCart";
 
-        $.post(url, { productid: inn, Quantity : quantity}, function (data) {
-            console.log(data);
-        });
+        $.post(url, { productid: inn, Quantity : quantity}, function (data) {});
 
         var id = "productbox_" + inn
 
@@ -95,5 +93,11 @@
         window.setTimeout(function () { $("#" + id).addClass("hidden"); }, 1500);
     }
 
+
+    function goToProduct(id) {
+        var url = "/Product/ShowProduct";
+        $.post(url, { id: id }, function (data) {});
+
+    }
 
 </script>

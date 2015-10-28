@@ -23,8 +23,16 @@ namespace nettButikkpls.Controllers
             return View();
         }
 
-        public ActionResult ShowProduct()
+        [HttpGet]
+        public ActionResult ShowProduct(int id)
         {
+
+            
+
+            Product p = FindProduct(id);
+
+            Debug.Print(p.ToString());
+
             return View();
         }
 
@@ -58,6 +66,13 @@ namespace nettButikkpls.Controllers
                 Debug.Print(file.FileName);
             }*/
             return Json(new { Message = string.Empty });
+        }
+
+        public Product FindProduct(int productid)
+        {
+            var db = new DbOrder();
+            return db.FindProduct(productid);
+
         }
     }
 }
