@@ -45,9 +45,10 @@
 
                         </div>
                         
-                        <a href="#" class="btn btn-primary btn-success" id="button" onclick="testClick('@product.productid') "><span class="glyphicon glyphicon-usd"></span> Buy Now!</a>
+                        <a class="btn btn-primary btn-success" id="button" onclick="testClick('@product.productid') "><span class="glyphicon glyphicon-usd"></span> Buy Now!</a>
                         
                     </div>
+
                 </div>
 
             }
@@ -72,5 +73,7 @@
         $.post(url, { Name: inn, Quantity : quantity}, function (data) {
             console.log(data);
         });
+
+        
     }
 </script>

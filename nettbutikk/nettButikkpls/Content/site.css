@@ -328,3 +328,7 @@ img {
     width:100%;
 
 }
+
+.alert{
+  display:none;
+}
