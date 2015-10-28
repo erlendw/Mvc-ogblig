@@ -83,6 +83,7 @@ namespace nettButikkpls.Controllers
             Debug.Print("Total price: " + sumTotal);
             int orderid = db.saveOrer(sumTotal);
             Debug.Print("Orderid: " + orderid);
+
             if (orderid!=0)
             {
                 // metode(orderid); som legger inn i orderlist
