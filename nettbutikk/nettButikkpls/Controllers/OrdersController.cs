@@ -10,16 +10,15 @@ namespace nettButikkpls.Controllers
 {
     public class OrdersController : Controller
     {
-        public ActionResult addToCart(int productid, int quantity)
+        [HttpPost]
+        public void addToCart(string Name, string Quantity)
         {
 
-            Debug.Print(productid.ToString() + ' ' + quantity.ToString());
+            Debug.Print(Name + " " + Quantity);
 
-            return null;
+            var db = new DbOrder();
 
-            //var db = new DbOrder();
-            //db.addToCart(productid, quantity);
-            //return RedirectToAction("Shared", "Layout");
+            db.addToCart(Int32.Parse(Name), Int32.Parse(Quantity));
 
             /*if (Session["Cart"] == null)
             {
