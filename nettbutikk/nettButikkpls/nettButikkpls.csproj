@@ -171,9 +171,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201510280816195_test.cs" />
-    <Compile Include="Migrations\201510280816195_test.Designer.cs">
-      <DependentUpon>201510280816195_test.cs</DependentUpon>
+    <Compile Include="Migrations\201510280928578_Initial.cs" />
+    <Compile Include="Migrations\201510280928578_Initial.Designer.cs">
+      <DependentUpon>201510280928578_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cart.cs" />
@@ -211,8 +211,8 @@
     <Folder Include="Views\Cart\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201510280816195_test.resx">
-      <DependentUpon>201510280816195_test.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201510280928578_Initial.resx">
+      <DependentUpon>201510280928578_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
