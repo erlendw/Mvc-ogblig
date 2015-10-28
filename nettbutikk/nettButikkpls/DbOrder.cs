@@ -30,7 +30,7 @@ namespace nettButikkpls
                 }
                 Debug.Print("Cart.CustomerID: " + cart.customerid);
                 context.Session["Cart"] = cart;
-                for (int i = 0; i < quantity; i++)
+                for (int i = 0; i <= quantity; i++)
                 {
                     cart.productids.Add(productid);
                 }
@@ -40,7 +40,7 @@ namespace nettButikkpls
             else
             {
                 Cart cart = (Cart)context.Session["Cart"];
-                for (int i = 0; i < quantity; i++)
+                for (int i = 0; i <= quantity; i++)
                 {
                     cart.productids.Add(productid);
                 }
