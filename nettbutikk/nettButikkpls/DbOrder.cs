@@ -58,7 +58,7 @@ namespace nettButikkpls
             }
             return false;
         }
-        public int saveOrer(float price)
+        public int saveOrder(float price)
         {
             using (var db = new NettbutikkContext())
             {
