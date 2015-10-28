@@ -18,9 +18,10 @@ namespace nettButikkpls.Controllers
             return View(allProducts);
         }
 
+        [HttpPost]
         public ActionResult ShowProduct()
         {
-            return View();
+            return RedirectToAction("Product", "ShowProduct");
         }
 
         public ActionResult RegProduct()
