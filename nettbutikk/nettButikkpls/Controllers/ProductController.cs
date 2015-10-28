@@ -18,16 +18,16 @@ namespace nettButikkpls.Controllers
             return View(allProducts);
         }
 
-        [HttpPost]
-        public ActionResult ShowProduct()
-        {
-            return RedirectToAction("Product", "ShowProduct");
-        }
-
         public ActionResult RegProduct()
         {
             return View();
         }
+
+        public ActionResult ShowProduct()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult RegProduct(Product inProduct)
         {
@@ -44,7 +44,7 @@ namespace nettButikkpls.Controllers
         {
             HttpFileCollectionBase innfiler = Request.Files;
             var db = new DbProduct();
-            bool erlend = db.SaveImagesToServer(innfiler);
+            bool success = db.SaveImagesToServer(innfiler);
             /*
             foreach (string FileName in Request.Files)
             {
