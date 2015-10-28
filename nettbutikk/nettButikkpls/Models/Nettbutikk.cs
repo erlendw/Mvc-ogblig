@@ -36,6 +36,9 @@ namespace nettButikkpls.Models
         public string Productname { get; set; }
         public float Price { get; set; } 
         public string Category { get; set; }
+        public string String { get; set; }
+        public List<string> Picture { get; set; }
+
     }
     public class Orders
     {
