@@ -64,10 +64,11 @@ namespace nettButikkpls
             {
                 try
                 {
+                    Debug.Write("KOMMER TIL TRY");
                     HttpContext context = HttpContext.Current;
                     Customer c = (Customer)context.Session["CurrentUser"];
                     String timeStamp = (DateTime.Now).ToString("yyyyMMddHHmmssffff");
-
+                    Debug.Write("CustomerID " + c.customerId);
                     var newOrderRow = new Orders();
                     newOrderRow.CustomerId = c.customerId;
                     newOrderRow.TimeStamp = timeStamp;
