@@ -183,10 +183,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201510281121443_test.cs" />
-    <Compile Include="Migrations\201510281121443_test.Designer.cs">
-      <DependentUpon>201510281121443_test.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -222,11 +218,6 @@
   <ItemGroup>
     <Folder Include="App_Data\Images\" />
     <Folder Include="Views\Cart\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201510281121443_test.resx">
-      <DependentUpon>201510281121443_test.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

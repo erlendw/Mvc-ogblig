@@ -11,31 +11,65 @@ namespace nettButikkpls.Controllers
     public class OrdersController : Controller
     {
         [HttpPost]
-        public void addToCart(string Name, string Quantity)
+        public void addToCart(string Productid, string Quantity)
         {
+            Debug.Print("Productid " + Productid);
+            Debug.Print("Quantity " + Quantity);
+           // int productid = Int32.Parse(Productid);
+            int quantity = Int32.Parse(Quantity);
+          // Debug.Print("ProduID: " + productid + "Quantity: " + quantity);
+            //HttpContext context = HttpContext.Current;
 
-            Debug.Print(Name + " " + Quantity);
-
-            var db = new DbOrder();
-
-            db.addToCart(Int32.Parse(Name), Int32.Parse(Quantity));
-
-            /*if (Session["Cart"] == null)
+            if (Session["Cart"] == null)
             {
                 Cart cart = new Cart();
-                cart.productids[0].Add(productid);  
-                cart.productids[1].Add(quantity);
+                List<int> pIds = new List<int>();
+                Debug.Print("Cart.CustomerID: " + cart.customerid);
                 Session["Cart"] = cart;
+                for (int i = 0; i < quantity; i++)
+                {
+                    pIds.Add(1);
+                }
+                cart.productids = pIds;
+                Session["Cart"] = cart;
+                Debug.Print("Cart:" + cart.productids.ToString());
+
             }
             else
             {
-                Cart cart = (Cart)HttpContext.Session["Cart "];
-                cart.productids[0].Add(productid);
-                cart.productids[1].Add(quantity);
+                Cart cart = (Cart)Session["Cart"];
+                List<int> pIds = new List<int>();
+                for (int i = 0; i < quantity; i++)
+                {
+                    pIds.Add(1);
+                }
+                cart.productids.AddRange(pIds);
                 Session["Cart"] = cart;
+                Debug.Print("Cart:" + cart.productids.ToString());
+
             }
-            return RedirectToAction("Product", "ListProducts");*/
         }
+
+        /*  Debug.Print(Name + " " + Quantity);
+          var db = new DbOrder();
+          db.addToCart(Int32.Parse(Name), Int32.Parse(Quantity));
+
+          if (Session["Cart"] == null)
+          {
+              Cart cart = new Cart();
+              cart.productids[0].Add(productid);  
+              cart.productids[1].Add(quantity);
+              Session["Cart"] = cart;
+          }
+          else
+          {
+              Cart cart = (Cart)HttpContext.Session["Cart "];
+              cart.productids[0].Add(productid);
+              cart.productids[1].Add(quantity);
+              Session["Cart"] = cart;
+          }
+          return RedirectToAction("Product", "ListProducts");
+    }*/
         public ActionResult addOrder()
         {
             return View();
