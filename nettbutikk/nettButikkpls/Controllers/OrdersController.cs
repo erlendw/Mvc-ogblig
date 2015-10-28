@@ -11,13 +11,16 @@ namespace nettButikkpls.Controllers
     public class OrdersController : Controller
     {
         [HttpPost]
-        public void addToCart(string Productid, string Quantity)
+        public void addToCart(string productid, string Quantity)
         {
-            Debug.Print("Productid " + Productid);
+            Debug.Print("Productid " + productid);
             Debug.Print("Quantity " + Quantity);
-           // int productid = Int32.Parse(Productid);
+
+            // int productid = Int32.Parse(Productid);
+
             int quantity = Int32.Parse(Quantity);
-          // Debug.Print("ProduID: " + productid + "Quantity: " + quantity);
+          
+            // Debug.Print("ProduID: " + productid + "Quantity: " + quantity);
             //HttpContext context = HttpContext.Current;
 
             if (Session["Cart"] == null)
