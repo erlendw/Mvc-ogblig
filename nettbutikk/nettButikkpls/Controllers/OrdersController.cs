@@ -32,8 +32,7 @@ namespace nettButikkpls.Controllers
                 }
                 cart.productids = pIds;
                 Session["Cart"] = cart;
-                Debug.Print("Cart:" + cart.productids.ToString());
-
+                //Debug.Print("Cart:" + cart.ToString());
             }
             else
             {
@@ -45,8 +44,7 @@ namespace nettButikkpls.Controllers
                 }
                 cart.productids.AddRange(pIds);
                 Session["Cart"] = cart;
-                Debug.Print("Cart:" + cart.productids.ToString());
-
+                //Debug.Print("Cart:" + cart.ToString());
             }
         }
 
@@ -80,16 +78,23 @@ namespace nettButikkpls.Controllers
         {
             var db = new DbOrder();
             Cart cart = (Cart)HttpContext.Session["Cart"];
-            float sumTotal = TotalPrice(cart.productids);
+            Debug.Print(cart.ToString());
+            int sumTotal = SumTotal(cart.productids);
+            Debug.Print("Total price: " + sumTotal);
             int orderid = db.saveOrer(sumTotal);
+            Debug.Print("Orderid: " + orderid);
+
             if (orderid!=0)
             {
                 // metode(orderid); som legger inn i orderlist
+                
                 db.addOrderList(orderid);
                 return RedirectToAction("Product", "ListProducts");
             }
             return RedirectToAction("Customer", "List");
+            
         }
+
         public bool AddToOrderList(int orderid)
         {
             var db = new DbOrder();
@@ -99,7 +104,6 @@ namespace nettButikkpls.Controllers
         }
         public float TotalPrice(List<int> pid)
         {
-            Debug.Write("Kommer til TotalPrice");
             float price = 0;
             foreach (var i in pid)
             {
