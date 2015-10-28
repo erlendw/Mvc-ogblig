@@ -31,10 +31,11 @@ namespace nettButikkpls.Controllers
             }
             return RedirectToAction("Product", "ListProducts");*/
         }
-        public ActionResult Checkout()
+        public ActionResult addOrder()
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult AddOrder()
         {
