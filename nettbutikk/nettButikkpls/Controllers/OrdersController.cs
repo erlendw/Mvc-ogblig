@@ -4,16 +4,21 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using nettButikkpls.Models;
+using System.Diagnostics;
 
 namespace nettButikkpls.Controllers
 {
     public class OrdersController : Controller
     {
-        public ActionResult addToCart(int productid, int quantity)
+        [HttpPost]
+        public void addToCart(string Name, string Quantity)
         {
+
+            Debug.Print(Name + " " + Quantity);
+
             var db = new DbOrder();
-            db.addToCart(productid, quantity);
-            return RedirectToAction("Shared", "Layout");
+
+            db.addToCart(Int32.Parse(Name), Int32.Parse(Quantity));
 
             /*if (Session["Cart"] == null)
             {
@@ -46,6 +51,7 @@ namespace nettButikkpls.Controllers
             if (orderid!=0)
             {
                 // metode(orderid); som legger inn i orderlist
+                db.addOrderList(orderid);
                 return RedirectToAction("Product", "ListProducts");
             }
             return RedirectToAction("Customer", "List");
