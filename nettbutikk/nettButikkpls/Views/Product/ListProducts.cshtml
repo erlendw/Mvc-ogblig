@@ -83,7 +83,7 @@
         
         var url = "/Orders/addToCart";
 
-        $.post(url, { Name: inn, Quantity : quantity}, function (data) {
+        $.post(url, { productid: inn, Quantity : quantity}, function (data) {
             console.log(data);
         });
 
