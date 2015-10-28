@@ -58,15 +58,13 @@ namespace nettButikkpls
             }
             return false;
         }
-        public int saveOrer(float price)
+        public int saveOrer(float price, Customer c)
         {
             using (var db = new NettbutikkContext())
             {
                 try
                 {
                     Debug.Write("KOMMER TIL TRY");
-                    HttpContext context = HttpContext.Current;
-                    Customer c = (Customer)context.Session["CurrentUser"];
                     String timeStamp = (DateTime.Now).ToString("yyyyMMddHHmmssffff");
                     Debug.Write("CustomerID " + c.customerId);
                     var newOrderRow = new Orders();

@@ -81,8 +81,9 @@ namespace nettButikkpls.Controllers
             var db = new DbOrder();
             Cart cart = (Cart)HttpContext.Session["Cart"];
             int sumTotal = SumTotal(cart.productids);
+            Customer c = (Customer)Session["CurrentUser"];
             Debug.Write("SumTotal" + sumTotal);
-            int orderid = db.saveOrer(sumTotal);
+            int orderid = db.saveOrer(sumTotal, c);
             Debug.Print("Orderid: " + orderid);
             if (orderid!=0)
             {
