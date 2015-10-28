@@ -79,11 +79,12 @@ namespace nettButikkpls.Controllers
         public ActionResult AddOrder()
         {
             var db = new DbOrder();
+            var cdb = new DbCustomer();
             Cart cart = (Cart)HttpContext.Session["Cart"];
             int sumTotal = SumTotal(cart.productids);
-            Customer c = (Customer)Session["CurrentUser"];
+            int customerID = cdb.CurrentCustomer();
             Debug.Write("SumTotal" + sumTotal);
-            int orderid = db.saveOrer(sumTotal, c);
+            int orderid = db.saveOrer(sumTotal, customerID);
             Debug.Print("Orderid: " + orderid);
             if (orderid!=0)
             {

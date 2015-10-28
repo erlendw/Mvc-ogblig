@@ -11,7 +11,8 @@ namespace nettButikkpls
 {
     public class DbCustomer
     {
-       NettbutikkContext bmx = new NettbutikkContext();
+        HttpContext context = HttpContext.Current;
+        NettbutikkContext bmx = new NettbutikkContext();
         public List<Customer> allCustomers()
         {
             using (var db = new NettbutikkContext())
@@ -70,7 +71,7 @@ namespace nettButikkpls
         {
                 try
                 {
-                    HttpContext context = HttpContext.Current;
+                   // HttpContext context = HttpContext.Current;
                     Customers c = (Customers)context.Session["CurrentUser"];
 
                     Customers customer = FindCustomerByEmail(c.Mail);
@@ -101,7 +102,7 @@ namespace nettButikkpls
         }
         public bool Login()
         {
-            HttpContext context = HttpContext.Current;
+            //HttpContext context = HttpContext.Current;
             if (context.Session["loggedin"] == null)
             {
                 context.Session["loggedin"] = false;
@@ -169,6 +170,12 @@ namespace nettButikkpls
                 }
             }
             return null;
+        }
+        public int CurrentCustomer()
+        {
+            // HttpContext context = HttpContext.Current;
+            Customers c = (Customers)context.Session["CurrentUSer"];
+            return c.CustomerId;
         }
     }
 }

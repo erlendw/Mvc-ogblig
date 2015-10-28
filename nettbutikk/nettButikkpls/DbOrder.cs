@@ -58,7 +58,7 @@ namespace nettButikkpls
             }
             return false;
         }
-        public int saveOrer(float price, Customer c)
+        public int saveOrer(float price, int customerid)
         {
             using (var db = new NettbutikkContext())
             {
@@ -66,9 +66,9 @@ namespace nettButikkpls
                 {
                     Debug.Write("KOMMER TIL TRY");
                     String timeStamp = (DateTime.Now).ToString("yyyyMMddHHmmssffff");
-                    Debug.Write("CustomerID " + c.customerId);
+                   // Debug.Write("CustomerID " + c.customerId);
                     var newOrderRow = new Orders();
-                    newOrderRow.CustomerId = c.customerId;
+                    newOrderRow.CustomerId = customerid;
                     newOrderRow.TimeStamp = timeStamp;
                     newOrderRow.SumTotal = price;
                     db.Orders.Add(newOrderRow);
