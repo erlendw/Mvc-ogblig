@@ -39,14 +39,27 @@
                             <p>@product.category</p>
                         </div>
                         
-                        <div class="col-md-3 pull-left">
+                        <div class="row">
 
-                            <input type="text" class="form-control" value="1" id="@product.productid">
+                            <div class="col-md-2 pull-left">
+
+                                <input type="text" class="form-control" value="1" id="@product.productid">
+
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <a class="btn btn-primary btn-success" id="button" onclick="testClick('@product.productid') "><span class="glyphicon glyphicon-usd"></span> Buy Now!</a>
+
+                            </div>
+
+                            <div class="col-md-4 pull-right">
+
+                                <div id="productbox_@product.productid" class="hidden text-success"><i class="fa fa-check"></i> Added!</div>
+
+                            </div>
 
                         </div>
-                        
-                        <a class="btn btn-primary btn-success" id="button" onclick="testClick('@product.productid') "><span class="glyphicon glyphicon-usd"></span> Buy Now!</a>
-                        
                     </div>
 
                 </div>
@@ -74,6 +87,12 @@
             console.log(data);
         });
 
-        
+        var id = "productbox_" + inn
+
+        console.log(id)
+
+        $("#" + id).removeClass("hidden");
+
+        window.setTimeout(function () { $("#" + id).addClass("hidden"); }, 1500);
     }
 </script>
