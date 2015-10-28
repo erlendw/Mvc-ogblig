@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "Page Not Found";
+}
+
+
+
+
+
+
+
+<div class="container">
+    
+    <div class="row">
+
+        <div class="col-md-8 col-md-offset-2">
+            
+            <h1 class="page-header text-center text-danger">This Page Was Not Found :( </h1>
+
+            <div class="carousel slide" data-ride="carousel">
+                
+                <div class="carousel-inner">
+                    
+                    <div class="item active">
+                        
+                        <img src="http://i.imgur.com/3JkrWRk.jpg" alt="" class="img-responsive">
+                        
+                        <div class="carousel-caption">
+                            
+                            <a href="/Product/ListProducts"><i class="fa fa-undo" style="font-size:100px; padding-bottom:20%;"></i></a>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+        
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+@* Error page must be longer than 512 bytes for IE and Chrome to show it. 
+   So add padding in case we're short. *@
+@(new string(' ', 512))

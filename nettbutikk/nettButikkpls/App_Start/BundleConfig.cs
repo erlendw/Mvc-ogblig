@@ -19,7 +19,8 @@ namespace nettButikkpls
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/basic.css",
-                       "~/Content/dropzone.css"));
+                       "~/Content/dropzone.css",
+                       "~/Content/font-awesome.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/dropzonescripts").Include(
                      "~/Scripts/dropzone/dropzone.js"));

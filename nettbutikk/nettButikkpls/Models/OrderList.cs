@@ -7,8 +7,9 @@ namespace nettButikkpls.Models
 {
     public class OrderList
     {    
-        public int OrderID { get; set; }
-        public int ProductID { get; set; }
-        public float UnitPrice { get; set; }
+        public int orderId { get; set; }
+        public int productId { get; set; }
+        public float unitPrice { get; set; }
+        public int quanty { get; set; }
     }
 }
