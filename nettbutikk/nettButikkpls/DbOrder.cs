@@ -10,17 +10,31 @@ namespace nettButikkpls
 {
     public class DbOrder
     {
+        HttpContext context = HttpContext.Current;
         public void addToCart(int productid, int quantity)
         {
-            HttpContext context = HttpContext.Current;
-
+            Debug.Print("ProduID: " + productid + "Quantity: " + quantity);
+            int customerid;
+            //HttpContext context = HttpContext.Current;
+          
             if (context.Session["Cart"] == null)
             {
+                
                 Cart cart = new Cart();
+                
+                if (context.Session["CurrentUser"] != null)
+                {
+                    Customers c = (Customers)context.Session["CurrentUser"];
+                    customerid = c.CustomerId;
+                    cart.customerid = customerid;
+                }
+                Debug.Print("Cart.CustomerID: " + cart.customerid);
+                context.Session["Cart"] = cart;
                 for (int i = 0; i < quantity; i++)
                 {
                     cart.productids.Add(productid);
                 }
+                
                 context.Session["Cart"] = cart;     
             } 
             else
