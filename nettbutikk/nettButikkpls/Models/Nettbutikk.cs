@@ -36,6 +36,9 @@ namespace nettButikkpls.Models
         public string Productname { get; set; }
         public float Price { get; set; } 
         public string Category { get; set; }
+        public string String { get; set; }
+        public List<string> Picture { get; set; }
+
     }
     public class Orders
     {
@@ -50,11 +53,12 @@ namespace nettButikkpls.Models
         public int OrderID { get; set; }
         public int ProductID { get; set; }
         public float UnitPrice { get; set; }
+        public int Quantity { get; set; }
     }
     public class NettbutikkContext : DbContext
     {   
         public NettbutikkContext()
-            : base("name=Nettbutikk")
+            : base("Nettbutikk")
         {
             Database.CreateIfNotExists();
         }

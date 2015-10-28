@@ -12,5 +12,7 @@ namespace nettButikkpls.Models
         public string productname { get; set; }
         public float price { get; set; }
         public string category { get; set; }
+        public string description { get; set; }
+        public List<string> picture { get; set; }
     }
 }
