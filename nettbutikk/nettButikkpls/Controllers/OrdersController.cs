@@ -15,9 +15,9 @@ namespace nettButikkpls.Controllers
         {
             Debug.Print("Productid " + Productid);
             Debug.Print("Quantity " + Quantity);
-           // int productid = Int32.Parse(Productid);
+            int productid = Int32.Parse(Productid);
             int quantity = Int32.Parse(Quantity);
-          // Debug.Print("ProduID: " + productid + "Quantity: " + quantity);
+            //Debug.Print("ProduID: " + productid + "Quantity: " + quantity);
             //HttpContext context = HttpContext.Current;
 
             if (Session["Cart"] == null)
@@ -28,7 +28,7 @@ namespace nettButikkpls.Controllers
                 Session["Cart"] = cart;
                 for (int i = 0; i < quantity; i++)
                 {
-                    pIds.Add(1);
+                    pIds.Add(productid);
                 }
                 cart.productids = pIds;
                 Session["Cart"] = cart;
@@ -41,7 +41,7 @@ namespace nettButikkpls.Controllers
                 List<int> pIds = new List<int>();
                 for (int i = 0; i < quantity; i++)
                 {
-                    pIds.Add(1);
+                    pIds.Add(productid);
                 }
                 cart.productids.AddRange(pIds);
                 Session["Cart"] = cart;
