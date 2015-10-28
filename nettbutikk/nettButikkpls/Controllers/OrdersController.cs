@@ -18,7 +18,7 @@ namespace nettButikkpls.Controllers
             /*if (Session["Cart"] == null)
             {
                 Cart cart = new Cart();
-                cart.productids[0].Add(productid);
+                cart.productids[0].Add(productid);  
                 cart.productids[1].Add(quantity);
                 Session["Cart"] = cart;
             }
