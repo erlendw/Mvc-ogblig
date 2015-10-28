@@ -80,7 +80,7 @@ namespace nettButikkpls.Controllers
         {
             var db = new DbOrder();
             Cart cart = (Cart)HttpContext.Session["Cart"];
-            float sumTotal = TotalPrice(cart.productids);
+            int sumTotal = SumTotal(cart.productids);
             Debug.Write("SumTotal" + sumTotal);
             int orderid = db.saveOrer(sumTotal);
             Debug.Print("Orderid: " + orderid);
