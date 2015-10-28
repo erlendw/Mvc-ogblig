@@ -31,9 +31,9 @@ namespace nettButikkpls.Controllers
 
             Product p = FindProduct(id);
 
-            Debug.Print(p.ToString());
+            Debug.Print(p.productname);
 
-            return View();
+            return View(p);
         }
 
         [HttpPost]

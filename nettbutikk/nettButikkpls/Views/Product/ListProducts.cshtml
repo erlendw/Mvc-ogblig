@@ -31,10 +31,14 @@
                         <div class="caption">
                             <h4 class="pull-right">$@product.price</h4>
 
-                            <h4>
-                                <a onclick="goToProduct(@product.productid)">@product.productname</a>
-                                @Html.ActionLink("product.productname",  "ShowProduct", "Product", new { id = product.productid }, null);
-                            </h4>
+                            
+                                <div class="lead">
+                                    
+                                    <h3>@product.productname</h3>
+                                    <h4 class="text-muted"> @Html.ActionLink("More info", "ShowProduct", "Product", new { id = product.productid }, null) </h4>
+
+                            </div>
+                                
 
                             <p>@product.category</p>
                         </div>
