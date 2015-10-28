@@ -18,6 +18,11 @@ namespace nettButikkpls.Controllers
             return View(allProducts);
         }
 
+        public ActionResult ShowProduct()
+        {
+            return View();
+        }
+
         public ActionResult RegProduct()
         {
             return View();

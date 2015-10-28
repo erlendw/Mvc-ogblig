@@ -33,7 +33,7 @@
                             <h4 class="pull-right">$@product.price</h4>
 
                             <h4>
-                                <a href="#">@product.productname</a>
+                                <a href="">@product.productname</a>
                             </h4>
 
                             <p>@product.category</p>
@@ -83,7 +83,7 @@
         
         var url = "/Orders/addToCart";
 
-        $.post(url, { Name: inn, Quantity : quantity}, function (data) {
+        $.post(url, { productid: inn, Quantity : quantity}, function (data) {
             console.log(data);
         });
 
