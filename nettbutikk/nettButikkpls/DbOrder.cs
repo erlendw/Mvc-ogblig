@@ -13,7 +13,7 @@ namespace nettButikkpls
         HttpContext context = HttpContext.Current;
         public void addToCart(int productid, int quantity)
         {
-            Debug.Print("ProduID: " + productid + "Quantity: " + quantity);
+            Debug.Print("ProduID: " + productid + " Quantity: " + quantity);
             int customerid;
             //HttpContext context = HttpContext.Current;
           
@@ -32,7 +32,7 @@ namespace nettButikkpls
                 context.Session["Cart"] = cart;
                 for (int i = 0; i < quantity; i++)
                 {
-                    cart.productids.Add(productid);
+                    cart.productids.Add(productid); 
                 }
                 
                 context.Session["Cart"] = cart;     
