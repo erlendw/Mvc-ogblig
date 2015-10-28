@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using nettButikkpls.Models;
 using System.Web.Mvc;
+using System.Diagnostics;
 
 namespace nettButikkpls
 {
@@ -21,7 +22,7 @@ namespace nettButikkpls
                     cart.productids.Add(productid);
                 }
                 context.Session["Cart"] = cart;     
-            }
+            } 
             else
             {
                 Cart cart = (Cart)context.Session["Cart"];
@@ -36,7 +37,11 @@ namespace nettButikkpls
         {
             HttpContext context = HttpContext.Current;
             Cart cart = (Cart)context.Session["Cart"];
-            
+            var g = cart.productids.GroupBy(i => i);
+            foreach (var grp in g)
+            {
+                Debug.Print("{0} {1}", grp.ToString(), grp.Count());
+            }
             return false;
         }
         public int saveOrer(float price)
