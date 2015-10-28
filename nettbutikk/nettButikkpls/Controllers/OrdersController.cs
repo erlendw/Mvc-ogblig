@@ -72,7 +72,6 @@ namespace nettButikkpls.Controllers
         {
             var db = new DbOrder();
             return db.FindProduct(productid);
-        }
-        
+        }   
     }
 }
