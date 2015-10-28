@@ -24,7 +24,7 @@ namespace nettButikkpls.Controllers
             {
                 Cart cart = new Cart();
                 List<int> pIds = new List<int>();
-                Debug.Print("Cart.CustomerID: " + cart.customerid);
+                //Debug.Print("Cart.CustomerID: " + cart.customerid);
                 Session["Cart"] = cart;
                 for (int i = 0; i < quantity; i++)
                 {
@@ -32,8 +32,7 @@ namespace nettButikkpls.Controllers
                 }
                 cart.productids = pIds;
                 Session["Cart"] = cart;
-                Debug.Print("Cart:" + cart.productids.ToString());
-
+                //Debug.Print("Cart:" + cart.ToString());
             }
             else
             {
@@ -45,8 +44,7 @@ namespace nettButikkpls.Controllers
                 }
                 cart.productids.AddRange(pIds);
                 Session["Cart"] = cart;
-                Debug.Print("Cart:" + cart.productids.ToString());
-
+                //Debug.Print("Cart:" + cart.ToString());
             }
         }
 
@@ -80,11 +78,15 @@ namespace nettButikkpls.Controllers
         {
             var db = new DbOrder();
             Cart cart = (Cart)HttpContext.Session["Cart"];
-            float sumTotal = TotalPrice(cart.productids);
+            Debug.Print(cart.ToString());
+            int sumTotal = SumTotal(cart.productids);
+            Debug.Print("Total price: " + sumTotal);
             int orderid = db.saveOrer(sumTotal);
+            Debug.Print("Orderid: " + orderid);
             if (orderid!=0)
             {
                 // metode(orderid); som legger inn i orderlist
+                
                 db.addOrderList(orderid);
                 return RedirectToAction("Product", "ListProducts");
             }
@@ -105,6 +107,15 @@ namespace nettButikkpls.Controllers
             foreach (var i in pid)
             {
                 price += FindProduct(i).price;
+            }
+            return price;
+        }
+        public int SumTotal(List<int> pid)
+        {
+            int price = 0;
+            foreach (int p in pid)
+            {
+                price += (int)FindProduct(p).price;
             }
             return price;
         }

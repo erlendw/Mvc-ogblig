@@ -13,7 +13,7 @@ namespace nettButikkpls
         HttpContext context = HttpContext.Current;
         public void addToCart(int productid, int quantity)
         {
-            Debug.Print("ProduID: " + productid + " Quantity: " + quantity);
+            //Debug.Print("ProduID: " + productid + " Quantity: " + quantity);
             int customerid;
             //HttpContext context = HttpContext.Current;
           
@@ -28,7 +28,7 @@ namespace nettButikkpls
                     customerid = c.CustomerId;
                     cart.customerid = customerid;
                 }
-                Debug.Print("Cart.CustomerID: " + cart.customerid);
+               // Debug.Print("Cart.CustomerID: " + cart.customerid);
                 context.Session["Cart"] = cart;
                 for (int i = 0; i <= quantity; i++)
                 {
@@ -58,7 +58,7 @@ namespace nettButikkpls
             }
             return false;
         }
-        public int saveOrer(float price)
+        public int saveOrer(int price)
         {
             using (var db = new NettbutikkContext())
             {
