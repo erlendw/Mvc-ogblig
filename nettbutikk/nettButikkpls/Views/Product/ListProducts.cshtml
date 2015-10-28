@@ -6,7 +6,6 @@
     <title>ListProducts</title>
 </head>
 
-
 <!-- Full Width Image Header -->
 <header class="header-image">
     <div class="headline">
@@ -33,7 +32,7 @@
                             <h4 class="pull-right">$@product.price</h4>
 
                             <h4>
-                                <a href="">@product.productname</a>
+                                <a href="/Product/ShowProduct">@product.productname</a>
                             </h4>
 
                             <p>@product.category</p>
@@ -95,4 +94,6 @@
 
         window.setTimeout(function () { $("#" + id).addClass("hidden"); }, 1500);
     }
+
+
 </script>
