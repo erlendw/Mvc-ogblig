@@ -60,7 +60,7 @@ namespace nettButikkpls.Models
         public NettbutikkContext()
             : base("Nettbutikk")
         {
-            Database.CreateIfNotExists();
+                Database.CreateIfNotExists();
         }
         public DbSet<Customers> Customers{ get; set; }
         public DbSet<PostalAreas> PostalAreas { get; set; }
