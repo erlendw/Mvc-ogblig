@@ -34,6 +34,7 @@ namespace nettButikkpls
                     var newProductRow = new Products();
                     newProductRow.ProductId = inProduct.productid;
                     newProductRow.Productname = inProduct.productname;
+                    newProductRow.Description = inProduct.description;
                     newProductRow.Price = inProduct.price;
                     newProductRow.Category = inProduct.category;
                
