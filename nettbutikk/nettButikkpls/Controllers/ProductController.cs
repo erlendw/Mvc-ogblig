@@ -24,16 +24,21 @@ namespace nettButikkpls.Controllers
         }
 
         [HttpGet]
-        public ActionResult ShowProduct(int id)
+        public ActionResult ShowProduct(int? id)
         {
 
-            
+            if(id == null)
+            {
+                return RedirectToAction("ListProducts");
+            }
+            else
+            { 
 
-            Product p = FindProduct(id);
-
+            Product p = FindProduct( (int) id );
             Debug.Print(p.productname);
-
             return View(p);
+
+            }
         }
 
         [HttpPost]
