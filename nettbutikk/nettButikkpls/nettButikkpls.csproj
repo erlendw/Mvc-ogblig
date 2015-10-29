@@ -213,6 +213,7 @@
     <Content Include="Views\Orders\addOrder.cshtml" />
     <Content Include="Views\Shared\NotFound.cshtml" />
     <Content Include="Views\Product\ShowProduct.cshtml" />
+    <Content Include="Views\Orders\OrderComplete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -76,7 +76,7 @@ namespace nettButikkpls
                         db.OrderLists.Add(list);
                     }
                     db.SaveChanges();
-                    Debug.Print("Det gikk bra daniel");
+                    context.Session["Cart"] = null;
                     return true;
                 }
                 catch (Exception e)
