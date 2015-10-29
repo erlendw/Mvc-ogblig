@@ -72,6 +72,7 @@ namespace nettButikkpls.Controllers
     }*/
         public ActionResult addOrder()
         {
+          
             return View();
         }
 
@@ -94,13 +95,7 @@ namespace nettButikkpls.Controllers
             }
             return RedirectToAction("Customer", "List");
         }
-        public bool AddToOrderList(int orderid)
-        {
-            var db = new DbOrder();
-            OrderList list = new OrderList();
-            
-            return false;
-        }
+      
         public float TotalPrice(List<int> pid)
         {
             Debug.Write("Kommer til TotalPrice");

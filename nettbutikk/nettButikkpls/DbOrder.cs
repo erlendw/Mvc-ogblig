@@ -49,14 +49,21 @@ namespace nettButikkpls
         }
         public bool addOrderList(int orderid)
         {
-            HttpContext context = HttpContext.Current;
-            Cart cart = (Cart)context.Session["Cart"];
-            var g = cart.productids.GroupBy(i => i);
-            foreach (var grp in g)
+            try
             {
-                Debug.Print("{0} {1}", grp.ToString(), grp.Count());
+                Cart cart = (Cart)context.Session["Cart"];
+                var g = cart.productids.GroupBy(i => i);
+                foreach (var grp in g)
+                {
+                    Debug.Print("BALLEFRANS: "+"{0} {1}", grp.ToString(), grp.Count());
+                }
+                context.Session["Cart"] = null;
+                return true;
             }
-            return false;
+            catch (Exception e)
+            {
+                return false;
+            }
         }
         public int saveOrer(float price, int customerid)
         {
