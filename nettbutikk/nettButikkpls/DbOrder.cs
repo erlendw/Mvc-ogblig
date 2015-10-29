@@ -104,6 +104,7 @@ namespace nettButikkpls
                         c.productname = GetAllProducts[i].Productname;
                         c.price = GetAllProducts[i].Price;
                         c.category = GetAllProducts[i].Category;
+                        c.description = GetAllProducts[i].Description;
 
                         return c;
                     }
