@@ -91,7 +91,7 @@ namespace nettButikkpls.Controllers
             {
                 // metode(orderid); som legger inn i orderlist
                 db.addOrderList(orderid);
-                return RedirectToAction("Product", "ListProducts");
+                return RedirectToAction( "ListProducts", "Product");
             }
             return RedirectToAction("Customer", "List");
         }

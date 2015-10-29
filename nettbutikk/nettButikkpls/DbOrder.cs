@@ -49,32 +49,22 @@ namespace nettButikkpls
         }
         public bool addOrderList(int orderid)
         {
-            try
+            using (var db = new NettbutikkContext())
             {
-                Cart cart = (Cart)context.Session["Cart"];
-                //var g = cart.productids.GroupBy(i => i);
-                //OrderLists list = new OrderLists();
-                
-                
-                int listsize = cart.productids.Count();
-                int distinct = (from x in cart.productids select x).Distinct().Count();
-                //Debug.Print("Distinct teas: " + distinct + ", Number of teas in cart: " + listsize);
-                int[] pids = new int[distinct];
-                //int[] pidsdesc = new int[listsize];
-                List<int> pidlistdesc = new List<int>();
-                //pidlistdesc = cart.productids.OrderByDescending(p => p).ToList();
-                pidlistdesc = cart.productids.Distinct().ToList();
-                List<int> count = new List<int>();
-                
-                foreach (int p in pidlistdesc)
+                try
                 {
-                    int c = cart.productids.Count(x => x == p);
-                    count.Add(c);
-                }
-               
-                if (listsize > distinct)
-                {
-                    for (int i = 0; i < listsize; i++)
+                    Cart cart = (Cart)context.Session["Cart"];
+                    List<int> pidlistdesc = new List<int>();
+                    pidlistdesc = cart.productids.Distinct().ToList();
+                    List<int> count = new List<int>();
+
+                    foreach (int p in pidlistdesc)
+                    {
+                        int c = cart.productids.Count(x => x == p);
+                        count.Add(c);
+                    }
+
+                    for (int i = 0; i < count.Count; i++)
                     {
                         Debug.Print("pid " + pidlistdesc[i]);
                         Debug.Print("Count " + count[i]);
@@ -83,27 +73,16 @@ namespace nettButikkpls
                         list.ProductID = pidlistdesc[i];
                         list.Quantity = count[i];
                         list.UnitPrice = FindProduct(pidlistdesc[i]).price;
+                        db.OrderLists.Add(list);
                     }
+                    db.SaveChanges();
+                    Debug.Print("Det gikk bra daniel");
+                    return true;
                 }
-                else
+                catch (Exception e)
                 {
-                    foreach (int p in cart.productids)
-                    {
-                        OrderLists list = new OrderLists();
-                        //Debug.Print("ProductIDS i Carten: " + p);
-                        list.OrderID = orderid;
-                        list.ProductID = p;
-                        list.UnitPrice = FindProduct(p).price;
-                        list.Quantity = 1;
-                    }
+                    return false;
                 }
-                
-                context.Session["Cart"] = null;
-                return true;
-            }
-            catch (Exception e)
-            {
-                return false;
             }
         }
         public int saveOrer(float price, int customerid)
