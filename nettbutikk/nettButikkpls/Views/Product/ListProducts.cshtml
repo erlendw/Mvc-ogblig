@@ -75,12 +75,17 @@
         </div>
     </div>
 
-
 @Scripts.Render("~/bundles/jquery")
 
 <script type="text/javascript">
 
+    
+
     function buyButton(inn) {
+
+        var cartcount = document.getElementById("cartcount").innerHTML
+
+        console.log(cartcount)
 
         var quantity = document.getElementById(inn).value;
 
@@ -93,6 +98,10 @@
         console.log(id)
 
         $("#" + id).removeClass("hidden");
+
+        $('#cartcount').html((parseInt(cartcount)+parseInt(quantity)))
+
+        
 
         window.setTimeout(function () { $("#" + id).addClass("hidden"); }, 1500);
     }

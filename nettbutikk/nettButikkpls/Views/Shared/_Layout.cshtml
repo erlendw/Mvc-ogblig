@@ -51,19 +51,19 @@
                     <li>
 
                         <div class="btn-sm btn-primary btn-info">
-                            <span class="glyphicon glyphicon-shopping-cart"></span>
+                            <span class="glyphicon glyphicon-shopping-cart"></span>Shopping Cart (
                             @if ((nettButikkpls.Models.Cart)HttpContext.Current.Session["Cart"] != null)
                             {
                                 nettButikkpls.Models.Cart cart = (nettButikkpls.Models.Cart)HttpContext.Current.Session["Cart"];
-                                <span>Shopping Cart (@cart.productids.Count()) </span>
+                                <span id="cartcount">@cart.productids.Count()</span>
                             }
                             else
                             {
-                                <span>Shopping Cart (0) </span>
+                                <span id="cartcount">0</span>
 
                             }
                           
-                          </div >
+                          )</div >
 
 
 
