@@ -17,11 +17,15 @@ namespace nettButikkpls.Controllers
             Debug.Print("Quantity " + Quantity);
             int productid = Int32.Parse(Productid);
             int quantity = Int32.Parse(Quantity);
+            var db = new DbOrder();
+            Cart cart;
 
             if (Session["Cart"] == null)
             {
-                Cart cart = new Cart();
-                List<int> pIds = new List<int>();
+                cart = new Cart();
+                cart.productids = db.addToCart(productid, quantity);
+                Session["Cart"] = cart;
+                /*List<int> pIds = new List<int>();
                 Session["Cart"] = cart;
                 for (int i = 0; i < quantity; i++)
                 {
@@ -29,20 +33,23 @@ namespace nettButikkpls.Controllers
                 }
                 cart.productids = pIds;
                 Session["Cart"] = cart;
-                Debug.Print("Cart:" + cart.productids.ToString());
+                Debug.Print("Cart:" + cart.productids.ToString());*/
 
             }
             else
             {
-                Cart cart = (Cart)Session["Cart"];
-                List<int> pIds = new List<int>();
-                for (int i = 0; i < quantity; i++)
-                {
-                    pIds.Add(productid);
-                }
-                cart.productids.AddRange(pIds);
+                cart = (Cart)Session["Cart"];
+                cart.productids.AddRange(db.addToCart(productid, quantity));
                 Session["Cart"] = cart;
-                Debug.Print("Cart:" + cart.productids.ToString());
+
+                /* List<int> pIds = new List<int>();
+                 for (int i = 0; i < quantity; i++)
+                 {
+                     pIds.Add(productid);
+                 }
+                 cart.productids.AddRange(pIds);
+                 Session["Cart"] = cart;
+                 Debug.Print("Cart:" + cart.productids.ToString());*/
             }
         }
 

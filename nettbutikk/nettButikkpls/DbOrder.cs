@@ -11,41 +11,24 @@ namespace nettButikkpls
     public class DbOrder
     {
         HttpContext context = HttpContext.Current;
-        public void addToCart(int productid, int quantity)
+        public List<int> addToCart(int productid, int quantity)
         {
-            //Debug.Print("ProduID: " + productid + " Quantity: " + quantity);
-            int customerid;
-            //HttpContext context = HttpContext.Current;
-          
-            if (context.Session["Cart"] == null)
+            List<int> pIds = new List<int>();
+            for (int i = 0; i < quantity; i++)
             {
-                
-                Cart cart = new Cart();
-                
-                if (context.Session["CurrentUser"] != null)
-                {
-                    Customers c = (Customers)context.Session["CurrentUser"];
-                    customerid = c.CustomerId;
-                    cart.customerid = customerid;
-                }
-               // Debug.Print("Cart.CustomerID: " + cart.customerid);
-                context.Session["Cart"] = cart;
-                for (int i = 0; i <= quantity; i++)
-                {
-                    cart.productids.Add(productid); 
-                }
-                
-                context.Session["Cart"] = cart;     
-            } 
+                pIds.Add(productid);
+            }
+            return pIds;
+           /* if (!cart.productids.Any())
+            {
+                cart.productids = pIds;
+            }
             else
             {
-                Cart cart = (Cart)context.Session["Cart"];
-                for (int i = 0; i <= quantity; i++)
-                {
-                    cart.productids.Add(productid);
-                }
-                context.Session["Cart"] = cart;
+                cart.productids.AddRange(pIds);
             }
+            Debug.Print("Cart:" + cart.productids.ToString());
+            return cart;*/
         }
         public bool addOrderList(int orderid)
         {
