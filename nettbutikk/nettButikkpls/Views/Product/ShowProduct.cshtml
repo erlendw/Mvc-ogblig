@@ -4,5 +4,85 @@
     ViewBag.Title = "ShowProduct";
 }
 
-<h2>ShowProduct</h2>
+<div class="spacer">
+    <!-- Page Content -->
+    <div class="container">
 
+        <div class="row">
+
+            <div class="col-md-10 col-md-offset-1">
+
+                <div class="thumbnail">
+                    <img class="img-responsive" src="http://placehold.it/800x300" alt="">
+                    <div class="caption-full">
+                        <h4 class="pull-right">$@Model.price</h4>
+                        <h4>
+                            <a href="#">@Model.productname</a>
+                    </h4>
+                    <p>@Model.description</p>
+                
+                        <div class="row">
+
+                            <div class="col-md-2 pull-left">
+
+                                <input type="text" class="form-control" value="1" id="@Model.productid">
+
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <a class="btn btn-primary btn-success" id="button" onclick="buyButton('@Model.productid') "><span class="glyphicon glyphicon-usd"></span> Buy Now!</a>
+
+                            </div>
+
+                            <div class="col-md-4 pull-right">
+
+                                <div id="productbox_@Model.productid" class="hidden text-success"><i class="fa fa-check"></i> Added!</div>
+
+                            </div>
+
+                        </div>
+                    
+                    </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+
+@Scripts.Render("~/bundles/jquery")
+
+<script type="text/javascript">
+
+    function buyButton(inn) {
+
+        var quantity = document.getElementById(inn).value;
+
+        var url = "/Orders/addToCart";
+
+        $.post(url, { productid: inn, Quantity : quantity}, function (data) {});
+
+        var id = "productbox_" + inn
+
+        console.log(id)
+
+        $("#" + id).removeClass("hidden");
+
+        window.setTimeout(function () { $("#" + id).addClass("hidden"); }, 1500);
+    }
+
+
+    function goToProduct(id) {
+        var url = "/Product/ShowProduct";
+        $.post(url, { id: id }, function (data) {});
+
+    }
+
+</script>

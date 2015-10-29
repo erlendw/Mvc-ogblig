@@ -10,5 +10,15 @@ namespace nettButikkpls.Models
     {
         public int customerid { get; set; }
         public List<int> productids { get; set; }
+
+        public string ToString()
+        {
+            string print = "CART: Customer ID: " + customerid;
+            foreach (int p in productids)
+            {
+                print += " Product ID: " + p;
+            }
+            return print;
+        }
     }
 }

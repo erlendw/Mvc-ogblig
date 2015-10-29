@@ -6,7 +6,6 @@
     <title>ListProducts</title>
 </head>
 
-
 <!-- Full Width Image Header -->
 <header class="header-image">
     <div class="headline">
@@ -32,9 +31,14 @@
                         <div class="caption">
                             <h4 class="pull-right">$@product.price</h4>
 
-                            <h4>
-                                <a href="">@product.productname</a>
-                            </h4>
+                            
+                                <div class="lead">
+                                    
+                                    <h3>@product.productname</h3>
+                                    <h4 class="text-muted"> @Html.ActionLink("More info", "ShowProduct", "Product", new { id = product.productid }, null) </h4>
+
+                            </div>
+                                
 
                             <p>@product.category</p>
                         </div>
@@ -49,7 +53,7 @@
 
                             <div class="col-md-6">
 
-                                <a class="btn btn-primary btn-success" id="button" onclick="testClick('@product.productid') "><span class="glyphicon glyphicon-usd"></span> Buy Now!</a>
+                                <a class="btn btn-primary btn-success" id="button" onclick="buyButton('@product.productid') "><span class="glyphicon glyphicon-usd"></span> Buy Now!</a>
 
                             </div>
 
@@ -71,21 +75,23 @@
         </div>
     </div>
 
-
 @Scripts.Render("~/bundles/jquery")
 
 <script type="text/javascript">
 
-    function testClick(inn) {
+    
+
+    function buyButton(inn) {
+
+        var cartcount = document.getElementById("cartcount").innerHTML
+
+        console.log(cartcount)
 
         var quantity = document.getElementById(inn).value;
 
-        
         var url = "/Orders/addToCart";
 
-        $.post(url, { productid: inn, Quantity : quantity}, function (data) {
-            console.log(data);
-        });
+        $.post(url, { productid: inn, Quantity : quantity}, function (data) {});
 
         var id = "productbox_" + inn
 
@@ -93,6 +99,18 @@
 
         $("#" + id).removeClass("hidden");
 
+        $('#cartcount').html((parseInt(cartcount)+parseInt(quantity)))
+
+        
+
         window.setTimeout(function () { $("#" + id).addClass("hidden"); }, 1500);
     }
+
+
+    function goToProduct(id) {
+        var url = "/Product/ShowProduct";
+        $.post(url, { id: id }, function (data) {});
+
+    }
+
 </script>

@@ -24,7 +24,7 @@ namespace nettButikkpls.Controllers
             {
                 Cart cart = new Cart();
                 List<int> pIds = new List<int>();
-                Debug.Print("Cart.CustomerID: " + cart.customerid);
+                //Debug.Print("Cart.CustomerID: " + cart.customerid);
                 Session["Cart"] = cart;
                 for (int i = 0; i < quantity; i++)
                 {
@@ -72,6 +72,7 @@ namespace nettButikkpls.Controllers
     }*/
         public ActionResult addOrder()
         {
+          
             return View();
         }
 
@@ -79,9 +80,13 @@ namespace nettButikkpls.Controllers
         public ActionResult AddOrder()
         {
             var db = new DbOrder();
+            var cdb = new DbCustomer();
             Cart cart = (Cart)HttpContext.Session["Cart"];
-            float sumTotal = TotalPrice(cart.productids);
-            int orderid = db.saveOrer(sumTotal);
+            int sumTotal = SumTotal(cart.productids);
+            int customerID = cdb.CurrentCustomer();
+            Debug.Write("SumTotal" + sumTotal);
+            int orderid = db.saveOrer(sumTotal, customerID);
+            Debug.Print("Orderid: " + orderid);
             if (orderid!=0)
             {
                 // metode(orderid); som legger inn i orderlist
@@ -89,18 +94,11 @@ namespace nettButikkpls.Controllers
                 return RedirectToAction("Product", "ListProducts");
             }
             return RedirectToAction("Customer", "List");
-            
         }
-
-        public bool AddToOrderList(int orderid)
-        {
-            var db = new DbOrder();
-            OrderList list = new OrderList();
-            
-            return false;
-        }
+      
         public float TotalPrice(List<int> pid)
         {
+            Debug.Write("Kommer til TotalPrice");
             float price = 0;
             foreach (var i in pid)
             {
@@ -108,10 +106,20 @@ namespace nettButikkpls.Controllers
             }
             return price;
         }
+        public int SumTotal(List<int> pid)
+        {
+            int price = 0;
+            foreach (int p in pid)
+            {
+                price += (int)FindProduct(p).price;
+            }
+            return price;
+        }
         public Product FindProduct(int productid)
         {
             var db = new DbOrder();
             return db.FindProduct(productid);
+
         }   
     }
 }

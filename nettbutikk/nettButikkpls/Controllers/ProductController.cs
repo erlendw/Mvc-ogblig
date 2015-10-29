@@ -18,16 +18,29 @@ namespace nettButikkpls.Controllers
             return View(allProducts);
         }
 
-        [HttpPost]
-        public ActionResult ShowProduct()
-        {
-            return RedirectToAction("Product", "ShowProduct");
-        }
-
         public ActionResult RegProduct()
         {
             return View();
         }
+
+        [HttpGet]
+        public ActionResult ShowProduct(int? id)
+        {
+
+            if(id == null)
+            {
+                return RedirectToAction("ListProducts");
+            }
+            else
+            { 
+
+            Product p = FindProduct( (int) id );
+            Debug.Print(p.productname);
+            return View(p);
+
+            }
+        }
+
         [HttpPost]
         public ActionResult RegProduct(Product inProduct)
         {
@@ -44,7 +57,7 @@ namespace nettButikkpls.Controllers
         {
             HttpFileCollectionBase innfiler = Request.Files;
             var db = new DbProduct();
-            bool erlend = db.SaveImagesToServer(innfiler);
+            bool success = db.SaveImagesToServer(innfiler);
             /*
             foreach (string FileName in Request.Files)
             {
@@ -58,6 +71,13 @@ namespace nettButikkpls.Controllers
                 Debug.Print(file.FileName);
             }*/
             return Json(new { Message = string.Empty });
+        }
+
+        public Product FindProduct(int productid)
+        {
+            var db = new DbOrder();
+            return db.FindProduct(productid);
+
         }
     }
 }
