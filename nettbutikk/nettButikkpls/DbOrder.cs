@@ -52,11 +52,52 @@ namespace nettButikkpls
             try
             {
                 Cart cart = (Cart)context.Session["Cart"];
-                var g = cart.productids.GroupBy(i => i);
-                foreach (var grp in g)
+                //var g = cart.productids.GroupBy(i => i);
+                //OrderLists list = new OrderLists();
+                
+                
+                int listsize = cart.productids.Count();
+                int distinct = (from x in cart.productids select x).Distinct().Count();
+                //Debug.Print("Distinct teas: " + distinct + ", Number of teas in cart: " + listsize);
+                int[] pids = new int[distinct];
+                //int[] pidsdesc = new int[listsize];
+                List<int> pidlistdesc = new List<int>();
+                //pidlistdesc = cart.productids.OrderByDescending(p => p).ToList();
+                pidlistdesc = cart.productids.Distinct().ToList();
+                List<int> count = new List<int>();
+                
+                foreach (int p in pidlistdesc)
                 {
-                    Debug.Print("BALLEFRANS: "+"{0} {1}", grp.ToString(), grp.Count());
+                    int c = cart.productids.Count(x => x == p);
+                    count.Add(c);
                 }
+               
+                if (listsize > distinct)
+                {
+                    for (int i = 0; i < listsize; i++)
+                    {
+                        Debug.Print("pid " + pidlistdesc[i]);
+                        Debug.Print("Count " + count[i]);
+                        OrderLists list = new OrderLists();
+                        list.OrderID = orderid;
+                        list.ProductID = pidlistdesc[i];
+                        list.Quantity = count[i];
+                        list.UnitPrice = FindProduct(pidlistdesc[i]).price;
+                    }
+                }
+                else
+                {
+                    foreach (int p in cart.productids)
+                    {
+                        OrderLists list = new OrderLists();
+                        //Debug.Print("ProductIDS i Carten: " + p);
+                        list.OrderID = orderid;
+                        list.ProductID = p;
+                        list.UnitPrice = FindProduct(p).price;
+                        list.Quantity = 1;
+                    }
+                }
+                
                 context.Session["Cart"] = null;
                 return true;
             }
