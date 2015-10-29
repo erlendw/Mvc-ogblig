@@ -20,7 +20,8 @@ namespace nettButikkpls
                     productid = p.ProductId,
                     productname = p.Productname,
                     price = p.Price,
-                    category = p.Category
+                    category = p.Category,
+                    description = p.Description
                 }).ToList();
             return allProducts;
             }
