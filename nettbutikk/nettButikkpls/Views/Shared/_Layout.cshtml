@@ -47,11 +47,37 @@
                     {
                         <li>@Html.ActionLink("Checkout", "addOrder", "Orders")</li>
                     }
+
+                    <li>
+
+                        <div class="btn-sm btn-primary btn-info">
+                            <span class="glyphicon glyphicon-shopping-cart"></span>Shopping Cart (
+                            @if ((nettButikkpls.Models.Cart)HttpContext.Current.Session["Cart"] != null)
+                            {
+                                nettButikkpls.Models.Cart cart = (nettButikkpls.Models.Cart)HttpContext.Current.Session["Cart"];
+                                <span id="cartcount">@cart.productids.Count()</span>
+                            }
+                            else
+                            {
+                                <span id="cartcount">0</span>
+
+                            }
+                          
+                          )</div >
+
+
+
+</li>
+                    
+                                                     
                     
                 </ul>
+
+                    
+
+                </div>
             </div>
         </div>
-    </div>
 
      <div class="body-content">
 
