@@ -17,14 +17,11 @@ namespace nettButikkpls.Controllers
             Debug.Print("Quantity " + Quantity);
             int productid = Int32.Parse(Productid);
             int quantity = Int32.Parse(Quantity);
-            //Debug.Print("ProduID: " + productid + "Quantity: " + quantity);
-            //HttpContext context = HttpContext.Current;
 
             if (Session["Cart"] == null)
             {
                 Cart cart = new Cart();
                 List<int> pIds = new List<int>();
-                //Debug.Print("Cart.CustomerID: " + cart.customerid);
                 Session["Cart"] = cart;
                 for (int i = 0; i < quantity; i++)
                 {
@@ -46,33 +43,11 @@ namespace nettButikkpls.Controllers
                 cart.productids.AddRange(pIds);
                 Session["Cart"] = cart;
                 Debug.Print("Cart:" + cart.productids.ToString());
-
             }
         }
 
-        /*  Debug.Print(Name + " " + Quantity);
-          var db = new DbOrder();
-          db.addToCart(Int32.Parse(Name), Int32.Parse(Quantity));
-
-          if (Session["Cart"] == null)
-          {
-              Cart cart = new Cart();
-              cart.productids[0].Add(productid);  
-              cart.productids[1].Add(quantity);
-              Session["Cart"] = cart;
-          }
-          else
-          {
-              Cart cart = (Cart)HttpContext.Session["Cart "];
-              cart.productids[0].Add(productid);
-              cart.productids[1].Add(quantity);
-              Session["Cart"] = cart;
-          }
-          return RedirectToAction("Product", "ListProducts");
-    }*/
         public ActionResult addOrder()
         {
-          
             return View();
         }
 
@@ -89,7 +64,6 @@ namespace nettButikkpls.Controllers
             Debug.Print("Orderid: " + orderid);
             if (orderid!=0)
             {
-                // metode(orderid); som legger inn i orderlist
                 db.addOrderList(orderid);
                 return RedirectToAction( "OrderComplete", "Orders");
             }
@@ -103,7 +77,6 @@ namespace nettButikkpls.Controllers
       
         public float TotalPrice(List<int> pid)
         {
-            Debug.Write("Kommer til TotalPrice");
             float price = 0;
             foreach (var i in pid)
             {
