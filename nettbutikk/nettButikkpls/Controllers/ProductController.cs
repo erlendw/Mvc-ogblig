@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using nettButikkpls.Models;
+using nettButikkpls.BLL;
 using System.Diagnostics;
 using System.IO;
 
@@ -13,7 +14,7 @@ namespace nettButikkpls.Controllers
     {
         public ActionResult ListProducts()
         {
-            var db = new DbProduct();
+            var db = new ProductBLL();
             IEnumerable<Product> allProducts = db.allProducts();
             return View(allProducts);
         }
@@ -44,7 +45,7 @@ namespace nettButikkpls.Controllers
         [HttpPost]
         public ActionResult RegProduct(Product inProduct)
         {
-            var db = new DbProduct();
+            var db = new ProductBLL();
             bool OK = db.saveProduct(inProduct);
             if(OK)
             {
@@ -56,7 +57,7 @@ namespace nettButikkpls.Controllers
         public ActionResult SaveImagesToServer()
         {
             HttpFileCollectionBase innfiler = Request.Files;
-            var db = new DbProduct();
+            var db = new ProductBLL();
             bool success = db.SaveImagesToServer(innfiler);
             /*
             foreach (string FileName in Request.Files)
@@ -75,7 +76,7 @@ namespace nettButikkpls.Controllers
 
         public Product FindProduct(int productid)
         {
-            var db = new DbOrder();
+            var db = new OrderBLL();
             return db.FindProduct(productid);
 
         }

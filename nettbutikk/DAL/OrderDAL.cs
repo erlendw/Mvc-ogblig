@@ -6,9 +6,9 @@ using nettButikkpls.Models;
 using System.Web.Mvc;
 using System.Diagnostics;
 
-namespace nettButikkpls
+namespace nettButikkpls.DAL
 {
-    public class DbOrder
+    public class OrderDAL
     {
         HttpContext context = HttpContext.Current;
         public void addToCart(int productid, int quantity)
@@ -85,7 +85,7 @@ namespace nettButikkpls
                 }
             }
         }
-        public int saveOrer(float price, int customerid)
+        public int saveOrder(float price, int customerid)
         {
             using (var db = new NettbutikkContext())
             {

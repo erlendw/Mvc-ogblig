@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using nettButikkpls.Models;
 using System.Diagnostics;
+using nettButikkpls.BLL;
+using nettButikkpls.Models;
 
 
 namespace nettButikkpls.Controllers
 {
     public class CustomerController : Controller
     {
-        NettbutikkContext bmx = new NettbutikkContext();
+        //NettbutikkContext bmx = new NettbutikkContext();
         public ActionResult List()
         {
-            var db = new DbCustomer();
+            var db = new CustomerBLL();
             List<Customer> allCustomers = db.allCustomers();
             return View(allCustomers);
         }
@@ -22,11 +23,16 @@ namespace nettButikkpls.Controllers
         {
             return View();
         }
+        public ActionResult CurrentCustomer()
+        {
+            var db = new CustomerBLL();
+            return View(db.CurrentCustomerObj());
+        }
 
         [HttpPost]
         public ActionResult Reg(Customer inCustomer)
         {
-            var db = new DbCustomer();
+            var db = new CustomerBLL();
             bool OK = db.saveCustomer(inCustomer);
             if (OK)
             {
@@ -46,7 +52,7 @@ namespace nettButikkpls.Controllers
         [HttpPost]
         public ActionResult UpdateCustomer(FormCollection inList)
         {
-            var db = new DbCustomer();
+            var db = new CustomerBLL();
             bool OK = db.EditCustomer(inList);
             if(OK)
             {
@@ -54,12 +60,14 @@ namespace nettButikkpls.Controllers
             }
             return View();
         }
-        public Customers FindCustomerByEmail (string Email)
+        public Customer FindCustomerByEmail (string Email)
         {
-            List<Customers> GetAllCustomers = bmx.Customers.ToList();
-            for(int i = 0; i < GetAllCustomers.Count; i++)
+            var db = new CustomerBLL();
+            //List<Customer> GetAllCustomers = bmx.Customers.ToList();
+            List<Customer> GetAllCustomers = db.allCustomers();
+            for (int i = 0; i < GetAllCustomers.Count; i++)
             {
-                if(GetAllCustomers[i].Mail == Email)
+                if(GetAllCustomers[i].email == Email)
                 {
                     return GetAllCustomers[i];
                 }
@@ -68,7 +76,7 @@ namespace nettButikkpls.Controllers
         }
         public ActionResult Login()
         {
-            var db = new DbCustomer();
+            var db = new CustomerBLL();
             bool loggedIn = db.Login();
             if (loggedIn)
             {
@@ -81,14 +89,14 @@ namespace nettButikkpls.Controllers
         public ActionResult ValidateUser(FormCollection inList)
         {
             //Trenger feilmelding når brukervalidering feiler.
-            var db = new DbCustomer();
+            var db = new CustomerBLL();
             bool loggedIn = db.ValidateUser(inList);
             if (loggedIn)
             {
                 return RedirectToAction("List");
             }
             return RedirectToAction("Login");//Implisitt else
+        }
     }
 
-    }
 }

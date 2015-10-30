@@ -5,9 +5,9 @@ using System.Web;
 using nettButikkpls.Models;
 using System.IO;
 
-namespace nettButikkpls
+namespace nettButikkpls.DAL
 {
-    public class DbProduct
+    public class ProductDAL
     {
         public IEnumerable<Product> allProducts()
         {

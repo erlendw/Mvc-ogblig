@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using nettButikkpls.Models;
 using System.Diagnostics;
+using nettButikkpls.BLL;
 
 namespace nettButikkpls.Controllers
 {
@@ -79,13 +80,13 @@ namespace nettButikkpls.Controllers
         [HttpPost]
         public ActionResult AddOrder()
         {
-            var db = new DbOrder();
-            var cdb = new DbCustomer();
+            var db = new OrderBLL();
+            var cdb = new CustomerBLL();
             Cart cart = (Cart)HttpContext.Session["Cart"];
             int sumTotal = SumTotal(cart.productids);
-            int customerID = cdb.CurrentCustomer();
+            int customerID = cdb.CurrentCustomerId();
             Debug.Write("SumTotal" + sumTotal);
-            int orderid = db.saveOrer(sumTotal, customerID);
+            int orderid = db.saveOrder(sumTotal, customerID);
             Debug.Print("Orderid: " + orderid);
             if (orderid!=0)
             {
@@ -122,7 +123,7 @@ namespace nettButikkpls.Controllers
         }
         public Product FindProduct(int productid)
         {
-            var db = new DbOrder();
+            var db = new OrderBLL();
             return db.FindProduct(productid);
 
         }   

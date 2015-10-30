@@ -177,23 +177,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
-    <Compile Include="DbCustomer.cs" />
-    <Compile Include="DbOrder.cs" />
-    <Compile Include="DbProduct.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201510291012075_test.cs" />
-    <Compile Include="Migrations\201510291012075_test.Designer.cs">
-      <DependentUpon>201510291012075_test.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Cart.cs" />
-    <Compile Include="Models\Customer.cs" />
-    <Compile Include="Models\Nettbutikk.cs" />
-    <Compile Include="Models\Order.cs" />
-    <Compile Include="Models\OrderList.cs" />
-    <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -223,12 +209,19 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Images\" />
+    <Folder Include="Migrations\" />
+    <Folder Include="Models\" />
     <Folder Include="Views\Cart\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201510291012075_test.resx">
-      <DependentUpon>201510291012075_test.cs</DependentUpon>
-    </EmbeddedResource>
+    <ProjectReference Include="..\BLL\BLL.csproj">
+      <Project>{c0f54875-3798-47e1-99c5-35c23cd03925}</Project>
+      <Name>BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{5c098928-4dca-4110-9e83-24e538e8443a}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

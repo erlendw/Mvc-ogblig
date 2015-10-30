@@ -7,9 +7,9 @@ using System.Security.Cryptography;
 using System.Diagnostics;
 using System.Web.Mvc;
 
-namespace nettButikkpls
+namespace nettButikkpls.DAL
 {
-    public class DbCustomer
+    public class CustomerDAL
     {
         HttpContext context = HttpContext.Current;
         NettbutikkContext bmx = new NettbutikkContext();
@@ -171,11 +171,16 @@ namespace nettButikkpls
             }
             return null;
         }
-        public int CurrentCustomer()
+        public int CurrentCustomerId()
         {
             // HttpContext context = HttpContext.Current;
             Customers c = (Customers)context.Session["CurrentUSer"];
             return c.CustomerId;
+        }
+        public Customers CurrentCustomerObj()
+        {
+            Customers c = (Customers)context.Session["CurrentUser"];
+            return c;
         }
     }
 }

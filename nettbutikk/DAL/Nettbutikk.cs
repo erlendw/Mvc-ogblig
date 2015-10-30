@@ -7,7 +7,7 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Web;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace nettButikkpls.Models
+namespace nettButikkpls.DAL
 {
     public class Customers
     {
