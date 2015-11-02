@@ -1,4 +1,4 @@
-﻿@{nettButikkpls.Models.Customers customer = (nettButikkpls.Models.Customers)HttpContext.Current.Session["CurrentUser"]; }
+﻿@{nettButikkpls.Models.Customer customer = (nettButikkpls.Models.Customer)HttpContext.Current.Session["CurrentUser"]; }
 
 
 <div class="container">
@@ -12,16 +12,16 @@
             </li>
 
             <li class="list-group-item">
-                Mail address: @customer.Mail
+                Mail address: @customer.email
             </li>
             <li class="list-group-item">
-                First name: @customer.Firstname
+                First name: @customer.firstname
             </li>
             <li class="list-group-item">
-                Last name: @customer.Lastname
+                Last name: @customer.lastname
             </li>
             <li class="list-group-item">
-                Address: @customer.Address
+                Address: @customer.address
             </li>
 
         </ul>

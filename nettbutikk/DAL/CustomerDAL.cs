@@ -69,12 +69,12 @@ namespace nettButikkpls.DAL
 
         public bool EditCustomer(FormCollection inList)
         {
-                try
+            try
                 {
-                   // HttpContext context = HttpContext.Current;
-                    Customers c = (Customers)context.Session["CurrentUser"];
-
-                    Customers customer = FindCustomerByEmail(c.Mail);
+                    // HttpContext context = HttpContext.Current;
+                    Customer c = (Customer)context.Session["CurrentUser"];
+                    Customers customer = FindCustomersByEmail(c.email);
+                    
                     if (!(String.IsNullOrEmpty(inList["Mail"])))
                     {
                         customer.Mail = inList["Mail"];
@@ -82,22 +82,23 @@ namespace nettButikkpls.DAL
                     if (!(String.IsNullOrEmpty(inList["Firstname"])))
                     {
                         customer.Firstname = inList["Firstname"];
-                    }
+                }
                     if (!(String.IsNullOrEmpty(inList["Lastname"])))
                     {
                         customer.Lastname = inList["Lastname"];
-                    }
+                }
                     if (!(String.IsNullOrEmpty(inList["Address"])))
                     {
                         customer.Address = inList["Address"];
-                    }
+                }
                     bmx.SaveChanges();
-                    context.Session["CurrentUser"] = customer;
+                c = FindCustomerByEmail(customer.Mail);
+                    context.Session["CurrentUser"] = c;
                     return true;
                 }
                 catch (Exception e)
                 {
-                    return false;   
+                    return false;
                 }
         }
         public bool Login()
@@ -115,12 +116,12 @@ namespace nettButikkpls.DAL
         }
         public bool ValidateUser(FormCollection inList)
         {
-            Customers customer = FindCustomerByEmail(inList["Email"]);
+            Customer customer = FindCustomerByEmail(inList["Email"]);
 
             if (customer != null)
             {
-                String OldHash = customer.Password;
-                String ReHash = HashPassword(inList["Password"], customer.Salt);
+                String OldHash = customer.password;
+                String ReHash = HashPassword(inList["Password"], customer.salt);
                 HttpContext context = HttpContext.Current;
                 if (OldHash == ReHash)
                 {
@@ -159,28 +160,51 @@ namespace nettButikkpls.DAL
             return Convert.ToBase64String(hash);
 
         }
-        public Customers FindCustomerByEmail(string email)
+        public Customer FindCustomerByEmail(string email)
         {
+            Customer c = new Customer();
             List<Customers> GetAllCustomers = bmx.Customers.ToList();
             for (int i = 0; i < GetAllCustomers.Count; i++)
             {
                 if (GetAllCustomers[i].Mail == email)
+                {
+                    c.customerId = GetAllCustomers[i].CustomerId;
+                    c.email = email;
+                    c.firstname = GetAllCustomers[i].Firstname;
+                    c.lastname = GetAllCustomers[i].Lastname;
+                    c.address = GetAllCustomers[i].Address;
+                    c.zipcode = GetAllCustomers[i].Zipcode;
+                    c.postalarea = GetAllCustomers[i].Postalareas.ToString();
+                    c.password = GetAllCustomers[i].Password;
+                    c.salt = GetAllCustomers[i].Salt;
+                    return c;
+                }
+            }
+            return null;
+        }
+        public Customers FindCustomersByEmail(string email)
+        {
+            List<Customers> GetAllCustomers = bmx.Customers.ToList();
+            for(int i = 0; i<GetAllCustomers.Count; i++)
+            {
+                if(GetAllCustomers[i].Mail == email)
                 {
                     return GetAllCustomers[i];
                 }
             }
             return null;
         }
+
         public int CurrentCustomerId()
         {
-            // HttpContext context = HttpContext.Current;
-            Customers c = (Customers)context.Session["CurrentUSer"];
-            return c.CustomerId;
+            Customer c = (Customer)context.Session["CurrentUSer"];
+            return c.customerId;
+            //Endret her fra Customers til Customer for å teste
         }
-        public Customers CurrentCustomerObj()
+       /* public Customers CurrentCustomerObj()
         {
             Customers c = (Customers)context.Session["CurrentUser"];
             return c;
-        }
+        }*/
     }
 }
