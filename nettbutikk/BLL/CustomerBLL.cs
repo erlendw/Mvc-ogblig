@@ -49,7 +49,7 @@ namespace nettButikkpls.BLL
             return customerDal.HashPassword(Password, Salt);
 
         }
-        public Customers FindCustomerByEmail(string email)
+        public Customer FindCustomerByEmail(string email)
         {
             var customerDal = new CustomerDAL();
             return customerDal.FindCustomerByEmail(email);
@@ -59,10 +59,10 @@ namespace nettButikkpls.BLL
             var customerDal = new CustomerDAL();
             return customerDal.CurrentCustomerId();
         }
-        public Customers CurrentCustomerObj()
+      /* public Customers CurrentCustomerObj()
         {
             var customerDal = new CustomerDAL();
             return customerDal.CurrentCustomerObj();
-        }
+        }*/
     }
 }

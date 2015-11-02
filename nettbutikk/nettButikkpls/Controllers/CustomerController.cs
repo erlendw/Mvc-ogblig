@@ -23,11 +23,11 @@ namespace nettButikkpls.Controllers
         {
             return View();
         }
-        public ActionResult CurrentCustomer()
+        /*public ActionResult CurrentCustomer()
         {
             var db = new CustomerBLL();
             return View(db.CurrentCustomerObj());
-        }
+        }*/
 
         [HttpPost]
         public ActionResult Reg(Customer inCustomer)
@@ -58,7 +58,7 @@ namespace nettButikkpls.Controllers
             {
                 return RedirectToAction("List");
             }
-            return View();
+            return RedirectToAction("List");
         }
         public Customer FindCustomerByEmail (string Email)
         {

@@ -1,4 +1,4 @@
-﻿@{nettButikkpls.Models.Customers customer = (nettButikkpls.Models.Customers)HttpContext.Current.Session["CurrentUser"]; }
+﻿@{nettButikkpls.Models.Customer customer = (nettButikkpls.Models.Customer)HttpContext.Current.Session["CurrentUser"]; }
 
 <div class="container">
 
@@ -11,22 +11,22 @@
             <form class="form-horizontal" action="/Customer/UpdateCustomer" method="post">
                 <div class="form-group">
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="@customer.Mail" name="Mail">
+                        <input type="text" class="form-control" placeholder="@customer.email" name="Mail">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" placehlder="@customer.Firstname" name="Firstname">
+                        <input type="text" class="form-control" placehlder="@customer.firstname" name="Firstname">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="@customer.Lastname" name="Lastname">
+                        <input type="text" class="form-control" placeholder="@customer.lastname" name="Lastname">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="@customer.Address" name="Address">
+                        <input type="text" class="form-control" placeholder="@customer.address" name="Address">
                     </div>
                 </div>
                 <div class="form-group">
