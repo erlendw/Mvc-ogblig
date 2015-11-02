@@ -44,6 +44,19 @@ Ting vi mangler:
 <li>Sikker masse annet</li>
 <li>Klem fra Daniel</li>
 
+# Pri for denne uken
+
+<li>Liste order history</li>
+<li>endring av produkter</li>
+<li>adminpanel</li>
+<li>lage superbruker</li>
+<li>logging av endringer</li>
+<li>C r u d på orders</li>
+<li>boyz will be boyz</li>
+<li>Administrere brukere</li>
+<li></li>
+
+
 
 # Vi er kule bønner
 
