@@ -8,9 +8,9 @@ namespace nettButikkpls.Models
 {
     public class Order
     {
-        public int OrderId { get; set; }
-        public int CustomerId { get; set; }
-        public string TimeStamp { get; set; }
-        public float SumTotal { get; set; }
+        public int orderId { get; set; }
+        public int customerId { get; set; }
+        public string timestamp { get; set; }
+        public float sumtotal { get; set; }
     }
 }

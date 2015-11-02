@@ -132,5 +132,26 @@ namespace nettButikkpls.DAL
             }
             return null;
         }
+        public List<Order> ListAllOrders()
+        {
+            using (var bmx = new NettbutikkContext()) {
+                var db = new CustomerDAL();
+                int cId = db.CurrentCustomerId();
+                List<Order> order = new List<Order>();
+                IEnumerable<Orders> orders = bmx.Orders.Where(o => o.CustomerId == cId);
+
+                foreach ( var i in orders)
+                {
+                    Order or = new Order();
+                    or.customerId = i.CustomerId;
+                    or.orderId = i.OrderId;
+                    or.sumtotal = i.SumTotal;
+                    or.timestamp = i.TimeStamp;
+                    order.Add(or);
+                }
+                return order;
+            }
+
+        }
     }
 }

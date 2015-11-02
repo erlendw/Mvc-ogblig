@@ -31,5 +31,10 @@ namespace nettButikkpls.BLL
             var orderDal = new OrderDAL();
             return orderDal.FindProduct(productid);
         }
+        public List<Order> ListAllOrders()
+        {
+            var orderDal = new OrderDAL();
+            return orderDal.ListAllOrders();
+        }
     }
 }

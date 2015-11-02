@@ -126,6 +126,12 @@ namespace nettButikkpls.Controllers
             var db = new OrderBLL();
             return db.FindProduct(productid);
 
-        }   
+        }  
+        public ActionResult ListOrders()
+        {
+            var db = new OrderBLL();
+            List<Order> orders = db.ListAllOrders();
+            return View(orders);
+        }
     }
 }
