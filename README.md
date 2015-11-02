@@ -44,7 +44,7 @@ Ting vi mangler:
 <li>Sikker masse annet</li>
 <li>Klem fra Daniel</li>
 
-# Pri for denne uken
+# Pri for denne uken (uke 45)
 
 <li>Liste order history</li>
 <li>endring av produkter</li>
