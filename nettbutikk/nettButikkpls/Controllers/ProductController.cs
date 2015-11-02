@@ -17,7 +17,6 @@ namespace nettButikkpls.Controllers
             IEnumerable<Product> allProducts = db.allProducts();
             return View(allProducts);
         }
-
         public ActionResult RegProduct()
         {
             return View();

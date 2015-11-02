@@ -19,16 +19,6 @@ namespace nettButikkpls
                 pIds.Add(productid);
             }
             return pIds;
-           /* if (!cart.productids.Any())
-            {
-                cart.productids = pIds;
-            }
-            else
-            {
-                cart.productids.AddRange(pIds);
-            }
-            Debug.Print("Cart:" + cart.productids.ToString());
-            return cart;*/
         }
         public bool addOrderList(int orderid)
         {

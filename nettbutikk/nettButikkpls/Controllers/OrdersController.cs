@@ -25,31 +25,12 @@ namespace nettButikkpls.Controllers
                 cart = new Cart();
                 cart.productids = db.addToCart(productid, quantity);
                 Session["Cart"] = cart;
-                /*List<int> pIds = new List<int>();
-                Session["Cart"] = cart;
-                for (int i = 0; i < quantity; i++)
-                {
-                    pIds.Add(productid);
-                }
-                cart.productids = pIds;
-                Session["Cart"] = cart;
-                Debug.Print("Cart:" + cart.productids.ToString());*/
-
             }
             else
             {
                 cart = (Cart)Session["Cart"];
                 cart.productids.AddRange(db.addToCart(productid, quantity));
                 Session["Cart"] = cart;
-
-                /* List<int> pIds = new List<int>();
-                 for (int i = 0; i < quantity; i++)
-                 {
-                     pIds.Add(productid);
-                 }
-                 cart.productids.AddRange(pIds);
-                 Session["Cart"] = cart;
-                 Debug.Print("Cart:" + cart.productids.ToString());*/
             }
         }
 

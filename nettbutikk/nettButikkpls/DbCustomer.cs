@@ -6,7 +6,7 @@ using nettButikkpls.Models;
 using System.Security.Cryptography;
 using System.Diagnostics;
 using System.Web.Mvc;
-
+using nettButikkpls.Models;
 namespace nettButikkpls
 {
     public class DbCustomer

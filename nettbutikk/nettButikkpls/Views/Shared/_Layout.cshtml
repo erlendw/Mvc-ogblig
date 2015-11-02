@@ -32,7 +32,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "ListProducts", "Product")</li>
                     <li>@Html.ActionLink("Register customer", "Reg", "Customer")</li>
-                    
+
                     
                     @if ((nettButikkpls.Models.Customers)HttpContext.Current.Session["CurrentUser"] == null)
                     {

@@ -88,7 +88,7 @@ namespace nettButikkpls.Controllers
                 return RedirectToAction("List");
             }
             return RedirectToAction("Login");//Implisitt else
-    }
+        }
 
     }
 }
