@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using nettButikkpls.Models;
 using nettButikkpls.DAL;
+using System.Web.Mvc;
 using System.IO;
 
 namespace nettButikkpls.BLL
@@ -24,6 +25,11 @@ namespace nettButikkpls.BLL
         {
             var productDal = new ProductDAL();
             return productDal.SaveImagesToServer(innFiler);
+        }
+        public bool EditProduct(FormCollection inList, int productid)
+        {
+            var productDal = new ProductDAL();
+            return productDal.EditProduct(inList, productid);
         }
     }
 }
