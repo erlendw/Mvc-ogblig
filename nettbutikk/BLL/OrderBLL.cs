@@ -11,6 +11,7 @@ namespace nettButikkpls.BLL
 {
     public class OrderBLL
     {
+        
         public void addToCart(int productid, int quantity)
         {
             var orderDal = new OrderDAL();
@@ -35,6 +36,11 @@ namespace nettButikkpls.BLL
         {
             var orderDal = new OrderDAL();
             return orderDal.ListAllOrders();
+        }
+        public List<Order> allOrders()
+        {
+            var orderDal = new OrderDAL();
+            return orderDal.allOrders();
         }
     }
 }

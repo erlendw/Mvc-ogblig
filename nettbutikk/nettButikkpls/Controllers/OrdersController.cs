@@ -71,6 +71,15 @@ namespace nettButikkpls.Controllers
           }
           return RedirectToAction("Product", "ListProducts");
     }*/
+
+        public ActionResult allOrders()
+        {
+            //DU JOBBER HER MAAAAADS
+            var db = new OrderBLL();
+            List<Order> allOrders = db.ListAllOrders();
+            return View(allOrders);
+        }
+
         public ActionResult addOrder()
         {
           
@@ -96,6 +105,8 @@ namespace nettButikkpls.Controllers
             }
             return RedirectToAction("Customer", "List");
         }
+
+
 
         public ActionResult OrderComplete()
         {

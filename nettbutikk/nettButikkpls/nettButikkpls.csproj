@@ -201,6 +201,7 @@
     <Content Include="Views\Product\ShowProduct.cshtml" />
     <Content Include="Views\Orders\OrderComplete.cshtml" />
     <Content Include="Views\Orders\ListOrders.cshtml" />
+    <Content Include="Views\Orders\allOrders.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

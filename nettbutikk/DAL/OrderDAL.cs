@@ -10,6 +10,20 @@ namespace nettButikkpls.DAL
 {
     public class OrderDAL
     {
+        public List<Order> allOrders()
+        {
+            using (var db = new NettbutikkContext())
+            {
+                List<Order> allOrders = db.Orders.Select(o => new Order
+                {
+                    customerId = o.CustomerId,
+                    orderId = o.OrderId,
+                    timestamp = o.TimeStamp,
+                    sumtotal = o.SumTotal
+                }).ToList();
+                return allOrders;
+            }
+        }
         HttpContext context = HttpContext.Current;
         public void addToCart(int productid, int quantity)
         {
