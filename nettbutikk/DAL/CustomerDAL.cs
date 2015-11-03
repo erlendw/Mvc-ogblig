@@ -6,6 +6,7 @@ using nettButikkpls.Models;
 using System.Security.Cryptography;
 using System.Diagnostics;
 using System.Web.Mvc;
+using System.IO;
 
 namespace nettButikkpls.DAL
 {
@@ -65,9 +66,17 @@ namespace nettButikkpls.DAL
                     {
                         nettbutikkpls.Models.Log log = new nettbutikkpls.Models.Log();
                         log.NewValue = newCustomerRow.ToString();
-                        log.EventType = "Save";
+                        log.EventType = "Create";
                         log.ChangedTime = (DateTime.Now).ToString("yyyyMMddHHmmss");
                         Debug.Print(log.toString());
+                        string logText = log.toString();
+                        var _Path = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data"), "/Log.txt");
+
+                        using (System.IO.StreamWriter file =
+                             new System.IO.StreamWriter(@"C:\Users\Mads Karlstad\Source\Repos\Mvc-ogblig6\nettbutikk\nettButikkpls\App_Data", true))
+                        {
+                            file.WriteLine(logText);
+                        }
                     }
                     catch (Exception e)
                     {
