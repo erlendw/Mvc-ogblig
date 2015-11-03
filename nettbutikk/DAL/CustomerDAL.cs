@@ -94,7 +94,7 @@ namespace nettButikkpls.DAL
                         customer.Address = inList["Address"];
                 }
                     bmx.SaveChanges();
-                c = FindCustomerByEmail(customer.Mail);
+                    c = FindCustomerByEmail(customer.Mail);
                     context.Session["CurrentUser"] = c;
                     return true;
                 }
@@ -204,10 +204,5 @@ namespace nettButikkpls.DAL
             return c.customerId;
             //Endret her fra Customers til Customer for å teste
         }
-       /* public Customers CurrentCustomerObj()
-        {
-            Customers c = (Customers)context.Session["CurrentUser"];
-            return c;
-        }*/
     }
 }
