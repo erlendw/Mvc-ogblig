@@ -79,6 +79,7 @@
   <ItemGroup>
     <Compile Include="Cart.cs" />
     <Compile Include="Customer.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OrderList.cs" />
     <Compile Include="Product.cs" />
