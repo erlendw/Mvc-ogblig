@@ -205,6 +205,7 @@
     <Content Include="Views\Shared\AdminLayout.cshtml" />
     <Content Include="Views\Admin\AdminPanel.cshtml" />
     <Content Include="Views\Product\ListProductsAdmin.cshtml" />
+    <Content Include="Views\Product\EditProduct.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
