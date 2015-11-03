@@ -1,0 +1,32 @@
+﻿@model List<nettButikkpls.Models.Order>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>allOrders</title>
+</head>
+<body>
+    <div>
+        @foreach (var order in Model)
+        {
+            <ul class="list-group fifty">
+
+                <li class="list-group-item active">
+                    <h2>@order.customerId, @order.orderId</h2>
+                </li>
+
+                <li class="list-group-item">
+                    Sum total: @order.sumtotal
+                </li>
+            </ul>
+
+        } 
+    </div>
+</body>
+</html>
