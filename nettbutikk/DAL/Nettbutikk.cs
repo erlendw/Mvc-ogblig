@@ -18,6 +18,7 @@ namespace nettButikkpls.DAL
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public string Address { get; set; }
+        public bool IsAdmin { get; set; }
         public string Salt { get; set; }
         public string Zipcode { get; set; }
         public virtual PostalAreas Postalareas { get; set; }

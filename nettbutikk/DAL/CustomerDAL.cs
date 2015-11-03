@@ -24,6 +24,7 @@ namespace nettButikkpls.DAL
                     lastname = c.Lastname,
                     address = c.Address,
                     zipcode = c.Zipcode,
+                    isadmin = c.IsAdmin,
                     postalarea = c.Postalareas.Postalarea,
                     email = c.Mail,
                     password = c.Password,
@@ -46,6 +47,7 @@ namespace nettButikkpls.DAL
                     newCustomerRow.Firstname = inCustomer.firstname;
                     newCustomerRow.Lastname = inCustomer.lastname;
                     newCustomerRow.Address = inCustomer.address;
+                    newCustomerRow.IsAdmin = inCustomer.isadmin;
                     newCustomerRow.Zipcode = inCustomer.zipcode;
                     newCustomerRow.Salt = salt;
 
@@ -173,6 +175,7 @@ namespace nettButikkpls.DAL
                     c.firstname = GetAllCustomers[i].Firstname;
                     c.lastname = GetAllCustomers[i].Lastname;
                     c.address = GetAllCustomers[i].Address;
+                    c.isadmin = GetAllCustomers[i].IsAdmin;
                     c.zipcode = GetAllCustomers[i].Zipcode;
                     c.postalarea = GetAllCustomers[i].Postalareas.ToString();
                     c.password = GetAllCustomers[i].Password;
