@@ -22,7 +22,6 @@ namespace nettButikkpls.BLL
         }
         public bool SaveImagesToServer(HttpFileCollectionBase innFiler)
         {
-
             var productDal = new ProductDAL();
             return productDal.SaveImagesToServer(innFiler);
         }
