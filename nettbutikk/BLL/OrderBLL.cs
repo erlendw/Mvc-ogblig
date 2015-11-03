@@ -42,5 +42,10 @@ namespace nettButikkpls.BLL
             var orderDal = new OrderDAL();
             return orderDal.allOrders();
         }
+        public bool DeleteOrder(int orderId)
+        {
+            var orderDal = new OrderDAL();
+            return orderDal.DeleteOrder(orderId);
+        }
     }
 }

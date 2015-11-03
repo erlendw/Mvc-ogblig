@@ -105,9 +105,6 @@ namespace nettButikkpls.Controllers
             }
             return RedirectToAction("Customer", "List");
         }
-
-
-
         public ActionResult OrderComplete()
         {
             return View();
@@ -143,6 +140,17 @@ namespace nettButikkpls.Controllers
             var db = new OrderBLL();
             List<Order> orders = db.ListAllOrders();
             return View(orders);
+        }
+        [HttpPost]
+        public ActionResult DeleteOrder(int orderId)
+        {
+            var db = new OrderBLL();
+            bool OK = db.DeleteOrder(orderId);
+            if (OK)
+            {
+                return RedirectToAction("allOrders");
+            }
+            return RedirectToAction("allOrders");
         }
     }
 }

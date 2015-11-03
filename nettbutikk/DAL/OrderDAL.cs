@@ -6,6 +6,7 @@ using nettButikkpls.Models;
 using System.Web.Mvc;
 using System.Diagnostics;
 
+
 namespace nettButikkpls.DAL
 {
     public class OrderDAL
@@ -30,27 +31,27 @@ namespace nettButikkpls.DAL
             //Debug.Print("ProduID: " + productid + " Quantity: " + quantity);
             int customerid;
             //HttpContext context = HttpContext.Current;
-          
+
             if (context.Session["Cart"] == null)
             {
-                
+
                 Cart cart = new Cart();
-                
+
                 if (context.Session["CurrentUser"] != null)
                 {
                     Customers c = (Customers)context.Session["CurrentUser"];
                     customerid = c.CustomerId;
                     cart.customerid = customerid;
                 }
-               // Debug.Print("Cart.CustomerID: " + cart.customerid);
+                // Debug.Print("Cart.CustomerID: " + cart.customerid);
                 context.Session["Cart"] = cart;
                 for (int i = 0; i <= quantity; i++)
                 {
-                    cart.productids.Add(productid); 
+                    cart.productids.Add(productid);
                 }
-                
-                context.Session["Cart"] = cart;     
-            } 
+
+                context.Session["Cart"] = cart;
+            }
             else
             {
                 Cart cart = (Cart)context.Session["Cart"];
@@ -107,7 +108,7 @@ namespace nettButikkpls.DAL
                 {
                     Debug.Write("KOMMER TIL TRY");
                     String timeStamp = (DateTime.Now).ToString("yyyyMMddHHmmssffff");
-                   // Debug.Write("CustomerID " + c.customerId);
+                    // Debug.Write("CustomerID " + c.customerId);
                     var newOrderRow = new Orders();
                     newOrderRow.CustomerId = customerid;
                     newOrderRow.TimeStamp = timeStamp;
@@ -148,13 +149,14 @@ namespace nettButikkpls.DAL
         }
         public List<Order> ListAllOrders()
         {
-            using (var bmx = new NettbutikkContext()) {
+            using (var bmx = new NettbutikkContext())
+            {
                 var db = new CustomerDAL();
                 int cId = db.CurrentCustomerId();
                 List<Order> order = new List<Order>();
                 IEnumerable<Orders> orders = bmx.Orders.Where(o => o.CustomerId == cId);
 
-                foreach ( var i in orders)
+                foreach (var i in orders)
                 {
                     Order or = new Order();
                     or.customerId = i.CustomerId;
@@ -164,6 +166,32 @@ namespace nettButikkpls.DAL
                     order.Add(or);
                 }
                 return order;
+            }
+        }
+        public bool DeleteOrder(int orderId)
+        {
+            using (var db = new NettbutikkContext())
+            {
+                try
+                {
+                    var order = new Orders { OrderId = orderId };
+                    db.Orders.Attach(order);
+                    db.Orders.Remove(order);
+
+                    var orderlists = db.OrderLists.Where(ol => ol.OrderID == orderId);
+
+                    foreach (var ol in orderlists)
+                    {
+                        db.OrderLists.Attach(ol);
+                        db.OrderLists.Remove(ol);
+                    }
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
             }
         }
     }
