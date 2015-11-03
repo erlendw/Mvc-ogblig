@@ -188,12 +188,28 @@ namespace nettButikkpls.DAL
         }
         public Customer FindCustomerByEmail(string email)
         {
-            Customer c = new Customer();
-            List<Customers> GetAllCustomers = bmx.Customers.ToList();
-            for (int i = 0; i < GetAllCustomers.Count; i++)
+            using (var db = new NettbutikkContext())
             {
-                if (GetAllCustomers[i].Mail == email)
+                try
                 {
+                    Customer c = new Customer();
+                    var customer = db.Customers.Single(b => (b.Mail.Equals(email)));
+
+                    c.customerId = customer.CustomerId;
+                    c.email = email;
+                    c.firstname = customer.Firstname;
+                    c.lastname = customer.Lastname;
+                    c.address = customer.Address;
+                    c.isadmin = customer.IsAdmin;
+                    c.zipcode = customer.Zipcode;
+                    c.password = customer.Password;
+                    c.salt = customer.Salt;
+                    return c;
+                    /*List<Customers> GetAllCustomers = bmx.Customers.ToList();
+                    for (int i = 0; i < GetAllCustomers.Count; i++)
+                    {
+                        if (GetAllCustomers[i].Mail == email)
+                        {
                     c.customerId = GetAllCustomers[i].CustomerId;
                     c.email = email;
                     c.firstname = GetAllCustomers[i].Firstname;
@@ -205,9 +221,15 @@ namespace nettButikkpls.DAL
                     c.password = GetAllCustomers[i].Password;
                     c.salt = GetAllCustomers[i].Salt;
                     return c;
+                    }
+                 }*/
+
+                }
+                catch (Exception e)
+                {
+                    return null;
                 }
             }
-            return null;
         }
         public Customers FindCustomersByEmail(string email)
         {
@@ -278,7 +300,8 @@ namespace nettButikkpls.DAL
                     c.isadmin = customer.IsAdmin;
 
                     return c;
-                }catch
+                }
+                catch
                 {
                     return null;
                 }
