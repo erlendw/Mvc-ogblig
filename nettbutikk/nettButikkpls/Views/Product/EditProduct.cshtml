@@ -5,5 +5,49 @@
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 
-<h2>EditProduct</h2>
+    <div class="col-md-6 col-md-offset-3">
+
+        <h2 class="form-signin-heading">Update product information</h2>
+
+        <form class="form-horizontal" action="/Admin/EditProduct" method="post">
+            
+            <div class="form-group">
+                <div class="col-sm-10">
+                    <label>Product name:</label>
+                    <input type="text" class="form-control" value="@Model.productid" name="productid" readonly>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-10">
+                    <label>Product name:</label>
+                    <input type="text" class="form-control" placeholder="@Model.productname" name="Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10">
+                    <label>Product price:</label>
+                    <input type="text" class="form-control" placeholder="$@Model.price" name="Price">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10">
+                    <label>Product description:</label>
+                    <textarea class="form-control" rows="5" name="description" placeholder="@Model.description" style="resize:none;"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10">
+                    <label>Product category:</label>
+                    <input type="text" class="form-control" placeholder="@Model.category" name="Category">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10">
+                    <input class="btn btn-lg btn-primary btn-block" type="submit" value="Update Information" />
+                </div>
+            </div>
+        </form>
+
+    </div>
 
