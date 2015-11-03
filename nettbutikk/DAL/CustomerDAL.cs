@@ -61,7 +61,20 @@ namespace nettButikkpls.DAL
                     }
                     db.Customers.Add(newCustomerRow);
                     db.SaveChanges();
+                    try
+                    {
+                        nettbutikkpls.Models.Log log = new nettbutikkpls.Models.Log();
+                        log.NewValue = newCustomerRow.ToString();
+                        log.EventType = "Save";
+                        log.ChangedTime = (DateTime.Now).ToString("yyyyMMddHHmmss");
+                        Debug.Print(log.toString());
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.Print("Mads, du suger balle");
+                    }
                     
+
                     return true;
                 }catch(Exception feil)
                 {
@@ -77,6 +90,7 @@ namespace nettButikkpls.DAL
                     // HttpContext context = HttpContext.Current;
                     Customer c = (Customer)context.Session["CurrentUser"];
                     Customers customer = FindCustomersByEmail(c.email);
+                    
                     
                     if (!(String.IsNullOrEmpty(inList["Mail"])))
                     {
