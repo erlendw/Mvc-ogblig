@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using nettButikkpls.BLL;
+using nettButikkpls.Models;
 
 namespace nettButikkpls.Controllers
 {
@@ -15,15 +16,40 @@ namespace nettButikkpls.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult EditProduct(FormCollection inList, int productid)
+        public ActionResult UpdateProduct(FormCollection inList, int productid)
         {
             var db = new ProductBLL();
-            bool OK = db.EditProduct(inList, productid);
+            bool OK = db.UpdateProduct(inList, productid);
             if (OK)
             {
                 return RedirectToAction("AdminPanel");
             }
             return RedirectToAction("AdminPanel");
+        }
+        public ActionResult ListProductsAdmin()
+        {
+            var db = new ProductBLL();
+            IEnumerable<Product> allProducts = db.allProducts();
+            return View(allProducts);
+        }
+        [HttpGet]
+        public ActionResult EditProduct(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("EditProduct");
+            }
+            else
+            {
+                Product p = FindProduct((int)id);
+                return View(p);
+            }
+        }
+        public Product FindProduct(int productid)
+        {
+            var db = new OrderBLL();
+            return db.FindProduct(productid);
+
         }
     }
 }

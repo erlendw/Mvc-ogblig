@@ -65,7 +65,7 @@ namespace nettButikkpls.DAL
             }
             return true;
         }
-        public bool EditProduct(FormCollection inList, int productid)
+        public bool UpdateProduct(FormCollection inList, int productid)
         {
             using (var db = new NettbutikkContext())
             {

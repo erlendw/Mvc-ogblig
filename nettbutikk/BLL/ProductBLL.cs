@@ -26,10 +26,10 @@ namespace nettButikkpls.BLL
             var productDal = new ProductDAL();
             return productDal.SaveImagesToServer(innFiler);
         }
-        public bool EditProduct(FormCollection inList, int productid)
+        public bool UpdateProduct(FormCollection inList, int productid)
         {
             var productDal = new ProductDAL();
-            return productDal.EditProduct(inList, productid);
+            return productDal.UpdateProduct(inList, productid);
         }
     }
 }
