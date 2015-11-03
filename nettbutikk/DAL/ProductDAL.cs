@@ -72,7 +72,11 @@ namespace nettButikkpls.DAL
                 try
                 {
                     var product = new Products { ProductId = productid };
-                    Debug.Write(product.ProductId);
+
+
+                    Debug.Write("nese: " + inList["Name"]);
+
+
                     if (!(String.IsNullOrEmpty(inList["Name"])))
                     {
                         product.Productname = inList["Name"];
