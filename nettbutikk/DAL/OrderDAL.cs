@@ -174,7 +174,7 @@ namespace nettButikkpls.DAL
             {
                 try
                 {
-                    var order = new Orders { OrderId = orderId };
+                    var order = db.Orders.Single(b => (b.OrderId == orderId));
                     db.Orders.Attach(order);
                     db.Orders.Remove(order);
 
