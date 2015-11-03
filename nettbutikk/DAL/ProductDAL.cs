@@ -71,12 +71,9 @@ namespace nettButikkpls.DAL
             {
                 try
                 {
-                    var product = new Products { ProductId = productid };
+                    var product = db.Products.Single(b => (b.ProductId == productid));
 
-
-                    Debug.Write("nese: " + inList["Name"]);
-
-
+                    Debug.Write(product.ProductId);
                     if (!(String.IsNullOrEmpty(inList["Name"])))
                     {
                         product.Productname = inList["Name"];
