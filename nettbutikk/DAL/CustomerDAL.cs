@@ -6,6 +6,7 @@ using nettButikkpls.Models;
 using System.Security.Cryptography;
 using System.Diagnostics;
 using System.Web.Mvc;
+using System.IO;
 
 namespace nettButikkpls.DAL
 {
@@ -61,7 +62,28 @@ namespace nettButikkpls.DAL
                     }
                     db.Customers.Add(newCustomerRow);
                     db.SaveChanges();
+                    try
+                    {
+                        nettbutikkpls.Models.Log log = new nettbutikkpls.Models.Log();
+                        log.NewValue = newCustomerRow.ToString();
+                        log.EventType = "Create";
+                        log.ChangedTime = (DateTime.Now).ToString("yyyyMMddHHmmss");
+                        Debug.Print(log.toString());
+                        string logText = log.toString();
+                        var _Path = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data"), "/Log.txt");
+
+                        using (System.IO.StreamWriter file =
+                             new System.IO.StreamWriter(@"C:\Users\Mads Karlstad\Source\Repos\Mvc-ogblig6\nettbutikk\nettButikkpls\App_Data", true))
+                        {
+                            file.WriteLine(logText);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.Print("Mads, du suger balle");
+                    }
                     
+
                     return true;
                 }catch(Exception feil)
                 {
@@ -78,6 +100,7 @@ namespace nettButikkpls.DAL
                     Customer c = (Customer)context.Session["CurrentUser"];
                     Customers customer = FindCustomersByEmail(c.email);
                     
+                    
                     if (!(String.IsNullOrEmpty(inList["Mail"])))
                     {
                         customer.Mail = inList["Mail"];
@@ -85,15 +108,15 @@ namespace nettButikkpls.DAL
                     if (!(String.IsNullOrEmpty(inList["Firstname"])))
                     {
                         customer.Firstname = inList["Firstname"];
-                }
+                    }
                     if (!(String.IsNullOrEmpty(inList["Lastname"])))
                     {
                         customer.Lastname = inList["Lastname"];
-                }
+                    }
                     if (!(String.IsNullOrEmpty(inList["Address"])))
                     {
                         customer.Address = inList["Address"];
-                }
+                    }
                     bmx.SaveChanges();
                     c = FindCustomerByEmail(customer.Mail);
                     context.Session["CurrentUser"] = c;
@@ -165,12 +188,28 @@ namespace nettButikkpls.DAL
         }
         public Customer FindCustomerByEmail(string email)
         {
-            Customer c = new Customer();
-            List<Customers> GetAllCustomers = bmx.Customers.ToList();
-            for (int i = 0; i < GetAllCustomers.Count; i++)
+            using (var db = new NettbutikkContext())
             {
-                if (GetAllCustomers[i].Mail == email)
+                try
                 {
+                    Customer c = new Customer();
+                    var customer = db.Customers.Single(b => (b.Mail.Equals(email)));
+
+                    c.customerId = customer.CustomerId;
+                    c.email = email;
+                    c.firstname = customer.Firstname;
+                    c.lastname = customer.Lastname;
+                    c.address = customer.Address;
+                    c.isadmin = customer.IsAdmin;
+                    c.zipcode = customer.Zipcode;
+                    c.password = customer.Password;
+                    c.salt = customer.Salt;
+                    return c;
+                    /*List<Customers> GetAllCustomers = bmx.Customers.ToList();
+                    for (int i = 0; i < GetAllCustomers.Count; i++)
+                    {
+                        if (GetAllCustomers[i].Mail == email)
+                        {
                     c.customerId = GetAllCustomers[i].CustomerId;
                     c.email = email;
                     c.firstname = GetAllCustomers[i].Firstname;
@@ -182,9 +221,15 @@ namespace nettButikkpls.DAL
                     c.password = GetAllCustomers[i].Password;
                     c.salt = GetAllCustomers[i].Salt;
                     return c;
+                    }
+                 }*/
+
+                }
+                catch (Exception e)
+                {
+                    return null;
                 }
             }
-            return null;
         }
         public Customers FindCustomersByEmail(string email)
         {
@@ -203,7 +248,65 @@ namespace nettButikkpls.DAL
         {
             Customer c = (Customer)context.Session["CurrentUSer"];
             return c.customerId;
-            //Endret her fra Customers til Customer for å teste
+        }
+        public bool UpdateCustomer(FormCollection inList, int customerid)
+        {
+            using (var db = new NettbutikkContext())
+            {
+                try
+                {
+                    var customer = db.Customers.Single(b => (b.CustomerId == customerid));
+
+                    if (!(String.IsNullOrEmpty(inList["Mail"])))
+                    {
+                        customer.Mail = inList["Mail"];
+                    }
+                    if (!(String.IsNullOrEmpty(inList["Firstname"])))
+                    {
+                        customer.Firstname = inList["Firstname"];
+                    }
+                    if (!(String.IsNullOrEmpty(inList["Lastname"])))
+                    {
+                        customer.Lastname = inList["Lastname"];
+                    }
+                    if (!(String.IsNullOrEmpty(inList["Address"])))
+                    {
+                        customer.Address = inList["Address"];
+                    }
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
+        }
+        public Customer FindCustomer(int customerid)
+        {
+            using (var db = new NettbutikkContext())
+            {
+                try
+                {
+                    Customer c = new Customer();
+                    var customer = db.Customers.Single(b => (b.CustomerId == customerid));
+                    c.customerId = customerid;
+                    c.firstname = customer.Firstname;
+                    c.lastname = customer.Lastname;
+                    c.address = customer.Address;
+                    c.zipcode = customer.Zipcode;
+                    c.password = customer.Password;
+                    c.salt = customer.Salt;
+                    c.isadmin = customer.IsAdmin;
+
+                    return c;
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+          
         }
     }
 }

@@ -4,7 +4,8 @@ using System.Linq;
 using System.Web;
 using nettButikkpls.Models;
 using System.IO;
-
+using System.Web.Mvc;
+using System.Diagnostics;
 namespace nettButikkpls.DAL
 {
     public class ProductDAL
@@ -63,6 +64,40 @@ namespace nettButikkpls.DAL
                 return true;
             }
             return true;
+        }
+        public bool UpdateProduct(FormCollection inList, int productid)
+        {
+            using (var db = new NettbutikkContext())
+            {
+                try
+                {
+                    var product = db.Products.Single(b => (b.ProductId == productid));
+
+                    Debug.Write(product.ProductId);
+                    if (!(String.IsNullOrEmpty(inList["Name"])))
+                    {
+                        product.Productname = inList["Name"];
+                    }
+                    if (!(String.IsNullOrEmpty(inList["Price"])))
+                    {
+                        product.Price = Int32.Parse(inList["Price"]);
+                    }
+                    if (!(String.IsNullOrEmpty(inList["Description"])))
+                    {
+                        product.Description = inList["Description"];
+                    }
+                    if (!(String.IsNullOrEmpty(inList["Category"])))
+                    {
+                        product.Category = inList["Category"];
+                    }
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
         }
     }
 }

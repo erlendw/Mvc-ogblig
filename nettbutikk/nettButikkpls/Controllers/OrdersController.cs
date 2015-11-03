@@ -51,30 +51,8 @@ namespace nettButikkpls.Controllers
             }
         }
 
-        /*  Debug.Print(Name + " " + Quantity);
-          var db = new DbOrder();
-          db.addToCart(Int32.Parse(Name), Int32.Parse(Quantity));
-
-          if (Session["Cart"] == null)
-          {
-              Cart cart = new Cart();
-              cart.productids[0].Add(productid);  
-              cart.productids[1].Add(quantity);
-              Session["Cart"] = cart;
-          }
-          else
-          {
-              Cart cart = (Cart)HttpContext.Session["Cart "];
-              cart.productids[0].Add(productid);
-              cart.productids[1].Add(quantity);
-              Session["Cart"] = cart;
-          }
-          return RedirectToAction("Product", "ListProducts");
-    }*/
-
         public ActionResult allOrders()
         {
-            //DU JOBBER HER MAAAAADS
             var db = new OrderBLL();
             List<Order> allOrders = db.ListAllOrders();
             return View(allOrders);
@@ -112,7 +90,6 @@ namespace nettButikkpls.Controllers
       
         public float TotalPrice(List<int> pid)
         {
-            Debug.Write("Kommer til TotalPrice");
             float price = 0;
             foreach (var i in pid)
             {

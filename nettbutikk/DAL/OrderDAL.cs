@@ -129,23 +129,40 @@ namespace nettButikkpls.DAL
         {
             using (var db = new NettbutikkContext())
             {
-                List<Products> GetAllProducts = db.Products.ToList();
-                Product c = new Product();
-                for (int i = 0; i < GetAllProducts.Count; i++)
+                try
                 {
-                    if (GetAllProducts[i].ProductId == productid)
-                    {
-                        c.productid = productid;
-                        c.productname = GetAllProducts[i].Productname;
-                        c.price = GetAllProducts[i].Price;
-                        c.category = GetAllProducts[i].Category;
-                        c.description = GetAllProducts[i].Description;
+                    Product p = new Product();
+                    var product = db.Products.Single(b=>(b.ProductId == productid));
+                    // var customer = db.Customers.Single(b => (b.CustomerId == customerid));
 
-                        return c;
-                    }
+                    p.productid = productid;
+                    p.productname = product.Productname;
+                    p.price = product.Price;
+                    p.category = product.Category;
+                    p.description = product.Description;
+                    return p;
                 }
+                catch (Exception e)
+                {
+                    return null;
+                }
+
+                /* List<Products> GetAllProducts = db.Products.ToList();
+                 Product c = new Product();
+                 for (int i = 0; i < GetAllProducts.Count; i++)
+                 {
+                     if (GetAllProducts[i].ProductId == productid)
+                     {
+                         c.productid = productid;
+                         c.productname = GetAllProducts[i].Productname;
+                         c.price = GetAllProducts[i].Price;
+                         c.category = GetAllProducts[i].Category;
+                         c.description = GetAllProducts[i].Description;
+
+                         return c;
+                     }
+                 }*/
             }
-            return null;
         }
         public List<Order> ListAllOrders()
         {
@@ -174,7 +191,7 @@ namespace nettButikkpls.DAL
             {
                 try
                 {
-                    var order = new Orders { OrderId = orderId };
+                    var order = db.Orders.Single(b => (b.OrderId == orderId));
                     db.Orders.Attach(order);
                     db.Orders.Remove(order);
 

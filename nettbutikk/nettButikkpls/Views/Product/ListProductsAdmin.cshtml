@@ -5,5 +5,42 @@
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 
-<h2>ListProductsAdmin</h2>
 
+    <h2>Product overview</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Productname</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var product in Model)
+            {
+                <tr>
+
+                    <td>@product.productid</td>
+
+                    <td>@product.productname</td>
+
+                    <td>$@product.price</td>
+
+                    <td>@product.category</td>
+
+                    <td><a href="@Url.Action("EditProduct", "Product", new { id = product.productid })" class="btn btn-xs btn-success">
+                        Edit Product
+                        <span class="glyphicon glyphicon-edit" />
+                        </a>
+                    </td>
+
+                    <!--<td><a href="#" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-edit"></span> Edit Product</a></td>-->
+
+                </tr>
+
+             }
+        </tbody>
+    </table>

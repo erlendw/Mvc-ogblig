@@ -68,11 +68,5 @@ namespace nettButikkpls.Controllers
             return db.FindProduct(productid);
 
         }
-        public ActionResult ListProductsAdmin()
-        {
-            var db = new ProductBLL();
-            IEnumerable<Product> allProducts = db.allProducts();
-            return View(allProducts);
-        }
     }
 }
