@@ -61,6 +61,7 @@ namespace nettButikkpls.DAL
                     }
                     db.Customers.Add(newCustomerRow);
                     db.SaveChanges();
+                    
                     return true;
                 }catch(Exception feil)
                 {
