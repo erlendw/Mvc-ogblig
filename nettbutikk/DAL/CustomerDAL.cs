@@ -228,5 +228,30 @@ namespace nettButikkpls.DAL
             return c.customerId;
             //Endret her fra Customers til Customer for å teste
         }
+        public Customer FindCustomer(int customerid)
+        {
+            using (var db = new NettbutikkContext())
+            {
+                try
+                {
+                    Customer c = new Customer();
+                    var customer = db.Customers.Single(b => (b.CustomerId == customerid));
+                    c.customerId = customerid;
+                    c.firstname = customer.Firstname;
+                    c.lastname = customer.Lastname;
+                    c.address = customer.Address;
+                    c.zipcode = customer.Zipcode;
+                    c.password = customer.Password;
+                    c.salt = customer.Salt;
+                    c.isadmin = customer.IsAdmin;
+
+                    return c;
+                }catch
+                {
+                    return null;
+                }
+            }
+          
+        }
     }
 }

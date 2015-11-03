@@ -51,5 +51,28 @@ namespace nettButikkpls.Controllers
             return db.FindProduct(productid);
 
         }
+        public ActionResult ListCustomersAdmin()
+        {
+            var db = new CustomerBLL();
+            IEnumerable<Customer> allProducts = db.allCustomers();
+            return View(allProducts);
+        }
+        public ActionResult EditCustomer(int id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("EditCustomer");
+            }
+            else
+            {
+                Customer p = FindCustomer((int)id);
+                return View(p);
+            }
+        }
+        public Customer FindCustomer(int customerid)
+        {
+            var db = new CustomerBLL();
+            return db.FindCustomer(customerid);
+        }
     }
 }

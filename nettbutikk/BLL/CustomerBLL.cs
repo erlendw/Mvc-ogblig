@@ -59,10 +59,11 @@ namespace nettButikkpls.BLL
             var customerDal = new CustomerDAL();
             return customerDal.CurrentCustomerId();
         }
-      /* public Customers CurrentCustomerObj()
+        public Customer FindCustomer(int customerid)
         {
             var customerDal = new CustomerDAL();
-            return customerDal.CurrentCustomerObj();
-        }*/
+            return customerDal.FindCustomer(customerid);
+        }
+
     }
 }
