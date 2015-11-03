@@ -5,7 +5,7 @@ using System.Web;
 using nettButikkpls.Models;
 using System.IO;
 using System.Web.Mvc;
-
+using System.Diagnostics;
 namespace nettButikkpls.DAL
 {
     public class ProductDAL
@@ -72,7 +72,7 @@ namespace nettButikkpls.DAL
                 try
                 {
                     var product = new Products { ProductId = productid };
-
+                    Debug.Write(product.ProductId);
                     if (!(String.IsNullOrEmpty(inList["Name"])))
                     {
                         product.Productname = inList["Name"];
