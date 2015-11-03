@@ -14,6 +14,7 @@ namespace nettButikkpls.Controllers
         {
             return View();
         }
+        [HttpPost]
         public ActionResult EditProduct(FormCollection inList, int productid)
         {
             var db = new ProductBLL();
