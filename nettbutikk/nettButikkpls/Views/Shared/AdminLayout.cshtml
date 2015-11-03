@@ -54,6 +54,7 @@
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
                         <a href="index.html"><i class="fa fa-fw fa-user"></i> Users</a>
+                        @Html.ActionLink("The Tea Shop", "ListProducts", "Product", new { area = "" }, new { @class = "navbar-brand lobster" })
                     </li>
                     <li>
                         <a href="charts.html"><i class="fa fa-fw fa-shopping-cart"></i> Orders</a>
@@ -73,7 +74,14 @@
 
             <div class="container-fluid">
 
-                <!-- All content goes in hear -->
+                <!-- All content goes in here -->
+
+                <div class="body-content">
+
+                    @RenderBody()
+
+                </div>
+
               
             </div>
             <!-- /.container-fluid -->
@@ -85,11 +93,7 @@
     <!-- /#wrapper -->
 
     
-    <div class="body-content">
 
-        @RenderBody()
-
-    </div>
 
 
     @Scripts.Render("~/bundles/jquery")
