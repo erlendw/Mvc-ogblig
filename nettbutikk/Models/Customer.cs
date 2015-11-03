@@ -15,6 +15,7 @@ namespace nettButikkpls.Models
         public string firstname { get; set; }
         public string lastname { get; set; }
         public string address { get; set; }
+        public bool isadmin { get; set; }
         public string salt { get; set; }
         public string zipcode { get; set; }
         public string postalarea { get; set; }

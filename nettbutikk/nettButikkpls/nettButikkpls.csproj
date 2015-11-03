@@ -173,6 +173,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
@@ -201,7 +202,8 @@
     <Content Include="Views\Product\ShowProduct.cshtml" />
     <Content Include="Views\Orders\OrderComplete.cshtml" />
     <Content Include="Views\Orders\ListOrders.cshtml" />
-    <Content Include="Views\Orders\allOrders.cshtml" />
+    <Content Include="Views\Shared\AdminLayout.cshtml" />
+    <Content Include="Views\Admin\AdminPanel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
