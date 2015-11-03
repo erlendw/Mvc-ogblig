@@ -108,15 +108,15 @@ namespace nettButikkpls.DAL
                     if (!(String.IsNullOrEmpty(inList["Firstname"])))
                     {
                         customer.Firstname = inList["Firstname"];
-                }
+                    }
                     if (!(String.IsNullOrEmpty(inList["Lastname"])))
                     {
                         customer.Lastname = inList["Lastname"];
-                }
+                    }
                     if (!(String.IsNullOrEmpty(inList["Address"])))
                     {
                         customer.Address = inList["Address"];
-                }
+                    }
                     bmx.SaveChanges();
                     c = FindCustomerByEmail(customer.Mail);
                     context.Session["CurrentUser"] = c;
@@ -226,7 +226,39 @@ namespace nettButikkpls.DAL
         {
             Customer c = (Customer)context.Session["CurrentUSer"];
             return c.customerId;
-            //Endret her fra Customers til Customer for å teste
+        }
+        public bool UpdateCustomer(FormCollection inList, int customerid)
+        {
+            using (var db = new NettbutikkContext())
+            {
+                try
+                {
+                    var customer = db.Customers.Single(b => (b.CustomerId == customerid));
+
+                    if (!(String.IsNullOrEmpty(inList["Mail"])))
+                    {
+                        customer.Mail = inList["Mail"];
+                    }
+                    if (!(String.IsNullOrEmpty(inList["Firstname"])))
+                    {
+                        customer.Firstname = inList["Firstname"];
+                    }
+                    if (!(String.IsNullOrEmpty(inList["Lastname"])))
+                    {
+                        customer.Lastname = inList["Lastname"];
+                    }
+                    if (!(String.IsNullOrEmpty(inList["Address"])))
+                    {
+                        customer.Address = inList["Address"];
+                    }
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
         }
         public Customer FindCustomer(int customerid)
         {

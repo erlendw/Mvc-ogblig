@@ -74,5 +74,16 @@ namespace nettButikkpls.Controllers
             var db = new CustomerBLL();
             return db.FindCustomer(customerid);
         }
+        [HttpPost]
+        public ActionResult UpdateCustomer(FormCollection inList, int customerid)
+        {
+            var db = new CustomerBLL();
+            bool OK = db.UpdateCustomer(inList, customerid);
+            if (OK)
+            {
+                return RedirectToAction("AdminPanel");
+            }
+            return RedirectToAction("AdminPAnel");
+        }
     }
 }

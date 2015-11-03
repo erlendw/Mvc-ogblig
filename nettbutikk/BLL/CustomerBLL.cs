@@ -64,6 +64,10 @@ namespace nettButikkpls.BLL
             var customerDal = new CustomerDAL();
             return customerDal.FindCustomer(customerid);
         }
-
+        public bool UpdateCustomer(FormCollection inList, int customerid)
+        {
+            var customerDal = new CustomerDAL();
+            return customerDal.UpdateCustomer(inList, customerid);
+        }
     }
 }
