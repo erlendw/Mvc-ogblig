@@ -151,7 +151,6 @@ namespace nettButikkpls.DAL
                 }
                 return order;
             }
-
         }
     }
 }
