@@ -49,18 +49,10 @@ namespace nettButikkpls.DAL
             else
                 return true;
         }
-        /*public bool Login()
+        public bool Login()
         {
-            if (context.Session["loggedin"] == null)
-            {
-                context.Session["loggedin"] = false;
-            }
-            else
-            {
-                return (bool)context.Session["loggedin"];
-            }
-            return false;
-        }*/
+            return true;
+        }
         public bool ValidateUser(FormCollection inList)
         {
             if (!(String.IsNullOrEmpty(inList["Firstname"])))
