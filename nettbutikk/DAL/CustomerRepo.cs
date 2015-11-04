@@ -214,11 +214,9 @@ namespace nettButikkpls.DAL
                     context.Session["CurrentUser"] = null;
                     Debug.WriteLine("Kunne ikke logge inn");
                     return false;
-                    //return RedirectToAction("Reg");
                 }
             }
             return false;
-            //return RedirectToAction("Login");
         }
         public String GenerateSalt(int size)
         {
@@ -301,6 +299,39 @@ namespace nettButikkpls.DAL
                 catch (Exception e)
                 {
                     return null;
+                }
+            }
+        }
+        public bool UpdateCustomer(FormCollection inList, int customerid)
+        {
+            using (var db = new NettbutikkContext())
+            {
+                try
+                {
+                    var customer = db.Customers.Single(b => (b.CustomerId == customerid));
+
+                    if (!(String.IsNullOrEmpty(inList["Mail"])))
+                    {
+                        customer.Mail = inList["Mail"];
+                    }
+                    if (!(String.IsNullOrEmpty(inList["Firstname"])))
+                    {
+                        customer.Firstname = inList["Firstname"];
+                    }
+                    if (!(String.IsNullOrEmpty(inList["Lastname"])))
+                    {
+                        customer.Lastname = inList["Lastname"];
+                    }
+                    if (!(String.IsNullOrEmpty(inList["Address"])))
+                    {
+                        customer.Address = inList["Address"];
+                    }
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    return false;
                 }
             }
         }

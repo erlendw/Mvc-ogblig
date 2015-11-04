@@ -89,7 +89,6 @@ namespace nettButikkpls.DAL
             c.Mail = email;
             return c;
         }
-
         public int CurrentCustomerId()
         {
             int customerId = 1337;
