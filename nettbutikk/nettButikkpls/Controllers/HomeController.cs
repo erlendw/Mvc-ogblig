@@ -16,30 +16,6 @@ namespace nettButikkpls.Controllers
             return View();
         }
 
-
-        public ActionResult SaveDropzoneJsUploadedFiles()
-        {
-            
-
-            foreach (string FileName in Request.Files)
-            {
-                HttpPostedFileBase file = Request.Files[FileName];
-
-                var _FileName = Path.GetFileName(file.FileName);
-
-                var _Path = Path.Combine(Server.MapPath("~/App_Data/Images"), _FileName);
-
-                file.SaveAs(_Path);
-
-
-                Debug.Print(file.FileName);
-
-            }
-
-            return Json(new { Message = string.Empty });
-
-        }
-
     }
 
 

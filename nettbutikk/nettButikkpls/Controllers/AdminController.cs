@@ -11,7 +11,7 @@ namespace nettButikkpls.Controllers
 {
     public class AdminController : Controller
     {
-        // GET: Admin
+        //mulig  endring her, hente current user, og sjekke om admin
         public ActionResult AdminPanel()
         {
             return View();
@@ -25,7 +25,7 @@ namespace nettButikkpls.Controllers
             {
                 return RedirectToAction("AdminPanel");
             }
-            return RedirectToAction("AdminPanel");
+            return RedirectToAction("redirect");
         }
         public ActionResult ListProducts()
         {

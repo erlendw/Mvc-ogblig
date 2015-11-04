@@ -38,7 +38,6 @@ namespace nettButikkpls.Controllers
         [HttpGet]
         public ActionResult ShowProduct(int? id)
         {
-
             if(id == null)
             {
                 return RedirectToAction("ListProducts");
@@ -48,7 +47,6 @@ namespace nettButikkpls.Controllers
 
             Product p = FindProduct( (int) id );
             return View(p);
-
             }
         }
 
