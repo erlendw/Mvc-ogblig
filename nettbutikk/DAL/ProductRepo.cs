@@ -61,8 +61,10 @@ namespace nettButikkpls.DAL
                     SaveToLog(log.toString());
                     return true;
                 }
-                catch(Exception feil)
+                catch(Exception e)
                 {
+                    string message = "Exception: " + e + " catched at DeleteOrder()";
+                    SaveToErrorLog(message);
                     return false;
                 }
             }
@@ -95,7 +97,22 @@ namespace nettButikkpls.DAL
                 string appendText = log + Environment.NewLine;
                 File.AppendAllText(_Path, appendText);
             }
-            Debug.Print("VICTORY");
+        }
+
+        public void SaveToErrorLog(string log)
+        {
+            string path = "ErrorLog.txt";
+            var _Path = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/"), path);
+            if (!File.Exists(_Path))
+            {
+                string createText = log + Environment.NewLine;
+                File.WriteAllText(_Path, createText);
+            }
+            else
+            {
+                string appendText = log + Environment.NewLine;
+                File.AppendAllText(_Path, appendText);
+            }
         }
         public bool UpdateProduct(FormCollection inList, int productid)
         {
@@ -134,6 +151,8 @@ namespace nettButikkpls.DAL
                 }
                 catch (Exception e)
                 {
+                    string message = "Exception: " + e + " catched at DeleteOrder()";
+                    SaveToErrorLog(message);
                     return false;
                 }
             }

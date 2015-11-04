@@ -23,22 +23,22 @@ namespace nettButikkpls.BLL
         }
         public IEnumerable<Product> allProducts()
         {
-            var productDal = new ProductRepo();
+            
             return _repo.allProducts();
         }
         public bool saveProduct (Product inProduct)
         {
-            var productDal = new ProductRepo();
+            
             return _repo.saveProduct(inProduct);
         }
         public bool SaveImagesToServer(HttpFileCollectionBase innFiler)
         {
-            var productDal = new ProductRepo();
+            
             return _repo.SaveImagesToServer(innFiler);
         }
         public bool UpdateProduct(FormCollection inList, int productid)
         {
-            var productDal = new ProductRepo();
+            
             return _repo.UpdateProduct(inList, productid);
         }
     }
