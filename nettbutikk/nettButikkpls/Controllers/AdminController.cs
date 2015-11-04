@@ -14,11 +14,21 @@ namespace nettButikkpls.Controllers
         // GET: Admin
         public ActionResult AdminPanel()
         {
+            Customer c = (Customer)HttpContext.Session["CurrentUser"];
+            if (c == null)
+            {
+                return RedirectToAction("ListProducts", "Product");
+            }
             return View();
         }
         [HttpPost]
         public ActionResult UpdateProduct(FormCollection inList, int productid)
         {
+            Customer c = (Customer)HttpContext.Session["CurrentUser"];
+            if (c == null)
+            {
+                return RedirectToAction("ListProducts", "Product");
+            }
             var db = new ProductLogic();
             bool OK = db.UpdateProduct(inList, productid);
             if (OK)
@@ -29,6 +39,11 @@ namespace nettButikkpls.Controllers
         }
         public ActionResult ListProducts()
         {
+            Customer c = (Customer)HttpContext.Session["CurrentUser"];
+            if (c == null)
+            {
+                return RedirectToAction("ListProducts", "Product");
+            }
             var db = new ProductLogic();
             IEnumerable<Product> allProducts = db.allProducts();
             return View(allProducts);
@@ -49,12 +64,22 @@ namespace nettButikkpls.Controllers
         }
         public Product FindProduct(int productid)
         {
+            Customer c = (Customer)HttpContext.Session["CurrentUser"];
+            if (c == null)
+            {
+                return RedirectToAction("ListProducts", "Product");
+            }
             var db = new OrderLogic();
             return db.FindProduct(productid);
 
         }
         public ActionResult ListCustomers()
         {
+            Customer c = (Customer)HttpContext.Session["CurrentUser"];
+            if (c == null)
+            {
+                return RedirectToAction("ListProducts", "Product");
+            }
             var db = new CustomerLogic();
             IEnumerable<Customer> allCustomers = db.allCustomers();
             if (allCustomers != null)
@@ -79,6 +104,11 @@ namespace nettButikkpls.Controllers
         }
         public Customer FindCustomer(int customerid)
         {
+            Customer c = (Customer)HttpContext.Session["CurrentUser"];
+            if (c == null)
+            {
+                return RedirectToAction("ListProducts", "Product");
+            }
             var db = new CustomerLogic();
             return db.FindCustomer(customerid);
         }
@@ -96,6 +126,11 @@ namespace nettButikkpls.Controllers
         }
         public ActionResult ListOrders()
         {
+            Customer c = (Customer)HttpContext.Session["CurrentUser"];
+            if (c == null)
+            {
+                return RedirectToAction("ListProducts", "Product");
+            }
             var db = new OrderLogic();
             List<Order> orders = db.allOrders();
             return View(orders);
@@ -115,6 +150,11 @@ namespace nettButikkpls.Controllers
         }
         public ActionResult Redirect()
         {
+            Customer c = (Customer)HttpContext.Session["CurrentUser"];
+            if (c == null)
+            {
+                return RedirectToAction("ListProducts", "Product");
+            }
             Debug.Write("Du har ikke tilgang");
             return RedirectToAction("ListProducts", "Product");
         }
