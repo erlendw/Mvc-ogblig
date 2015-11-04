@@ -49,14 +49,6 @@ namespace nettButikkpls.DAL
         {
             return customerid;
         }
-        public Product FindProduct(int productid)
-        {
-            Product p = new Product()
-            {
-                productid = productid,
-            };
-            return p;
-        }
         public List<Order> ListAllOrders()
         {
             List<Order> o = new List<Order>();

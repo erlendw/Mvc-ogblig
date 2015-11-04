@@ -120,7 +120,7 @@ namespace nettButikkpls.Controllers
         }
         public Product FindProduct(int productid)
         {
-            var db = new OrderLogic();
+            var db = new ProductLogic();
             return db.FindProduct(productid);
 
         }

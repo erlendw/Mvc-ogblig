@@ -48,5 +48,17 @@ namespace nettButikkpls.DAL
             else
                 return true;
         }
+        public Product FindProduct(int productid)
+        {
+            Product p = new Product()
+            {
+                productid = productid,
+                productname = "Te",
+                price = 69,
+                category = "Te",
+                description = "Dette er te",
+            };
+            return p;
+        }
     }
 }

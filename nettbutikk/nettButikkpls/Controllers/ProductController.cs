@@ -12,10 +12,21 @@ namespace nettButikkpls.Controllers
 {
     public class ProductController : Controller
     {
+        private IProductLogic _productBLL;
+
+        public ProductController()
+        {
+            _productBLL = new ProductLogic();
+        }
+
+        public ProductController(IProductLogic stub)
+        {
+            _productBLL = stub;
+        }
         public ActionResult ListProducts()
         {
-            var db = new ProductLogic();
-            IEnumerable<Product> allProducts = db.allProducts();
+            
+            IEnumerable<Product> allProducts = _productBLL.allProducts();
             return View(allProducts);
         }
 
@@ -36,7 +47,6 @@ namespace nettButikkpls.Controllers
             { 
 
             Product p = FindProduct( (int) id );
-            Debug.Print(p.productname);
             return View(p);
 
             }
@@ -45,8 +55,8 @@ namespace nettButikkpls.Controllers
         [HttpPost]
         public ActionResult RegProduct(Product inProduct)
         {
-            var db = new ProductLogic();
-            bool OK = db.saveProduct(inProduct);
+            
+            bool OK = _productBLL.saveProduct(inProduct);
             if(OK)
             {
                 return RedirectToAction("ListProducts");
@@ -57,16 +67,14 @@ namespace nettButikkpls.Controllers
         public ActionResult SaveImagesToServer()
         {
             HttpFileCollectionBase innfiler = Request.Files;
-            var db = new ProductLogic();
-            bool success = db.SaveImagesToServer(innfiler);
+            
+            bool success = _productBLL.SaveImagesToServer(innfiler);
             return Json(new { Message = string.Empty });
         }
 
         public Product FindProduct(int productid)
         {
-            var db = new OrderLogic();
-            return db.FindProduct(productid);
-
+            return _productBLL.FindProduct(productid);
         }
     }
 }

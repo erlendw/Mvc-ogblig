@@ -72,6 +72,7 @@ namespace nettButikkpls.DAL
                     List<int> pidlistdesc = new List<int>();
                     pidlistdesc = cart.productids.Distinct().ToList();
                     List<int> count = new List<int>();
+                    var prod = new ProductRepo();
 
                     foreach (int p in pidlistdesc)
                     {
@@ -87,7 +88,7 @@ namespace nettButikkpls.DAL
                         list.OrderID = orderid;
                         list.ProductID = pidlistdesc[i];
                         list.Quantity = count[i];
-                        list.UnitPrice = FindProduct(pidlistdesc[i]).price;
+                        list.UnitPrice = prod.FindProduct(pidlistdesc[i]).price;
                         db.OrderLists.Add(list);
                     }
                     db.SaveChanges();
@@ -155,45 +156,6 @@ namespace nettButikkpls.DAL
                     SaveToErrorLog(message);
                     return 0;
                 }
-            }
-        }
-        public Product FindProduct(int productid)
-        {
-            using (var db = new NettbutikkContext())
-            {
-                try
-                {
-                    Product p = new Product();
-                    var product = db.Products.Single(b=>(b.ProductId == productid));
-                    // var customer = db.Customers.Single(b => (b.CustomerId == customerid));
-
-                    p.productid = productid;
-                    p.productname = product.Productname;
-                    p.price = product.Price;
-                    p.category = product.Category;
-                    p.description = product.Description;
-                    return p;
-                }
-                catch (Exception e)
-                {
-                    return null;
-                }
-
-                /* List<Products> GetAllProducts = db.Products.ToList();
-                 Product c = new Product();
-                 for (int i = 0; i < GetAllProducts.Count; i++)
-                 {
-                     if (GetAllProducts[i].ProductId == productid)
-                     {
-                         c.productid = productid;
-                         c.productname = GetAllProducts[i].Productname;
-                         c.price = GetAllProducts[i].Price;
-                         c.category = GetAllProducts[i].Category;
-                         c.description = GetAllProducts[i].Description;
-
-                         return c;
-                     }
-                 }*/
             }
         }
         public List<Order> ListAllOrders()

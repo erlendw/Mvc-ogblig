@@ -41,5 +41,9 @@ namespace nettButikkpls.BLL
             
             return _repo.UpdateProduct(inList, productid);
         }
+        public Product FindProduct(int productid)
+        {
+            return _repo.FindProduct(productid);
+        }
     }
 }

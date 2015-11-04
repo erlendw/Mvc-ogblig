@@ -9,7 +9,6 @@ namespace nettButikkpls.DAL
         void addToCart(int productid, int quantity);
         List<Order> allOrders();
         bool DeleteOrder(int orderId);
-        Product FindProduct(int productid);
         List<Order> ListAllOrders();
         int saveOrder(float price, int customerid);
     }
