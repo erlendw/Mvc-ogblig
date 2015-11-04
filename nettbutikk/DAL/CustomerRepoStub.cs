@@ -49,7 +49,7 @@ namespace nettButikkpls.DAL
             else
                 return true;
         }
-        public bool Login()
+        /*public bool Login()
         {
             if (context.Session["loggedin"] == null)
             {
@@ -60,7 +60,7 @@ namespace nettButikkpls.DAL
                 return (bool)context.Session["loggedin"];
             }
             return false;
-        }
+        }*/
         public bool ValidateUser(FormCollection inList)
         {
             if (!(String.IsNullOrEmpty(inList["Firstname"])))
