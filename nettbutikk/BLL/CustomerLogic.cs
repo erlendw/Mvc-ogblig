@@ -78,5 +78,9 @@ namespace nettButikkpls.BLL
         {
             return _repo.FindCustomer(customerid);
         }
+        public bool UpdateCustomer(FormCollection inList, int customerid)
+        {
+            return _repo.UpdateCustomer(inList, customerid);
+        }
     }
 }

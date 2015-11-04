@@ -110,5 +110,12 @@ namespace nettButikkpls.DAL
             };
             return c;
         }
+        public bool UpdateCustomer(FormCollection inList, int customerid)
+        {
+            if (!(String.IsNullOrEmpty(inList["Firstname"])))
+                return true;
+            else
+                return false;
+        }
     }
 }
