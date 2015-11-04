@@ -17,5 +17,6 @@ namespace nettButikkpls.BLL
         bool Login();
         bool saveCustomer(Customer inCustomer);
         bool ValidateUser(FormCollection inList);
+        Customer FindCustomer(int customerid);
     }
 }

@@ -267,7 +267,6 @@ namespace nettButikkpls.DAL
                 {
                     Customer c = new Customer();
                     var customer = db.Customers.Single(b => (b.CustomerId == customerid));
-                    // var customer = db.Customers.Single(b => (b.CustomerId == customerid));
                     c.customerId = customerid;
                     c.email = customer.Mail;
                     c.firstname = customer.Firstname;
