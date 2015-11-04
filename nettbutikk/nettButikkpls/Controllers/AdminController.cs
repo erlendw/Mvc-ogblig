@@ -59,7 +59,7 @@ namespace nettButikkpls.Controllers
             return View(allProducts);
         }
         //HER ER JEG USIKKER PÅ HVA SOM HAR BLITT ENDRET, KOMMENTERER UT FOR Å TESTE LØSNINGEN! /Trym
-
+        [HttpGet]
         public ActionResult EditCustomer(int id)
         {
             if (id == null)
