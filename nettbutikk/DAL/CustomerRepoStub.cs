@@ -95,5 +95,21 @@ namespace nettButikkpls.DAL
             int customerId = 1337;
             return customerId;
         }
+        public Customer FindCustomer(int customerid)
+        {
+            Customer c = new Customer()
+            {
+                    email = "daniel@thoresen.no",
+                    password = "Sommeren2015",
+                    firstname = "Daniel",
+                    lastname = "Thoresen",
+                    address = "Hesselbergs gate 7A",
+                    isadmin = false,
+                    salt = "hejhejhallo",
+                    zipcode = "0555",
+                    postalarea = "Oslo",
+            };
+            return c;
+        }
     }
 }
