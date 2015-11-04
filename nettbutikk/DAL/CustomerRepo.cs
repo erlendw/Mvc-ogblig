@@ -61,7 +61,8 @@ namespace nettButikkpls.DAL
                     }
                     db.Customers.Add(newCustomerRow);
                     db.SaveChanges();
-                    
+                    nettbutikkpls.Models.Log log = new nettbutikkpls.Models.Log();
+
                     return true;
                 }catch(Exception feil)
                 {
