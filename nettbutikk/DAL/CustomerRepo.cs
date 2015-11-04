@@ -179,7 +179,6 @@ namespace nettButikkpls.DAL
         }
         public bool Login()
         {
-            
             if (context.Session["CurrentUser"] == null)
             {
                 return false;
