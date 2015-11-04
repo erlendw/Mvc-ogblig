@@ -93,7 +93,7 @@ namespace nettButikkpls.Controllers
         public ActionResult ListOrders()
         {
             var db = new OrderLogic();
-            List<Order> orders = db.ListAllOrders();
+            List<Order> orders = db.allOrders();
             return View(orders);
         }
         [HttpPost]
