@@ -64,11 +64,7 @@ namespace nettButikkpls.Controllers
         }
         public Product FindProduct(int productid)
         {
-            Customer c = (Customer)HttpContext.Session["CurrentUser"];
-            if (c == null)
-            {
-                return RedirectToAction("ListProducts", "Product");
-            }
+            
             var db = new OrderLogic();
             return db.FindProduct(productid);
 
@@ -104,11 +100,7 @@ namespace nettButikkpls.Controllers
         }
         public Customer FindCustomer(int customerid)
         {
-            Customer c = (Customer)HttpContext.Session["CurrentUser"];
-            if (c == null)
-            {
-                return RedirectToAction("ListProducts", "Product");
-            }
+            
             var db = new CustomerLogic();
             return db.FindCustomer(customerid);
         }
