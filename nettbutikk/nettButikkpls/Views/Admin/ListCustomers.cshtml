@@ -10,10 +10,12 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Product ID</th>
-            <th>Productname</th>
-            <th>Price</th>
-            <th>Category</th>
+            <th>Customer ID</th>
+            <th>Fornavn</th>
+            <th>Etternavn</th>
+            <th>Address</th>
+            <th>Postalarea</th>
+            <th>Email</th>
             <th>Edit</th>
         </tr>
     </thead>
@@ -23,16 +25,18 @@
             {
             <tr>
 
+                <td>@customer.customerId</td>
                 <td>@customer.firstname</td>
                 <td>@customer.lastname</td>
                 <td>@customer.address</td>
-                <td>@customer.email</td>
                 <td>@customer.postalarea</td>
+                <td>@customer.email</td>
+                
                 
 
                 <td>
                     <a href="@Url.Action("EditProduct", "Admin", new { id = customer.firstname })" class="btn btn-xs btn-success">
-                        Edit Product
+                        Edit Customer
                         <span class="glyphicon glyphicon-edit" />
                     </a>
                 </td>
