@@ -8,7 +8,7 @@ using System.Web.Mvc;
 using System.Diagnostics;
 namespace nettButikkpls.DAL
 {
-    public class ProductDAL
+    public class ProductRepo : IProductRepo
     {
         public IEnumerable<Product> allProducts()
         {

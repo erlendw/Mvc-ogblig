@@ -78,7 +78,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomerDAL.cs" />
+    <Compile Include="CustomerRepoStub.cs" />
+    <Compile Include="CustomerRepo.cs" />
+    <Compile Include="ICustomerRepo.cs" />
+    <Compile Include="IOrderRepo.cs" />
+    <Compile Include="IProductRepo.cs" />
     <Compile Include="LogDAL.cs" />
     <Compile Include="Migrations\201511030949363_InitialCreate.cs" />
     <Compile Include="Migrations\201511030949363_InitialCreate.Designer.cs">
@@ -89,8 +93,10 @@
       <DependentUpon>201511031351218_test.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="OrderDAL.cs" />
-    <Compile Include="ProductDAL.cs" />
+    <Compile Include="OrderRepoStub.cs" />
+    <Compile Include="OrderRepo.cs" />
+    <Compile Include="ProductRepoStub.cs" />
+    <Compile Include="ProductRepo.cs" />
     <Compile Include="Nettbutikk.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

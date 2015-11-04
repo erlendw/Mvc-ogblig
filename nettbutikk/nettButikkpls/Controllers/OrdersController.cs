@@ -11,6 +11,18 @@ namespace nettButikkpls.Controllers
 {
     public class OrdersController : Controller
     {
+        private IOrderLogic _orderBLL;
+
+        public OrdersController()
+        {
+            _orderBLL = new OrderLogic();
+        }
+
+        public OrdersController(IOrderLogic stub)
+        {
+            _orderBLL = stub;
+        }
+
         [HttpPost]
         public void addToCart(string Productid, string Quantity)
         {
@@ -53,7 +65,7 @@ namespace nettButikkpls.Controllers
 
         public ActionResult allOrders()
         {
-            var db = new OrderBLL();
+            var db = new OrderLogic();
             List<Order> allOrders = db.ListAllOrders();
             return View(allOrders);
         }
@@ -67,8 +79,8 @@ namespace nettButikkpls.Controllers
         [HttpPost]
         public ActionResult AddOrder()
         {
-            var db = new OrderBLL();
-            var cdb = new CustomerBLL();
+            var db = new OrderLogic();
+            var cdb = new CustomerLogic();
             Cart cart = (Cart)HttpContext.Session["Cart"];
             int sumTotal = SumTotal(cart.productids);
             int customerID = cdb.CurrentCustomerId();
@@ -108,20 +120,20 @@ namespace nettButikkpls.Controllers
         }
         public Product FindProduct(int productid)
         {
-            var db = new OrderBLL();
+            var db = new OrderLogic();
             return db.FindProduct(productid);
 
         }  
         public ActionResult ListOrders()
         {
-            var db = new OrderBLL();
+            var db = new OrderLogic();
             List<Order> orders = db.ListAllOrders();
             return View(orders);
         }
         [HttpPost]
         public ActionResult DeleteOrder(int orderId)
         {
-            var db = new OrderBLL();
+            var db = new OrderLogic();
             bool OK = db.DeleteOrder(orderId);
             if (OK)
             {

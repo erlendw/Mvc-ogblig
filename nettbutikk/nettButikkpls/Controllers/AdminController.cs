@@ -18,7 +18,7 @@ namespace nettButikkpls.Controllers
         [HttpPost]
         public ActionResult UpdateProduct(FormCollection inList, int productid)
         {
-            var db = new ProductBLL();
+            var db = new ProductLogic();
             bool OK = db.UpdateProduct(inList, productid);
             if (OK)
             {
@@ -28,7 +28,7 @@ namespace nettButikkpls.Controllers
         }
         public ActionResult ListProductsAdmin()
         {
-            var db = new ProductBLL();
+            var db = new ProductLogic();
             IEnumerable<Product> allProducts = db.allProducts();
             return View(allProducts);
         }
@@ -47,17 +47,18 @@ namespace nettButikkpls.Controllers
         }
         public Product FindProduct(int productid)
         {
-            var db = new OrderBLL();
+            var db = new OrderLogic();
             return db.FindProduct(productid);
 
         }
         public ActionResult ListCustomersAdmin()
         {
-            var db = new CustomerBLL();
+            var db = new CustomerLogic();
             IEnumerable<Customer> allProducts = db.allCustomers();
             return View(allProducts);
         }
-        public ActionResult EditCustomer(int id)
+        //HER ER JEG USIKKER PÅ HVA SOM HAR BLITT ENDRET, KOMMENTERER UT FOR Å TESTE LØSNINGEN! /Trym
+        /*public ActionResult EditCustomer(int id)
         {
             if (id == null)
             {
@@ -71,19 +72,19 @@ namespace nettButikkpls.Controllers
         }
         public Customer FindCustomer(int customerid)
         {
-            var db = new CustomerBLL();
+            var db = new CustomerLogic();
             return db.FindCustomer(customerid);
         }
         [HttpPost]
         public ActionResult UpdateCustomer(FormCollection inList, int customerid)
         {
-            var db = new CustomerBLL();
+            var db = new CustomerLogic();
             bool OK = db.UpdateCustomer(inList, customerid);
             if (OK)
             {
                 return RedirectToAction("AdminPanel");
             }
             return RedirectToAction("AdminPAnel");
-        }
+        }*/
     }
 }

@@ -13,10 +13,21 @@ namespace nettButikkpls.Controllers
     public class CustomerController : Controller
     {
         //NettbutikkContext bmx = new NettbutikkContext();
+        private ICustomerLogic _customerBLL;
+
+        public CustomerController()
+        {
+            _customerBLL = new CustomerLogic();
+        }
+
+        public CustomerController(ICustomerLogic stub)
+        {
+            _customerBLL = stub;
+        }
         public ActionResult List()
         {
-            var db = new CustomerBLL();
-            List<Customer> allCustomers = db.allCustomers();
+            
+            List<Customer> allCustomers = _customerBLL.allCustomers();
             return View(allCustomers);
         }
         public ActionResult Reg()
@@ -25,15 +36,15 @@ namespace nettButikkpls.Controllers
         }
         /*public ActionResult CurrentCustomer()
         {
-            var db = new CustomerBLL();
+            
             return View(db.CurrentCustomerObj());
         }*/
 
         [HttpPost]
         public ActionResult Reg(Customer inCustomer)
         {
-            var db = new CustomerBLL();
-            bool OK = db.saveCustomer(inCustomer);
+            
+            bool OK = _customerBLL.saveCustomer(inCustomer);
             if (OK)
             {
                 return RedirectToAction("List");
@@ -52,8 +63,8 @@ namespace nettButikkpls.Controllers
         [HttpPost]
         public ActionResult UpdateCustomer(FormCollection inList)
         {
-            var db = new CustomerBLL();
-            bool OK = db.EditCustomer(inList);
+            
+            bool OK = _customerBLL.EditCustomer(inList);
             if(OK)
             {
                 return RedirectToAction("List");
@@ -62,9 +73,9 @@ namespace nettButikkpls.Controllers
         }
         public Customer FindCustomerByEmail (string Email)
         {
-            var db = new CustomerBLL();
+            
             //List<Customer> GetAllCustomers = bmx.Customers.ToList();
-            List<Customer> GetAllCustomers = db.allCustomers();
+            List<Customer> GetAllCustomers = _customerBLL.allCustomers();
             for (int i = 0; i < GetAllCustomers.Count; i++)
             {
                 if(GetAllCustomers[i].email == Email)
@@ -76,8 +87,8 @@ namespace nettButikkpls.Controllers
         }
         public ActionResult Login()
         {
-            var db = new CustomerBLL();
-            bool loggedIn = db.Login();
+            
+            bool loggedIn = _customerBLL.Login();
             if (loggedIn)
             {
                 ViewBag.loggedin = true; //Forklar meg dette den so lagde det
@@ -89,8 +100,8 @@ namespace nettButikkpls.Controllers
         public ActionResult ValidateUser(FormCollection inList)
         {
             //Trenger feilmelding når brukervalidering feiler.
-            var db = new CustomerBLL();
-            bool loggedIn = db.ValidateUser(inList);
+            
+            bool loggedIn = _customerBLL.ValidateUser(inList);
             if (loggedIn)
             {
                 return RedirectToAction("List");
