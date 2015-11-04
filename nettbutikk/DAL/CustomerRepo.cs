@@ -105,7 +105,6 @@ namespace nettButikkpls.DAL
                 string appendText = log + Environment.NewLine;
                 File.AppendAllText(_Path, appendText);
             }
-            Debug.Print("VICTORY");
         }
 
         public void SaveToErrorLog(string log)
@@ -173,7 +172,7 @@ namespace nettButikkpls.DAL
                 }
                 catch (Exception e)
                 {
-                    string message = "Exception: " + e + " catched at DeleteOrder()";
+                    string message = "Exception: " + e + " catched at EditCustomer()";
                     SaveToErrorLog(message);
                     return false;
                 }
@@ -298,6 +297,8 @@ namespace nettButikkpls.DAL
                 }
                 catch (Exception e)
                 {
+                    string message = "Exception: " + e + " catched at FindCustomer()";
+                    SaveToErrorLog(message);
                     return null;
                 }
             }
