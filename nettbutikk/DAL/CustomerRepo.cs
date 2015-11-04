@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace nettButikkpls.DAL
 {
-    public class CustomerRepo
+    public class CustomerRepo : ICustomerRepo
     {
         HttpContext context = HttpContext.Current;
         NettbutikkContext bmx = new NettbutikkContext();

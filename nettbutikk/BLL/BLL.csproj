@@ -78,9 +78,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomerBLL.cs" />
-    <Compile Include="OrderBLL.cs" />
-    <Compile Include="ProductBLL.cs" />
+    <Compile Include="CustomerLogic.cs" />
+    <Compile Include="ICustomerLogic.cs" />
+    <Compile Include="IOrderLogic.cs" />
+    <Compile Include="IProductLogic.cs" />
+    <Compile Include="OrderLogic.cs" />
+    <Compile Include="ProductLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace nettButikkpls.DAL
 {
-    public class CustomerRepoStub
+    public class CustomerRepoStub : ICustomerRepo
     {
         public List<Customer> allCustomers()
         {
@@ -44,25 +44,26 @@ namespace nettButikkpls.DAL
 
         public bool EditCustomer(FormCollection inList)
         {
-            if ((String.IsNullOrEmpty(inList["Firstname"])))
+            if (!(String.IsNullOrEmpty(inList["Firstname"])))
                 return false;
             else
                 return true;
         }
         public bool Login()
         {
-            Random rand = new Random();
-            int rnd = rand.Next(1, 5);
-            if (rnd < 3)
-                return false;
-            else if (rnd > 3)
-                return true;
+            if (context.Session["loggedin"] == null)
+            {
+                context.Session["loggedin"] = false;
+            }
             else
-                return true;
+            {
+                return (bool)context.Session["loggedin"];
+            }
+            return false;
         }
         public bool ValidateUser(FormCollection inList)
         {
-            if ((String.IsNullOrEmpty(inList["Firstname"])))
+            if (!(String.IsNullOrEmpty(inList["Firstname"])))
                 return true;
             else
                 return false;
@@ -86,27 +87,6 @@ namespace nettButikkpls.DAL
         }
         public Customer FindCustomerByEmail(string email)
         {
-            /*List<Customer> clist = allCustomers();
-            Customer c = new Customer();
-            email = "daniel@thoresen.no";
-            for(int i = 0; i < clist.Count; i++)
-            {
-                if (clist[i].email == email)
-                {
-                    c.customerId = clist[i].customerId;
-                    c.email = email;
-                    c.firstname = clist[i].firstname;
-                    c.lastname = clist[i].lastname;
-                    c.address = clist[i].address;
-                    c.isadmin = clist[i].isadmin;
-                    c.zipcode = clist[i].zipcode;
-                    c.postalarea = clist[i].postalarea.ToString();
-                    c.password = clist[i].password;
-                    c.salt = clist[i].salt;
-                    return c;
-                }
-            }
-            return null;*/
             Customer c = new Customer();
             c.email = email;
             return c;

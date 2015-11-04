@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 namespace nettButikkpls.DAL
 {
-    public class OrderDAL
+    public class OrderRepo : IOrderRepo
     {
         public List<Order> allOrders()
         {
@@ -168,7 +168,7 @@ namespace nettButikkpls.DAL
         {
             using (var bmx = new NettbutikkContext())
             {
-                var db = new CustomerDAL();
+                var db = new CustomerRepo();
                 int cId = db.CurrentCustomerId();
                 List<Order> order = new List<Order>();
                 IEnumerable<Orders> orders = bmx.Orders.Where(o => o.CustomerId == cId);

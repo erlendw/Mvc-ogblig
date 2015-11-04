@@ -14,7 +14,7 @@ namespace nettButikkpls.Controllers
     {
         public ActionResult ListProducts()
         {
-            var db = new ProductBLL();
+            var db = new ProductLogic();
             IEnumerable<Product> allProducts = db.allProducts();
             return View(allProducts);
         }
@@ -45,7 +45,7 @@ namespace nettButikkpls.Controllers
         [HttpPost]
         public ActionResult RegProduct(Product inProduct)
         {
-            var db = new ProductBLL();
+            var db = new ProductLogic();
             bool OK = db.saveProduct(inProduct);
             if(OK)
             {
@@ -57,14 +57,14 @@ namespace nettButikkpls.Controllers
         public ActionResult SaveImagesToServer()
         {
             HttpFileCollectionBase innfiler = Request.Files;
-            var db = new ProductBLL();
+            var db = new ProductLogic();
             bool success = db.SaveImagesToServer(innfiler);
             return Json(new { Message = string.Empty });
         }
 
         public Product FindProduct(int productid)
         {
-            var db = new OrderBLL();
+            var db = new OrderLogic();
             return db.FindProduct(productid);
 
         }
