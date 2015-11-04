@@ -26,12 +26,13 @@ namespace nettButikkpls.Controllers
             }
             return RedirectToAction("AdminPanel");
         }
-        public ActionResult ListProductsAdmin()
+        public ActionResult ListProducts()
         {
             var db = new ProductLogic();
             IEnumerable<Product> allProducts = db.allProducts();
             return View(allProducts);
         }
+
         [HttpGet]
         public ActionResult EditProduct(int? id)
         {
@@ -51,14 +52,15 @@ namespace nettButikkpls.Controllers
             return db.FindProduct(productid);
 
         }
-        public ActionResult ListCustomersAdmin()
+        public ActionResult ListCustomers()
         {
             var db = new CustomerLogic();
             IEnumerable<Customer> allProducts = db.allCustomers();
             return View(allProducts);
         }
         //HER ER JEG USIKKER PÅ HVA SOM HAR BLITT ENDRET, KOMMENTERER UT FOR Å TESTE LØSNINGEN! /Trym
-        /*public ActionResult EditCustomer(int id)
+
+        public ActionResult EditCustomer(int id)
         {
             if (id == null)
             {
@@ -85,6 +87,6 @@ namespace nettButikkpls.Controllers
                 return RedirectToAction("AdminPanel");
             }
             return RedirectToAction("AdminPAnel");
-        }*/
+        }
     }
 }

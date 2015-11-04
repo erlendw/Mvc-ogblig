@@ -74,5 +74,10 @@ namespace nettButikkpls.BLL
             var customerDal = new CustomerRepo();
             return _repo.CurrentCustomerId();
         }
+        public Customer FindCustomer(int customerid)
+        {
+            var customerDal = new CustomerRepo();
+            return _repo.Fin
+        }
     }
 }

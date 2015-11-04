@@ -5,7 +5,7 @@ using System.Web;
 using nettButikkpls.Models;
 using System.Web.Mvc;
 using System.Diagnostics;
-
+using System.IO;
 
 namespace nettButikkpls.DAL
 {
@@ -92,10 +92,27 @@ namespace nettButikkpls.DAL
                     }
                     db.SaveChanges();
                     context.Session["Cart"] = null;
+                    //Start save to Log
+                    nettbutikkpls.Models.Log log = new nettbutikkpls.Models.Log();
+                    log.ChangedTime = (DateTime.Now).ToString("yyyyMMddHHmmss");
+                    log.EventType = "Create";
+                    if (HttpContext.Current.Session["CurrentCustomer"] != null)
+                    {
+                        Customer changedby = (Customer)HttpContext.Current.Session["CurrentCustomer"];
+                        log.ChangedBy = changedby.firstname;
+                    }
+                    else
+                    {
+                        log.ChangedBy = "null";
+                    }
+                    SaveToLog(log.toString());
+
                     return true;
                 }
                 catch (Exception e)
                 {
+                    string message = "Exception: " + e + " catched at DeleteOrder()";
+                    SaveToErrorLog(message);
                     return false;
                 }
             }
@@ -106,8 +123,7 @@ namespace nettButikkpls.DAL
             {
                 try
                 {
-                    Debug.Write("KOMMER TIL TRY");
-                    String timeStamp = (DateTime.Now).ToString("yyyyMMddHHmmssffff");
+                    String timeStamp = (DateTime.Now).ToString("yyyyMMddHHmmss");
                     // Debug.Write("CustomerID " + c.customerId);
                     var newOrderRow = new Orders();
                     newOrderRow.CustomerId = customerid;
@@ -115,12 +131,28 @@ namespace nettButikkpls.DAL
                     newOrderRow.SumTotal = price;
                     db.Orders.Add(newOrderRow);
                     db.SaveChanges();
-
+                    //Start save to Log
+                    nettbutikkpls.Models.Log log = new nettbutikkpls.Models.Log();
+                    log.ChangedTime = timeStamp;
+                    log.EventType = "Create";
+                    log.NewValue = newOrderRow.ToString(); ;
+                    if (HttpContext.Current.Session["CurrentCustomer"] != null)
+                    {
+                        Customer changedby = (Customer)HttpContext.Current.Session["CurrentCustomer"];
+                        log.ChangedBy = changedby.firstname;
+                    }
+                    else
+                    {
+                        log.ChangedBy = "null";
+                    }
+                    SaveToLog(log.toString());
                     List<Orders> GetAllOrders = db.Orders.ToList();
                     return GetAllOrders.Count;
                 }
-                catch (Exception feil)
+                catch (Exception e)
                 {
+                    string message = "Exception: " + e + " catched at DeleteOrder()";
+                    SaveToErrorLog(message);
                     return 0;
                 }
             }
@@ -185,6 +217,38 @@ namespace nettButikkpls.DAL
                 return order;
             }
         }
+
+        public void SaveToLog(string log)
+        {
+            string path = "Log.txt";
+            var _Path = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/"), path);
+            if (!File.Exists(_Path))
+            {
+                string createText = log + Environment.NewLine;
+                File.WriteAllText(_Path, createText);
+            }
+            else
+            {
+                string appendText = log + Environment.NewLine;
+                File.AppendAllText(_Path, appendText);
+            }
+        }
+        public void SaveToErrorLog(string log)
+        {
+            string path = "ErrorLog.txt";
+            var _Path = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/"), path);
+            if (!File.Exists(_Path))
+            {
+                string createText = log + Environment.NewLine;
+                File.WriteAllText(_Path, createText);
+            }
+            else
+            {
+                string appendText = log + Environment.NewLine;
+                File.AppendAllText(_Path, appendText);
+            }
+        }
+
         public bool DeleteOrder(int orderId)
         {
             using (var db = new NettbutikkContext())
@@ -192,6 +256,7 @@ namespace nettButikkpls.DAL
                 try
                 {
                     var order = db.Orders.Single(b => (b.OrderId == orderId));
+                    string originalvalue = order.ToString();
                     db.Orders.Attach(order);
                     db.Orders.Remove(order);
 
@@ -202,11 +267,29 @@ namespace nettButikkpls.DAL
                         db.OrderLists.Attach(ol);
                         db.OrderLists.Remove(ol);
                     }
+                    //Start save to Log
+                    nettbutikkpls.Models.Log log = new nettbutikkpls.Models.Log();
+                    log.ChangedTime = (DateTime.Now).ToString("yyyyMMddHHmmss");
+                    log.EventType = "Delete";
+                    log.OriginalValue = originalvalue;
+                    log.NewValue = "null";
+                    if (HttpContext.Current.Session["CurrentCustomer"] != null)
+                    {
+                        Customer changedby = (Customer)HttpContext.Current.Session["CurrentCustomer"];
+                        log.ChangedBy = changedby.firstname;
+                    }
+                    else
+                    {
+                        log.ChangedBy = "null";
+                    }
+                    SaveToLog(log.toString());
                     db.SaveChanges();
                     return true;
                 }
                 catch (Exception e)
                 {
+                    string message = "Exception: "+ e + " catched at DeleteOrder()";
+                    SaveToErrorLog(message);
                     return false;
                 }
             }

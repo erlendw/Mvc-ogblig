@@ -1,0 +1,50 @@
+﻿@model IEnumerable<nettButikkpls.Models.Customer>
+
+@{
+    ViewBag.Title = "ListCustomers";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h2>ListCustomers</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Customer ID</th>
+            <th>Fornavn</th>
+            <th>Etternavn</th>
+            <th>Address</th>
+            <th>Postalarea</th>
+            <th>Email</th>
+            <th>Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var customer in Model)
+            {
+            <tr>
+
+                <td>@customer.customerId</td>
+                <td>@customer.firstname</td>
+                <td>@customer.lastname</td>
+                <td>@customer.address</td>
+                <td>@customer.postalarea</td>
+                <td>@customer.email</td>
+                
+                
+
+                <td>
+                    <a href="@Url.Action("EditProduct", "Admin", new { id = customer.firstname })" class="btn btn-xs btn-success">
+                        Edit Customer
+                        <span class="glyphicon glyphicon-edit" />
+                    </a>
+                </td>
+
+                <!--<td><a href="#" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-edit"></span> Edit Product</a></td>-->
+
+            </tr>
+
+        }
+    </tbody>
+</table>
