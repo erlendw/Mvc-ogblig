@@ -52,7 +52,6 @@ namespace nettButikkpls.DAL
         }
         public bool SaveImagesToServer(HttpFileCollectionBase innFiler)
         {
-
             foreach (string FileName in innFiler)
             {
                 HttpPostedFileBase file = innFiler[FileName];
