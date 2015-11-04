@@ -96,16 +96,19 @@ namespace nettButikkpls.Controllers
             List<Order> orders = db.allOrders();
             return View(orders);
         }
-        [HttpPost]
+        [HttpGet]
         public ActionResult DeleteOrder(int orderId)
         {
+
+            Debug.Print(orderId.ToString());
+
             var db = new OrderLogic();
             bool OK = db.DeleteOrder(orderId);
             if (OK)
             {
-                return RedirectToAction("allOrders");
+                return RedirectToAction("ListOrders");
             }
-            return RedirectToAction("allOrders");
+            return RedirectToAction("ListOrders");
         }
     }
 }
