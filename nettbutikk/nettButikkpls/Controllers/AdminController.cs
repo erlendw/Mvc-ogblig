@@ -56,8 +56,12 @@ namespace nettButikkpls.Controllers
         public ActionResult ListCustomers()
         {
             var db = new CustomerLogic();
-            IEnumerable<Customer> allProducts = db.allCustomers();
-            return View(allProducts);
+            IEnumerable<Customer> allCustomers = db.allCustomers();
+            if (allCustomers != null)
+            {
+                return View(allCustomers);
+            }
+            return RedirectToAction("Redirect");
         }
         //HER ER JEG USIKKER PÅ HVA SOM HAR BLITT ENDRET, KOMMENTERER UT FOR Å TESTE LØSNINGEN! /Trym
         [HttpGet]
@@ -99,7 +103,6 @@ namespace nettButikkpls.Controllers
         [HttpGet]
         public ActionResult DeleteOrder(int orderId)
         {
-
             Debug.Print(orderId.ToString());
 
             var db = new OrderLogic();
@@ -109,6 +112,11 @@ namespace nettButikkpls.Controllers
                 return RedirectToAction("ListOrders");
             }
             return RedirectToAction("ListOrders");
+        }
+        public ActionResult Redirect()
+        {
+            Debug.Write("Du har ikke tilgang");
+            return RedirectToAction("ListProducts", "Product");
         }
     }
 }
