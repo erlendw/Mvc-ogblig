@@ -1,0 +1,50 @@
+﻿@model List<nettButikkpls.Models.Order>
+
+
+@{
+    ViewBag.Title = "ListOrders";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h2>ListOrders</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Customer ID</th>
+            <th>Total</th>
+            <th>Timestamp</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var order in Model)
+            {
+            <tr>
+
+                <td>@order.orderId</td>
+
+                <td>@order.customerId</td>
+
+                <td>$@order.sumtotal</td>
+
+                <td>@order.timestamp</td>
+
+                <td>
+                    <a href="@Url.Action("DeleteOrder", "Admin", new { orderId = order.orderId })" class="btn btn-xs btn-danger">
+                        Delete Order
+                        <span class="glyphicon glyphicon-trash" />
+                    </a>
+                </td>
+
+                <!--<td><a href="#" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-edit"></span> Edit Product</a></td>-->
+
+            </tr>
+
+        }
+    </tbody>
+</table>
+
+
+

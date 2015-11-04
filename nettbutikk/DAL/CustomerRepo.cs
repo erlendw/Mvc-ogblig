@@ -105,7 +105,6 @@ namespace nettButikkpls.DAL
                 string appendText = log + Environment.NewLine;
                 File.AppendAllText(_Path, appendText);
             }
-            Debug.Print("VICTORY");
         }
 
         public void SaveToErrorLog(string log)
@@ -173,23 +172,20 @@ namespace nettButikkpls.DAL
                 }
                 catch (Exception e)
                 {
-                    string message = "Exception: " + e + " catched at DeleteOrder()";
+                    string message = "Exception: " + e + " catched at EditCustomer()";
                     SaveToErrorLog(message);
                     return false;
                 }
         }
         public bool Login()
         {
-            //HttpContext context = HttpContext.Current;
-            if (context.Session["loggedin"] == null)
+            
+            if (context.Session["CurrentUser"] == null)
             {
-                context.Session["loggedin"] = false;
+                return false;
             }
-            else
-            {
-               return (bool)context.Session["loggedin"];
-            }
-            return false;
+            
+            return true;
         }
         public bool ValidateUser(FormCollection inList)
         {
@@ -273,7 +269,7 @@ namespace nettButikkpls.DAL
 
         public int CurrentCustomerId()
         {
-            Customer c = (Customer)context.Session["CurrentUSer"];
+            Customer c = (Customer)context.Session["CurrentUser"];
             return c.customerId;
         }
         public Customer FindCustomer(int customerid)
@@ -298,6 +294,8 @@ namespace nettButikkpls.DAL
                 }
                 catch (Exception e)
                 {
+                    string message = "Exception: " + e + " catched at FindCustomer()";
+                    SaveToErrorLog(message);
                     return null;
                 }
             }
@@ -309,6 +307,7 @@ namespace nettButikkpls.DAL
                 try
                 {
                     var customer = db.Customers.Single(b => (b.CustomerId == customerid));
+                    Debug.Write("kundeid " + customer.CustomerId);
 
                     if (!(String.IsNullOrEmpty(inList["Mail"])))
                     {
@@ -331,9 +330,11 @@ namespace nettButikkpls.DAL
                 }
                 catch (Exception e)
                 {
+                    string message = "Exception: " + e + " catched at UpdateCustomer()";
+                    SaveToErrorLog(message);
                     return false;
                 }
             }
         }
     }
-}
+} 

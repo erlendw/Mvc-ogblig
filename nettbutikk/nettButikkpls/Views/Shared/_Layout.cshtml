@@ -47,7 +47,7 @@
                     {
                         <li>@Html.ActionLink("Checkout", "addOrder", "Orders")</li>
                     }
-
+                    
                     <li>
 
                         <div class="btn-sm btn-primary btn-primary" style="margin-top:12px;">
@@ -62,22 +62,22 @@
                                 <span id="cartcount">0</span>
 
                             }
-                          
-                          )</div >
 
-
-
-</li>
-                    
-                                                     
-                    
+                            )
+                        </div>
+                    </li>
+                    @if ((nettButikkpls.Models.Customer)HttpContext.Current.Session["CurrentUser"] != null)
+                    {
+                        nettButikkpls.Models.Customer customer = (nettButikkpls.Models.Customer)HttpContext.Current.Session["CurrentUser"];
+                        if (customer.isadmin)
+                        {
+                            <li>@Html.ActionLink("Admin", "AdminPanel", "Admin")</li>
+                        }
+                    }
                 </ul>
-
-                    
-
-                </div>
             </div>
         </div>
+     </div>
 
      <div class="body-content">
 

@@ -10,7 +10,6 @@ namespace DAL.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "nettButikkpls.DAL.NettbutikkContext";
         }
 
         protected override void Seed(nettButikkpls.DAL.NettbutikkContext context)
