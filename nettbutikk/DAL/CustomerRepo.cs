@@ -6,6 +6,7 @@ using nettButikkpls.Models;
 using System.Security.Cryptography;
 using System.Diagnostics;
 using System.Web.Mvc;
+using System.IO;
 
 namespace nettButikkpls.DAL
 {
@@ -61,14 +62,48 @@ namespace nettButikkpls.DAL
                     }
                     db.Customers.Add(newCustomerRow);
                     db.SaveChanges();
+                    
+                    
+                    //Start saving to Log
                     nettbutikkpls.Models.Log log = new nettbutikkpls.Models.Log();
-
+                    log.ChangedTime = (DateTime.Now).ToString("yyyyMMddHHmmss");
+                    log.EventType = "Create";
+                    log.NewValue = newCustomerRow.ToString();
+                    Customer changedby = null;
+                    if (HttpContext.Current.Session["CurrentCustomer"] != null)
+                    {
+                        changedby = (Customer)HttpContext.Current.Session["CurrentCustomer"];
+                        log.ChangedBy = changedby.firstname;
+                    }
+                    else
+                    {
+                        log.ChangedBy = "null";
+                    }
+                    SaveToLog(log.toString());
+                    //End of saving to Log
                     return true;
                 }catch(Exception feil)
                 {
                     return false;
                 }                   
             }  
+        }
+
+        public void SaveToLog(string log)
+        {
+            string path = "Log.txt";
+            var _Path = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/"), path);
+            if (!File.Exists(_Path))
+            {
+                string createText = log + Environment.NewLine;
+                File.WriteAllText(_Path, createText);
+            }
+            else
+            {
+                string appendText = log + Environment.NewLine;
+                File.AppendAllText(_Path, appendText);
+            }
+            Debug.Print("VICTORY");
         }
 
         public bool EditCustomer(FormCollection inList)
@@ -78,7 +113,7 @@ namespace nettButikkpls.DAL
                     // HttpContext context = HttpContext.Current;
                     Customer c = (Customer)context.Session["CurrentUser"];
                     Customers customer = FindCustomersByEmail(c.email);
-                    
+                string originalvalue = customer.ToString();
                     if (!(String.IsNullOrEmpty(inList["Mail"])))
                     {
                         customer.Mail = inList["Mail"];
@@ -96,7 +131,26 @@ namespace nettButikkpls.DAL
                         customer.Address = inList["Address"];
                 }
                     bmx.SaveChanges();
-                    c = FindCustomerByEmail(customer.Mail);
+
+                //Start saving to log
+                string newvalue = customer.ToString();
+                nettbutikkpls.Models.Log log = new nettbutikkpls.Models.Log();
+                log.ChangedTime = (DateTime.Now).ToString("yyyyMMddHHmmss");
+                log.EventType = "Update";
+                log.OriginalValue = originalvalue;
+                log.NewValue = newvalue;
+                if (HttpContext.Current.Session["CurrentCustomer"] != null)
+                {
+                    Customer changedby = (Customer)HttpContext.Current.Session["CurrentCustomer"];
+                    log.ChangedBy = changedby.firstname;
+                }
+                else
+                {
+                    log.ChangedBy = "null";
+                }
+                SaveToLog(log.toString());
+                //End saving to log
+                c = FindCustomerByEmail(customer.Mail);
                     context.Session["CurrentUser"] = c;
                     return true;
                 }

@@ -42,6 +42,23 @@ namespace nettButikkpls.DAL
                
                     db.Products.Add(newProductRow);
                     db.SaveChanges();
+
+                    //Start saving to Log
+                    nettbutikkpls.Models.Log log = new nettbutikkpls.Models.Log();
+                    log.ChangedTime = (DateTime.Now).ToString("yyyyMMddHHmmss");
+                    log.EventType = "Create";
+                    log.NewValue = newProductRow.ToString();
+                    
+                    if (HttpContext.Current.Session["CurrentCustomer"] != null)
+                    {
+                        Customer changedby = (Customer)HttpContext.Current.Session["CurrentCustomer"];
+                        log.ChangedBy = changedby.firstname;
+                    }
+                    else
+                    {
+                        log.ChangedBy = "null";
+                    }
+                    SaveToLog(log.toString());
                     return true;
                 }
                 catch(Exception feil)
@@ -64,6 +81,22 @@ namespace nettButikkpls.DAL
             }
             return true;
         }
+        public void SaveToLog(string log)
+        {
+            string path = "Log.txt";
+            var _Path = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/"), path);
+            if (!File.Exists(_Path))
+            {
+                string createText = log + Environment.NewLine;
+                File.WriteAllText(_Path, createText);
+            }
+            else
+            {
+                string appendText = log + Environment.NewLine;
+                File.AppendAllText(_Path, appendText);
+            }
+            Debug.Print("VICTORY");
+        }
         public bool UpdateProduct(FormCollection inList, int productid)
         {
             using (var db = new NettbutikkContext())
@@ -71,8 +104,8 @@ namespace nettButikkpls.DAL
                 try
                 {
                     var product = db.Products.Single(b => (b.ProductId == productid));
-
                     Debug.Write(product.ProductId);
+                    string originalvalue = product.ToString();
                     if (!(String.IsNullOrEmpty(inList["Name"])))
                     {
                         product.Productname = inList["Name"];
@@ -90,6 +123,13 @@ namespace nettButikkpls.DAL
                         product.Category = inList["Category"];
                     }
                     db.SaveChanges();
+                    //Start saving to Log
+                    nettbutikkpls.Models.Log log = new nettbutikkpls.Models.Log();
+                    log.ChangedTime = (DateTime.Now).ToString("yyyyMMddHHmmss");
+                    string newvalue = product.ToString();
+                    log.ChangedTime = (DateTime.Now).ToString("yyyyMMddHHmmss");
+                    log.EventType = "Update";
+                    SaveToLog(log.toString());
                     return true;
                 }
                 catch (Exception e)

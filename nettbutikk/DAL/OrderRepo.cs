@@ -5,7 +5,7 @@ using System.Web;
 using nettButikkpls.Models;
 using System.Web.Mvc;
 using System.Diagnostics;
-
+using System.IO;
 
 namespace nettButikkpls.DAL
 {
@@ -184,6 +184,23 @@ namespace nettButikkpls.DAL
                 }
                 return order;
             }
+        }
+
+        public void SaveToLog(string log)
+        {
+            string path = "Log.txt";
+            var _Path = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/"), path);
+            if (!File.Exists(_Path))
+            {
+                string createText = log + Environment.NewLine;
+                File.WriteAllText(_Path, createText);
+            }
+            else
+            {
+                string appendText = log + Environment.NewLine;
+                File.AppendAllText(_Path, appendText);
+            }
+            Debug.Print("VICTORY");
         }
         public bool DeleteOrder(int orderId)
         {
