@@ -17,5 +17,6 @@ namespace nettButikkpls.DAL
         bool saveCustomer(Customer inCustomer);
         bool ValidateUser(FormCollection inList);
         Customer FindCustomer(int customerid);
+        bool UpdateCustomer(FormCollection inList, int customerid);
     }
 }
