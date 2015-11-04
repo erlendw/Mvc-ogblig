@@ -340,4 +340,4 @@ namespace nettButikkpls.DAL
             }
         }
     }
-}
+} 
