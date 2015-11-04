@@ -46,14 +46,14 @@ Ting vi mangler:
 
 # Pri for denne uken (uke 45)
 
-<li>Liste order history</li>CHECK
-<li>endring av produkter</li>CHECK
-<li>adminpanel</li>
+<li><del>Liste order history</del></li>CHECK
+<li><del>endring av produkter</del></li>CHECK
+<li><del>adminpanel</del></li>
 <li>lage superbruker</li>
-<li>logging av endringer</li>
-<li>C r u d på orders</li>
+<li><del>logging av endringer</del></li>
+<li><del>C r u d på orders</del></li>
 <li>boyz will be boyz</li>Check
-<li>Administrere brukere</li>
+<li><del>Administrere brukere</del></li>
 <li></li>
 
 
