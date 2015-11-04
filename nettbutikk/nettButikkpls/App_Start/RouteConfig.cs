@@ -16,7 +16,7 @@ namespace nettButikkpls
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Customer", action = "Reg", id = UrlParameter.Optional }
+                defaults: new { controller = "Product", action = "ListProducts", id = UrlParameter.Optional }
             );
         }
     }

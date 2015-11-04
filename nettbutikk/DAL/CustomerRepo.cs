@@ -16,23 +16,28 @@ namespace nettButikkpls.DAL
         NettbutikkContext bmx = new NettbutikkContext();
         public List<Customer> allCustomers()
         {
-            using (var db = new NettbutikkContext())
+            Customer cust = CurrentCustomer();
+            if (cust.isadmin)
             {
-                List<Customer> allCustomers = db.Customers.Select(c => new Customer
+                using (var db = new NettbutikkContext())
                 {
-                    customerId = c.CustomerId,
-                    firstname = c.Firstname,
-                    lastname = c.Lastname,
-                    address = c.Address,
-                    zipcode = c.Zipcode,
-                    isadmin = c.IsAdmin,
-                    postalarea = c.Postalareas.Postalarea,
-                    email = c.Mail,
-                    password = c.Password,
-                    salt = c.Salt
-                }).ToList();
-                return allCustomers;
+                    List<Customer> allCustomers = db.Customers.Select(c => new Customer
+                    {
+                        customerId = c.CustomerId,
+                        firstname = c.Firstname,
+                        lastname = c.Lastname,
+                        address = c.Address,
+                        zipcode = c.Zipcode,
+                        isadmin = c.IsAdmin,
+                        postalarea = c.Postalareas.Postalarea,
+                        email = c.Mail,
+                        password = c.Password,
+                        salt = c.Salt
+                    }).ToList();
+                    return allCustomers;
+                }
             }
+            return null;
         }
         public bool saveCustomer (Customer inCustomer)
         {
@@ -270,6 +275,10 @@ namespace nettButikkpls.DAL
         {
             Customer c = (Customer)context.Session["CurrentUser"];
             return c.customerId;
+        }
+        public Customer CurrentCustomer()
+        {
+            return (Customer)context.Session["CurrentUser"];
         }
         public Customer FindCustomer(int customerid)
         {
