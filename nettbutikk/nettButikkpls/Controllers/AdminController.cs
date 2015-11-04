@@ -60,7 +60,7 @@ namespace nettButikkpls.Controllers
         }
         //HER ER JEG USIKKER PÅ HVA SOM HAR BLITT ENDRET, KOMMENTERER UT FOR Å TESTE LØSNINGEN! /Trym
 
-        /*public ActionResult EditCustomer(int id)
+        public ActionResult EditCustomer(int id)
         {
             if (id == null)
             {
@@ -87,6 +87,6 @@ namespace nettButikkpls.Controllers
                 return RedirectToAction("AdminPanel");
             }
             return RedirectToAction("AdminPAnel");
-        }*/
+        }
     }
 }
