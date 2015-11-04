@@ -212,25 +212,25 @@ namespace nettButikkpls.DAL
                 try
                 {
                     Customer c = new Customer();
-                    var customer  = db.Customers.Single(b => (b.CustomerId == customerid));
+                    var customer = db.Customers.Single(b => (b.CustomerId == customerid));
                     // var customer = db.Customers.Single(b => (b.CustomerId == customerid));
-                    c.customerId = customer.CustomerId;
-                    c.email = email;
-                    c.firstname = GetAllCustomers[i].Firstname;
-                    c.lastname = GetAllCustomers[i].Lastname;
-                    c.address = GetAllCustomers[i].Address;
-                    c.isadmin = GetAllCustomers[i].IsAdmin;
-                    c.zipcode = GetAllCustomers[i].Zipcode;
-                    c.postalarea = GetAllCustomers[i].Postalareas.ToString();
-                    c.password = GetAllCustomers[i].Password;
-                    c.salt = GetAllCustomers[i].Salt;
+                    c.customerId = customerid;
+                    c.email = customer.Mail;
+                    c.firstname = customer.Firstname;
+                    c.lastname = customer.Lastname;
+                    c.address = customer.Address;
+                    c.isadmin = customer.IsAdmin;
+                    c.zipcode = customer.Zipcode;
+                    c.password = customer.Password;
+                    c.salt = customer.Salt;
 
-                    return p;
+                    return c;
                 }
                 catch (Exception e)
                 {
                     return null;
                 }
-          }
+            }
+        }
     }
 }
