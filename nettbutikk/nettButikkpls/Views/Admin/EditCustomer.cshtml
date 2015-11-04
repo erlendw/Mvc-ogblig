@@ -13,39 +13,39 @@
 
     <h2 class="form-signin-heading">Update product information</h2>
 
-    <form class="form-horizontal" action="/Admin/UpdateProduct" method="post">
+    <form class="form-horizontal" action="/Admin/UpdateCustomer" method="post">
 
 
         <div class="form-group">
             <div class="col-sm-10">
-                <input type="text" class="form-control" value="@Model.customerId" name="productid" readonly>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-sm-10">
-                <input type="text" class="form-control" value="@Model.firstname" name="productid">
+                <input type="text" class="form-control" value="@Model.customerId" name="customerid" readonly>
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-sm-10">
-                <input type="text" class="form-control" placeholder="@Model.lastname" name="Name">
+                <input type="text" class="form-control" value="@Model.firstname" name="firstname">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-10">
+                <input type="text" class="form-control" placeholder="@Model.lastname" name="lastname">
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-10">
-                <input type="text" class="form-control" placeholder="@Model.address" name="Price">
+                <input type="text" class="form-control" placeholder="@Model.address" name="address">
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-10">
-                <input type="text" class="form-control" placeholder="@Model.postalarea" name="Price">
+                <input type="text" class="form-control" placeholder="@Model.postalarea" name="postalarea">
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-10">
-                <input type="text" class="form-control" placeholder="@Model.zipcode" name="Category">
+                <input type="text" class="form-control" placeholder="@Model.zipcode" name="zipcode">
             </div>
         </div>
         <div class="form-group">
