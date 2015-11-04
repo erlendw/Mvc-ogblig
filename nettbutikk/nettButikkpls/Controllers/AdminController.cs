@@ -90,5 +90,22 @@ namespace nettButikkpls.Controllers
             }
             return RedirectToAction("AdminPAnel");
         }
+        public ActionResult ListOrders()
+        {
+            var db = new OrderLogic();
+            List<Order> orders = db.ListAllOrders();
+            return View(orders);
+        }
+        [HttpPost]
+        public ActionResult DeleteOrder(int orderId)
+        {
+            var db = new OrderLogic();
+            bool OK = db.DeleteOrder(orderId);
+            if (OK)
+            {
+                return RedirectToAction("allOrders");
+            }
+            return RedirectToAction("allOrders");
+        }
     }
 }
