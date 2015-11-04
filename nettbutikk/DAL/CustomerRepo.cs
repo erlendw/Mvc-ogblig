@@ -258,7 +258,33 @@ namespace nettButikkpls.DAL
         {
             Customer c = (Customer)context.Session["CurrentUSer"];
             return c.customerId;
-            //Endret her fra Customers til Customer for å teste
         }
+        public Customer FindCustomer(int customerid)
+        {
+            using (var db = new NettbutikkContext())
+            {
+                try
+                {
+                    Customer c = new Customer();
+                    var customer  = db.Customers.Single(b => (b.CustomerId == customerid));
+                    // var customer = db.Customers.Single(b => (b.CustomerId == customerid));
+                    c.customerId = customer.CustomerId;
+                    c.email = email;
+                    c.firstname = GetAllCustomers[i].Firstname;
+                    c.lastname = GetAllCustomers[i].Lastname;
+                    c.address = GetAllCustomers[i].Address;
+                    c.isadmin = GetAllCustomers[i].IsAdmin;
+                    c.zipcode = GetAllCustomers[i].Zipcode;
+                    c.postalarea = GetAllCustomers[i].Postalareas.ToString();
+                    c.password = GetAllCustomers[i].Password;
+                    c.salt = GetAllCustomers[i].Salt;
+
+                    return p;
+                }
+                catch (Exception e)
+                {
+                    return null;
+                }
+          }
     }
 }
