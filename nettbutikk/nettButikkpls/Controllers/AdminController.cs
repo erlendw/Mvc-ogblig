@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using nettButikkpls.BLL;
 using nettButikkpls.Models;
+using System.Diagnostics;
 
 namespace nettButikkpls.Controllers
 {
@@ -81,6 +82,7 @@ namespace nettButikkpls.Controllers
         public ActionResult UpdateCustomer(FormCollection inList, int customerid)
         {
             var db = new CustomerLogic();
+            Debug.Write("CUSTOMER " + customerid);
             bool OK = db.UpdateCustomer(inList, customerid);
             if (OK)
             {
