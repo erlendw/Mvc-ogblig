@@ -92,6 +92,21 @@ namespace nettButikkpls.DAL
                     }
                     db.SaveChanges();
                     context.Session["Cart"] = null;
+                    //Start save to Log
+                    nettbutikkpls.Models.Log log = new nettbutikkpls.Models.Log();
+                    log.ChangedTime = (DateTime.Now).ToString("yyyyMMddHHmmss");
+                    log.EventType = "Create";
+                    if (HttpContext.Current.Session["CurrentCustomer"] != null)
+                    {
+                        Customer changedby = (Customer)HttpContext.Current.Session["CurrentCustomer"];
+                        log.ChangedBy = changedby.firstname;
+                    }
+                    else
+                    {
+                        log.ChangedBy = "null";
+                    }
+                    SaveToLog(log.toString());
+
                     return true;
                 }
                 catch (Exception e)
@@ -107,7 +122,7 @@ namespace nettButikkpls.DAL
                 try
                 {
                     Debug.Write("KOMMER TIL TRY");
-                    String timeStamp = (DateTime.Now).ToString("yyyyMMddHHmmssffff");
+                    String timeStamp = (DateTime.Now).ToString("yyyyMMddHHmmss");
                     // Debug.Write("CustomerID " + c.customerId);
                     var newOrderRow = new Orders();
                     newOrderRow.CustomerId = customerid;
@@ -115,7 +130,21 @@ namespace nettButikkpls.DAL
                     newOrderRow.SumTotal = price;
                     db.Orders.Add(newOrderRow);
                     db.SaveChanges();
-
+                    //Start save to Log
+                    nettbutikkpls.Models.Log log = new nettbutikkpls.Models.Log();
+                    log.ChangedTime = timeStamp;
+                    log.EventType = "Create";
+                    log.NewValue = newOrderRow.ToString(); ;
+                    if (HttpContext.Current.Session["CurrentCustomer"] != null)
+                    {
+                        Customer changedby = (Customer)HttpContext.Current.Session["CurrentCustomer"];
+                        log.ChangedBy = changedby.firstname;
+                    }
+                    else
+                    {
+                        log.ChangedBy = "null";
+                    }
+                    SaveToLog(log.toString());
                     List<Orders> GetAllOrders = db.Orders.ToList();
                     return GetAllOrders.Count;
                 }
@@ -209,6 +238,7 @@ namespace nettButikkpls.DAL
                 try
                 {
                     var order = db.Orders.Single(b => (b.OrderId == orderId));
+                    string originalvalue = order.ToString();
                     db.Orders.Attach(order);
                     db.Orders.Remove(order);
 
@@ -219,6 +249,22 @@ namespace nettButikkpls.DAL
                         db.OrderLists.Attach(ol);
                         db.OrderLists.Remove(ol);
                     }
+                    //Start save to Log
+                    nettbutikkpls.Models.Log log = new nettbutikkpls.Models.Log();
+                    log.ChangedTime = (DateTime.Now).ToString("yyyyMMddHHmmss");
+                    log.EventType = "Delete";
+                    log.OriginalValue = originalvalue;
+                    log.NewValue = "null";
+                    if (HttpContext.Current.Session["CurrentCustomer"] != null)
+                    {
+                        Customer changedby = (Customer)HttpContext.Current.Session["CurrentCustomer"];
+                        log.ChangedBy = changedby.firstname;
+                    }
+                    else
+                    {
+                        log.ChangedBy = "null";
+                    }
+                    SaveToLog(log.toString());
                     db.SaveChanges();
                     return true;
                 }
