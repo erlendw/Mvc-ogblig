@@ -72,13 +72,18 @@ namespace nettButikkpls.Controllers
 
         public ActionResult addOrder()
         {
-          
+            Customer c = (Customer)HttpContext.Session["CurrentUser"];
+            if (c == null)
+            {
+                return RedirectToAction("ListProducts", "Product");
+            }
             return View();
         }
 
         [HttpPost]
         public ActionResult AddOrder()
         {
+            
             var db = new OrderLogic();
             var cdb = new CustomerLogic();
             Cart cart = (Cart)HttpContext.Session["Cart"];
