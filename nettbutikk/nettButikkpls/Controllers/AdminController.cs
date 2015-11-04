@@ -11,39 +11,25 @@ namespace nettButikkpls.Controllers
 {
     public class AdminController : Controller
     {
-        // GET: Admin
         public ActionResult AdminPanel()
         {
-            Customer c = (Customer)HttpContext.Session["CurrentUser"];
-            if (c == null)
-            {
-                return RedirectToAction("ListProducts", "Product");
-            }
+            //mulig  endring her, hente current user, og sjekke om admin
             return View();
         }
         [HttpPost]
         public ActionResult UpdateProduct(FormCollection inList, int productid)
         {
-            Customer c = (Customer)HttpContext.Session["CurrentUser"];
-            if (c == null)
-            {
-                return RedirectToAction("ListProducts", "Product");
-            }
             var db = new ProductLogic();
             bool OK = db.UpdateProduct(inList, productid);
             if (OK)
             {
                 return RedirectToAction("AdminPanel");
             }
-            return RedirectToAction("AdminPanel");
+            return RedirectToAction("redirect");
         }
         public ActionResult ListProducts()
         {
-            Customer c = (Customer)HttpContext.Session["CurrentUser"];
-            if (c == null)
-            {
-                return RedirectToAction("ListProducts", "Product");
-            }
+
             var db = new ProductLogic();
             IEnumerable<Product> allProducts = db.allProducts();
             return View(allProducts);
@@ -71,11 +57,6 @@ namespace nettButikkpls.Controllers
         }
         public ActionResult ListCustomers()
         {
-            Customer c = (Customer)HttpContext.Session["CurrentUser"];
-            if (c == null)
-            {
-                return RedirectToAction("ListProducts", "Product");
-            }
             var db = new CustomerLogic();
             IEnumerable<Customer> allCustomers = db.allCustomers();
             if (allCustomers != null)
@@ -118,11 +99,6 @@ namespace nettButikkpls.Controllers
         }
         public ActionResult ListOrders()
         {
-            Customer c = (Customer)HttpContext.Session["CurrentUser"];
-            if (c == null)
-            {
-                return RedirectToAction("ListProducts", "Product");
-            }
             var db = new OrderLogic();
             List<Order> orders = db.allOrders();
             return View(orders);
@@ -142,11 +118,6 @@ namespace nettButikkpls.Controllers
         }
         public ActionResult Redirect()
         {
-            Customer c = (Customer)HttpContext.Session["CurrentUser"];
-            if (c == null)
-            {
-                return RedirectToAction("ListProducts", "Product");
-            }
             Debug.Write("Du har ikke tilgang");
             return RedirectToAction("ListProducts", "Product");
         }
