@@ -91,8 +91,7 @@ namespace nettButikkpls.Controllers
             bool loggedIn = _customerBLL.Login();
             if (loggedIn)
             {
-                ViewBag.loggedin = true; //Forklar meg dette den so lagde det
-                return RedirectToAction("Product", "ListProducts");
+                return RedirectToAction("List");
             }
             return View(); //Implisitt else
         }
@@ -104,7 +103,7 @@ namespace nettButikkpls.Controllers
             bool loggedIn = _customerBLL.ValidateUser(inList);
             if (loggedIn)
             {
-                return RedirectToAction("ListProducts", "Product");
+                return RedirectToAction("List");
             }
             return RedirectToAction("Login");//Implisitt else
         }

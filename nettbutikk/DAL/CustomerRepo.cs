@@ -184,16 +184,13 @@ namespace nettButikkpls.DAL
         }
         public bool Login()
         {
-            //HttpContext context = HttpContext.Current;
-            if (context.Session["loggedin"] == null)
+            
+            if (context.Session["CurrentUser"] == null)
             {
-                context.Session["loggedin"] = false;
+                return false;
             }
-            else
-            {
-               return (bool)context.Session["loggedin"];
-            }
-            return false;
+            
+            return true;
         }
         public bool ValidateUser(FormCollection inList)
         {
