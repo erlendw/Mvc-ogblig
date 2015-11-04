@@ -65,27 +65,19 @@
 
                             )
                         </div>
-
-                        @if ((nettButikkpls.Models.Customer)HttpContext.Current.Session["CurrentUser"] != null)
+                    </li>
+                    @if ((nettButikkpls.Models.Customer)HttpContext.Current.Session["CurrentUser"] != null)
+                    {
+                        nettButikkpls.Models.Customer customer = (nettButikkpls.Models.Customer)HttpContext.Current.Session["CurrentUser"];
+                        if (customer.isadmin)
                         {
-                            nettButikkpls.Models.Customer customer = (nettButikkpls.Models.Customer)HttpContext.Current.Session["CurrentUser"];
-                            if (customer.isadmin)
-                            {
                             <li>@Html.ActionLink("Admin", "AdminPanel", "Admin")</li>
-                            }
                         }
-
-</li>
-                    
-                                                     
-                    
+                    }
                 </ul>
-
-                    
-
-                </div>
             </div>
         </div>
+     </div>
 
      <div class="body-content">
 
