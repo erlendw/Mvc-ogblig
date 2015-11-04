@@ -310,6 +310,7 @@ namespace nettButikkpls.DAL
                 try
                 {
                     var customer = db.Customers.Single(b => (b.CustomerId == customerid));
+                    Debug.Write("kundeid " + customer.CustomerId);
 
                     if (!(String.IsNullOrEmpty(inList["Mail"])))
                     {

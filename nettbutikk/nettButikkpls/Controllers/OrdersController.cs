@@ -124,7 +124,7 @@ namespace nettButikkpls.Controllers
             return db.FindProduct(productid);
 
         }  
-        public ActionResult ListOrders()
+       /* public ActionResult ListOrders()
         {
             var db = new OrderLogic();
             List<Order> orders = db.ListAllOrders();
@@ -140,6 +140,6 @@ namespace nettButikkpls.Controllers
                 return RedirectToAction("allOrders");
             }
             return RedirectToAction("allOrders");
-        }
+        }*/
     }
 }

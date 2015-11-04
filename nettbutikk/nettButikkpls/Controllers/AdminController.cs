@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using nettButikkpls.BLL;
 using nettButikkpls.Models;
+using System.Diagnostics;
 
 namespace nettButikkpls.Controllers
 {
@@ -59,7 +60,7 @@ namespace nettButikkpls.Controllers
             return View(allProducts);
         }
         //HER ER JEG USIKKER PÅ HVA SOM HAR BLITT ENDRET, KOMMENTERER UT FOR Å TESTE LØSNINGEN! /Trym
-
+        [HttpGet]
         public ActionResult EditCustomer(int id)
         {
             if (id == null)
@@ -81,12 +82,30 @@ namespace nettButikkpls.Controllers
         public ActionResult UpdateCustomer(FormCollection inList, int customerid)
         {
             var db = new CustomerLogic();
+            Debug.Write("CUSTOMER " + customerid);
             bool OK = db.UpdateCustomer(inList, customerid);
             if (OK)
             {
                 return RedirectToAction("AdminPanel");
             }
             return RedirectToAction("AdminPAnel");
+        }
+        public ActionResult ListOrders()
+        {
+            var db = new OrderLogic();
+            List<Order> orders = db.ListAllOrders();
+            return View(orders);
+        }
+        [HttpPost]
+        public ActionResult DeleteOrder(int orderId)
+        {
+            var db = new OrderLogic();
+            bool OK = db.DeleteOrder(orderId);
+            if (OK)
+            {
+                return RedirectToAction("allOrders");
+            }
+            return RedirectToAction("allOrders");
         }
     }
 }
