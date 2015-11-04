@@ -24,54 +24,54 @@ namespace nettButikkpls.BLL
         }
         public List<Customer> allCustomers()
         {
-            var customerDal = new CustomerRepo();
+            
             return _repo.allCustomers();
         }
         public bool saveCustomer(Customer inCustomer)
         {
-            var customerDal = new CustomerRepo();
+            
             return _repo.saveCustomer(inCustomer);
         }
 
         public bool EditCustomer(FormCollection inList)
         {
-            var customerDal = new CustomerRepo();
+            
             return _repo.EditCustomer(inList);
         }
         public bool Login()
         {
-            var customerDal = new CustomerRepo();
+            
             return _repo.Login();
         }
         public bool ValidateUser(FormCollection inList)
         {
-            var customerDal = new CustomerRepo();
+            
             return _repo.ValidateUser(inList);
         }
         public String GenerateSalt(int size)
         {
-            var customerDal = new CustomerRepo();
+            
             return _repo.GenerateSalt(size);
         }
         public String HashPassword(String Password, string Salt)
         {
-            var customerDal = new CustomerRepo();
+            
             return _repo.HashPassword(Password, Salt);
 
         }
         public Customer FindCustomerByEmail(string email)
         {
-            var customerDal = new CustomerRepo();
+            
             return _repo.FindCustomerByEmail(email);
         }
         public Customers FindCustomersByEmail(string email)
         {
-            var customerDal = new CustomerRepo();
+            
             return _repo.FindCustomersByEmail(email);
         }
         public int CurrentCustomerId()
         {
-            var customerDal = new CustomerRepo();
+            
             return _repo.CurrentCustomerId();
         }
         public Customer FindCustomer(int customerid)

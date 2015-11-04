@@ -14,11 +14,6 @@ namespace nettButikkpls.Controllers
         // GET: Admin
         public ActionResult AdminPanel()
         {
-            Customer c = (Customer)HttpContext.Session["CurrentUser"];
-            if (c == null)
-            {
-                return RedirectToAction("ListProducts", "Product");
-            }
             return View();
         }
         [HttpPost]
@@ -34,11 +29,6 @@ namespace nettButikkpls.Controllers
         }
         public ActionResult ListProducts()
         {
-            Customer c = (Customer)HttpContext.Session["CurrentUser"];
-            if (c == null)
-            {
-                return RedirectToAction("ListProducts", "Product");
-            }
             var db = new ProductLogic();
             IEnumerable<Product> allProducts = db.allProducts();
             return View(allProducts);
@@ -47,11 +37,6 @@ namespace nettButikkpls.Controllers
         [HttpGet]
         public ActionResult EditProduct(int? id)
         {
-            Customer c = (Customer)HttpContext.Session["CurrentUser"];
-            if (c == null)
-            {
-                return RedirectToAction("ListProducts", "Product");
-            }
             if (id == null)
             {
                 return RedirectToAction("EditProduct");
@@ -70,24 +55,18 @@ namespace nettButikkpls.Controllers
         }
         public ActionResult ListCustomers()
         {
-            Customer c = (Customer)HttpContext.Session["CurrentUser"];
-            if (c == null)
-            {
-                return RedirectToAction("ListProducts", "Product");
-            }
             var db = new CustomerLogic();
-            IEnumerable<Customer> allProducts = db.allCustomers();
-            return View(allProducts);
+            IEnumerable<Customer> allCustomers = db.allCustomers();
+            if (allCustomers != null)
+            {
+                return View(allCustomers);
+            }
+            return RedirectToAction("Redirect");
         }
         //HER ER JEG USIKKER PÅ HVA SOM HAR BLITT ENDRET, KOMMENTERER UT FOR Å TESTE LØSNINGEN! /Trym
         [HttpGet]
         public ActionResult EditCustomer(int id)
         {
-            Customer c = (Customer)HttpContext.Session["CurrentUser"];
-            if (c == null)
-            {
-                return RedirectToAction("ListProducts", "Product");
-            }
             if (id == null)
             {
                 return RedirectToAction("EditCustomer");
@@ -106,11 +85,6 @@ namespace nettButikkpls.Controllers
         [HttpPost]
         public ActionResult UpdateCustomer(FormCollection inList, int customerid)
         {
-            Customer c = (Customer)HttpContext.Session["CurrentUser"];
-            if (c == null)
-            {
-                return RedirectToAction("ListProducts", "Product");
-            }
             var db = new CustomerLogic();
             Debug.Write("CUSTOMER " + customerid);
             bool OK = db.UpdateCustomer(inList, customerid);
@@ -122,11 +96,6 @@ namespace nettButikkpls.Controllers
         }
         public ActionResult ListOrders()
         {
-            Customer c = (Customer)HttpContext.Session["CurrentUser"];
-            if (c == null)
-            {
-                return RedirectToAction("ListProducts", "Product");
-            }
             var db = new OrderLogic();
             List<Order> orders = db.allOrders();
             return View(orders);
@@ -134,11 +103,6 @@ namespace nettButikkpls.Controllers
         [HttpGet]
         public ActionResult DeleteOrder(int orderId)
         {
-            Customer c = (Customer)HttpContext.Session["CurrentUser"];
-            if (c == null)
-            {
-                return RedirectToAction("ListProducts", "Product");
-            }
             Debug.Print(orderId.ToString());
 
             var db = new OrderLogic();
@@ -148,6 +112,11 @@ namespace nettButikkpls.Controllers
                 return RedirectToAction("ListOrders");
             }
             return RedirectToAction("ListOrders");
+        }
+        public ActionResult Redirect()
+        {
+            Debug.Write("Du har ikke tilgang");
+            return RedirectToAction("ListProducts", "Product");
         }
     }
 }

@@ -91,7 +91,6 @@ namespace nettButikkpls.Controllers
             bool loggedIn = _customerBLL.Login();
             if (loggedIn)
             {
-                ViewBag.loggedin = true; //Forklar meg dette den so lagde det
                 return RedirectToAction("List");
             }
             return View(); //Implisitt else
