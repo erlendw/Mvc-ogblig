@@ -111,6 +111,8 @@ namespace nettButikkpls.DAL
                 }
                 catch (Exception e)
                 {
+                    string message = "Exception: " + e + " catched at DeleteOrder()";
+                    SaveToErrorLog(message);
                     return false;
                 }
             }
@@ -121,7 +123,6 @@ namespace nettButikkpls.DAL
             {
                 try
                 {
-                    Debug.Write("KOMMER TIL TRY");
                     String timeStamp = (DateTime.Now).ToString("yyyyMMddHHmmss");
                     // Debug.Write("CustomerID " + c.customerId);
                     var newOrderRow = new Orders();
@@ -148,8 +149,10 @@ namespace nettButikkpls.DAL
                     List<Orders> GetAllOrders = db.Orders.ToList();
                     return GetAllOrders.Count;
                 }
-                catch (Exception feil)
+                catch (Exception e)
                 {
+                    string message = "Exception: " + e + " catched at DeleteOrder()";
+                    SaveToErrorLog(message);
                     return 0;
                 }
             }
@@ -229,8 +232,23 @@ namespace nettButikkpls.DAL
                 string appendText = log + Environment.NewLine;
                 File.AppendAllText(_Path, appendText);
             }
-            Debug.Print("VICTORY");
         }
+        public void SaveToErrorLog(string log)
+        {
+            string path = "ErrorLog.txt";
+            var _Path = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/"), path);
+            if (!File.Exists(_Path))
+            {
+                string createText = log + Environment.NewLine;
+                File.WriteAllText(_Path, createText);
+            }
+            else
+            {
+                string appendText = log + Environment.NewLine;
+                File.AppendAllText(_Path, appendText);
+            }
+        }
+
         public bool DeleteOrder(int orderId)
         {
             using (var db = new NettbutikkContext())
@@ -270,6 +288,8 @@ namespace nettButikkpls.DAL
                 }
                 catch (Exception e)
                 {
+                    string message = "Exception: "+ e + " catched at DeleteOrder()";
+                    SaveToErrorLog(message);
                     return false;
                 }
             }
