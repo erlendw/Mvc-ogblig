@@ -82,13 +82,17 @@ namespace nettButikkpls.DAL
 
                     for (int i = 0; i < count.Count; i++)
                     {
-                        Debug.Print("pid " + pidlistdesc[i]);
-                        Debug.Print("Count " + count[i]);
                         OrderLists list = new OrderLists();
                         list.OrderID = orderid;
+                        list.Orders = FindOrder(orderid);
                         list.ProductID = pidlistdesc[i];
                         list.Quantity = count[i];
+                        //Product p = prod.FindProduct(pidlistdes[i])
+                        //list.UnitPrice = p.price;
+                        //list.Product = p;
                         list.UnitPrice = prod.FindProduct(pidlistdesc[i]).price;
+                        //add list.product = prod.Find
+                        //Sende ved Product, og Order oxo.
                         db.OrderLists.Add(list);
                     }
                     db.SaveChanges();
@@ -253,6 +257,21 @@ namespace nettButikkpls.DAL
                     string message = "Exception: "+ e + " catched at DeleteOrder()";
                     SaveToErrorLog(message);
                     return false;
+                }
+            }
+        }
+        public Orders FindOrder(int orderid)
+        {
+            using (var db = new NettbutikkContext())
+            {
+                try
+                {
+                    var orders = db.Orders.Single(o => (o.OrderId == orderid));
+                    return orders;
+                }
+                catch (Exception e)
+                {
+                    return null;
                 }
             }
         }
