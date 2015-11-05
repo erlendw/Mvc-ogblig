@@ -82,8 +82,7 @@ namespace nettButikkpls.Controllers
 
         [HttpPost]
         public ActionResult AddOrder()
-        {
-            
+        {    
             var db = new OrderLogic();
             var cdb = new CustomerLogic();
             Cart cart = (Cart)HttpContext.Session["Cart"];

@@ -82,5 +82,9 @@ namespace nettButikkpls.BLL
         {
             return _repo.UpdateCustomer(inList, customerid);
         }
+        public Customer CurrentCustomer()
+        {
+            return _repo.CurrentCustomer();
+        }
     }
 }
