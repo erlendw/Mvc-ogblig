@@ -297,16 +297,20 @@ namespace nettButikkpls.DAL
         {
             using (var db = new NettbutikkContext())
             {
+                IEnumerable<OrderLists> orderlists = from o in db.OrderLists
+                                                     select o;
+                List<OrderList> allOrderLists = new List<OrderList>();
                 var prod = new ProductRepo();
-                List<OrderList> allOrderLists = db.OrderLists.Select(o => new OrderList
+                foreach (var order in orderlists)
                 {
-                    orderId = o.OrderID,
-                    productId = o.ProductID,
-                    unitPrice = o.UnitPrice,
-                    quantity = o.Quantity,
-                    order = GetOrder(o.OrderID),
-                    product = prod.FindProduct(o.ProductID)
-                }).ToList();
+                    OrderList ol = new OrderList();
+                    ol.orderId = order.OrderID;
+                    ol.productId = order.ProductID;
+                    ol.unitPrice = order.UnitPrice;
+                    ol.quantity = order.Quantity;
+                    ol.order = GetOrder(order.OrderID);
+                    ol.product = prod.FindProduct(order.ProductID);
+                }
                 return allOrderLists;
             }
         }
