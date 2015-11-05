@@ -273,7 +273,12 @@ namespace nettButikkpls.DAL
         }
         public Customer CurrentCustomer()
         {
-            return (Customer)context.Session["CurrentUser"];
+            Customer c = (Customer)context.Session["CurrentUser"];
+            if (c == null)
+            {
+                return null;
+            }
+            return c;
         }
         public Customer FindCustomer(int customerid)
         {
