@@ -10,7 +10,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MvcContrib.TestHelper;
 using System.Collections.Generic;
 using System.Linq;
-using Moq;
 
 namespace EnhetsTest
 {
