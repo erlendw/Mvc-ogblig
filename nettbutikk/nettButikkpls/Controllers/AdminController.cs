@@ -155,7 +155,7 @@ namespace nettButikkpls.Controllers
         public bool AccessOk()
         {
             var db = new CustomerLogic();
-            Customer c = db.CurrentCustomer();
+            Customer c = db.CurrentCustomer();;
             return (c.isadmin && (c != null));
         }
     }
