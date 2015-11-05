@@ -127,8 +127,8 @@ namespace nettButikkpls.Controllers
             if (AccessOk())
             {
                 var db = new OrderLogic();
-                List<Order> orders = db.allOrders();
-                return View(orders);
+                List<OrderList> orderlists = db.allOrderLists();
+                return View(orderlists);
             }
             return RedirectToAction("Redirect");
         }

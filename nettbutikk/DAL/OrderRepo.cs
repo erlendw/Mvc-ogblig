@@ -307,6 +307,7 @@ namespace nettButikkpls.DAL
                     order = GetOrder(o.OrderID),
                     product = prod.FindProduct(o.ProductID)
                 }).ToList();
+                return allOrderLists;
             }
         }
     }
