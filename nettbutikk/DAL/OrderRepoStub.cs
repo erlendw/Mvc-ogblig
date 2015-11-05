@@ -64,8 +64,7 @@ namespace nettButikkpls.DAL
                 return true;
 
         }
-
-        public List<OrderList> allOrderLists()
+        public List<OrderList> AllOrderLists()
         {
             throw new NotImplementedException();
         }

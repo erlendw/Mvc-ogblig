@@ -11,6 +11,6 @@ namespace nettButikkpls.DAL
         bool DeleteOrder(int orderId);
         List<Order> ListAllOrders();
         int saveOrder(float price, int customerid);
-        List<OrderList> allOrderLists();
+        List<OrderList> AllOrderLists();
     }
 }

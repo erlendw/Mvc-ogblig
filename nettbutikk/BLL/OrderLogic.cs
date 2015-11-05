@@ -41,9 +41,9 @@ namespace nettButikkpls.BLL
             
             return _repo.ListAllOrders();
         }
-        public List<OrderList> allOrderLists()
+        public List<OrderList> AllOrderLists()
         {
-            return _repo.allOrderLists();
+            return _repo.AllOrderLists();
         }
         public bool DeleteOrder(int orderId)
         {
@@ -52,12 +52,6 @@ namespace nettButikkpls.BLL
         }
 
         public List<Order> allOrders()
-        {
-            //Trenger nok ikke denne
-            throw new NotImplementedException();
-        }
-
-        public List<OrderList> AllOrderLists()
         {
             //Trenger nok ikke denne
             throw new NotImplementedException();
