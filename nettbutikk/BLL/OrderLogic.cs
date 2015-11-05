@@ -53,7 +53,7 @@ namespace nettButikkpls.BLL
 
         public List<Order> allOrders()
         {
-            //Trenger nok ikke denne
+            //DRIT I DENNE TROR JEG
             throw new NotImplementedException();
         }
     }
