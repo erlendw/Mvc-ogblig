@@ -11,144 +11,152 @@ namespace nettButikkpls.Controllers
 {
     public class AdminController : Controller
     {
-        // GET: Admin
+        //mulig  endring her, hente current user, og sjekke om admin
         public ActionResult AdminPanel()
         {
-            Customer c = (Customer)HttpContext.Session["CurrentUser"];
-            if (c == null)
+            if (AccessOk())
             {
-                return RedirectToAction("ListProducts", "Product");
+                return View();
             }
-            return View();
+            return RedirectToAction("redirect");
         }
         [HttpPost]
         public ActionResult UpdateProduct(FormCollection inList, int productid)
         {
-            Customer c = (Customer)HttpContext.Session["CurrentUser"];
-            if (c == null)
+            if (AccessOk())
             {
-                return RedirectToAction("ListProducts", "Product");
+                var db = new ProductLogic();
+                bool OK = db.UpdateProduct(inList, productid);
+                if (OK)
+                {
+                    //Melding her ; p
+                    return RedirectToAction("AdminPanel");
+                }
+                //Melding her ; P
+                return RedirectToAction("ListProducts");
             }
-            var db = new ProductLogic();
-            bool OK = db.UpdateProduct(inList, productid);
-            if (OK)
-            {
-                return RedirectToAction("AdminPanel");
-            }
-            return RedirectToAction("AdminPanel");
+            return RedirectToAction("Redirect");
         }
         public ActionResult ListProducts()
         {
-            Customer c = (Customer)HttpContext.Session["CurrentUser"];
-            if (c == null)
-            {
-                return RedirectToAction("ListProducts", "Product");
+            if (AccessOk())
+            { 
+                var db = new ProductLogic();
+                IEnumerable<Product> allProducts = db.allProducts();
+                return View(allProducts);
             }
-            var db = new ProductLogic();
-            IEnumerable<Product> allProducts = db.allProducts();
-            return View(allProducts);
+            return RedirectToAction("Redirect)");
         }
 
         [HttpGet]
         public ActionResult EditProduct(int? id)
         {
-            if (id == null)
+            if (AccessOk())
             {
-                return RedirectToAction("EditProduct");
+                if (id == null)
+                {
+                    return RedirectToAction("EditProduct");
+                }
+                else
+                {
+                    Product p = FindProduct((int)id);
+                    return View(p);
+                }
             }
-            else
-            {
-                Product p = FindProduct((int)id);
-                return View(p);
-            }
+            return RedirectToAction("Redirect");
         }
         public Product FindProduct(int productid)
         {
-            
-            var db = new OrderLogic();
+            var db = new ProductLogic();
             return db.FindProduct(productid);
-
         }
         public ActionResult ListCustomers()
         {
-            Customer c = (Customer)HttpContext.Session["CurrentUser"];
-            if (c == null)
+            if (AccessOk())
             {
-                return RedirectToAction("ListProducts", "Product");
-            }
-            var db = new CustomerLogic();
-            IEnumerable<Customer> allCustomers = db.allCustomers();
-            if (allCustomers != null)
-            {
-                return View(allCustomers);
+                var db = new CustomerLogic();
+                IEnumerable<Customer> allCustomers = db.allCustomers();
+                if (allCustomers != null)
+                {
+                    return View(allCustomers);
+                }
+                return RedirectToAction("AdminPanel");
             }
             return RedirectToAction("Redirect");
         }
         //HER ER JEG USIKKER PÅ HVA SOM HAR BLITT ENDRET, KOMMENTERER UT FOR Å TESTE LØSNINGEN! /Trym
         [HttpGet]
-        public ActionResult EditCustomer(int id)
+        public ActionResult EditCustomer(int? id)
         {
-            if (id == null)
-            {
-                return RedirectToAction("EditCustomer");
+            if (AccessOk()) {
+                if (id == null)
+                {
+                    return RedirectToAction("EditCustomer");
+                }
+                else
+                {
+                    Customer p = FindCustomer((int)id);
+                    return View(p);
+                }
             }
-            else
-            {
-                Customer p = FindCustomer((int)id);
-                return View(p);
-            }
+            return RedirectToAction("Redirect");
         }
         public Customer FindCustomer(int customerid)
         {
-            
             var db = new CustomerLogic();
             return db.FindCustomer(customerid);
         }
         [HttpPost]
         public ActionResult UpdateCustomer(FormCollection inList, int customerid)
         {
-            var db = new CustomerLogic();
-            Debug.Write("CUSTOMER " + customerid);
-            bool OK = db.UpdateCustomer(inList, customerid);
-            if (OK)
+            if (AccessOk())
             {
-                return RedirectToAction("AdminPanel");
+                var db = new CustomerLogic();
+                Debug.Write("CUSTOMER " + customerid);
+                bool OK = db.UpdateCustomer(inList, customerid);
+                if (OK)
+                {
+                    return RedirectToAction("ListCustomers");
+                }
+                return RedirectToAction("AdminPAnel");
             }
-            return RedirectToAction("AdminPAnel");
+            return RedirectToAction("Redirect");
         }
         public ActionResult ListOrders()
         {
-            Customer c = (Customer)HttpContext.Session["CurrentUser"];
-            if (c == null)
+            if (AccessOk())
             {
-                return RedirectToAction("ListProducts", "Product");
+                var db = new OrderLogic();
+                List<Order> orders = db.allOrders();
+                return View(orders);
             }
-            var db = new OrderLogic();
-            List<Order> orders = db.allOrders();
-            return View(orders);
+            return RedirectToAction("Redirect");
         }
         [HttpGet]
         public ActionResult DeleteOrder(int orderId)
         {
-            Debug.Print(orderId.ToString());
-
-            var db = new OrderLogic();
-            bool OK = db.DeleteOrder(orderId);
-            if (OK)
+            if (AccessOk())
             {
+                var db = new OrderLogic();
+                bool OK = db.DeleteOrder(orderId);
+                if (OK)
+                {
+                    return RedirectToAction("ListOrders");
+                }
                 return RedirectToAction("ListOrders");
             }
-            return RedirectToAction("ListOrders");
+            return RedirectToAction("Redirect");
         }
         public ActionResult Redirect()
         {
-            Customer c = (Customer)HttpContext.Session["CurrentUser"];
-            if (c == null)
-            {
-                return RedirectToAction("ListProducts", "Product");
-            }
             Debug.Write("Du har ikke tilgang");
-            return RedirectToAction("ListProducts", "Product");
+            return RedirectToAction("Login", "Customer");
+        }
+        public bool AccessOk()
+        {
+            var db = new CustomerLogic();
+            Customer c = db.CurrentCustomer();
+            return (c.isadmin && (c != null));
         }
     }
 }

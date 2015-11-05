@@ -16,28 +16,23 @@ namespace nettButikkpls.DAL
         NettbutikkContext bmx = new NettbutikkContext();
         public List<Customer> allCustomers()
         {
-            Customer cust = CurrentCustomer();
-            if (cust.isadmin)
+            using (var db = new NettbutikkContext())
             {
-                using (var db = new NettbutikkContext())
+                List<Customer> allCustomers = db.Customers.Select(c => new Customer
                 {
-                    List<Customer> allCustomers = db.Customers.Select(c => new Customer
-                    {
-                        customerId = c.CustomerId,
-                        firstname = c.Firstname,
-                        lastname = c.Lastname,
-                        address = c.Address,
-                        zipcode = c.Zipcode,
-                        isadmin = c.IsAdmin,
-                        postalarea = c.Postalareas.Postalarea,
-                        email = c.Mail,
-                        password = c.Password,
-                        salt = c.Salt
-                    }).ToList();
-                    return allCustomers;
-                }
+                    customerId = c.CustomerId,
+                    firstname = c.Firstname,
+                    lastname = c.Lastname,
+                    address = c.Address,
+                    zipcode = c.Zipcode,
+                    isadmin = c.IsAdmin,
+                    postalarea = c.Postalareas.Postalarea,
+                    email = c.Mail,
+                    password = c.Password,
+                    salt = c.Salt
+                }).ToList();
+                return allCustomers;
             }
-            return null;
         }
         public bool saveCustomer (Customer inCustomer)
         {
@@ -271,7 +266,6 @@ namespace nettButikkpls.DAL
             }
             return null;
         }
-
         public int CurrentCustomerId()
         {
             Customer c = (Customer)context.Session["CurrentUser"];

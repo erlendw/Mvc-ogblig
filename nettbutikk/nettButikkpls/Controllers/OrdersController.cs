@@ -82,8 +82,7 @@ namespace nettButikkpls.Controllers
 
         [HttpPost]
         public ActionResult AddOrder()
-        {
-            
+        {    
             var db = new OrderLogic();
             var cdb = new CustomerLogic();
             Cart cart = (Cart)HttpContext.Session["Cart"];
@@ -125,7 +124,7 @@ namespace nettButikkpls.Controllers
         }
         public Product FindProduct(int productid)
         {
-            var db = new OrderLogic();
+            var db = new ProductLogic();
             return db.FindProduct(productid);
 
         }

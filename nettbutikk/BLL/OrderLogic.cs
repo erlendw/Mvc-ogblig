@@ -36,11 +36,6 @@ namespace nettButikkpls.BLL
             
             return _repo.saveOrder(price, customerid);
         }
-        public Product FindProduct(int productid)
-        {
-            
-            return _repo.FindProduct(productid);
-        }
         public List<Order> ListAllOrders()
         {
             

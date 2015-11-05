@@ -11,5 +11,6 @@ namespace nettButikkpls.BLL
         bool SaveImagesToServer(HttpFileCollectionBase innFiler);
         bool saveProduct(Product inProduct);
         bool UpdateProduct(FormCollection inList, int productid);
+        Product FindProduct(int productid);
     }
 }
