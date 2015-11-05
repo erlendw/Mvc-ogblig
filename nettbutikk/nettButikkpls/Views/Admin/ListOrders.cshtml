@@ -29,6 +29,8 @@
             <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td>
 
             <td>@order.orderId</td>
+            <td>@order.productId</td>
+            <td>@order.quantity</td>
 
             <td>
                 <a href="@Url.Action("DeleteOrder", "Admin", new { orderId = order.orderId })" class="btn btn-xs btn-danger">

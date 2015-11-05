@@ -315,8 +315,8 @@ namespace nettButikkpls.DAL
                     ol.unitPrice = order.UnitPrice;
                     ol.quantity = order.Quantity;
                     ol.order = GetOrder(order.OrderID);
-                    Debug.Print("Objektets orderid  " + ol.order.orderId);
                     ol.product = prod.FindProduct(order.ProductID);
+                    allOrderLists.Add(ol);
                 }
                 return allOrderLists;
             }
