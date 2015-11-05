@@ -54,7 +54,10 @@ Ting vi mangler:
 <li><del>C r u d på orders</del></li>
 <li>boyz will be boyz</li>Check
 <li><del>Administrere brukere</del></li>
-<li></li>
+<li>Inputvalidering</li>
+<li>Ferdigstille admin</li>
+<li>Vise innhold til shoppingcart</li>
+<li>Feilproofe koden</li>
 
 
 
