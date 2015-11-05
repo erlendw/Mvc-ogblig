@@ -156,12 +156,7 @@ namespace nettButikkpls.Controllers
         {
             var db = new CustomerLogic();
             Customer c = db.CurrentCustomer();
-            if (c != null && c.isadmin)
-            {
-                return true;
-            }
-            return false;
-            //return (c.isadmin || !c.Equals(null));
+            return (c != null && c.isadmin);
         }
     }
 }
