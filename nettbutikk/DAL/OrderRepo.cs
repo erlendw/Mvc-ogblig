@@ -305,10 +305,17 @@ namespace nettButikkpls.DAL
                 {
                     OrderList ol = new OrderList();
                     ol.orderId = order.OrderID;
+
+                    Debug.Print("smash the fønk " + ol.productId);
+
                     ol.productId = order.ProductID;
+
+                    Debug.Print("smash the fønk " + ol.productId);
+
                     ol.unitPrice = order.UnitPrice;
                     ol.quantity = order.Quantity;
                     ol.order = GetOrder(order.OrderID);
+                    Debug.Print("Objektets orderid  " + ol.order.orderId);
                     ol.product = prod.FindProduct(order.ProductID);
                 }
                 return allOrderLists;

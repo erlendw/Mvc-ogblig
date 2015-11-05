@@ -1,4 +1,4 @@
-﻿@model List<nettButikkpls.Models.Order>
+﻿@model List<nettButikkpls.Models.OrderList>
 
 
 @{
@@ -29,12 +29,6 @@
             <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td>
 
             <td>@order.orderId</td>
-
-            <td>@order.customerId</td>
-
-            <td>$@order.sumtotal</td>
-            
-            <td>@order.timestamp</td>
 
             <td>
                 <a href="@Url.Action("DeleteOrder", "Admin", new { orderId = order.orderId })" class="btn btn-xs btn-danger">
