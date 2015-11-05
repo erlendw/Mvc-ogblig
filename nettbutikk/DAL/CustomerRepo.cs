@@ -69,7 +69,8 @@ namespace nettButikkpls.DAL
                     log.ChangedTime = (DateTime.Now).ToString("yyyyMMddHHmmss");
                     log.EventType = "Create";
                     log.NewValue = newCustomerRow.ToString();
-                    Customer changedby = null;
+                    Customer changedby = (Customer)HttpContext.Current.Session["CurrentCustomer"]; ;
+                    Debug.Print("Navn: " + changedby.firstname);
                     if (HttpContext.Current.Session["CurrentCustomer"] != null)
                     {
                         changedby = (Customer)HttpContext.Current.Session["CurrentCustomer"];
