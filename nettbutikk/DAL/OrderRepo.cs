@@ -272,5 +272,42 @@ namespace nettButikkpls.DAL
                 }
             }
         }
+        public Order GetOrder(int orderid)
+        {
+            using (var db = new NettbutikkContext())
+            {
+                try
+                {
+                    Order o = new Order();
+                    var order = db.Orders.Single(a => (a.OrderId == orderid));
+                    o.orderId = orderid;
+                    o.customerId = order.CustomerId;
+                    o.sumtotal = order.SumTotal;
+                    o.timestamp = order.TimeStamp;
+                    return o;
+                    
+                }
+                catch (Exception e)
+                {
+                    return null;
+                }
+            }
+        }
+        public List<OrderList> AllOrderLists()
+        {
+            using (var db = new NettbutikkContext())
+            {
+                var prod = new ProductRepo();
+                List<OrderList> allOrderLists = db.OrderLists.Select(o => new OrderList
+                {
+                    orderId = o.OrderID,
+                    productId = o.ProductID,
+                    unitPrice = o.UnitPrice,
+                    quantity = o.Quantity,
+                    order = GetOrder(o.OrderID),
+                    product = prod.FindProduct(o.ProductID)
+                }).ToList();
+            }
+        }
     }
 }
