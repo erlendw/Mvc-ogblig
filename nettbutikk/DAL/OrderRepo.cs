@@ -83,16 +83,13 @@ namespace nettButikkpls.DAL
                     for (int i = 0; i < count.Count; i++)
                     {
                         OrderLists list = new OrderLists();
+                        Products product = db.Products.Single(p=> (p.ProductId == pidlistdesc[i]));
                         list.OrderID = orderid;
                         list.Orders = FindOrder(orderid);
                         list.ProductID = pidlistdesc[i];
                         list.Quantity = count[i];
-                        //Product p = prod.FindProduct(pidlistdes[i])
-                        //list.UnitPrice = p.price;
-                        //list.Product = p;
-                        list.UnitPrice = prod.FindProduct(pidlistdesc[i]).price;
-                        //add list.product = prod.Find
-                        //Sende ved Product, og Order oxo.
+                        list.UnitPrice = product.Price;
+                        list.Products = product;
                         db.OrderLists.Add(list);
                     }
                     db.SaveChanges();
