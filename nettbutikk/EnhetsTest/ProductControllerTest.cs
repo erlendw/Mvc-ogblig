@@ -12,7 +12,7 @@ using System.Linq;
 namespace EnhetsTest
 {
     [TestClass]
-    public class CustomerProductTest
+    public class ProductControllerTest
     {
         [TestMethod]
         public void allProducts()

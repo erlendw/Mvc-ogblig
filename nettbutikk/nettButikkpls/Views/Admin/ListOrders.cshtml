@@ -30,7 +30,7 @@
 
             <td>@order.orderId</td>
             <td>@order.productId</td>
-            <td>@order.quantity</td>
+            <td>@order.order.orderId</td>
 
             <td>
                 <a href="@Url.Action("DeleteOrder", "Admin", new { orderId = order.orderId })" class="btn btn-xs btn-danger">

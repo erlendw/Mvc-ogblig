@@ -49,16 +49,6 @@ namespace nettButikkpls.DAL
             else
                 return true;
         }
-        public bool Login()
-        {
-            HttpContext context = HttpContext.Current;
-            if (context.Session["CurrentUser"] == null)
-            {
-                return false;
-            }
-
-            return true;
-        }
         public bool ValidateUser(FormCollection inList)
         {
             if (!(String.IsNullOrEmpty(inList["Firstname"])))

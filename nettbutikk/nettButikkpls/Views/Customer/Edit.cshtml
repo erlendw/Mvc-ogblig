@@ -9,31 +9,54 @@
             <h2 class="form-signin-heading">Update your contact information</h2>
 
             <form class="form-horizontal" action="/Customer/UpdateCustomer" method="post">
-                <div class="form-group">
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="@customer.email" name="Mail">
+                
+                <div class="form-group col-sm-10">
+                    
+                    <div class="input-group">
+                        
+                        <input id="target" type="text" class="form-control" placeholder="@customer.email" name="Mail">
+                        <span class="input-group-addon"><i  id="change" class="fa fa-times fa-fw"></i></span>
+                    
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" placehlder="@customer.firstname" name="Firstname">
+                
+                <div class="form-group col-sm-10">
+
+                    <div class="input-group">
+
+                        <input id="target" type="text" class="form-control" placeholder="@customer.firstname" name="Mail">
+                        <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="@customer.lastname" name="Lastname">
+                
+                <div class="form-group col-sm-10">
+
+                    <div class="input-group">
+
+                        <input id="target" type="text" class="form-control" placeholder="@customer.lastname" name="Mail">
+                        <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="@customer.address" name="Address">
+                
+                <div class="form-group col-sm-10">
+
+                    <div class="input-group">
+
+                        <input id="target" type="text" class="form-control" placeholder="@customer.address" name="Mail">
+                        <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-10">
-                        <input class="btn btn-lg btn-primary btn-block" type="submit" value="Update Information" />
-                    </div>
+
+                <div class="form-group col-sm-10">
+                      
+                      <input class="btn btn-lg btn-primary btn-block" type="submit" value="Update Information" />
+                
                 </div>
+
+
             </form>
 
         </div>
@@ -42,3 +65,29 @@
     </div>
 
 </div>
+
+@Scripts.Render("~/bundles/jquery")
+
+<script>
+
+    $("#target").keypress(function () {
+
+        console.log('blir trykket på');
+
+        if (isValidEmailAddress($("#target").val())) {
+
+            console.log('går inn her');
+
+            $("#change").removeClass('fa-times').addClass('fa-check');
+
+        }
+
+    });
+
+
+    function isValidEmailAddress(emailAddress) {
+        var pattern = new RegExp(/^[+a-zA-Z0-9._-]+@@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
+        return pattern.test(emailAddress);
+    };
+
+</script>
