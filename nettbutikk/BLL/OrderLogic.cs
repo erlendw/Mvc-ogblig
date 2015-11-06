@@ -47,13 +47,11 @@ namespace nettButikkpls.BLL
         }
         public bool DeleteOrder(int orderId)
         {
-            
             return _repo.DeleteOrder(orderId);
         }
 
         public List<Order> allOrders()
         {
-            //DRIT I DENNE TROR JEG
             throw new NotImplementedException();
         }
         public Product FindProduct(int productid)
