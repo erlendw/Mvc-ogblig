@@ -49,5 +49,10 @@ namespace nettButikkpls.BLL
         {
             return _repo.DeleteOrder(orderId);
         }
+
+        public List<Order> allOrders()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
