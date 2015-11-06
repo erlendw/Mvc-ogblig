@@ -14,8 +14,8 @@
                     
                     <div class="input-group">
                         
-                        <input id="target" type="text" class="form-control" placeholder="@customer.email" name="Mail">
-                        <span class="input-group-addon"><i  id="change" class="fa fa-check fa-fw"></i></span>
+                        <input id="email" type="text" class="form-control" placeholder="@customer.email" name="Mail">
+                        <span class="input-group-addon"><i  id="change_email" class="fa fa-check fa-fw"></i></span>
                     
                     </div>
                 </div>
@@ -24,8 +24,8 @@
 
                     <div class="input-group">
 
-                        <input id="target" type="text" class="form-control" placeholder="@customer.firstname" name="Mail">
-                        <span class="input-group-addon"><i class="fa fa-check fa-fw"></i></span>
+                        <input id="firstname" type="text" class="form-control" placeholder="@customer.firstname" name="Firstname">
+                        <span class="input-group-addon"><i  id="change_firstname" class="fa fa-check fa-fw"></i></span>
 
                     </div>
                 </div>
@@ -34,8 +34,8 @@
 
                     <div class="input-group">
 
-                        <input id="target" type="text" class="form-control" placeholder="@customer.lastname" name="Mail">
-                        <span class="input-group-addon"><i class="fa fa-check fa-fw"></i></span>
+                        <input id="lastname" type="text" class="form-control" placeholder="@customer.lastname" name="Lastname">
+                        <span class="input-group-addon"><i  id="change_lastname" class="fa fa-check fa-fw"></i></span>
 
                     </div>
                 </div>
@@ -44,8 +44,8 @@
 
                     <div class="input-group">
 
-                        <input id="target" type="text" class="form-control" placeholder="@customer.address" name="Mail">
-                        <span class="input-group-addon"><i class="fa fa-check fa-fw"></i></span>
+                        <input id="address" type="text" class="form-control" placeholder="@customer.address" name="Address">
+                        <span class="input-group-addon"><i id="change_address" class="fa fa-check fa-fw"></i></span>
 
                     </div>
                 </div>
@@ -71,22 +71,47 @@
 
 <script>
 
-    $("#target").keyup(function () {
+    $("#email").keyup(function () {
 
-        inn = $("#target").val()
-        inn = String(inn)
-
-
-        console.log(inn.length)
-       
-
+        inn = String($("#email").val())
         if (ValidateEmail(inn) || inn.length == 0){
-
-            $("#change").removeClass('fa-times').addClass('fa-check');
+            $("#change_email").removeClass('fa-times').addClass('fa-check');
         }
-        
         else {
-            $("#change").removeClass('fa-check').addClass('fa-times');
+            $("#change_email").removeClass('fa-check').addClass('fa-times');
+        }
+    });
+
+    $("#firstname").keyup(function () {
+
+        inn = String($("#firstname").val())
+        if (ValidateText(inn) || inn.length == 0) {
+            $("#change_firstname").removeClass('fa-times').addClass('fa-check');
+        }
+        else {
+            $("#change_firstname").removeClass('fa-check').addClass('fa-times');
+        }
+    });
+
+    $("#lastname").keyup(function () {
+
+        inn = String($("#lastname").val())
+        if (ValidateText(inn) || inn.length == 0) {
+            $("#change_lastname").removeClass('fa-times').addClass('fa-check');
+        }
+        else {
+            $("#change_lastname").removeClass('fa-check').addClass('fa-times');
+        }
+    });
+
+    $("#address").keyup(function () {
+
+        inn = String($("#address").val())
+        if (ValidateText(inn) || inn.length == 0) {
+            $("#change_address").removeClass('fa-times').addClass('fa-check');
+        }
+        else {
+            $("#change_address").removeClass('fa-check').addClass('fa-times');
         }
     });
 
