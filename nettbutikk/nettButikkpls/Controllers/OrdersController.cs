@@ -128,11 +128,11 @@ namespace nettButikkpls.Controllers
             return db.FindProduct(productid);
 
         }
-        public ActionResult ListOrders()
+      /*  public ActionResult ListOrders()
         {
             var db = new OrderLogic();
             List<Order> orders = db.ListAllOrders();
             return View(orders);
-        }
+        }*/
     }
 }

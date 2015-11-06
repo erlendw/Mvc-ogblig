@@ -301,22 +301,42 @@ namespace nettButikkpls.DAL
                                                      select o;
                 List<OrderList> allOrderLists = new List<OrderList>();
                 var prod = new ProductRepo();
+                int orderCounter = 1;
+                List<Product> plist = new List<Product>();
+                List<int> quantity = new List<int>();
+                Product p = new Product();
+                OrderList ol = new OrderList();
+
                 foreach (var order in orderlists)
                 {
-                    OrderList ol = new OrderList();
-                    ol.orderId = order.OrderID;
+                    if((order.OrderID+1) != orderCounter)
+                    {
+                        plist.Add(prod.FindProduct(order.ProductID));
+                        quantity.Add(order.Quantity);
+                    }
+                    else
+                    {
+                        ol.orderId = order.OrderID;
+                        ol.product = plist;
+                        ol.quantity = quantity;
+                        orderCounter++;
+                        plist = null;
+                        quantity = null;
+                        allOrderLists.Add(ol);
+                    }
+                    
+                   /* ol.orderId = order.OrderID;
 
-                    Debug.Print("smash the fønk " + ol.productId);
+                   // ol.productId = order.ProductID;
 
-                    ol.productId = order.ProductID;
-
+                    Debug.Print("smash the fønk order " + ol.orderId);
                     Debug.Print("smash the fønk " + ol.productId);
 
                     ol.unitPrice = order.UnitPrice;
                     ol.quantity = order.Quantity;
                     ol.order = GetOrder(order.OrderID);
                     ol.product = prod.FindProduct(order.ProductID);
-                    allOrderLists.Add(ol);
+                    allOrderLists.Add(ol);*/
                 }
                 return allOrderLists;
             }
