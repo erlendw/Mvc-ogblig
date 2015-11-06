@@ -15,7 +15,7 @@
                     <div class="input-group">
                         
                         <input id="target" type="text" class="form-control" placeholder="@customer.email" name="Mail">
-                        <span class="input-group-addon"><i  id="change" class="fa fa-times fa-fw"></i></span>
+                        <span class="input-group-addon"><i  id="change" class="fa fa-check fa-fw"></i></span>
                     
                     </div>
                 </div>
@@ -25,7 +25,7 @@
                     <div class="input-group">
 
                         <input id="target" type="text" class="form-control" placeholder="@customer.firstname" name="Mail">
-                        <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                        <span class="input-group-addon"><i class="fa fa-check fa-fw"></i></span>
 
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                     <div class="input-group">
 
                         <input id="target" type="text" class="form-control" placeholder="@customer.lastname" name="Mail">
-                        <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                        <span class="input-group-addon"><i class="fa fa-check fa-fw"></i></span>
 
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                     <div class="input-group">
 
                         <input id="target" type="text" class="form-control" placeholder="@customer.address" name="Mail">
-                        <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                        <span class="input-group-addon"><i class="fa fa-check fa-fw"></i></span>
 
                     </div>
                 </div>
@@ -67,27 +67,28 @@
 </div>
 
 @Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/theteashop")
 
 <script>
 
-    $("#target").keypress(function () {
+    $("#target").keyup(function () {
 
-        console.log('blir trykket på');
+        inn = $("#target").val()
+        inn = String(inn)
 
-        if (isValidEmailAddress($("#target").val())) {
 
-            console.log('går inn her');
+        console.log(inn.length)
+       
+
+        if (ValidateEmail(inn) || inn.length == 0){
 
             $("#change").removeClass('fa-times').addClass('fa-check');
-
         }
-
+        
+        else {
+            $("#change").removeClass('fa-check').addClass('fa-times');
+        }
     });
 
-
-    function isValidEmailAddress(emailAddress) {
-        var pattern = new RegExp(/^[+a-zA-Z0-9._-]+@@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
-        return pattern.test(emailAddress);
-    };
 
 </script>

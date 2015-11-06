@@ -24,6 +24,9 @@ namespace nettButikkpls
 
             bundles.Add(new ScriptBundle("~/bundles/dropzonescripts").Include(
                      "~/Scripts/dropzone/dropzone.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/theteashop").Include(
+                     "~/Scripts/theteashop.js"));
         }
     }
 }
