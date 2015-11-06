@@ -38,11 +38,6 @@ namespace nettButikkpls.BLL
             
             return _repo.EditCustomer(inList);
         }
-        public bool Login()
-        {
-            
-            return _repo.Login();
-        }
         public bool ValidateUser(FormCollection inList)
         {
             

@@ -75,6 +75,9 @@ namespace nettButikkpls.Controllers
             Customer c = (Customer)HttpContext.Session["CurrentUser"];
             if (c == null)
             {
+                //If-statement for EnhetsTesting
+                if (Session["CurrentUser"] != null)
+                    return View();
                 return RedirectToAction("ListProducts", "Product");
             }
             return View();
@@ -83,15 +86,17 @@ namespace nettButikkpls.Controllers
         [HttpPost]
         public ActionResult AddOrder()
         {
-            
+            //If-statement for EnhetsTest
+            if (HttpContext.Session["Cart"] == null)
+                HttpContext.Session["Cart"] = (Cart)Session["Cart"];
+            Cart cart = (Cart)HttpContext.Session["Cart"];
             var db = new OrderLogic();
             var cdb = new CustomerLogic();
-            Cart cart = (Cart)HttpContext.Session["Cart"];
-            int sumTotal = SumTotal(cart.productids);
+            int sumTotal = TotalPrice(cart.productids);
             int customerID = cdb.CurrentCustomerId();
-            Debug.Write("SumTotal" + sumTotal);
+            //Debug.Write("SumTotal" + sumTotal);
             int orderid = db.saveOrder(sumTotal, customerID);
-            Debug.Print("Orderid: " + orderid);
+            //Debug.Print("Orderid: " + orderid);
             if (orderid!=0)
             {
                 // metode(orderid); som legger inn i orderlist
@@ -104,17 +109,7 @@ namespace nettButikkpls.Controllers
         {
             return View();
         }
-      
-        public float TotalPrice(List<int> pid)
-        {
-            float price = 0;
-            foreach (var i in pid)
-            {
-                price += FindProduct(i).price;
-            }
-            return price;
-        }
-        public int SumTotal(List<int> pid)
+        public int TotalPrice(List<int> pid)
         {
             int price = 0;
             foreach (int p in pid)
@@ -125,14 +120,13 @@ namespace nettButikkpls.Controllers
         }
         public Product FindProduct(int productid)
         {
-            var db = new ProductLogic();
+            var db = new ProductController();
             return db.FindProduct(productid);
 
         }
         public ActionResult ListOrders()
         {
-            var db = new OrderLogic();
-            List<Order> orders = db.ListAllOrders();
+            List<Order> orders = _orderBLL.ListAllOrders();
             return View(orders);
         }
     }
