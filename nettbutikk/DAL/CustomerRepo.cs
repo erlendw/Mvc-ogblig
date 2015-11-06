@@ -185,15 +185,6 @@ namespace nettButikkpls.DAL
                     return false;
                 }
         }
-        public bool Login()
-        {
-            if (context.Session["CurrentUser"] == null)
-            {
-                return false;
-            }
-            
-            return true;
-        }
         public bool ValidateUser(FormCollection inList)
         {
             Customer customer = FindCustomerByEmail(inList["Email"]);

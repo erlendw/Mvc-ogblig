@@ -87,11 +87,16 @@ namespace nettButikkpls.Controllers
         }
         public ActionResult Login()
         {
-            
-            bool loggedIn = _customerBLL.Login();
-            if (loggedIn)
+            HttpContext context = System.Web.HttpContext.Current;
+            if (context == null)
             {
-                ViewBag.loggedin = true; //Forklar meg dette den so lagde det
+                if (Session["CurrentUser"] != null)
+                    return RedirectToAction("List");
+                return View();
+            }
+                
+            if (context.Session["CurrentUser"] != null)
+            {
                 return RedirectToAction("List");
             }
             return View(); //Implisitt else
@@ -107,6 +112,10 @@ namespace nettButikkpls.Controllers
                 return RedirectToAction("ListProducts", "Product");
             }
             return RedirectToAction("Login");//Implisitt else
+        }
+        public int CurrentCustomerId()
+        {
+            return _customerBLL.CurrentCustomerId();
         }
     }
 

@@ -184,11 +184,26 @@ namespace EnhetsTest
             //Assert
             Assert.AreEqual(null, result);
         }
-        /*[TestMethod]
+        [TestMethod]
         public void Login_OK()
         {
             //Arrange
             var controller = new CustomerController(new CustomerLogic(new CustomerRepoStub()));
+            var SessionMock = new TestControllerBuilder();
+            var c = new Customer()
+            {
+                email = "daniel@thoresen.no",
+                password = "Sommeren2015",
+                firstname = "Daniel",
+                lastname = "Thoresen",
+                address = "Hesselbergs gate 7A",
+                isadmin = false,
+                salt = "hejhejhallo",
+                zipcode = "0555",
+                postalarea = "Oslo",
+            };
+            SessionMock.InitializeController(controller);
+            controller.Session["CurrentUser"] = c;
             //Act
             var result = (RedirectToRouteResult)controller.Login();
             //Assert
@@ -200,11 +215,14 @@ namespace EnhetsTest
         {
             //Arrange
             var controller = new CustomerController(new CustomerLogic(new CustomerRepoStub()));
+            var SessionMock = new TestControllerBuilder();
+            SessionMock.InitializeController(controller);
+            controller.Session["CurrentUser"] = null;
             //Act
             var result = (ViewResult)controller.Login();
             //Assert
             Assert.AreEqual(result.ViewName, "");
-        }*/
+        }
         [TestMethod]
         public void ValidateUser_OK()
         {
@@ -216,7 +234,7 @@ namespace EnhetsTest
             var result = (RedirectToRouteResult)controller.ValidateUser(inList);
             //Assert
             Assert.AreEqual(result.RouteName, "");
-            Assert.AreEqual(result.RouteValues.Values.First(), "List");
+            Assert.AreEqual(result.RouteValues.Values.First(), "ListProducts", "Product");
         }
         [TestMethod]
         public void ValidateUser_Fail()

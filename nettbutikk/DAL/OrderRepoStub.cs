@@ -26,7 +26,6 @@ namespace nettButikkpls.DAL
             olist.Add(o);
             return olist;
         }
-        HttpContext context = HttpContext.Current;
         public void addToCart(int productid, int quantity)
         {
             List<int> p = new List<int>();
