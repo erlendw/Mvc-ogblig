@@ -18,20 +18,27 @@ namespace nettButikkpls.DAL
         {
             using (var db = new NettbutikkContext())
             {
-                List<Customer> allCustomers = db.Customers.Select(c => new Customer
+                try
                 {
-                    customerId = c.CustomerId,
-                    firstname = c.Firstname,
-                    lastname = c.Lastname,
-                    address = c.Address,
-                    zipcode = c.Zipcode,
-                    isadmin = c.IsAdmin,
-                    postalarea = c.Postalareas.Postalarea,
-                    email = c.Mail,
-                    password = c.Password,
-                    salt = c.Salt
-                }).ToList();
-                return allCustomers;
+                    List<Customer> allCustomers = db.Customers.Select(c => new Customer
+                    {
+                        customerId = c.CustomerId,
+                        firstname = c.Firstname,
+                        lastname = c.Lastname,
+                        address = c.Address,
+                        zipcode = c.Zipcode,
+                        isadmin = c.IsAdmin,
+                        postalarea = c.Postalareas.Postalarea,
+                        email = c.Mail,
+                        password = c.Password,
+                        salt = c.Salt
+                    }).ToList();
+                    return allCustomers;
+                }
+                catch (Exception e)
+                {
+                    SaveToErrorLog(e + " was catched at allCustomer()");
+                }
             }
         }
         public bool saveCustomer (Customer inCustomer)
@@ -235,45 +242,78 @@ namespace nettButikkpls.DAL
         {
             Customer c = new Customer();
             List<Customers> GetAllCustomers = bmx.Customers.ToList();
-            for (int i = 0; i < GetAllCustomers.Count; i++)
+            try
             {
-                if (GetAllCustomers[i].Mail == email)
+                for (int i = 0; i < GetAllCustomers.Count; i++)
                 {
-                    c.customerId = GetAllCustomers[i].CustomerId;
-                    c.email = email;
-                    c.firstname = GetAllCustomers[i].Firstname;
-                    c.lastname = GetAllCustomers[i].Lastname;
-                    c.address = GetAllCustomers[i].Address;
-                    c.isadmin = GetAllCustomers[i].IsAdmin;
-                    c.zipcode = GetAllCustomers[i].Zipcode;
-                    c.postalarea = GetAllCustomers[i].Postalareas.ToString();
-                    c.password = GetAllCustomers[i].Password;
-                    c.salt = GetAllCustomers[i].Salt;
-                    return c;
+                    if (GetAllCustomers[i].Mail == email)
+                    {
+                        c.customerId = GetAllCustomers[i].CustomerId;
+                        c.email = email;
+                        c.firstname = GetAllCustomers[i].Firstname;
+                        c.lastname = GetAllCustomers[i].Lastname;
+                        c.address = GetAllCustomers[i].Address;
+                        c.isadmin = GetAllCustomers[i].IsAdmin;
+                        c.zipcode = GetAllCustomers[i].Zipcode;
+                        c.postalarea = GetAllCustomers[i].Postalareas.ToString();
+                        c.password = GetAllCustomers[i].Password;
+                        c.salt = GetAllCustomers[i].Salt;
+                        return c;
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                SaveToErrorLog(e + " was catched at FindCustomerByEmail()");
+                return null;
             }
             return null;
         }
         public Customers FindCustomersByEmail(string email)
         {
-            List<Customers> GetAllCustomers = bmx.Customers.ToList();
-            for(int i = 0; i<GetAllCustomers.Count; i++)
+            try
             {
-                if(GetAllCustomers[i].Mail == email)
+                List<Customers> GetAllCustomers = bmx.Customers.ToList();
+                for (int i = 0; i < GetAllCustomers.Count; i++)
                 {
-                    return GetAllCustomers[i];
+                    if (GetAllCustomers[i].Mail == email)
+                    {
+                        return GetAllCustomers[i];
+                    }
                 }
             }
-            return null;
+            catch (Exception e)
+            {
+                SaveToErrorLog(e + " was catched at FindCustomersByEmail()");
+                return null;
+            }
+            return null;            
         }
         public int CurrentCustomerId()
         {
-            Customer c = (Customer)context.Session["CurrentUser"];
-            return c.customerId;
+            try
+            {
+                Customer c = (Customer)context.Session["CurrentUser"];
+                return c.customerId;
+            }
+            catch (Exception e)
+            {
+                SaveToErrorLog(e+" was catched at CurrentCustomerId()");
+                return 0;
+            }
+            
         }
         public Customer CurrentCustomer()
         {
-            return (Customer)context.Session["CurrentUser"];
+            try
+            {
+                return (Customer)context.Session["CurrentUser"];
+            }
+            catch(Exception e)
+            {
+                SaveToErrorLog(e + " was catched at CurrentCustomer()");
+                return null;
+            }
         }
         public Customer FindCustomer(int customerid)
         {
