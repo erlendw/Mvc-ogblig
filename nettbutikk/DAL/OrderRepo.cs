@@ -83,13 +83,12 @@ namespace nettButikkpls.DAL
                     for (int i = 0; i < count.Count; i++)
                     {
                         OrderLists list = new OrderLists();
-                        Products product = db.Products.Single(p=> (p.ProductId == pidlistdesc[i]));
                         list.OrderID = orderid;
-                        list.Orders = FindOrder(orderid);
+                        Products product = prod.FindProducts(pidlistdesc[i]);
+                        Debug.Print("OrderID fra in " + orderid + " orderid fra objekt " + list.OrderID);
                         list.ProductID = pidlistdesc[i];
                         list.Quantity = count[i];
                         list.UnitPrice = product.Price;
-                        list.Products = product;
                         db.OrderLists.Add(list);
                     }
                     db.SaveChanges();
@@ -264,6 +263,7 @@ namespace nettButikkpls.DAL
                 try
                 {
                     var orders = db.Orders.Single(o => (o.OrderId == orderid));
+                    Debug.Print("orders.OrderId");
                     return orders;
                 }
                 catch (Exception e)

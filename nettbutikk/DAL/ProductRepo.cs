@@ -178,22 +178,14 @@ namespace nettButikkpls.DAL
                 {
                     return null;
                 }
-
-                /* List<Products> GetAllProducts = db.Products.ToList();
-                 Product c = new Product();
-                 for (int i = 0; i < GetAllProducts.Count; i++)
-                 {
-                     if (GetAllProducts[i].ProductId == productid)
-                     {
-                         c.productid = productid;
-                         c.productname = GetAllProducts[i].Productname;
-                         c.price = GetAllProducts[i].Price;
-                         c.category = GetAllProducts[i].Category;
-                         c.description = GetAllProducts[i].Description;
-
-                         return c;
-                     }
-                 }*/
+            }
+        }
+        public Products FindProducts(int productid)
+        {
+            using (var db = new NettbutikkContext())
+            {
+                var product = db.Products.Single(p => (p.ProductId == productid));
+                return product;
             }
         }
     }

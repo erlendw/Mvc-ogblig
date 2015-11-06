@@ -9,7 +9,7 @@ namespace nettButikkpls.BLL
         void addToCart(int productid, int quantity);
         List<Order> allOrders();
         bool DeleteOrder(int orderId);
-        List<Order> ListAllOrders();
+       // List<Order> ListAllOrders();
         int saveOrder(float price, int customerid);
         List<OrderList> AllOrderLists();
     }
