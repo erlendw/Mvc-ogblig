@@ -37,6 +37,7 @@ namespace nettButikkpls.DAL
                 }
                 catch (Exception e)
                 {
+                    return null;
                     SaveToErrorLog(e + " was catched at allCustomer()");
                 }
             }
