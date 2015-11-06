@@ -91,7 +91,7 @@ namespace nettButikkpls.Controllers
                 HttpContext.Session["Cart"] = (Cart)Session["Cart"];
             Cart cart = (Cart)HttpContext.Session["Cart"];
             var db = new OrderLogic();
-            var cdb = new CustomerLogic();
+            var cdb = new CustomerController();
             int sumTotal = TotalPrice(cart.productids);
             int customerID = cdb.CurrentCustomerId();
             //Debug.Write("SumTotal" + sumTotal);

@@ -113,6 +113,10 @@ namespace nettButikkpls.Controllers
             }
             return RedirectToAction("Login");//Implisitt else
         }
+        public int CurrentCustomerId()
+        {
+            return _customerBLL.CurrentCustomerId();
+        }
     }
 
 }

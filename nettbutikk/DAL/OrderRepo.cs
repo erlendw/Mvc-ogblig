@@ -31,36 +31,43 @@ namespace nettButikkpls.DAL
             //Debug.Print("ProduID: " + productid + " Quantity: " + quantity);
             int customerid;
             //HttpContext context = HttpContext.Current;
-
-            if (context.Session["Cart"] == null)
+            try
             {
-
-                Cart cart = new Cart();
-
-                if (context.Session["CurrentUser"] != null)
+                if (context.Session["Cart"] == null)
                 {
-                    Customers c = (Customers)context.Session["CurrentUser"];
-                    customerid = c.CustomerId;
-                    cart.customerid = customerid;
-                }
-                // Debug.Print("Cart.CustomerID: " + cart.customerid);
-                context.Session["Cart"] = cart;
-                for (int i = 0; i <= quantity; i++)
-                {
-                    cart.productids.Add(productid);
-                }
 
-                context.Session["Cart"] = cart;
+                    Cart cart = new Cart();
+
+                    if (context.Session["CurrentUser"] != null)
+                    {
+                        Customers c = (Customers)context.Session["CurrentUser"];
+                        customerid = c.CustomerId;
+                        cart.customerid = customerid;
+                    }
+                    // Debug.Print("Cart.CustomerID: " + cart.customerid);
+                    context.Session["Cart"] = cart;
+                    for (int i = 0; i <= quantity; i++)
+                    {
+                        cart.productids.Add(productid);
+                    }
+
+                    context.Session["Cart"] = cart;
+                }
+                else
+                {
+                    Cart cart = (Cart)context.Session["Cart"];
+                    for (int i = 0; i <= quantity; i++)
+                    {
+                        cart.productids.Add(productid);
+                    }
+                    context.Session["Cart"] = cart;
+                }
             }
-            else
+            catch (Exception e)
             {
-                Cart cart = (Cart)context.Session["Cart"];
-                for (int i = 0; i <= quantity; i++)
-                {
-                    cart.productids.Add(productid);
-                }
-                context.Session["Cart"] = cart;
+                SaveToErrorLog(e+" was catched at addToCart()");
             }
+            
         }
         public bool addOrderList(int orderid)
         {
@@ -82,13 +89,13 @@ namespace nettButikkpls.DAL
 
                     for (int i = 0; i < count.Count; i++)
                     {
-                        Debug.Print("pid " + pidlistdesc[i]);
-                        Debug.Print("Count " + count[i]);
                         OrderLists list = new OrderLists();
                         list.OrderID = orderid;
+                        Products product = prod.FindProducts(pidlistdesc[i]);
+                        Debug.Print("OrderID fra in " + orderid + " orderid fra objekt " + list.OrderID);
                         list.ProductID = pidlistdesc[i];
                         list.Quantity = count[i];
-                        list.UnitPrice = prod.FindProduct(pidlistdesc[i]).price;
+                        list.UnitPrice = product.Price;
                         db.OrderLists.Add(list);
                     }
                     db.SaveChanges();
@@ -160,24 +167,33 @@ namespace nettButikkpls.DAL
         }
         public List<Order> ListAllOrders()
         {
-            using (var bmx = new NettbutikkContext())
+            try
             {
-                var db = new CustomerRepo();
-                int cId = db.CurrentCustomerId();
-                List<Order> order = new List<Order>();
-                IEnumerable<Orders> orders = bmx.Orders.Where(o => o.CustomerId == cId);
-
-                foreach (var i in orders)
+                using (var bmx = new NettbutikkContext())
                 {
-                    Order or = new Order();
-                    or.customerId = i.CustomerId;
-                    or.orderId = i.OrderId;
-                    or.sumtotal = i.SumTotal;
-                    or.timestamp = i.TimeStamp;
-                    order.Add(or);
+                    var db = new CustomerRepo();
+                    int cId = db.CurrentCustomerId();
+                    List<Order> order = new List<Order>();
+                    IEnumerable<Orders> orders = bmx.Orders.Where(o => o.CustomerId == cId);
+
+                    foreach (var i in orders)
+                    {
+                        Order or = new Order();
+                        or.customerId = i.CustomerId;
+                        or.orderId = i.OrderId;
+                        or.sumtotal = i.SumTotal;
+                        or.timestamp = i.TimeStamp;
+                        order.Add(or);
+                    }
+                    return order;
                 }
-                return order;
             }
+            catch (Exception e)
+            {
+                SaveToErrorLog(e+" was catched at ListAllOrders()");
+                return null;
+            }
+            
         }
 
         public void SaveToLog(string log)
@@ -253,6 +269,79 @@ namespace nettButikkpls.DAL
                     string message = "Exception: "+ e + " catched at DeleteOrder()";
                     SaveToErrorLog(message);
                     return false;
+                }
+            }
+        }
+        public Orders FindOrder(int orderid)
+        {
+            using (var db = new NettbutikkContext())
+            {
+                try
+                {
+                    var orders = db.Orders.Single(o => (o.OrderId == orderid));
+                    Debug.Print("orders.OrderId");
+                    return orders;
+                }
+                catch (Exception e)
+                {
+                    SaveToErrorLog(e+" was catched at FindOrder()");
+                    return null;
+                }
+            }
+        }
+        public Order GetOrder(int orderid)
+        {
+            using (var db = new NettbutikkContext())
+            {
+                try
+                {
+                    Order o = new Order();
+                    var order = db.Orders.Single(a => (a.OrderId == orderid));
+                    o.orderId = orderid;
+                    o.customerId = order.CustomerId;
+                    o.sumtotal = order.SumTotal;
+                    o.timestamp = order.TimeStamp;
+                    return o;
+                    
+                }
+                catch (Exception e)
+                {
+                    return null;
+                }
+            }
+        }
+        public List<OrderList> AllOrderLists()
+        {
+            using (var db = new NettbutikkContext())
+            {
+                try
+                {
+                    IEnumerable<OrderLists> orderlists = from o in db.OrderLists
+                                                         select o;
+                    List<OrderList> allOrderLists = new List<OrderList>();
+                    var prod = new ProductRepo();
+                    foreach (var order in orderlists)
+                    {
+                        OrderList ol = new OrderList();
+                        ol.orderId = order.OrderID;
+
+                        Debug.Print("smash the fønk " + ol.productId);
+
+                        ol.productId = order.ProductID;
+
+                        Debug.Print("smash the fønk " + ol.productId);
+
+                        ol.unitPrice = order.UnitPrice;
+                        ol.quantity = order.Quantity;
+                        ol.order = GetOrder(order.OrderID);
+                        ol.product = prod.FindProduct(order.ProductID);
+                        allOrderLists.Add(ol);
+                    }
+                    return allOrderLists;
+                }
+                catch (Exception e)
+                {
+                    return null;
                 }
             }
         }

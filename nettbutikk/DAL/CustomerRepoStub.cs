@@ -113,5 +113,10 @@ namespace nettButikkpls.DAL
             else
                 return false;
         }
+
+        public Customer CurrentCustomer()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -14,9 +14,11 @@ namespace nettButikkpls.DAL
         {
             using (var db = new NettbutikkContext())
             {
-                var allProducts = db.Products
+                try
+                {
+                    var allProducts = db.Products
                 .ToList()
-                .Select(p=>new Product
+                .Select(p => new Product
                 {
                     productid = p.ProductId,
                     productname = p.Productname,
@@ -24,7 +26,14 @@ namespace nettButikkpls.DAL
                     category = p.Category,
                     description = p.Description
                 }).ToList();
-            return allProducts;
+                    return allProducts;
+                }
+                catch (Exception e)
+                {
+                    SaveToErrorLog(e + " was catched at allProducts()");
+                    return null;
+                }
+                
             }
         }
         public bool saveProduct (Product inProduct)
@@ -71,17 +80,26 @@ namespace nettButikkpls.DAL
         }
         public bool SaveImagesToServer(HttpFileCollectionBase innFiler)
         {
-            foreach (string FileName in innFiler)
+            try
             {
-                HttpPostedFileBase file = innFiler[FileName];
+                foreach (string FileName in innFiler)
+                {
+                    HttpPostedFileBase file = innFiler[FileName];
 
-                var _FileName = Path.GetFileName(file.FileName);
-                var _Path = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/Images"), _FileName);
+                    var _FileName = Path.GetFileName(file.FileName);
+                    var _Path = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/Images"), _FileName);
 
-                file.SaveAs(_Path);
+                    file.SaveAs(_Path);
+                    return true;
+                }
                 return true;
             }
-            return true;
+            catch (Exception e)
+            {
+                SaveToErrorLog(e + " was catched at SaveImagesToServer()");
+                return false;
+            }
+            
         }
         public void SaveToLog(string log)
         {
@@ -151,7 +169,7 @@ namespace nettButikkpls.DAL
                 }
                 catch (Exception e)
                 {
-                    string message = "Exception: " + e + " catched at DeleteOrder()";
+                    string message = "Exception: " + e + " catched at UpdateProduct()";
                     SaveToErrorLog(message);
                     return false;
                 }
@@ -176,24 +194,26 @@ namespace nettButikkpls.DAL
                 }
                 catch (Exception e)
                 {
+                    SaveToErrorLog(e + " was catched at FindProduct()");
                     return null;
                 }
-
-                /* List<Products> GetAllProducts = db.Products.ToList();
-                 Product c = new Product();
-                 for (int i = 0; i < GetAllProducts.Count; i++)
-                 {
-                     if (GetAllProducts[i].ProductId == productid)
-                     {
-                         c.productid = productid;
-                         c.productname = GetAllProducts[i].Productname;
-                         c.price = GetAllProducts[i].Price;
-                         c.category = GetAllProducts[i].Category;
-                         c.description = GetAllProducts[i].Description;
-
-                         return c;
-                     }
-                 }*/
+            }
+        }
+        public Products FindProducts(int productid)
+        {
+            using (var db = new NettbutikkContext())
+            {
+                try
+                {
+                    var product = db.Products.Single(p => (p.ProductId == productid));
+                    return product;
+                }
+                catch (Exception e)
+                {
+                    SaveToErrorLog(e + " was catched at FindProducts()");
+                    return null;
+                }
+                
             }
         }
     }

@@ -11,9 +11,9 @@
 
 <div class="col-md-6 col-md-offset-3">
 
-    <h2 class="form-signin-heading">Update product information</h2>
+    <h2 class="form-signin-heading">Update customer information</h2>
 
-    <form class="form-horizontal" action="/Admin/UpdateCustomer" method="post">
+    <form class="form-horizontal target" action="/Admin/UpdateCustomer" method="post">
 
 
         <div class="form-group">
@@ -24,7 +24,7 @@
 
         <div class="form-group">
             <div class="col-sm-10">
-                <input type="text" class="form-control" value="@Model.firstname" name="firstname">
+                <input type="text" class="form-control" placeholder="@Model.firstname" name="firstname">
             </div>
         </div>
 
@@ -45,7 +45,7 @@
         </div>
         <div class="form-group">
             <div class="col-sm-10">
-                <input type="text" class="form-control" placeholder="@Model.zipcode" name="zipcode">
+                <input type="number" class="form-control" placeholder="@Model.zipcode" name="zipcode">
             </div>
         </div>
         <div class="form-group">
@@ -56,3 +56,5 @@
     </form>
 
 </div>
+
+

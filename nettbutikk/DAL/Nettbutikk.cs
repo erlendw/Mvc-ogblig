@@ -23,6 +23,7 @@ namespace nettButikkpls.DAL
         public string Salt { get; set; }
         public string Zipcode { get; set; }
         public virtual PostalAreas Postalareas { get; set; }
+        public virtual List<Orders> Orders { get; set; }
     }
     public class PostalAreas
     {
@@ -40,6 +41,7 @@ namespace nettButikkpls.DAL
         public string Category { get; set; }
         public string Description { get; set; }
         public List<string> Picture { get; set; }
+        public virtual List<OrderLists> OrderLists { get; set; }
 
     }
     public class Orders
@@ -49,6 +51,8 @@ namespace nettButikkpls.DAL
         public int CustomerId { get; set; }
         public string TimeStamp { get; set; }
         public float SumTotal { get; set; }
+        public virtual List<OrderLists> OrderLists { get; set; }
+        public virtual Customers Cursotmer { get; set; }
     }
     public class OrderLists
     {
@@ -56,6 +60,8 @@ namespace nettButikkpls.DAL
         public int ProductID { get; set; }
         public float UnitPrice { get; set; }
         public int Quantity { get; set; }
+        public virtual Orders Orders { get; set; }
+        public virtual Products Products { get; set; }
     }
     public class NettbutikkContext : DbContext
     {   

@@ -41,15 +41,20 @@ namespace nettButikkpls.BLL
             
             return _repo.ListAllOrders();
         }
-        public List<Order> allOrders()
+        public List<OrderList> AllOrderLists()
         {
-            
-            return _repo.allOrders();
+            return _repo.AllOrderLists();
         }
         public bool DeleteOrder(int orderId)
         {
             
             return _repo.DeleteOrder(orderId);
+        }
+
+        public List<Order> allOrders()
+        {
+            //DRIT I DENNE TROR JEG
+            throw new NotImplementedException();
         }
     }
 }
