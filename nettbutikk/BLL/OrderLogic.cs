@@ -56,5 +56,13 @@ namespace nettButikkpls.BLL
             //DRIT I DENNE TROR JEG
             throw new NotImplementedException();
         }
+        public Product FindProduct(int productid)
+        {
+            return _repo.FindProduct(productid);
+        }
+        public int TotalPrice(List<int> pid)
+        {
+            return _repo.TotalPrice(pid);
+        }
     }
 }

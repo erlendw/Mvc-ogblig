@@ -12,5 +12,7 @@ namespace nettButikkpls.BLL
         List<Order> ListAllOrders();
         int saveOrder(float price, int customerid);
         List<OrderList> AllOrderLists();
+        Product FindProduct(int productid);
+        int TotalPrice(List<int> pid);
     }
 }

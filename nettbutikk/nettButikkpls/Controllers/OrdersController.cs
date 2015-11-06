@@ -90,17 +90,12 @@ namespace nettButikkpls.Controllers
             if (HttpContext.Session["Cart"] == null)
                 HttpContext.Session["Cart"] = (Cart)Session["Cart"];
             Cart cart = (Cart)HttpContext.Session["Cart"];
-            var db = new OrderLogic();
-            var cdb = new CustomerController();
-            int sumTotal = TotalPrice(cart.productids);
-            int customerID = cdb.CurrentCustomerId();
-            //Debug.Write("SumTotal" + sumTotal);
-            int orderid = db.saveOrder(sumTotal, customerID);
-            //Debug.Print("Orderid: " + orderid);
+            int sum = TotalPrice(cart.productids);
+            int orderid = _orderBLL.saveOrder(sum, CurrentCustomerId());
             if (orderid!=0)
             {
                 // metode(orderid); som legger inn i orderlist
-                db.addOrderList(orderid);
+                _orderBLL.addOrderList(orderid);
                 return RedirectToAction( "OrderComplete", "Orders");
             }
             return RedirectToAction("Customer", "List");
@@ -111,23 +106,23 @@ namespace nettButikkpls.Controllers
         }
         public int TotalPrice(List<int> pid)
         {
-            int price = 0;
-            foreach (int p in pid)
-            {
-                price += (int)FindProduct(p).price;
-            }
-            return price;
-        }
-        public Product FindProduct(int productid)
-        {
-            var db = new ProductController();
-            return db.FindProduct(productid);
-
+            return _orderBLL.TotalPrice(pid);
         }
         public ActionResult ListOrders()
         {
             List<Order> orders = _orderBLL.ListAllOrders();
             return View(orders);
+        }
+        public int CurrentCustomerId()
+        {
+            HttpContext context = System.Web.HttpContext.Current;
+            Customer c = new Customer();
+            //If-statement for EnhetsTest
+            if (context == null)
+                c = (Customer)Session["CurrentUser"];
+            else
+                c = (Customer)context.Session["CurrentUser"];
+            return c.customerId;
         }
     }
 }
