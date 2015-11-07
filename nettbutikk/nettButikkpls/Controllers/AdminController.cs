@@ -54,11 +54,11 @@ namespace nettButikkpls.Controllers
         public ActionResult ListProducts()
         {
             if (AccessOk())
-            { 
+            {
                 IEnumerable<Product> allProducts = _productBLL.allProducts();
                 return View(allProducts);
             }
-            return RedirectToAction("Redirect)");
+            return RedirectToAction("Redirect");
         }
 
         [HttpGet]
@@ -98,7 +98,8 @@ namespace nettButikkpls.Controllers
         [HttpGet]
         public ActionResult EditCustomer(int? id)
         {
-            if (AccessOk()) {
+            if (AccessOk())
+            {
                 if (id == null)
                 {
                     return RedirectToAction("EditCustomer");
@@ -163,11 +164,14 @@ namespace nettButikkpls.Controllers
         }
         public Customer CurrentCustomer()
         {
-            HttpContext context = new HttpContext.Current;
+            HttpContext context = System.Web.HttpContext.Current;
+            Customer c = new Customer();
             //If-statement for EnhetsTest
-            if (context.Session["CurrentUser"] == null)
-                context.Session["CurrentUser"] = Session["CurrentUser"];
-            return (Customer)context.Session["CurrentUser"];
+            if (context == null)
+                c = (Customer)Session["CurrentUser"];
+            else
+                c = (Customer)context.Session["CurrentUser"];
+            return c;
         }
     }
 }

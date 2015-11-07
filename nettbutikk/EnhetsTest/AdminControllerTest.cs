@@ -454,7 +454,7 @@ namespace EnhetsTest
             var controller = new AdminController(new CustomerLogic(new CustomerRepoStub()));
             var SessionMock = new TestControllerBuilder();
             FormCollection inList = new FormCollection();
-            inList.Add("Name", "aurate");
+            inList.Add("Firstname", "Egil");
             var c = new Customer()
             {
                 email = "daniel@thoresen.no",
@@ -470,7 +470,7 @@ namespace EnhetsTest
             SessionMock.InitializeController(controller);
             controller.Session["CurrentUser"] = c;
             //Act
-            var result = (RedirectToRouteResult)controller.UpdateProduct(inList, 1);
+            var result = (RedirectToRouteResult)controller.UpdateCustomer(inList, 1);
             //Assert
             Assert.AreEqual(result.RouteValues.Values.First(), "ListCustomers");
         }
@@ -496,7 +496,7 @@ namespace EnhetsTest
             SessionMock.InitializeController(controller);
             controller.Session["CurrentUser"] = c;
             //Act
-            var result = (RedirectToRouteResult)controller.UpdateProduct(inList, 1);
+            var result = (RedirectToRouteResult)controller.UpdateCustomer(inList, 1);
             //Assert
             Assert.AreEqual(result.RouteValues.Values.First(), "AdminPanel");
         }
@@ -599,7 +599,7 @@ namespace EnhetsTest
             SessionMock.InitializeController(controller);
             controller.Session["CurrentUser"] = c;
             //Act
-            var result = (RedirectToRouteResult)controller.EditProduct(1);
+            var result = (RedirectToRouteResult)controller.DeleteOrder(1);
             //Assert
             Assert.AreEqual(result.RouteValues.Values.First(), "ListOrders");
         }
@@ -624,7 +624,7 @@ namespace EnhetsTest
             SessionMock.InitializeController(controller);
             controller.Session["CurrentUser"] = c;
             //Act
-            var result = (RedirectToRouteResult)controller.EditProduct(-1);
+            var result = (RedirectToRouteResult)controller.DeleteOrder(-1);
             //Assert
             Assert.AreEqual(result.RouteValues.Values.First(), "ListOrders");
         }
@@ -649,7 +649,7 @@ namespace EnhetsTest
             SessionMock.InitializeController(controller);
             controller.Session["CurrentUser"] = c;
             //Act
-            var result = (RedirectToRouteResult)controller.EditProduct(1);
+            var result = (RedirectToRouteResult)controller.DeleteOrder(1);
             //Assert
             Assert.AreEqual(result.RouteValues.Values.First(), "Redirect");
         }
