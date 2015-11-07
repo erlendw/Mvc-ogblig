@@ -11,6 +11,21 @@ namespace nettButikkpls.Controllers
 {
     public class AdminController : Controller
     {
+        private ICustomerLogic _customerBLL;
+        private IProductLogic _productBLL;
+        private IOrderLogic _orderBLL;
+
+        public AdminController()
+        {
+            _customerBLL = new CustomerLogic();
+            _productBLL = new ProductLogic();
+            _orderBLL = new OrderLogic();
+        }
+
+        public AdminController(ICustomerLogic stub) { _customerBLL = stub; }
+        public AdminController(IProductLogic stub) { _productBLL = stub; }
+        public AdminController(IOrderLogic stub) { _orderBLL = stub; }
+
         //mulig  endring her, hente current user, og sjekke om admin
         public ActionResult AdminPanel()
         {
@@ -25,8 +40,7 @@ namespace nettButikkpls.Controllers
         {
             if (AccessOk())
             {
-                var db = new ProductLogic();
-                bool OK = db.UpdateProduct(inList, productid);
+                bool OK = _productBLL.UpdateProduct(inList, productid);
                 if (OK)
                 {
                     //Melding her ; p
@@ -40,12 +54,11 @@ namespace nettButikkpls.Controllers
         public ActionResult ListProducts()
         {
             if (AccessOk())
-            { 
-                var db = new ProductLogic();
-                IEnumerable<Product> allProducts = db.allProducts();
+            {
+                IEnumerable<Product> allProducts = _productBLL.allProducts();
                 return View(allProducts);
             }
-            return RedirectToAction("Redirect)");
+            return RedirectToAction("Redirect");
         }
 
         [HttpGet]
@@ -67,15 +80,13 @@ namespace nettButikkpls.Controllers
         }
         public Product FindProduct(int productid)
         {
-            var db = new ProductLogic();
-            return db.FindProduct(productid);
+            return _productBLL.FindProduct(productid);
         }
         public ActionResult ListCustomers()
         {
             if (AccessOk())
             {
-                var db = new CustomerLogic();
-                IEnumerable<Customer> allCustomers = db.allCustomers();
+                IEnumerable<Customer> allCustomers = _customerBLL.allCustomers();
                 if (allCustomers != null)
                 {
                     return View(allCustomers);
@@ -84,11 +95,11 @@ namespace nettButikkpls.Controllers
             }
             return RedirectToAction("Redirect");
         }
-        //HER ER JEG USIKKER PÅ HVA SOM HAR BLITT ENDRET, KOMMENTERER UT FOR Å TESTE LØSNINGEN! /Trym
         [HttpGet]
         public ActionResult EditCustomer(int? id)
         {
-            if (AccessOk()) {
+            if (AccessOk())
+            {
                 if (id == null)
                 {
                     return RedirectToAction("EditCustomer");
@@ -103,22 +114,19 @@ namespace nettButikkpls.Controllers
         }
         public Customer FindCustomer(int customerid)
         {
-            var db = new CustomerLogic();
-            return db.FindCustomer(customerid);
+            return _customerBLL.FindCustomer(customerid);
         }
         [HttpPost]
         public ActionResult UpdateCustomer(FormCollection inList, int customerid)
         {
             if (AccessOk())
             {
-                var db = new CustomerLogic();
-                Debug.Write("CUSTOMER " + customerid);
-                bool OK = db.UpdateCustomer(inList, customerid);
+                bool OK = _customerBLL.UpdateCustomer(inList, customerid);
                 if (OK)
                 {
                     return RedirectToAction("ListCustomers");
                 }
-                return RedirectToAction("AdminPAnel");
+                return RedirectToAction("AdminPanel");
             }
             return RedirectToAction("Redirect");
         }
@@ -126,8 +134,7 @@ namespace nettButikkpls.Controllers
         {
             if (AccessOk())
             {
-                var db = new OrderLogic();
-                List<OrderList> orderlists = db.AllOrderLists();
+                List<OrderList> orderlists = _orderBLL.AllOrderLists();
                 return View(orderlists);
             }
             return RedirectToAction("Redirect");
@@ -137,8 +144,7 @@ namespace nettButikkpls.Controllers
         {
             if (AccessOk())
             {
-                var db = new OrderLogic();
-                bool OK = db.DeleteOrder(orderId);
+                bool OK = _orderBLL.DeleteOrder(orderId);
                 if (OK)
                 {
                     return RedirectToAction("ListOrders");
@@ -149,14 +155,23 @@ namespace nettButikkpls.Controllers
         }
         public ActionResult Redirect()
         {
-            Debug.Write("Du har ikke tilgang");
             return RedirectToAction("Login", "Customer");
         }
         public bool AccessOk()
         {
-            var db = new CustomerLogic();
-            Customer c = db.CurrentCustomer();
+            Customer c = CurrentCustomer();
             return (c != null && c.isadmin);
+        }
+        public Customer CurrentCustomer()
+        {
+            HttpContext context = System.Web.HttpContext.Current;
+            Customer c = new Customer();
+            //If-statement for EnhetsTest
+            if (context == null)
+                c = (Customer)Session["CurrentUser"];
+            else
+                c = (Customer)context.Session["CurrentUser"];
+            return c;
         }
     }
 }
