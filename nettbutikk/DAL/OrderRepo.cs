@@ -13,6 +13,7 @@ namespace nettButikkpls.DAL
     {
         public List<Order> allOrders()
         {
+            //Det er denne erlend
             using (var db = new NettbutikkContext())
             {
                 List<Order> allOrders = db.Orders.Select(o => new Order
@@ -310,7 +311,7 @@ namespace nettButikkpls.DAL
                 }
             }
         }
-        public List<OrderList> AllOrderLists()
+       /* public List<OrderList> AllOrderLists()
         {
             using (var db = new NettbutikkContext())
             {
@@ -324,7 +325,7 @@ namespace nettButikkpls.DAL
                     List<Product> plist = new List<Product>();
                     List<int> quantity = new List<int>();
                     Product p = new Product();
-                   // allOrderLists.Add(null);
+                    allOrderLists.Add(null);
                     
                     for (int j=0; j<list.Count; j++)
                     {
@@ -341,21 +342,29 @@ namespace nettButikkpls.DAL
 
                         if (list[i+1] == null || list[i].OrderID != list[i + 1].OrderID)
                         {
-                            
-                            OrderList ol = new OrderList();
-                            Debug.Print("Kommer inn i IF");
-                            ol.product = plist;
-                            
-                            
-                            Debug.Print("produktid " + ol.product[0].productid);
-                            ol.quantity = quantity;
-                            ol.orderId = list[i].OrderID;
-                            Debug.Print("Ordersiden er daniel " + ol.orderId);
 
+                            Debug.Print("Kommer inn i IF");
+                            OrderList ol = new OrderList();
+                             Debug.Print("Kommer inn i IF");
+                             ol.product = plist;
+
+
+                             Debug.Print("produktid " + ol.product[0].productid);
+                             ol.quantity = quantity;
+                             ol.orderId = list[i].OrderID;
+                             Debug.Print("Ordersiden er daniel " + ol.orderId);
+
+                             plist.Clear();
+                             quantity.Clear();
+                             // allOrderLists.Add(null);
+                            allOrderLists.Add(new OrderList()
+                            {
+                                //orderId = list[i].OrderID,
+                                product = plist,
+                                quantity = quantity   
+                            });
                             plist.Clear();
                             quantity.Clear();
-                            allOrderLists.Add(null);
-                            allOrderLists.Add(ol);
 
                             Debug.Print("allOrderLists: " + allOrderLists[i].orderId);
                         }
@@ -364,6 +373,59 @@ namespace nettButikkpls.DAL
                 }
                 catch (Exception e)
                 {
+                    return null;
+                }
+            }
+        }*/
+
+        public List<OrderList> AllOrderLists()
+        {
+            //DET ER DENNE ERLEND
+            using (var db = new NettbutikkContext())
+            {
+                try
+                {
+                    List<OrderList> allOrderLists = db.OrderLists.Select(o => new OrderList
+                    {
+                        orderId = o.OrderID,
+                        productId = o.ProductID,
+                        quantity = o.Quantity,
+                        unitPrice = o.UnitPrice,      
+                    }).ToList();
+                    return allOrderLists;
+
+                    /* IEnumerable<OrderLists> listOfOrderLists = from orderline in db.OrderLists
+                                                                select orderline;
+                     List<OrderLists> iterateableOrderLists = listOfOrderLists.ToList();
+                     foreach (var list in iterateableOrderLists)
+                     {
+                         Debug.Print("OrderID " + list.OrderID);
+                         Debug.Print("ProductID " + list.ProductID);
+                     }
+
+                     List<Product> productList = new List<Product>();
+                     List<int> productQuantityList = new List<int>();
+                     List<OrderList> listOfAllOrderList = new List<OrderList>();
+
+                     for (int i = 0; i < iterateableOrderLists.Count; i++ )
+                     {
+                         productList.Add(FindProduct(iterateableOrderLists[i].ProductID));
+                         productQuantityList.Add(iterateableOrderLists[i].Quantity);
+
+                         if(iterateableOrderLists[i+1] == null || iterateableOrderLists[i].OrderID != iterateableOrderLists[i + 1].OrderID)
+                         {
+                             OrderList orderProductDetails = new OrderList();
+                             orderProductDetails.orderId = iterateableOrderLists[i].OrderID;
+                             orderProductDetails.product = productList;
+                             orderProductDetails.quantity = productQuantityList;
+                             listOfAllOrderList.Add(orderProductDetails);
+                         }
+                     }
+                     return listOfAllOrderList;*/
+                }
+                catch (Exception e)
+                {
+                    Debug.Print("Exception catches " + e);
                     return null;
                 }
             }
