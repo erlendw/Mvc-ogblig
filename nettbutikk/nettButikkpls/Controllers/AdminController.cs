@@ -125,7 +125,7 @@ namespace nettButikkpls.Controllers
                 {
                     return RedirectToAction("ListCustomers");
                 }
-                return RedirectToAction("AdminPAnel");
+                return RedirectToAction("AdminPanel");
             }
             return RedirectToAction("Redirect");
         }
@@ -158,8 +158,16 @@ namespace nettButikkpls.Controllers
         }
         public bool AccessOk()
         {
-            Customer c = _customerBLL.CurrentCustomer();
+            Customer c = CurrentCustomer();
             return (c != null && c.isadmin);
+        }
+        public Customer CurrentCustomer()
+        {
+            HttpContext context = new HttpContext.Current;
+            //If-statement for EnhetsTest
+            if (context.Session["CurrentUser"] == null)
+                context.Session["CurrentUser"] = Session["CurrentUser"];
+            return (Customer)context.Session["CurrentUser"];
         }
     }
 }
