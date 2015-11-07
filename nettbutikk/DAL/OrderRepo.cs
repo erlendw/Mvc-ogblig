@@ -318,33 +318,49 @@ namespace nettButikkpls.DAL
                 {
                     IEnumerable<OrderLists> orderlists = from o in db.OrderLists
                                                          select o;
+                    List<OrderLists> list = orderlists.ToList();
                     List<OrderList> allOrderLists = new List<OrderList>();
                     var prod = new ProductRepo();
-                    int orderCounter = 1;
                     List<Product> plist = new List<Product>();
                     List<int> quantity = new List<int>();
                     Product p = new Product();
-                    OrderList ol = new OrderList();
-
-                    foreach (var order in orderlists)
+                   // allOrderLists.Add(null);
+                    
+                    for (int j=0; j<list.Count; j++)
                     {
-                        if ((order.OrderID + 1) != orderCounter)
-                        {
-                            plist.Add(prod.FindProduct(order.ProductID));
-                            quantity.Add(order.Quantity);
-                        }
-                        else
-                        {
-                            ol.orderId = order.OrderID;
-                            ol.product = plist;
-                            ol.quantity = quantity;
-                            orderCounter++;
-                            plist = null;
-                            quantity = null;
-                            allOrderLists.Add(ol);
-                        }
+                        Debug.Print("ORDERIDEN ER DANIEL FØLGENDE KOLON " + list[j].OrderID);
                     }
-                    return allOrderLists;
+
+
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        Debug.Print("OrderID: " + list[i].OrderID);
+                        plist.Add(prod.FindProduct(list[i].ProductID));
+                        quantity.Add(list[i].Quantity);
+                        Debug.Print("I er: " + i);
+
+                        if (list[i+1] == null || list[i].OrderID != list[i + 1].OrderID)
+                        {
+                            
+                            OrderList ol = new OrderList();
+                            Debug.Print("Kommer inn i IF");
+                            ol.product = plist;
+                            
+                            
+                            Debug.Print("produktid " + ol.product[0].productid);
+                            ol.quantity = quantity;
+                            ol.orderId = list[i].OrderID;
+                            Debug.Print("Ordersiden er daniel " + ol.orderId);
+
+                            plist.Clear();
+                            quantity.Clear();
+                            allOrderLists.Add(null);
+                            allOrderLists.Add(ol);
+
+                            Debug.Print("allOrderLists: " + allOrderLists[i].orderId);
+                        }
+                    }  
+                return allOrderLists;
                 }
                 catch (Exception e)
                 {
