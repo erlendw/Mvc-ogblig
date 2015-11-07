@@ -368,5 +368,20 @@ namespace nettButikkpls.DAL
                 }
             }
         }
+        public int TotalPrice(List<int> pid)
+        {
+            int price = 0;
+            foreach (int p in pid)
+            {
+                price += (int)FindProduct(p).price;
+            }
+            return price;
+        }
+        public Product FindProduct(int productid)
+        {
+            var db = new ProductRepo();
+            return db.FindProduct(productid);
+
+        }
     }
 }

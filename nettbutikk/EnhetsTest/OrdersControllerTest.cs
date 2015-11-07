@@ -44,13 +44,43 @@ namespace EnhetsTest
             //Assert
             Assert.AreEqual(result.ViewName, "");
         }
-        /*[TestMethod]
-        public void AddOrder()
+        [TestMethod]
+        public void AddOrder_Fail()
         {
             //Arrange
             var controller = new OrdersController(new OrderLogic(new OrderRepoStub()));
             var SessionMock = new TestControllerBuilder();
-            List<int> pids = new List<int> { 1, 2, 3 };
+            var user = new Customer()
+            {
+                customerId = 0,
+            };
+            List<int> pids = new List<int> { 1, 1, 1 };
+            Cart c = new Cart()
+            {
+                customerid = 0,
+                productids = pids,
+
+            };
+            SessionMock.InitializeController(controller);
+            controller.Session["Cart"] = c;
+            controller.Session["CurrentUser"] = user;
+            //Act
+            var result = (RedirectToRouteResult)controller.AddOrder();
+            //Assert
+            Assert.AreEqual(result.RouteName, "");
+            Assert.AreEqual(result.RouteValues.Values.First(), "Customer", "List");
+        }
+        [TestMethod]
+        public void AddOrder_OK()
+        {
+            //Arrange
+            var controller = new OrdersController(new OrderLogic(new OrderRepoStub()));
+            var SessionMock = new TestControllerBuilder();
+            var user = new Customer()
+            {
+                customerId = 1,
+            };
+            List<int> pids = new List<int> { 1, 1, 1 };
             Cart c = new Cart()
             {
                 customerid = 1,
@@ -59,12 +89,13 @@ namespace EnhetsTest
             };
             SessionMock.InitializeController(controller);
             controller.Session["Cart"] = c;
+            controller.Session["CurrentUser"] = user;
             //Act
             var result = (RedirectToRouteResult)controller.AddOrder();
             //Assert
             Assert.AreEqual(result.RouteName, "");
-            Assert.AreEqual(result.RouteValues.Values.First(), "Customer", "List");
-        }*/
+            Assert.AreEqual(result.RouteValues.Values.First(), "OrderComplete", "Orders");
+        }
         [TestMethod]
         public void OrderComplete()
         {
@@ -75,18 +106,18 @@ namespace EnhetsTest
             //Assert
             Assert.AreEqual(result.ViewName, "");
         }
-        /*[TestMethod]
+        [TestMethod]
         public void TotalPrice()
         {
             //Arrange
             var controller = new OrdersController(new OrderLogic(new OrderRepoStub()));
             List<int> pid = new List<int> { 1, 1, 1 };
-            var expected = 207;
+            var expected = 69;
             //Act
             var result = (int)controller.TotalPrice(pid);
             //Assert
             Assert.AreEqual(result, expected);
-        }*/
+        }
         [TestMethod]
         public void ListOrders()
         {
@@ -96,6 +127,24 @@ namespace EnhetsTest
             var result = (ViewResult)controller.ListOrders();
             //Assert
             Assert.AreEqual(result.ViewName, "");
+        }
+        [TestMethod]
+        public void CurrentCustomerId()
+        {
+            //Arrange
+            var controller = new OrdersController(new OrderLogic(new OrderRepoStub()));
+            var SessionMock = new TestControllerBuilder();
+            int expected = 1;
+            Customer c = new Customer()
+            {
+                customerId = 1,
+            };
+            SessionMock.InitializeController(controller);
+            controller.Session["CurrentUser"] = c;
+            //Act
+            var result = (int)controller.CurrentCustomerId();
+            //Assert
+            Assert.AreEqual(expected, result);
         }
     }
 }

@@ -248,5 +248,23 @@ namespace EnhetsTest
             Assert.AreEqual(result.RouteName, "");
             Assert.AreEqual(result.RouteValues.Values.First(), "Login");
         }
+        [TestMethod]
+        public void CurrentCustomerId()
+        {
+            //Arrange
+            var controller = new OrdersController(new OrderLogic(new OrderRepoStub()));
+            var SessionMock = new TestControllerBuilder();
+            int expected = 1;
+            Customer c = new Customer()
+            {
+                customerId = 1,
+            };
+            SessionMock.InitializeController(controller);
+            controller.Session["CurrentUser"] = c;
+            //Act
+            var result = (int)controller.CurrentCustomerId();
+            //Assert
+            Assert.AreEqual(expected, result);
+        }
     }
 }

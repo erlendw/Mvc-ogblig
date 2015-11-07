@@ -67,5 +67,21 @@ namespace nettButikkpls.DAL
         {
             throw new NotImplementedException();
         }
+        public int TotalPrice(List<int> pid)
+        {
+            return 69;
+        }
+        public Product FindProduct(int productid)
+        {
+            Product p = new Product()
+            {
+                productid = productid,
+                productname = "Te",
+                price = 69,
+                category = "Te",
+                description = "Dette er te",
+            };
+            return p;
+        }
     }
 }
