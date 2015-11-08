@@ -129,8 +129,11 @@ namespace nettButikkpls.Controllers
         }
         public ActionResult ListOrders()
         {
+            if (AccessOk()) { 
                 List<Order> orders = _orderBLL.allOrders();
                 return View(orders);
+            }
+            return RedirectToAction("Redirect");
         }
         [HttpGet]
         public ActionResult DeleteOrder(int orderId)
