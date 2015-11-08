@@ -129,8 +129,8 @@ namespace nettButikkpls.Controllers
         }
         public ActionResult ListOrders()
         {
-                List<OrderList> orderlists = _orderBLL.AllOrderLists();
-                return View(orderlists);
+                List<Order> orders = _orderBLL.allOrders();
+                return View(orders);
         }
         [HttpGet]
         public ActionResult DeleteOrder(int orderId)

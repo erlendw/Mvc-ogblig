@@ -52,7 +52,7 @@ namespace nettButikkpls.BLL
 
         public List<Order> allOrders()
         {
-            throw new NotImplementedException();
+            return _repo.allOrders();
         }
         public Product FindProduct(int productid)
         {
