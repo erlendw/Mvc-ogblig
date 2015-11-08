@@ -80,17 +80,20 @@ namespace nettButikkpls.Controllers
         public ActionResult Login()
         {
             HttpContext context = System.Web.HttpContext.Current;
+            //If-statement for EnhetsTest
             if (context == null)
             {
                 if (Session["CurrentUser"] != null)
                     return RedirectToAction("List");
                 return View();
             }
-                
+
             if (context.Session["CurrentUser"] != null)
             {
+                ViewBag.Errors = "";
                 return RedirectToAction("List");
             }
+            ViewBag.Errors = "Error";
             return View(); //Implisitt else
         }
         [HttpPost]
