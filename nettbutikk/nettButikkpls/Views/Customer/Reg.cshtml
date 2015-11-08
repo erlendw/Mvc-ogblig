@@ -14,45 +14,58 @@
                 <h2 class="form-signin-heading">Register as a customer!</h2>
 
                 <form class="form-horizontal" action="/Customer/Reg" method="post" onsubmit="return isValid()">
-                    <div class="form-group">
-                        <div class="col-sm-10">
-                            <input type="email" class="form-control" placeholder="Email" name="email">
+                    <div class="form-group col-sm-10">
+
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Email" name="email" id="email">
+                            <span class="input-group-addon"><i id="change_email" class="fa fa-times fa-fw"></i></span>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="First name" name="firstname">
+                    <div class="form-group col-sm-10">
+
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="First name" name="firstname" id="firstname">
+                            <span class="input-group-addon"><i id="change_firstname" class="fa fa-times fa-fw"></i></span>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="Last name" name="lastname">
+                    <div class="form-group col-sm-10">
+
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Last name" name="lastname" id="lastname">
+                            <span class="input-group-addon"><i id="change_lastname" class="fa fa-times fa-fw"></i></span>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="Address" name="address">
+                    <div class="form-group col-sm-10">
+
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Address" name="address" id="address">
+                            <span class="input-group-addon"><i id="change_address" class="fa fa-times fa-fw"></i></span>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="Zip code" name="zipcode">
+                    <div class="form-group col-sm-10">
+
+                        <div class="input-group">
+                            <input type="number" class="form-control" placeholder="Zip code" name="zipcode" id="zipcode">
+                            <span class="input-group-addon"><i id="change_firstname" class="fa fa-times fa-fw"></i></span>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="Postal area" name="postalarea">
+                    <div class="form-group col-sm-10">
+
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Postal area" name="postalarea" id="postalarea">
+                            <span class="input-group-addon"><i id="change_postalarea" class="fa fa-times fa-fw"></i></span>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control" placeholder="Password" name="password">
+                    <div class="form-group col-sm-10">
+
+                        <div class="input-group">
+                            <input type="password" class="form-control" placeholder="Password" name="password" id="password">
+                            <span class="input-group-addon"><i id="change_password" class="fa fa-times fa-fw"></i></span>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-10">
+                    <div class="form-group col-sm-10">
+
                             <input class="btn btn-lg btn-primary btn-block" type="submit" value="Registrer!" />
-                        </div>
                     </div>
                 </form>
 
@@ -61,4 +74,89 @@
 
         </div>
 
-    </div>
+    </div>@Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/theteashop")
+
+    <script>
+
+    var confirmList = [true, true, true, true]
+
+    $("#email").keyup(function () {
+
+        inn = String($("#email").val())
+        if (ValidateText(inn) || inn.length == 0) {
+            $("#change_email").removeClass('fa-times').addClass('fa-check');
+            confirmList[0] = true;
+        }
+        else {
+            $("#change_firstname").removeClass('fa-check').addClass('fa-times');
+            confirmList[0] = false;
+        }
+    });
+
+    $("#lastname").keyup(function () {
+
+        inn = String($("#lastname").val())
+        if (ValidateText(inn) || inn.length == 0) {
+            $("#change_lastname").removeClass('fa-times').addClass('fa-check');
+            confirmList[1] = true;
+        }
+        else {
+            $("#change_lastname").removeClass('fa-check').addClass('fa-times');
+            confirmList[1] = false;
+        }
+    });
+
+    $("#address").keyup(function () {
+
+        inn = String($("#address").val())
+        if (ValidateText(inn) || inn.length == 0) {
+            $("#change_address").removeClass('fa-times').addClass('fa-check');
+            confirmList[2] = true;
+        }
+        else {
+            $("#change_address").removeClass('fa-check').addClass('fa-times');
+            confirmList[2] = false;
+            console.log(confirmList)
+        }
+    });
+
+    $("#postalarea").keyup(function () {
+
+        inn = String($("#postalarea").val())
+        if (ValidateText(inn) || inn.length == 0) {
+            $("#change_postalarea").removeClass('fa-times').addClass('fa-check');
+            confirmList[3] = true;
+        }
+        else {
+            $("#change_postalarea").removeClass('fa-check').addClass('fa-times');
+            confirmList[3] = false;
+        }
+    });
+
+    function isValid() {
+
+        canSubmit = true
+
+        for (i in confirmList) {
+
+            if (confirmList[i] == false) {
+
+                canSubmit = false
+                break
+
+            }
+
+        }
+
+        return canSubmit
+
+
+
+    }
+
+
+    </script>
+
+
+
