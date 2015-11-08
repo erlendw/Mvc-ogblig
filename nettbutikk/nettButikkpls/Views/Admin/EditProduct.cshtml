@@ -9,37 +9,46 @@
 
         <h2 class="form-signin-heading">Update product information</h2>
 
-        <form class="form-horizontal" action="/Admin/UpdateProduct" method="post">
-            
-            <div class="form-group"> 
-                <div class="col-sm-10">
-                    <label>Product name:</label>
+        <form class="form-horizontal" action="/Admin/UpdateProduct" method="post" onsubmit="return isValid()">
+
+            <div class="form-group col-sm-10">
+                <label>Product id:</label>
+                <div class="input-group">
                     <input type="text" class="form-control" value="@Model.productid" name="productid" readonly>
+                    <span class="input-group-addon"><i id="change_id" class="fa fa-check fa-fw"></i></span>
                 </div>
             </div>
 
-            <div class="form-group">
-                <div class="col-sm-10">
-                    <label>Product name:</label>
-                    <input type="text" class="form-control" placeholder="@Model.productname" name="Name">
+            <div class="form-group col-sm-10">
+                <label>Product name:</label>
+                <div class="input-group">
+
+                    <input type="text" class="form-control" placeholder="@Model.productname" name="Name" id="Name">
+                    <span class="input-group-addon"><i id="change_name" class="fa fa-check fa-fw"></i></span>
+
                 </div>
             </div>
-            <div class="form-group">
-                <div class="col-sm-10">
-                    <label>Product price:</label>
-                    <input type="number" class="form-control" placeholder="$@Model.price" name="Price">
+            <div class="form-group col-sm-10">
+                <label>Product price:</label>
+                <div class="input-group">
+                    <input type="number" class="form-control" placeholder="$@Model.price" name="Price" id="Price">
+                    <span class="input-group-addon"><i id="change_price" class="fa fa-check fa-fw"></i></span>
+
                 </div>
             </div>
-            <div class="form-group">
-                <div class="col-sm-10">
-                    <label>Product description:</label>
+            <div class="form-group col-sm-10">
+                <label>Product description:</label>
+                <div class="input-group">
                     <textarea class="form-control" rows="5" name="description" placeholder="@Model.description" style="resize:none;"></textarea>
+                    <span class="input-group-addon"><i id="change_firstname" class="fa fa-check fa-fw"></i></span>
+
                 </div>
             </div>
-            <div class="form-group">
-                <div class="col-sm-10">
-                    <label>Product category:</label>
+            <div class="form-group col-sm-10">
+                <label>Product category:</label>
+                <div class="input-group">
                     <input type="text" class="form-control" placeholder="@Model.category" name="Category">
+                    <span class="input-group-addon"><i id="change_firstname" class="fa fa-check fa-fw"></i></span>
                 </div>
             </div>
             <div class="form-group">
@@ -51,3 +60,47 @@
 
     </div>
 
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/theteashop")
+
+<script>
+
+    var confirmList = [true]
+
+    $("#Name").keyup(function () {
+
+        inn = String($("#Name").val())
+        if (ValidateText(inn) || inn.length == 0) {
+            $("#change_name").removeClass('fa-times').addClass('fa-check');
+            confirmList[0] = true;
+        }
+        else {
+            $("#change_name").removeClass('fa-check').addClass('fa-times');
+            confirmList[0] = false;
+        }
+    });
+
+
+    function isValid() {
+
+        canSubmit = true
+
+        for (i in confirmList) {
+
+            if (confirmList[i] == false) {
+
+                canSubmit = false
+                break
+
+            }
+
+        }
+
+        return canSubmit
+
+
+
+    }
+
+
+</script>
