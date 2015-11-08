@@ -29,7 +29,7 @@ En bruker har en liste over sine bestillinger, de kan også ha en handlekurvlist
 <li>Gi kunde beskjed om at bruker er oprettet</li>
 <li><del>Admin kan lage nye adminer</del></li>
 <li><del>Vis shopping cart</del> DONE MANGLER BARE PYNT</li>
-<li>Vise ordere i admin på en bra måte</li>
+<li><del>Vise ordere i admin på en bra måte</del>BLE LISTING AV ORDRE PÅ GAY MÅTE I STELLA....:S</li>
 <li><del>Cleane up logging til fil (MADS)</del></li>
 <li><del>Cleane up kode, er det metoder som er ekstremt lange etc.?</del></li>
 <li>Gjøre ferdig bildeopplasteren</li>
