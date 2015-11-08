@@ -32,7 +32,11 @@ namespace nettButikkpls.Controllers
 
         public ActionResult RegProduct()
         {
-            return View();
+            if (AccessOk())
+            {
+                return View();
+            }
+            return RedirectToAction("ListProducts");
         }
 
         [HttpGet]
@@ -74,6 +78,22 @@ namespace nettButikkpls.Controllers
         public Product FindProduct(int productid)
         {
             return _productBLL.FindProduct(productid);
+        }
+        public bool AccessOk()
+        {
+            Customer c = CurrentCustomer();
+            return (c != null && c.isadmin);
+        }
+        public Customer CurrentCustomer()
+        {
+            HttpContext context = System.Web.HttpContext.Current;
+            Customer c = new Customer();
+            //If-statement for EnhetsTest
+            if (context == null)
+                c = (Customer)Session["CurrentUser"];
+            else
+                c = (Customer)context.Session["CurrentUser"];
+            return c;
         }
     }
 }
