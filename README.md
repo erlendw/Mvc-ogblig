@@ -28,7 +28,7 @@ En bruker har en liste over sine bestillinger, de kan også ha en handlekurvlist
 <li>Hvis log in failer, må bruker få beskjed</li>
 <li>Gi kunde beskjed om at bruker er oprettet</li>
 <li>Admin kan lage nye adminer</li>
-<li>Vis shopping cart DONE MANGLER BARE PYNT</li>
+<li><del>Vis shopping cart</del> DONE MANGLER BARE PYNT</li>
 <li>Vise ordere i admin på en bra måte</li>
 <li>Cleane up logging til fil (MADS)</li>
 <li>Cleane up kode, er det metoder som er ekstremt lange etc.?</li>
