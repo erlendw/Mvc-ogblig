@@ -266,5 +266,23 @@ namespace EnhetsTest
             //Assert
             Assert.AreEqual(expected, result);
         }
+        [TestMethod]
+        public void NullUser()
+        {
+            //Arrange
+            var controller = new CustomerController(new CustomerLogic(new CustomerRepoStub()));
+            var SessionMock = new TestControllerBuilder();
+            int expected = 1;
+            Customer c = new Customer()
+            {
+                customerId = 1,
+            };
+            SessionMock.InitializeController(controller);
+            controller.Session["CurrentUser"] = c;
+            //Act
+            var result = (int)controller.CurrentCustomerId();
+            //Assert
+            Assert.AreEqual(expected, result);
+        }
     }
 }

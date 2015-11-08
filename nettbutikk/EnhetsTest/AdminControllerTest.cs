@@ -713,5 +713,54 @@ namespace EnhetsTest
             //Assert
             Assert.AreEqual(result, false);
         }
+        [TestMethod]
+        public void ListOrders_Admin_OK()
+        {
+            //Arrange
+            var controller = new AdminController();
+            var SessionMock = new TestControllerBuilder();
+            var c = new Customer()
+            {
+                email = "daniel@thoresen.no",
+                password = "Sommeren2015",
+                firstname = "Daniel",
+                lastname = "Thoresen",
+                address = "Hesselbergs gate 7A",
+                isadmin = true, //Expected value
+                salt = "hejhejhallo",
+                zipcode = "0555",
+                postalarea = "Oslo",
+            };
+            SessionMock.InitializeController(controller);
+            controller.Session["CurrentUser"] = c;
+            //Act
+            var result = (ViewResult)controller.ListOrders();
+            //Assert
+            Assert.AreEqual(result.ViewName, "");
+            [TestMethod]
+        public void ListOrders_Admin_Fail()
+        {
+            //Arrange
+            var controller = new AdminController();
+            var SessionMock = new TestControllerBuilder();
+            var c = new Customer()
+            {
+                email = "daniel@thoresen.no",
+                password = "Sommeren2015",
+                firstname = "Daniel",
+                lastname = "Thoresen",
+                address = "Hesselbergs gate 7A",
+                isadmin = false, //Expected value
+                salt = "hejhejhallo",
+                zipcode = "0555",
+                postalarea = "Oslo",
+            };
+            SessionMock.InitializeController(controller);
+            controller.Session["CurrentUser"] = c;
+            //Act
+            var result = (RedirectToRouteResult)controller.ListOrders();
+            //Assert
+            Assert.AreEqual(result.RouteValues.Values.First(), "Redirect");
+        }
     }
 }

@@ -150,5 +150,15 @@ namespace EnhetsTest
             //Assert
             Assert.AreEqual(expected, result);
         }
+        [TestMethod]
+        public void NullCart()
+        {
+            //Arrange
+            var controller = new OrdersController(new OrderLogic(new OrderRepoStub()));
+            //Act
+            var result = (RedirectToRouteResult)controller.NullCart();
+            //Assert
+            Assert.AreEqual(result.RouteValues.Values.First(), "ListProducts", "Product");
+        }
     }
 }
