@@ -45,8 +45,8 @@
                 </div>
                 <div class="form-group col-sm-10">
                     <div class="input-group">
-                        <textarea class="form-control" rows="5" name="description" id="descreption" placeholder="Description" style="resize:none;"></textarea>
-                        <span class="input-group-addon"><i id="change_category" class="fa fa-times fa-fw"></i></span>
+                        <textarea class="form-control" rows="5" name="description" id="description" placeholder="Description" style="resize:none;"></textarea>
+                        <span class="input-group-addon"><i id="change_category" class="fa fa-check fa-fw"></i></span>
 
                     </div>
                 </div>
@@ -104,7 +104,7 @@
     $("#productname").keyup(function () {
 
         inn = String($("#productname").val())
-        if (ValidateText(inn) || inn.length == 0) {
+        if (ValidateText(inn) || inn.length != 0) {
             $("#change_productname").removeClass('fa-times').addClass('fa-check');
             confirmList[0] = true;
         }
@@ -117,8 +117,8 @@
     $("#price").keyup(function () {
 
         inn = String($("#price").val())
-        if (inn.length == 0) {
-            $("#cange_price").removeClass('fa-times').addClass('fa-check');
+        if (inn.length != 0) {
+            $("#change_price").removeClass('fa-times').addClass('fa-check');
             confirmList[1] = true;
         }
         else {
@@ -129,7 +129,7 @@
     $("#category").keyup(function () {
 
         inn = String($("#category").val())
-        if (inn.length == 0) {
+        if (inn.length != 0) {
             $("#change_category").removeClass('fa-times').addClass('fa-check');
             confirmList[2] = true;
         }
@@ -141,7 +141,7 @@
     $("#description").keyup(function () {
 
         inn = String($("#description").val())
-        if (inn.length == 0) {
+        if (inn.length != 0) {
             $("#change_description").removeClass('fa-times').addClass('fa-check');
             confirmList[3] = true;
         }
