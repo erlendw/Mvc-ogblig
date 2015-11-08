@@ -83,5 +83,10 @@ namespace nettButikkpls.DAL
             };
             return p;
         }
+
+        public Cart FormatCart(Cart cart)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -445,5 +445,33 @@ namespace nettButikkpls.DAL
             return db.FindProduct(productid);
 
         }
+        public Cart FormatCart(Cart cart)
+        {
+            List<int> counter = new List<int>();
+            List<int> prod = new List<int>();
+            prod = cart.productids.Distinct().ToList();
+            List<Product> products = new List<Product>();
+            List<int> count = new List<int>();
+            List<float> price = new List<float>();
+
+            foreach (var p in prod)
+            {
+                int c = cart.productids.Count(x => x == p);
+                Debug.Print("C ER " + c);
+                counter.Add(c);
+            }
+            cart = new Cart();
+            for (int i = 0; i < prod.Count; i++)
+            {
+                Product product = FindProduct(prod[i]);
+                products.Add(product);
+                count.Add(counter[i]);
+                price.Add(product.price * counter[i]);
+            }
+            cart.products = products;
+            cart.count = count;
+            cart.price = price;
+            return cart;
+        }
     }
 }
