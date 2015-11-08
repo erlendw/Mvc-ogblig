@@ -72,7 +72,7 @@ namespace nettButikkpls.DAL
                 }
                 catch(Exception e)
                 {
-                    string message = "Exception: " + e + " catched at DeleteOrder()";
+                    string message = "Exception: " + e + " catched at SaveProduct()";
                     SaveToErrorLog(message);
                     return false;
                 }
@@ -183,8 +183,6 @@ namespace nettButikkpls.DAL
                 {
                     Product p = new Product();
                     var product = db.Products.Single(b => (b.ProductId == productid));
-                    // var customer = db.Customers.Single(b => (b.CustomerId == customerid));
-
                     p.productid = productid;
                     p.productname = product.Productname;
                     p.price = product.Price;

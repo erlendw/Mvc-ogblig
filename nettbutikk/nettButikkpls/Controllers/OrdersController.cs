@@ -30,15 +30,12 @@ namespace nettButikkpls.Controllers
             Debug.Print("Quantity " + Quantity);
             int productid = Int32.Parse(Productid);
             int quantity = Int32.Parse(Quantity);
-            //Debug.Print("ProduID: " + productid + "Quantity: " + quantity);
-            //HttpContext context = HttpContext.Current;
             var db = new OrderLogic();
             if (Session["Cart"] == null)
             {
                 Cart cart = new Cart();
                 List<int> pIds = new List<int>();
                 List<Product> products = new List<Product>();
-                //Debug.Print("Cart.CustomerID: " + cart.customerid);
                 Session["Cart"] = cart;
                 for (int i = 0; i < quantity; i++)
                 {
@@ -64,13 +61,6 @@ namespace nettButikkpls.Controllers
 
             }
         }
-
-       /* public ActionResult allOrders()
-        {
-            var db = new OrderLogic();
-            List<Order> allOrders = db.ListAllOrders();
-            return View(allOrders);
-        }*/
 
         public ActionResult addOrder()
         {
@@ -100,7 +90,6 @@ namespace nettButikkpls.Controllers
             int orderid = _orderBLL.saveOrder(sum, CurrentCustomerId());
             if (orderid!=0)
             {
-                // metode(orderid); som legger inn i orderlist
                 _orderBLL.addOrderList(orderid);
                 return RedirectToAction( "OrderComplete", "Orders");
             }
