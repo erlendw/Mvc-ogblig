@@ -71,16 +71,14 @@
 <script type="text/javascript">
     Dropzone.options.dropzoneJsForm = {
 
-        //prevents Dropzone from uploading dropped files immediately
         autoProcessQueue: false,dictDefaultMessage : 'Give your files to me!',
 
         init: function () {
             var submitButton = document.querySelector("#submit-all");
-            var myDropzone = this; //closure
+            var myDropzone = this;
 
             submitButton.addEventListener("click", function () {
 
-                //tell Dropzone to process all queued files
                 myDropzone.processQueue();
             });
 

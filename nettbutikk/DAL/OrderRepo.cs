@@ -13,7 +13,6 @@ namespace nettButikkpls.DAL
     {
         public List<Order> allOrders()
         {
-            //Det er denne erlend
             using (var db = new NettbutikkContext())
             {
                 List<Order> allOrders = db.Orders.Select(o => new Order
