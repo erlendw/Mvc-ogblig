@@ -47,6 +47,7 @@ namespace nettButikkpls.Controllers
                 }
                 cart.productids = pIds;
                 cart.products = products;
+                Debug.Print("PRoductek " + cart.products[0].productname);
                 Session["Cart"] = cart;
                 Debug.Print("Cart:" + cart.productids.ToString());
 
@@ -79,16 +80,16 @@ namespace nettButikkpls.Controllers
         public ActionResult addOrder()
         {
             Customer c = (Customer)HttpContext.Session["CurrentUser"];
+            Cart cart = (Cart)HttpContext.Session["Cart"];
             if (c == null)
             {
-                Cart cart = (Cart)HttpContext.Session["Cart"];
                 //If-statement for EnhetsTesting
                 if (Session["CurrentUser"] != null)
-                    return View(cart);
+                    return View();
                 return RedirectToAction("ListProducts", "Product");
             }
 
-            return View();
+            return View(cart);
         }
 
         [HttpPost]
