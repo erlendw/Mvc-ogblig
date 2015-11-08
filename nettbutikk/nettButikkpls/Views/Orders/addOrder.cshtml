@@ -21,10 +21,22 @@
 
                         @for (int i = 0; i < Model.count.Count; i++)
                         {
+                            <tr>
+
+                                <td>@Model.products[i].productid</td>
+
+                                <td>@Model.products[i].productname</td>
+
+                                <td>$@Model.products[i].price</td>
+
+                                <td>@Model.products[i].category</td>
+
+
+                            </tr>
                             <p>@Model.products[i].productname</p><p>@Model.count[i]</p><p>@Model.price[i]</p>
 
                         }
-
+                        
                         <div class="form-group col-sm-10">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Card number" name="cardnumber" id="cardnumber">

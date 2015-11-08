@@ -25,7 +25,7 @@ namespace nettButikkpls.DAL
                      price = p.Price,
                     category = p.Category,
                     description = p.Description,
-                    imagestring = "TEST"
+                    //imagestring = "TEST"
                 }).ToList();
                     return allProducts;
                 }
