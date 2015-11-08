@@ -91,7 +91,7 @@ namespace EnhetsTest
 
             //Assert
             Assert.AreEqual(result.RouteName, "");
-            Assert.AreEqual(result.RouteValues.Values.First(), "ListProducts", "Product");
+            Assert.AreEqual(result.RouteValues.Values.First(), "Login");
         }
         [TestMethod]
         public void Reg_Fail_Post()
@@ -141,7 +141,7 @@ namespace EnhetsTest
             
             //Assert
             Assert.AreEqual(result.RouteName, "");
-            Assert.AreEqual(result.RouteValues.Values.First(), "List");
+            Assert.AreEqual(result.RouteValues.Values.First(), "UserProfile");
         }
         [TestMethod]
         public void UpdateCustomer_Fail_Post()
@@ -155,7 +155,7 @@ namespace EnhetsTest
 
             //Assert
             Assert.AreEqual(result.RouteName, "");
-            Assert.AreEqual(result.RouteValues.Values.First(), "List");
+            Assert.AreEqual(result.RouteValues.Values.First(), "UserProfile");
         }
         [TestMethod]
         public void FindCustomerByEmail_Email_OK()

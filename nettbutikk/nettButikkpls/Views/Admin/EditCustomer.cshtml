@@ -124,6 +124,8 @@
 
     $("#zipcode").keyup(function () {
 
+        console.log
+
         inn = String($("#zipcode").val())
         if (ValidateNumber(inn) || inn.length == 0) {
             $("#change_zipcode").removeClass('fa-times').addClass('fa-check');
