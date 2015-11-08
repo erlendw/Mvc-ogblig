@@ -48,7 +48,7 @@ namespace nettButikkpls.DAL
                     newProductRow.Description = inProduct.description;
                     newProductRow.Price = inProduct.price;
                     newProductRow.Category = inProduct.category;
-               
+                    newProductRow               
                     db.Products.Add(newProductRow);
                     db.SaveChanges();
 
@@ -86,6 +86,8 @@ namespace nettButikkpls.DAL
                 {
                     HttpPostedFileBase file = innFiler[FileName];
 
+
+
                     var _FileName = Path.GetFileName(file.FileName);
                     var _Path = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/Images"), _FileName);
 
@@ -96,7 +98,7 @@ namespace nettButikkpls.DAL
             }
             catch (Exception e)
             {
-                SaveToErrorLog(e + " was catched at SaveImagesToServer()");
+                Debug.Write(e.ToString());
                 return false;
             }
             
