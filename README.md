@@ -17,7 +17,7 @@ En bruker har en liste over sine bestillinger, de kan også ha en handlekurvlist
 <li>lage superbruker</li>
 <li><del>logging av endringer</del></li>
 <li><del>C r u d på orders</del></li>
-<li>boyz will be boyz</li>Check
+<li><del>boyz will be boyz</del></li>
 <li><del>Administrere brukere</del></li>
 <li>Ferdigstille admin</li>
 <li>Vise innhold til shoppingcart</li>
