@@ -19,12 +19,11 @@ En bruker har en liste over sine bestillinger, de kan også ha en handlekurvlist
 <li><del>C r u d på orders</del></li>
 <li>boyz will be boyz</li>Check
 <li><del>Administrere brukere</del></li>
-<li>Inputvalidering</li>
 <li>Ferdigstille admin</li>
 <li>Vise innhold til shoppingcart</li>
 <li>Feilproofe koden</li>
 
-#Dawn of the final day
+#Dawn of the final day 08.11.15
 
 <li>Hvis log in failer, må bruker få beskjed</li>
 <li>Gi kunde beskjed om at bruker er oprettet</li>
@@ -34,6 +33,7 @@ En bruker har en liste over sine bestillinger, de kan også ha en handlekurvlist
 <li>Cleane up logging til fil (MADS)</li>
 <li>Cleane up kode, er det metoder som er ekstremt lange etc.?</li>
 <li>Gjøre ferdig bildeopplasteren</li>
+<li>Inputvalidering</li>
 
 
 
