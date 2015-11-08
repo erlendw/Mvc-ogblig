@@ -118,5 +118,9 @@ namespace nettButikkpls.DAL
         {
             throw new NotImplementedException();
         }
+        public void NullCustomer()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

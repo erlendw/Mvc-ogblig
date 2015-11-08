@@ -272,7 +272,7 @@ namespace EnhetsTest
             //Arrange
             var controller = new CustomerController(new CustomerLogic(new CustomerRepoStub()));
             var SessionMock = new TestControllerBuilder();
-            int expected = 1;
+            int expected = 1337;
             Customer c = new Customer()
             {
                 customerId = 1,

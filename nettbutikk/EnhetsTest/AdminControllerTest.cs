@@ -737,6 +737,7 @@ namespace EnhetsTest
             var result = (ViewResult)controller.ListOrders();
             //Assert
             Assert.AreEqual(result.ViewName, "");
+        }
             [TestMethod]
         public void ListOrders_Admin_Fail()
         {
