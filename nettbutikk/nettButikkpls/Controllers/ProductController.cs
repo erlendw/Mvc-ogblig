@@ -71,6 +71,7 @@ namespace nettButikkpls.Controllers
             HttpFileCollectionBase innfiler = Request.Files;
             
             bool success = _productBLL.SaveImagesToServer(innfiler);
+            Debug.Print("success " + success);
             return Json(new { Message = string.Empty });
         }
 

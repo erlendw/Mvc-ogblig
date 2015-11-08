@@ -14,6 +14,6 @@ namespace nettButikkpls.Models
         public float price { get; set; }
         public string category { get; set; }
         public string description { get; set; }
-        public List<string> picture { get; set; }
+        public string imagestring { get; set; }
     }
 }
