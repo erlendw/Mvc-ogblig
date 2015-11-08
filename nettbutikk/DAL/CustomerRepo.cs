@@ -93,7 +93,7 @@ namespace nettButikkpls.DAL
                     return true;
                 }catch(Exception e)
                 {
-                    string message = "Exception: " + e + " catched at DeleteOrder()";
+                    string message = "Exception: " + e + " catched at SaveOrder()";
                     SaveToErrorLog(message);
                     return false;
                 }                   
