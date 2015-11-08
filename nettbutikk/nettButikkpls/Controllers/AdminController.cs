@@ -26,7 +26,6 @@ namespace nettButikkpls.Controllers
         public AdminController(IProductLogic stub) { _productBLL = stub; }
         public AdminController(IOrderLogic stub) { _orderBLL = stub; }
 
-        //mulig  endring her, hente current user, og sjekke om admin
         public ActionResult AdminPanel()
         {
             if (AccessOk())
@@ -43,10 +42,8 @@ namespace nettButikkpls.Controllers
                 bool OK = _productBLL.UpdateProduct(inList, productid);
                 if (OK)
                 {
-                    //Melding her ; p
                     return RedirectToAction("AdminPanel");
                 }
-                //Melding her ; P
                 return RedirectToAction("ListProducts");
             }
             return RedirectToAction("Redirect");
@@ -132,12 +129,8 @@ namespace nettButikkpls.Controllers
         }
         public ActionResult ListOrders()
         {
-            /*if (AccessOk())
-            {*/
                 List<OrderList> orderlists = _orderBLL.AllOrderLists();
                 return View(orderlists);
-            /*}
-            return RedirectToAction("Redirect");*/
         }
         [HttpGet]
         public ActionResult DeleteOrder(int orderId)

@@ -66,9 +66,9 @@ namespace nettButikkpls.DAL
             }
             catch (Exception e)
             {
-                SaveToErrorLog(e + " was catched at addToCart()");
+                SaveToErrorLog(e+" was catched at addToCart()");
             }
-
+            
         }
         public bool addOrderList(int orderid)
         {
@@ -100,7 +100,7 @@ namespace nettButikkpls.DAL
                         db.OrderLists.Add(list);
                     }
                     db.SaveChanges();
-                    context.Session["Cart"] = null;
+                    
                     //Start save to Log
                     nettbutikkpls.Models.Log log = new nettbutikkpls.Models.Log();
                     log.ChangedTime = (DateTime.Now).ToString("yyyyMMddHHmmss");
@@ -120,7 +120,7 @@ namespace nettButikkpls.DAL
                 }
                 catch (Exception e)
                 {
-                    string message = "Exception: " + e + " catched at addOrderList()";
+                    string message = "Exception: " + e + " catched at DeleteOrder()";
                     SaveToErrorLog(message);
                     return false;
                 }
@@ -160,7 +160,7 @@ namespace nettButikkpls.DAL
                 }
                 catch (Exception e)
                 {
-                    string message = "Exception: " + e + " catched at SaveOrder()";
+                    string message = "Exception: " + e + " catched at DeleteOrder()";
                     SaveToErrorLog(message);
                     return 0;
                 }
@@ -191,10 +191,10 @@ namespace nettButikkpls.DAL
             }
             catch (Exception e)
             {
-                SaveToErrorLog(e + " was catched at ListAllOrders()");
+                SaveToErrorLog(e+" was catched at ListAllOrders()");
                 return null;
             }
-
+            
         }
 
         public void SaveToLog(string log)
@@ -267,7 +267,7 @@ namespace nettButikkpls.DAL
                 }
                 catch (Exception e)
                 {
-                    string message = "Exception: " + e + " catched at DeleteOrder()";
+                    string message = "Exception: "+ e + " catched at DeleteOrder()";
                     SaveToErrorLog(message);
                     return false;
                 }
@@ -285,7 +285,7 @@ namespace nettButikkpls.DAL
                 }
                 catch (Exception e)
                 {
-                    SaveToErrorLog(e + " was catched at FindOrder()");
+                    SaveToErrorLog(e+" was catched at FindOrder()");
                     return null;
                 }
             }
@@ -303,7 +303,7 @@ namespace nettButikkpls.DAL
                     o.sumtotal = order.SumTotal;
                     o.timestamp = order.TimeStamp;
                     return o;
-
+                    
                 }
                 catch (Exception e)
                 {
@@ -311,76 +311,9 @@ namespace nettButikkpls.DAL
                 }
             }
         }
-        /* public List<OrderList> AllOrderLists()
-         {
-             using (var db = new NettbutikkContext())
-             {
-                 try
-                 {
-                     IEnumerable<OrderLists> orderlists = from o in db.OrderLists
-                                                          select o;
-                     List<OrderLists> list = orderlists.ToList();
-                     List<OrderList> allOrderLists = new List<OrderList>();
-                     var prod = new ProductRepo();
-                     List<Product> plist = new List<Product>();
-                     List<int> quantity = new List<int>();
-                     Product p = new Product();
-                     allOrderLists.Add(null);
-
-                     for (int j=0; j<list.Count; j++)
-                     {
-                         Debug.Print("ORDERIDEN ER DANIEL FØLGENDE KOLON " + list[j].OrderID);
-                     }
-
-
-                     for (int i = 0; i < list.Count; i++)
-                     {
-                         Debug.Print("OrderID: " + list[i].OrderID);
-                         plist.Add(prod.FindProduct(list[i].ProductID));
-                         quantity.Add(list[i].Quantity);
-                         Debug.Print("I er: " + i);
-
-                         if (list[i+1] == null || list[i].OrderID != list[i + 1].OrderID)
-                         {
-
-                             Debug.Print("Kommer inn i IF");
-                             OrderList ol = new OrderList();
-                              Debug.Print("Kommer inn i IF");
-                              ol.product = plist;
-
-
-                              Debug.Print("produktid " + ol.product[0].productid);
-                              ol.quantity = quantity;
-                              ol.orderId = list[i].OrderID;
-                              Debug.Print("Ordersiden er daniel " + ol.orderId);
-
-                              plist.Clear();
-                              quantity.Clear();
-                              // allOrderLists.Add(null);
-                             allOrderLists.Add(new OrderList()
-                             {
-                                 //orderId = list[i].OrderID,
-                                 product = plist,
-                                 quantity = quantity   
-                             });
-                             plist.Clear();
-                             quantity.Clear();
-
-                             Debug.Print("allOrderLists: " + allOrderLists[i].orderId);
-                         }
-                     }  
-                 return allOrderLists;
-                 }
-                 catch (Exception e)
-                 {
-                     return null;
-                 }
-             }
-         }*/
 
         public List<OrderList> AllOrderLists()
         {
-            //DET ER DENNE ERLEND
             using (var db = new NettbutikkContext())
             {
                 try
@@ -390,39 +323,9 @@ namespace nettButikkpls.DAL
                         orderId = o.OrderID,
                         productId = o.ProductID,
                         quantity = o.Quantity,
-                        unitPrice = o.UnitPrice,
+                        unitPrice = o.UnitPrice,      
                     }).ToList();
-
                     return allOrderLists;
-
-                    /* IEnumerable<OrderLists> listOfOrderLists = from orderline in db.OrderLists
-                                                                select orderline;
-                     List<OrderLists> iterateableOrderLists = listOfOrderLists.ToList();
-                     foreach (var list in iterateableOrderLists)
-                     {
-                         Debug.Print("OrderID " + list.OrderID);
-                         Debug.Print("ProductID " + list.ProductID);
-                     }
-
-                     List<Product> productList = new List<Product>();
-                     List<int> productQuantityList = new List<int>();
-                     List<OrderList> listOfAllOrderList = new List<OrderList>();
-
-                     for (int i = 0; i < iterateableOrderLists.Count; i++ )
-                     {
-                         productList.Add(FindProduct(iterateableOrderLists[i].ProductID));
-                         productQuantityList.Add(iterateableOrderLists[i].Quantity);
-
-                         if(iterateableOrderLists[i+1] == null || iterateableOrderLists[i].OrderID != iterateableOrderLists[i + 1].OrderID)
-                         {
-                             OrderList orderProductDetails = new OrderList();
-                             orderProductDetails.orderId = iterateableOrderLists[i].OrderID;
-                             orderProductDetails.product = productList;
-                             orderProductDetails.quantity = productQuantityList;
-                             listOfAllOrderList.Add(orderProductDetails);
-                         }
-                     }
-                     return listOfAllOrderList;*/
                 }
                 catch (Exception e)
                 {
@@ -446,6 +349,33 @@ namespace nettButikkpls.DAL
             return db.FindProduct(productid);
 
         }
+        public Cart FormatCart(Cart cart)
+        {
+            List<int> counter = new List<int>();
+            List<int> prod = new List<int>();
+            prod = cart.productids.Distinct().ToList();
+            List<Product> products = new List<Product>();
+            List<int> count = new List<int>();
+            List<float> price = new List<float>();
 
+            foreach (var p in prod)
+            {
+                int c = cart.productids.Count(x => x == p);
+                Debug.Print("C ER " + c);
+                counter.Add(c);
+            }
+            cart = new Cart();
+            for (int i = 0; i < prod.Count; i++)
+            {
+                Product product = FindProduct(prod[i]);
+                products.Add(product);
+                count.Add(counter[i]);
+                price.Add(product.price * counter[i]);
+            }
+            cart.products = products;
+            cart.count = count;
+            cart.price = price;
+            return cart;
+        }
     }
 }

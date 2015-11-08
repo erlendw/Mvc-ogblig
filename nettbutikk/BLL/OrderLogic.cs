@@ -62,5 +62,9 @@ namespace nettButikkpls.BLL
         {
             return _repo.TotalPrice(pid);
         }
+        public Cart FormatCart(Cart cart)
+        {
+            return _repo.FormatCart(cart);
+        }
     }
 }
