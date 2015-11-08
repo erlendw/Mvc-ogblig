@@ -26,11 +26,8 @@ namespace nettButikkpls.Controllers
         [HttpPost]
         public void addToCart(string Productid, string Quantity)
         {
-            Debug.Print("Productid " + Productid);
-            Debug.Print("Quantity " + Quantity);
             int productid = Int32.Parse(Productid);
             int quantity = Int32.Parse(Quantity);
-            var db = new OrderLogic();
             if (Session["Cart"] == null)
             {
                 Cart cart = new Cart();
@@ -43,7 +40,6 @@ namespace nettButikkpls.Controllers
                 }
                 cart.productids = pIds;
                 Session["Cart"] = cart;
-                Debug.Print("Cart:" + cart.productids.ToString());
 
             }
             else
@@ -57,7 +53,6 @@ namespace nettButikkpls.Controllers
                 }
                 cart.productids.AddRange(pIds);
                 Session["Cart"] = cart;
-                Debug.Print("Cart:" + cart.productids.ToString());
 
             }
         }
@@ -66,8 +61,7 @@ namespace nettButikkpls.Controllers
         {
             Customer c = (Customer)HttpContext.Session["CurrentUser"];
             Cart cart = (Cart)HttpContext.Session["Cart"];
-            var db = new OrderLogic();
-            cart = db.FormatCart(cart);
+            cart = _orderBLL.FormatCart(cart);
             if (c == null)
             {
                 //If-statement for EnhetsTesting
@@ -97,9 +91,8 @@ namespace nettButikkpls.Controllers
         }
         public ActionResult OrderComplete()
         {
-            var db = new OrderLogic();
-            Cart tiss = db.FormatCart((Cart)HttpContext.Session["Cart"]);
-            return View(tiss);
+            Cart c = _orderBLL.FormatCart((Cart)HttpContext.Session["Cart"]);
+            return View(c);
         }
         public int TotalPrice(List<int> pid)
         {

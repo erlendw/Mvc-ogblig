@@ -14,5 +14,6 @@ namespace nettButikkpls.BLL
         List<OrderList> AllOrderLists();
         Product FindProduct(int productid);
         int TotalPrice(List<int> pid);
+        Cart FormatCart(Cart cart);
     }
 }

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using nettButikkpls.Models;
 using System.Web.Mvc;
 using System.Linq;
+using MvcContrib.TestHelper;
 
 namespace EnhetsTest
 {
@@ -47,14 +48,53 @@ namespace EnhetsTest
             }
         }
         [TestMethod]
-        public void RegProduct()
+        public void RegProduct_Admin_OK()
         {
             //Arrange
             var controller = new ProductController(new ProductLogic(new ProductRepoStub()));
+            var SessionMock = new TestControllerBuilder();
+            var c = new Customer()
+            {
+                email = "daniel@thoresen.no",
+                password = "Sommeren2015",
+                firstname = "Daniel",
+                lastname = "Thoresen",
+                address = "Hesselbergs gate 7A",
+                isadmin = true,
+                salt = "hejhejhallo",
+                zipcode = "0555",
+                postalarea = "Oslo",
+            };
+            SessionMock.InitializeController(controller);
+            controller.Session["CurrentUser"] = c;
             //Act
             var result = (ViewResult)controller.RegProduct();
             //Assert
             Assert.AreEqual(result.ViewName, "");
+        }
+        public void RegProduct_Admin_Fail()
+        {
+            //Arrange
+            var controller = new ProductController(new ProductLogic(new ProductRepoStub()));
+            var SessionMock = new TestControllerBuilder();
+            var c = new Customer()
+            {
+                email = "daniel@thoresen.no",
+                password = "Sommeren2015",
+                firstname = "Daniel",
+                lastname = "Thoresen",
+                address = "Hesselbergs gate 7A",
+                isadmin = false,
+                salt = "hejhejhallo",
+                zipcode = "0555",
+                postalarea = "Oslo",
+            };
+            SessionMock.InitializeController(controller);
+            controller.Session["CurrentUser"] = c;
+            //Act
+            var result = (RedirectToRouteResult)controller.RegProduct();
+            //Assert
+            Assert.AreEqual(result.RouteValues.Values.First(), "ListProducts");
         }
         [TestMethod]
         public void ShowProduct_ID_Fail()
