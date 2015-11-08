@@ -34,7 +34,7 @@
 
                     @if ((nettButikkpls.Models.Customer)HttpContext.Current.Session["CurrentUser"] == null)
                     {
-                        <li>@Html.ActionLink("Log in", "Login", "Customer")</li>
+                        <li>@Html.ActionLink("Register user", "Reg", "Customer")</li>
                     }
 
                     @if ((nettButikkpls.Models.Customer)HttpContext.Current.Session["CurrentUser"] == null)
@@ -42,18 +42,30 @@
                         <li>@Html.ActionLink("Log in", "Login", "Customer")</li>
                     }
 
-                    else
-                    {
-                        <li>@Html.ActionLink("Your profile", "UserProfile", "Customer")</li>
-                    }
-                    @if ((nettButikkpls.Models.Customer)HttpContext.Current.Session["CurrentUser"] != null)
+
+
+                    @if (HttpContext.Current.Session["CurrentUser"] != null)
                     {
                         nettButikkpls.Models.Customer customer = (nettButikkpls.Models.Customer)HttpContext.Current.Session["CurrentUser"];
-                        if (customer.isadmin)
-                        {
-                            <li>@Html.ActionLink("Admin", "AdminPanel", "Admin")</li>
-                        }
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> @customer.firstname @customer.lastname <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="/Customer/UserProfile"><i class="fa fa-fw fa-user"></i>Profile</a>
+                                </li>
+                                @if (customer.isadmin)
+                                {
+                                <li>@Html.ActionLink("Admin Panel", "AdminPanel", "Admin")</li>
+                                }
+                                <li class="divider"></li>
+                                <li>
+                                    <a href=""><i class="fa fa-fw fa-power-off"></i>Log out</a>
+                                </li>
+                            </ul>
+                        </li>
+
                     }
+
 
 
                     <li>
@@ -106,7 +118,7 @@
 
 
 
-                    </li>
+                    
                 </ul>
             </div>
         </div>
