@@ -22,25 +22,32 @@
 
             <h2 class="form-signin-heading">Register a new product</h2>
 
-            <form class="form-horizontal" action="/Product/RegProduct" method="post">
-                <div class="form-group">
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="Productname" name="productname">
+            <form class="form-horizontal" action="/Product/RegProduct" method="post" onsubmit="return isValid()">
+                <div class="form-group col-sm-10">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Productname" name="productname" id="productname">
+                        <span class="input-group-addon"><i id="change_productname" class="fa fa-times fa-fw"></i></span>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="Price" name="price">
+                <div class="form-group col-sm-10">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Price" name="price" id="price">
+                        <span class="input-group-addon"><i id="change_price" class="fa fa-times fa-fw"></i></span>
+
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="Category" name="category">
-                    </div>
+                <div class="form-group col-sm-10">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Category" name="category" id="category">
+                        <span class="input-group-addon"><i id="change_category" class="fa fa-times fa-fw"></i></span>
+
+                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-10">
-                        <textarea class="form-control" rows="5" name="description" placeholder="Description" style="resize:none;"></textarea>
+                <div class="form-group col-sm-10">
+                    <div class="input-group">
+                        <textarea class="form-control" rows="5" name="description" id="descreption" placeholder="Description" style="resize:none;"></textarea>
+                        <span class="input-group-addon"><i id="change_category" class="fa fa-times fa-fw"></i></span>
+
                     </div>
                 </div>
 
@@ -55,7 +62,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-10">
-                        <input class="btn btn-lg btn-primary btn-block" type="submit" value="Register" id="submit-all"/>
+                        <input class="btn btn-lg btn-primary btn-block" type="submit" value="Register" id="submit-all" />
                     </div>
                 </div>
             </form>
@@ -87,3 +94,84 @@
     //http://sampathloku.blogspot.no/2014/02/dropzonejs-with-aspnet-mvc-5.html
 </script>
 
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/theteashop")
+
+<script>
+
+    var confirmList = [true,true,true,true]
+
+    $("#productname").keyup(function () {
+
+        inn = String($("#productname").val())
+        if (ValidateText(inn) || inn.length == 0) {
+            $("#change_productname").removeClass('fa-times').addClass('fa-check');
+            confirmList[0] = true;
+        }
+        else {
+            $("#change_productname").removeClass('fa-check').addClass('fa-times');
+            confirmList[0] = false;
+        }
+    });
+
+    $("#price").keyup(function () {
+
+        inn = String($("#price").val())
+        if (inn.length == 0) {
+            $("#cange_price").removeClass('fa-times').addClass('fa-check');
+            confirmList[1] = true;
+        }
+        else {
+            $("#change_price").removeClass('fa-check').addClass('fa-times');
+            confirmList[1] = false;
+        }
+    });
+    $("#category").keyup(function () {
+
+        inn = String($("#category").val())
+        if (inn.length == 0) {
+            $("#change_category").removeClass('fa-times').addClass('fa-check');
+            confirmList[2] = true;
+        }
+        else {
+            $("#change_category").removeClass('fa-check').addClass('fa-times');
+            confirmList[2] = false;
+        }
+    });
+    $("#description").keyup(function () {
+
+        inn = String($("#description").val())
+        if (inn.length == 0) {
+            $("#change_description").removeClass('fa-times').addClass('fa-check');
+            confirmList[3] = true;
+        }
+        else {
+            $("#change_description").removeClass('fa-check').addClass('fa-times');
+            confirmList[3] = false;
+        }
+    });
+
+
+    function isValid() {
+
+        canSubmit = true
+
+        for (i in confirmList) {
+
+            if (confirmList[i] == false) {
+
+                canSubmit = false
+                break
+
+            }
+
+        }
+
+        return canSubmit
+
+
+
+    }
+
+
+</script>

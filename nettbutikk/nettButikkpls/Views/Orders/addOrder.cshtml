@@ -17,32 +17,39 @@
 
                     <h2 class="form-signin-heading">Place your order!</h2>
 
-                    <form class="form-horizontal" action="/Orders/AddOrder" method="post">
-                            
-                            @for (int i=0;i<Model.count.Count;i++)
-                            {
-                                <p>@Model.products[i].productname</p><p>@Model.count[i]</p><p>@Model.price[i]</p>
-                                
-                            }
+                    <form class="form-horizontal" action="/Orders/AddOrder" method="post" onsubmit="return isValid()">
 
-                        <div class="form-group">
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" placeholder="Card number" name="cardnumber">
+                        @for (int i = 0; i < Model.count.Count; i++)
+                        {
+                            <p>@Model.products[i].productname</p><p>@Model.count[i]</p><p>@Model.price[i]</p>
+
+                        }
+
+                        <div class="form-group col-sm-10">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Card number" name="cardnumber" id="cardnumber">
+                                <span class="input-group-addon"><i id="change_cardnumber" class="fa fa-times fa-fw"></i></span>
+
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" placeholder="Expiration date" name="expdate">
+                        <div class="form-group col-sm-10">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Expiration date" name="expdate" id="expdate">
+                                <span class="input-group-addon"><i id="change_expdate" class="fa fa-times fa-fw"></i></span>
+
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" placeholder="CVC" name="cvc">
+                        <div class="form-group col-sm-10">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="CVC" name="cvc" id="cvc">
+                                <span class="input-group-addon"><i id="change_cvc" class="fa fa-times fa-fw"></i></span>
+
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" placeholder="Cardholder" name="cardholder">
+                        <div class="form-group col-sm-10">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Cardholder" name="cardholder" id="cardholder">
+                                <span class="input-group-addon"><i id="change_cardholder" class="fa fa-times fa-fw"></i></span>
                             </div>
                         </div>
 
@@ -52,8 +59,93 @@
                             </div>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
     </body>
 </html>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/theteashop")
+
+<script>
+
+    var confirmList = [true, true, true, true]
+
+    $("#cardnumber").keyup(function () {
+
+        inn = String($("#cardnumber").val())
+        if (inn.length == 16) {
+            $("#change_cardnumber").removeClass('fa-times').addClass('fa-check');
+            confirmList[0] = true;
+        }
+        else {
+            $("#change_cardnumber").removeClass('fa-check').addClass('fa-times');
+            confirmList[0] = false;
+        }
+    });
+
+    $("#expdate").keyup(function () {
+
+        inn = String($("#expdate").val())
+        if (inn.length == 4) {
+            $("#change_expdate").removeClass('fa-times').addClass('fa-check');
+            confirmList[1] = true;
+        }
+        else {
+            $("#change_expdate").removeClass('fa-check').addClass('fa-times');
+            confirmList[1] = false;
+        }
+    });
+
+    $("#cvc").keyup(function () {
+
+        inn = String($("#cvc").val())
+        if (inn.length == 3) {
+            $("#change_cvc").removeClass('fa-times').addClass('fa-check');
+            confirmList[2] = true;
+        }
+        else {
+            $("#change_cvc").removeClass('fa-check').addClass('fa-times');
+            confirmList[2] = false;
+            console.log(confirmList)
+        }
+    });
+
+    $("#cardholder").keyup(function () {
+
+        inn = String($("#cardholder").val())
+        if (ValidateText(inn) || inn.length != 0) {
+            $("#change_cardholder").removeClass('fa-times').addClass('fa-check');
+            confirmList[3] = true;
+        }
+        else {
+            $("#change_cardholder").removeClass('fa-check').addClass('fa-times');
+            confirmList[3] = false;
+        }
+    });
+
+    function isValid() {
+
+        canSubmit = true
+
+        for (i in confirmList) {
+
+            if (confirmList[i] == false) {
+
+                canSubmit = false
+                break
+
+            }
+
+        }
+
+        return canSubmit
+
+
+
+    }
+
+
+</script>
