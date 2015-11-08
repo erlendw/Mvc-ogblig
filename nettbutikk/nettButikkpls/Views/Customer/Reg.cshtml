@@ -15,7 +15,6 @@
 
                 <form class="form-horizontal" action="/Customer/Reg" method="post" onsubmit="return isValid()">
                     <div class="form-group col-sm-10">
-
                         <div class="input-group">
                             <input type="email" class="form-control" placeholder="Email" name="email" id="email">
                             <span class="input-group-addon"><i id="change_email" class="fa fa-times fa-fw"></i></span>
@@ -46,7 +45,7 @@
 
                         <div class="input-group">
                             <input type="number" class="form-control" placeholder="Zip code" name="zipcode" id="zipcode">
-                            <span class="input-group-addon"><i id="change_firstname" class="fa fa-times fa-fw"></i></span>
+                            <span class="input-group-addon"><i id="change_zipcode" class="fa fa-times fa-fw"></i></span>
                         </div>
                     </div>
                     <div class="form-group col-sm-10">
@@ -84,39 +83,58 @@
     $("#email").keyup(function () {
 
         inn = String($("#email").val())
-        if (ValidateText(inn) || inn.length == 0) {
+
+        if (ValidateEmail(inn)) {
+
             $("#change_email").removeClass('fa-times').addClass('fa-check');
             confirmList[0] = true;
         }
+
+        else {
+
+            console.log("kommer inn")
+
+            $("#change_email").removeClass('fa-check').addClass('fa-times');
+            confirmList[0] = false;
+        }
+    });
+
+    $("#firstname").keyup(function () {
+
+        inn = String($("#firstname").val())
+        if (ValidateText(inn)) {
+            $("#change_firstname").removeClass('fa-times').addClass('fa-check');
+            confirmList[1] = true;
+        }
         else {
             $("#change_firstname").removeClass('fa-check').addClass('fa-times');
-            confirmList[0] = false;
+            confirmList[1] = false;
         }
     });
 
     $("#lastname").keyup(function () {
 
         inn = String($("#lastname").val())
-        if (ValidateText(inn) || inn.length == 0) {
+        if (ValidateText(inn)) {
             $("#change_lastname").removeClass('fa-times').addClass('fa-check');
-            confirmList[1] = true;
+            confirmList[2] = true;
         }
         else {
             $("#change_lastname").removeClass('fa-check').addClass('fa-times');
-            confirmList[1] = false;
+            confirmList[2] = false;
         }
     });
 
     $("#address").keyup(function () {
 
         inn = String($("#address").val())
-        if (ValidateText(inn) || inn.length == 0) {
+        if (inn.length > 0) {
             $("#change_address").removeClass('fa-times').addClass('fa-check');
-            confirmList[2] = true;
+            confirmList[3] = true;
         }
         else {
             $("#change_address").removeClass('fa-check').addClass('fa-times');
-            confirmList[2] = false;
+            confirmList[3] = false;
             console.log(confirmList)
         }
     });
@@ -126,11 +144,37 @@
         inn = String($("#postalarea").val())
         if (ValidateText(inn) || inn.length == 0) {
             $("#change_postalarea").removeClass('fa-times').addClass('fa-check');
-            confirmList[3] = true;
+            confirmList[4] = true;
         }
         else {
             $("#change_postalarea").removeClass('fa-check').addClass('fa-times');
-            confirmList[3] = false;
+            confirmList[4] = false;
+        }
+    });
+
+    $("#zipcode").keyup(function () {
+
+        inn = String($("#zipcode").val())
+        if (inn.length > 0) {
+            $("#change_zipcode").removeClass('fa-times').addClass('fa-check');
+            confirmList[5] = true;
+        }
+        else {
+            $("#change_zipcode").removeClass('fa-check').addClass('fa-times');
+            confirmList[5] = false;
+        }
+    });
+
+    $("#password").keyup(function () {
+
+        inn = String($("#password").val())
+        if (inn.length > 0) {
+            $("#change_password").removeClass('fa-times').addClass('fa-check');
+            confirmList[6] = true;
+        }
+        else {
+            $("#change_password").removeClass('fa-check').addClass('fa-times');
+            confirmList[6] = false;
         }
     });
 
