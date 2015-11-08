@@ -33,7 +33,7 @@ En bruker har en liste over sine bestillinger, de kan også ha en handlekurvlist
 <li><del>Cleane up logging til fil (MADS)</del></li>
 <li><del>Cleane up kode, er det metoder som er ekstremt lange etc.?</del></li>
 <li>Gjøre ferdig bildeopplasteren</li>
-<li>Inputvalidering</li>
+<li><del>Inputvalidering</del></li>
 
 
 
