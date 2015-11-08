@@ -47,7 +47,7 @@ namespace nettButikkpls.Controllers
             bool OK = _customerBLL.saveCustomer(inCustomer);
             if (OK)
             {
-                return RedirectToAction("List");
+                return RedirectToAction("ListProducts", "Product");
             }
             return View();
         }
