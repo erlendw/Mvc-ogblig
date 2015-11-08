@@ -32,18 +32,21 @@ namespace nettButikkpls.Controllers
             int quantity = Int32.Parse(Quantity);
             //Debug.Print("ProduID: " + productid + "Quantity: " + quantity);
             //HttpContext context = HttpContext.Current;
-
+            var db = new OrderLogic();
             if (Session["Cart"] == null)
             {
                 Cart cart = new Cart();
                 List<int> pIds = new List<int>();
+                List<Product> products = new List<Product>();
                 //Debug.Print("Cart.CustomerID: " + cart.customerid);
                 Session["Cart"] = cart;
                 for (int i = 0; i < quantity; i++)
                 {
                     pIds.Add(productid);
+                    products.Add(db.FindProduct(productid));
                 }
                 cart.productids = pIds;
+                cart.products = products;
                 Session["Cart"] = cart;
                 Debug.Print("Cart:" + cart.productids.ToString());
 
@@ -52,11 +55,14 @@ namespace nettButikkpls.Controllers
             {
                 Cart cart = (Cart)Session["Cart"];
                 List<int> pIds = new List<int>();
+                List<Product> products = new List<Product>();
                 for (int i = 0; i < quantity; i++)
                 {
                     pIds.Add(productid);
+                    products.Add(db.FindProduct(productid));
                 }
                 cart.productids.AddRange(pIds);
+                cart.products.AddRange(products);
                 Session["Cart"] = cart;
                 Debug.Print("Cart:" + cart.productids.ToString());
 
@@ -75,11 +81,13 @@ namespace nettButikkpls.Controllers
             Customer c = (Customer)HttpContext.Session["CurrentUser"];
             if (c == null)
             {
+                Cart cart = (Cart)HttpContext.Session["Cart"];
                 //If-statement for EnhetsTesting
                 if (Session["CurrentUser"] != null)
-                    return View();
+                    return View(cart);
                 return RedirectToAction("ListProducts", "Product");
             }
+
             return View();
         }
 

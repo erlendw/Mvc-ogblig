@@ -11,7 +11,7 @@ namespace nettButikkpls.Models
     {
         public int customerid { get; set; }
         public List<int> productids { get; set; }
-
+        public List<Product> products { get; set; }
         public string ToString()
         {
             string print = "CART: Customer ID: " + customerid;
