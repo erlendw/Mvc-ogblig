@@ -95,7 +95,7 @@ namespace nettButikkpls.Controllers
         [HttpGet]
         public ActionResult EditCustomer(int? id)
         {
-            if (AccessOk())
+            if (AccessOk()) 
             {
                 if (id == null)
                 {

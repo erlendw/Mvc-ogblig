@@ -84,18 +84,6 @@
     <Compile Include="IOrderRepo.cs" />
     <Compile Include="IProductRepo.cs" />
     <Compile Include="LogDAL.cs" />
-    <Compile Include="Migrations\201511030949363_InitialCreate.cs" />
-    <Compile Include="Migrations\201511030949363_InitialCreate.Designer.cs">
-      <DependentUpon>201511030949363_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511031351218_test.cs" />
-    <Compile Include="Migrations\201511031351218_test.Designer.cs">
-      <DependentUpon>201511031351218_test.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511061215521_test1.cs" />
-    <Compile Include="Migrations\201511061215521_test1.Designer.cs">
-      <DependentUpon>201511061215521_test1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OrderRepoStub.cs" />
     <Compile Include="OrderRepo.cs" />
@@ -113,17 +101,6 @@
       <Project>{5c098928-4dca-4110-9e83-24e538e8443a}</Project>
       <Name>Models</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201511030949363_InitialCreate.resx">
-      <DependentUpon>201511030949363_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511031351218_test.resx">
-      <DependentUpon>201511031351218_test.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511061215521_test1.resx">
-      <DependentUpon>201511061215521_test1.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
