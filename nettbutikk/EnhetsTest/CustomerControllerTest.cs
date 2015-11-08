@@ -91,7 +91,7 @@ namespace EnhetsTest
 
             //Assert
             Assert.AreEqual(result.RouteName, "");
-            Assert.AreEqual(result.RouteValues.Values.First(), "List");
+            Assert.AreEqual(result.RouteValues.Values.First(), "ListProducts", "Product");
         }
         [TestMethod]
         public void Reg_Fail_Post()
