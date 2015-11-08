@@ -31,8 +31,11 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "ListProducts", "Product")</li>
-                    <li>@Html.ActionLink("Register customer", "Reg", "Customer")</li>
 
+                    @if ((nettButikkpls.Models.Customer)HttpContext.Current.Session["CurrentUser"] == null)
+                    {
+                        <li>@Html.ActionLink("Log in", "Login", "Customer")</li>
+                    }
 
                     @if ((nettButikkpls.Models.Customer)HttpContext.Current.Session["CurrentUser"] == null)
                     {

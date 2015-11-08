@@ -12,6 +12,7 @@
         <div class="container">
 
 
+            <div>
 
             <div class="spacer"></div>
 
@@ -25,9 +26,13 @@
                         <th>Productname</th>
                         <th>Price</th>
                         <th>Category</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
                     </tr>
                 </thead>
                 <tbody>
+
+                    @{float sum = new int();}
 
                     @for (int i = 0; i < Model.count.Count; i++)
                     {
@@ -39,12 +44,22 @@
                             <td>@Model.products[i].productname</td>
                             <td>$@Model.products[i].price</td>
                             <td>@Model.products[i].category</td>
+                            <td>@Model.count[i]</td>
+                            <td>$@(Model.count[i]*Model.products[i].price)</td>
+
+                            @{ sum += (Model.count[i] * Model.products[i].price);}
+                            
                         </tr>
 
-                    }
+                                }
 
                 </tbody>
             </table>
+
+            <p class="spacer">SUM : @sum</p>
+
+                </div>
+
 
             <div class="col-md-6 col-md-offset-3">
 
