@@ -40,11 +40,8 @@ namespace nettButikkpls.Controllers
                 for (int i = 0; i < quantity; i++)
                 {
                     pIds.Add(productid);
-                    products.Add(db.FindProduct(productid));
                 }
                 cart.productids = pIds;
-                cart.products = products;
-                Debug.Print("PRoductek " + cart.products[0].productname);
                 Session["Cart"] = cart;
                 Debug.Print("Cart:" + cart.productids.ToString());
 
@@ -57,10 +54,8 @@ namespace nettButikkpls.Controllers
                 for (int i = 0; i < quantity; i++)
                 {
                     pIds.Add(productid);
-                    products.Add(db.FindProduct(productid));
                 }
                 cart.productids.AddRange(pIds);
-                cart.products.AddRange(products);
                 Session["Cart"] = cart;
                 Debug.Print("Cart:" + cart.productids.ToString());
 
@@ -71,6 +66,8 @@ namespace nettButikkpls.Controllers
         {
             Customer c = (Customer)HttpContext.Session["CurrentUser"];
             Cart cart = (Cart)HttpContext.Session["Cart"];
+            var db = new OrderLogic();
+            cart = db.FormatCart(cart);
             if (c == null)
             {
                 //If-statement for EnhetsTesting
