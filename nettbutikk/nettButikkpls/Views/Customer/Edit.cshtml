@@ -8,15 +8,15 @@
 
             <h2 class="form-signin-heading">Update your contact information</h2>
 
-            <form class="form-horizontal" action="/Customer/UpdateCustomer" method="post">
+            <form class="form-horizontal" action="/Customer/UpdateCustomer" method="post" onsubmit="return isValid()">
                 
                 <div class="form-group col-sm-10">
-                    
+
                     <div class="input-group">
-                        
+
                         <input id="email" type="text" class="form-control" placeholder="@customer.email" name="Mail">
-                        <span class="input-group-addon"><i  id="change_email" class="fa fa-check fa-fw"></i></span>
-                    
+                        <span class="input-group-addon"><i id="change_email" class="fa fa-check fa-fw"></i></span>
+
                     </div>
                 </div>
                 
@@ -71,14 +71,18 @@
 
 <script>
 
+    var confirmList = [true, true, true, true]
+
     $("#email").keyup(function () {
 
         inn = String($("#email").val())
         if (ValidateEmail(inn) || inn.length == 0){
             $("#change_email").removeClass('fa-times').addClass('fa-check');
+            confirmList[0] = true;
         }
         else {
             $("#change_email").removeClass('fa-check').addClass('fa-times');
+            confirmList[0] = false;
         }
     });
 
@@ -87,9 +91,11 @@
         inn = String($("#firstname").val())
         if (ValidateText(inn) || inn.length == 0) {
             $("#change_firstname").removeClass('fa-times').addClass('fa-check');
+            confirmList[1] = true;
         }
         else {
             $("#change_firstname").removeClass('fa-check').addClass('fa-times');
+            confirmList[1] = false;
         }
     });
 
@@ -98,9 +104,12 @@
         inn = String($("#lastname").val())
         if (ValidateText(inn) || inn.length == 0) {
             $("#change_lastname").removeClass('fa-times').addClass('fa-check');
+            confirmList[2] = true;
         }
         else {
             $("#change_lastname").removeClass('fa-check').addClass('fa-times');
+            confirmList[2] = false;
+            console.log(confirmList)
         }
     });
 
@@ -109,11 +118,34 @@
         inn = String($("#address").val())
         if (ValidateText(inn) || inn.length == 0) {
             $("#change_address").removeClass('fa-times').addClass('fa-check');
+            confirmList[3] = true;
         }
         else {
             $("#change_address").removeClass('fa-check').addClass('fa-times');
+            confirmList[3] = false;
         }
     });
+
+    function isValid() {
+
+        canSubmit = true
+
+        for (i in confirmList) {
+
+            if (confirmList[i] == false) {
+
+                canSubmit = false
+                break
+
+            }
+
+        }
+
+        return canSubmit
+
+        
+
+    }
 
 
 </script>

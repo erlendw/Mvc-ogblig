@@ -11,7 +11,6 @@ namespace nettbutikkpls.Models
     {
         public int LogID { get; set; }
         public string EventType { get; set; }
-        //public nettButikkpls.DAL.Customers ChangedBy{get;set;}
         public string ChangedBy { get; set; }
         public string OriginalValue { get; set; }
         public string NewValue { get; set; }

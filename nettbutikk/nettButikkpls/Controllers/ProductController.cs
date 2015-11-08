@@ -47,7 +47,7 @@ namespace nettButikkpls.Controllers
 
             Product p = FindProduct( (int) id );
             return View(p);
-            }
+                }
         }
 
         [HttpPost]

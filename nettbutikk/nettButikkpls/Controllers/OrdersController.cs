@@ -30,24 +30,18 @@ namespace nettButikkpls.Controllers
             Debug.Print("Quantity " + Quantity);
             int productid = Int32.Parse(Productid);
             int quantity = Int32.Parse(Quantity);
-            //Debug.Print("ProduID: " + productid + "Quantity: " + quantity);
-            //HttpContext context = HttpContext.Current;
             var db = new OrderLogic();
             if (Session["Cart"] == null)
             {
                 Cart cart = new Cart();
                 List<int> pIds = new List<int>();
                 List<Product> products = new List<Product>();
-                //Debug.Print("Cart.CustomerID: " + cart.customerid);
                 Session["Cart"] = cart;
                 for (int i = 0; i < quantity; i++)
                 {
                     pIds.Add(productid);
-                    products.Add(db.FindProduct(productid));
                 }
                 cart.productids = pIds;
-                cart.products = products;
-                Debug.Print("PRoductek " + cart.products[0].productname);
                 Session["Cart"] = cart;
                 Debug.Print("Cart:" + cart.productids.ToString());
 
@@ -60,27 +54,20 @@ namespace nettButikkpls.Controllers
                 for (int i = 0; i < quantity; i++)
                 {
                     pIds.Add(productid);
-                    products.Add(db.FindProduct(productid));
                 }
                 cart.productids.AddRange(pIds);
-                cart.products.AddRange(products);
                 Session["Cart"] = cart;
                 Debug.Print("Cart:" + cart.productids.ToString());
 
             }
         }
 
-       /* public ActionResult allOrders()
-        {
-            var db = new OrderLogic();
-            List<Order> allOrders = db.ListAllOrders();
-            return View(allOrders);
-        }*/
-
         public ActionResult addOrder()
         {
             Customer c = (Customer)HttpContext.Session["CurrentUser"];
             Cart cart = (Cart)HttpContext.Session["Cart"];
+            var db = new OrderLogic();
+            cart = db.FormatCart(cart);
             if (c == null)
             {
                 //If-statement for EnhetsTesting
@@ -103,7 +90,6 @@ namespace nettButikkpls.Controllers
             int orderid = _orderBLL.saveOrder(sum, CurrentCustomerId());
             if (orderid!=0)
             {
-                // metode(orderid); som legger inn i orderlist
                 _orderBLL.addOrderList(orderid);
                 return RedirectToAction( "OrderComplete", "Orders");
             }
@@ -111,7 +97,9 @@ namespace nettButikkpls.Controllers
         }
         public ActionResult OrderComplete()
         {
-            return View();
+            var db = new OrderLogic();
+            Cart tiss = db.FormatCart((Cart)HttpContext.Session["Cart"]);
+            return View(tiss);
         }
         public int TotalPrice(List<int> pid)
         {
@@ -121,6 +109,12 @@ namespace nettButikkpls.Controllers
         {
             List<Order> orders = _orderBLL.ListAllOrders();
             return View(orders);
+        }
+        [HttpPost]
+        public ActionResult NullCart()
+        {
+            HttpContext.Session["Cart"] = null;
+            return RedirectToAction("ListProducts","Product");
         }
         public int CurrentCustomerId()
         {

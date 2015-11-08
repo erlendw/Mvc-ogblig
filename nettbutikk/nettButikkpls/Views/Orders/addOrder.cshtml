@@ -19,12 +19,11 @@
 
                     <form class="form-horizontal" action="/Orders/AddOrder" method="post">
                             
-                            @foreach (var cart in Model.products)
+                            @for (int i=0;i<Model.count.Count;i++)
                             {
-                                <p>@cart.productname</p><p>@cart.price</p>
+                                <p>@Model.products[i].productname</p><p>@Model.count[i]</p><p>@Model.price[i]</p>
                                 
                             }
-
 
                         <div class="form-group">
                             <div class="col-sm-10">
@@ -53,12 +52,8 @@
                             </div>
                         </div>
                     </form>
-
                 </div>
-
-
             </div>
-
         </div>
     </body>
 </html>

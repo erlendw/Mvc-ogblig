@@ -13,48 +13,151 @@
 
     <h2 class="form-signin-heading">Update customer information</h2>
 
-    <form class="form-horizontal target" action="/Admin/UpdateCustomer" method="post">
+    <form class="form-horizontal target" action="/Admin/UpdateCustomer" method="post" onsubmit="return isValid()">
 
-
-        <div class="form-group">
-            <div class="col-sm-10">
+        <div class="form-group col-sm-10">
+            <div class="input-group">
                 <input type="text" class="form-control" value="@Model.customerId" name="customerid" readonly>
+                <span class="input-group-addon"><i class="fa fa-check fa-fw"></i></span>
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-sm-10">
-                <input type="text" class="form-control" placeholder="@Model.firstname" name="firstname">
+        <div class="form-group col-sm-10">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="@Model.firstname" name="firstname" id="firstname">
+                <span class="input-group-addon"><i id="change_firstname" class="fa fa-check fa-fw"></i></span>
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-sm-10">
-                <input type="text" class="form-control" placeholder="@Model.lastname" name="lastname">
+        <div class="form-group col-sm-10">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="@Model.lastname" name="lastname" id="lastname">
+                <span class="input-group-addon"><i id="change_lastname" class="fa fa-check fa-fw"></i></span>
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-sm-10">
-                <input type="text" class="form-control" placeholder="@Model.address" name="address">
+        <div class="form-group col-sm-10" >
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="@Model.address" name="address" id="address">
+                <span class="input-group-addon"><i id="change_address" class="fa fa-check fa-fw"></i></span>
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-sm-10">
-                <input type="text" class="form-control" placeholder="@Model.postalarea" name="postalarea">
+        <div class="form-group col-sm-10">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="@Model.postalarea" name="postalarea" id="postalarea">
+                <span class="input-group-addon"><i id="change_postalarea" class="fa fa-check fa-fw"></i></span>
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-sm-10">
-                <input type="number" class="form-control" placeholder="@Model.zipcode" name="zipcode">
+        <div class="form-group col-sm-10">
+            <div class="input-group">
+                <input type="number" class="form-control" placeholder="@Model.zipcode" name="zipcode" id="zipcode">
+                <span class="input-group-addon"><i id="change_zipcode" class="fa fa-check fa-fw"></i></span>
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-10">
                 <input class="btn btn-lg btn-primary btn-block" type="submit" value="Update Information" />
+
             </div>
-        </div>
     </form>
 
 </div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/theteashop")
+
+<script>
+
+    var confirmList = [true, true, true, true, true]
+
+    $("#firstname").keyup(function () {
+
+        inn = String($("#firstname").val())
+        if (ValidateText(inn) || inn.length == 0) {
+            $("#change_firstname").removeClass('fa-times').addClass('fa-check');
+            confirmList[0] = true;
+        }
+        else {
+            $("#change_firstname").removeClass('fa-check').addClass('fa-times');
+            confirmList[0] = false;
+        }
+    });
+
+    $("#lastname").keyup(function () {
+
+        inn = String($("#lastname").val())
+        if (ValidateText(inn) || inn.length == 0) {
+            $("#change_lastname").removeClass('fa-times').addClass('fa-check');
+            confirmList[1] = true;
+        }
+        else {
+            $("#change_lastname").removeClass('fa-check').addClass('fa-times');
+            confirmList[1] = false;
+        }
+    });
+
+    $("#address").keyup(function () {
+
+        inn = String($("#address").val())
+        if (ValidateText(inn) || inn.length == 0) {
+            $("#change_address").removeClass('fa-times').addClass('fa-check');
+            confirmList[2] = true;
+        }
+        else {
+            $("#change_address").removeClass('fa-check').addClass('fa-times');
+            confirmList[2] = false;
+            console.log(confirmList)
+        }
+    });
+
+    $("#postalarea").keyup(function () {
+
+        inn = String($("#postalarea").val())
+        if (ValidateText(inn) || inn.length == 0) {
+            $("#change_postalarea").removeClass('fa-times').addClass('fa-check');
+            confirmList[3] = true;
+        }
+        else {
+            $("#change_postalarea").removeClass('fa-check').addClass('fa-times');
+            confirmList[3] = false;
+        }
+    });
+
+    $("#zipcode").keyup(function () {
+
+        inn = String($("#zipcode").val())
+        if (ValidateNumber(inn) || inn.length == 0) {
+            $("#change_zipcode").removeClass('fa-times').addClass('fa-check');
+            confirmList[4] = true;
+        }
+        else {
+            $("#change_zipcode").removeClass('fa-check').addClass('fa-times');
+            confirmList[4] = false;
+        }
+    });
+
+    function isValid() {
+
+        canSubmit = true
+
+        for (i in confirmList) {
+
+            if (confirmList[i] == false) {
+
+                canSubmit = false
+                break
+
+            }
+
+        }
+
+        return canSubmit
+
+
+
+    }
+
+
+</script>
+
 
 

@@ -17,7 +17,7 @@ En bruker har en liste over sine bestillinger, de kan også ha en handlekurvlist
 <li>lage superbruker</li>
 <li><del>logging av endringer</del></li>
 <li><del>C r u d på orders</del></li>
-<li>boyz will be boyz</li>Check
+<li><del>boyz will be boyz</del></li>
 <li><del>Administrere brukere</del></li>
 <li>Ferdigstille admin</li>
 <li>Vise innhold til shoppingcart</li>
@@ -27,11 +27,11 @@ En bruker har en liste over sine bestillinger, de kan også ha en handlekurvlist
 
 <li>Hvis log in failer, må bruker få beskjed</li>
 <li>Gi kunde beskjed om at bruker er oprettet</li>
-<li>Admin kan lage nye adminer</li>
+<li><del>Admin kan lage nye adminer</del></li>
 <li><del>Vis shopping cart</del> DONE MANGLER BARE PYNT</li>
-<li>Vise ordere i admin på en bra måte</li>
-<li>Cleane up logging til fil (MADS)</li>
-<li>Cleane up kode, er det metoder som er ekstremt lange etc.?</li>
+<li><del>Vise ordere i admin på en bra måte</del>BLE LISTING AV ORDRE PÅ GAY MÅTE I STELLA....:S</li>
+<li><del>Cleane up logging til fil (MADS)</del></li>
+<li><del>Cleane up kode, er det metoder som er ekstremt lange etc.?</del></li>
 <li>Gjøre ferdig bildeopplasteren</li>
 <li>Inputvalidering</li>
 

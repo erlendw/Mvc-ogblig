@@ -77,11 +77,9 @@ namespace nettButikkpls.DAL
                     log.ChangedTime = (DateTime.Now).ToString("yyyyMMddHHmmss");
                     log.EventType = "Create";
                     log.NewValue = newCustomerRow.ToString();
-                    Customer changedby = new Customer(); // Hva skjer her? mads Endret fra changedby = HTTPCONTEXT:CURRENT:SESSION osv til new customer, pga if-test under
-                    //Debug.Print("Navn: " + changedby.firstname);
                     if (HttpContext.Current.Session["CurrentCustomer"] != null)
                     {
-                        changedby = (Customer)HttpContext.Current.Session["CurrentCustomer"]; // ????
+                        Customer changedby = (Customer)HttpContext.Current.Session["CurrentCustomer"]; // ????
                         log.ChangedBy = changedby.firstname;
                     }
                     else
@@ -135,7 +133,6 @@ namespace nettButikkpls.DAL
         {
             try
                 {
-                    // HttpContext context = HttpContext.Current;
                     Customer c = (Customer)context.Session["CurrentUser"];
                     Customers customer = FindCustomersByEmail(c.email);
                 string originalvalue = customer.ToString();
@@ -201,7 +198,6 @@ namespace nettButikkpls.DAL
                     context.Session["CurrentUser"] = customer;
                     Debug.WriteLine("Du er nå logget inn");
                     return true;
-                    // return RedirectToAction("List");
                 }
                 else
                 {

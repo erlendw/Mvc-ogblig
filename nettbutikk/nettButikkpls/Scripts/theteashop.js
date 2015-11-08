@@ -30,3 +30,23 @@ function ValidateCVC(cvc) {
     return (false)
 }
 
+function ValidateNumber(number) {
+
+    if ((/^\d+$/.test(number))) {
+        return (true)
+    }
+    return (false)
+}
+
+
+
+
+$(document)
+.on('click', 'form button[type=submit]', function (e) {
+    var isValid = $(e.target).parents('form').isValid();
+    if (!isValid) {
+        e.preventDefault(); //prevent the default action
+    }
+});
+
+

@@ -52,7 +52,7 @@ namespace nettButikkpls.BLL
 
         public List<Order> allOrders()
         {
-            throw new NotImplementedException();
+            return _repo.allOrders();
         }
         public Product FindProduct(int productid)
         {
@@ -61,6 +61,10 @@ namespace nettButikkpls.BLL
         public int TotalPrice(List<int> pid)
         {
             return _repo.TotalPrice(pid);
+        }
+        public Cart FormatCart(Cart cart)
+        {
+            return _repo.FormatCart(cart);
         }
     }
 }

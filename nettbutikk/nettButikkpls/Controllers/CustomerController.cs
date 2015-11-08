@@ -12,7 +12,6 @@ namespace nettButikkpls.Controllers
 {
     public class CustomerController : Controller
     {
-        //NettbutikkContext bmx = new NettbutikkContext();
         private ICustomerLogic _customerBLL;
 
         public CustomerController()
@@ -34,11 +33,6 @@ namespace nettButikkpls.Controllers
         {
             return View();
         }
-        /*public ActionResult CurrentCustomer()
-        {
-            
-            return View(db.CurrentCustomerObj());
-        }*/
 
         [HttpPost]
         public ActionResult Reg(Customer inCustomer)
@@ -73,8 +67,6 @@ namespace nettButikkpls.Controllers
         }
         public Customer FindCustomerByEmail (string Email)
         {
-            
-            //List<Customer> GetAllCustomers = bmx.Customers.ToList();
             List<Customer> GetAllCustomers = _customerBLL.allCustomers();
             for (int i = 0; i < GetAllCustomers.Count; i++)
             {
