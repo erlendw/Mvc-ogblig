@@ -8,9 +8,23 @@
 
 </head>
 <body>
+   
     <div class="container">
+        
+        @if (HttpContext.Current.Session["CurrentUser"] != null)
+        {
+            nettButikkpls.Models.Customer customer = (nettButikkpls.Models.Customer)HttpContext.Current.Session["CurrentUser"];
+            nettButikkpls.Models.Cart cart = (nettButikkpls.Models.Cart)HttpContext.Current.Session["Cart"];
+            <ul class="list-group fifty">
 
-       ORDER RECIEVED MADDAFAKKA
+                <h1> Dear @customer.firstname here are your order details: </h1>
+                <li class="list-group-item active">
+                    <h2>HEIHEI </h2>
+                </li>
+            </ul>
+        }
+        
+        
 
     </div>
 </body>
