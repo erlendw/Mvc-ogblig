@@ -19,5 +19,6 @@ namespace nettButikkpls.BLL
         Customer FindCustomer(int customerid);
         bool UpdateCustomer(FormCollection inList, int customerid);
         Customer CurrentCustomer();
+        void NullCustomer();
     }
 }

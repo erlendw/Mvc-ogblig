@@ -81,5 +81,9 @@ namespace nettButikkpls.BLL
         {
             return _repo.CurrentCustomer();
         }
+        public void NullCustomer()
+        {
+            _repo.NullCustomer();
+        }
     }
 }

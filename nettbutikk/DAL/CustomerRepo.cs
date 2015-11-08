@@ -367,5 +367,9 @@ namespace nettButikkpls.DAL
                 }
             }
         }
+        public void NullCustomer()
+        {
+            context.Session["CurrentUser"] = null; 
+        }
     }
 } 

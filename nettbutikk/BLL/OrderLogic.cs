@@ -23,22 +23,22 @@ namespace nettButikkpls.BLL
         }
         public void addToCart(int productid, int quantity)
         {
-            
+
             _repo.addToCart(productid, quantity);
         }
         public bool addOrderList(int orderid)
         {
-            
+
             return _repo.addOrderList(orderid);
         }
         public int saveOrder(float price, int customerid)
         {
-            
+
             return _repo.saveOrder(price, customerid);
         }
         public List<Order> ListAllOrders()
         {
-            
+
             return _repo.ListAllOrders();
         }
         public List<OrderList> AllOrderLists()

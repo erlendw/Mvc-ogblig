@@ -25,7 +25,6 @@ namespace nettButikkpls.DAL
                      price = p.Price,
                     category = p.Category,
                     description = p.Description,
-                    //imagestring = "TEST"
                 }).ToList();
                     return allProducts;
                 }
@@ -48,7 +47,8 @@ namespace nettButikkpls.DAL
                     newProductRow.Productname = inProduct.productname;
                     newProductRow.Description = inProduct.description;
                     newProductRow.Price = inProduct.price;
-                    newProductRow.Category = inProduct.category;      
+                    newProductRow.Category = inProduct.category;
+               
                     db.Products.Add(newProductRow);
                     db.SaveChanges();
 
@@ -86,8 +86,6 @@ namespace nettButikkpls.DAL
                 {
                     HttpPostedFileBase file = innFiler[FileName];
 
-
-
                     var _FileName = Path.GetFileName(file.FileName);
                     
 
@@ -101,7 +99,7 @@ namespace nettButikkpls.DAL
             }
             catch (Exception e)
             {
-                SaveToErrorLog(e.ToString());
+                SaveToErrorLog(e + " was catched at SaveImagesToServer()");
                 return false;
             }
             

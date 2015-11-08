@@ -112,6 +112,10 @@ namespace nettButikkpls.Controllers
         {
             return _customerBLL.CurrentCustomerId();
         }
+        public void NullUser()
+        {
+            _customerBLL.NullCustomer();
+        }
     }
 
 }
