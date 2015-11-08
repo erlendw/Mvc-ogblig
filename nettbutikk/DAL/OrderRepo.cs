@@ -138,8 +138,9 @@ namespace nettButikkpls.DAL
                     newOrderRow.CustomerId = customerid;
                     newOrderRow.TimeStamp = timeStamp;
                     newOrderRow.SumTotal = price;
-                    db.Orders.Add(newOrderRow);
+                    db.Orders.Add(newOrderRow);  
                     db.SaveChanges();
+                    var lastOrderId = newOrderRow.OrderId;
                     //Start save to Log
                     nettbutikkpls.Models.Log log = new nettbutikkpls.Models.Log();
                     log.ChangedTime = timeStamp;
@@ -154,9 +155,7 @@ namespace nettButikkpls.DAL
                     {
                         log.ChangedBy = "null";
                     }
-                    SaveToLog(log.toString());
-                    List<Orders> GetAllOrders = db.Orders.ToList();
-                    return GetAllOrders.Count;
+                    return lastOrderId;
                 }
                 catch (Exception e)
                 {

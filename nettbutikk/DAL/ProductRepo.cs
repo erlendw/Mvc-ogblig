@@ -22,9 +22,10 @@ namespace nettButikkpls.DAL
                 {
                     productid = p.ProductId,
                     productname = p.Productname,
-                    price = p.Price,
+                     price = p.Price,
                     category = p.Category,
-                    description = p.Description
+                    description = p.Description,
+                    imagestring = "TEST"
                 }).ToList();
                     return allProducts;
                 }
@@ -89,7 +90,10 @@ namespace nettButikkpls.DAL
 
 
                     var _FileName = Path.GetFileName(file.FileName);
+                    
+
                     var _Path = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/Images"), _FileName);
+                   
 
                     file.SaveAs(_Path);
                     return true;
