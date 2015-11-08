@@ -47,7 +47,7 @@ namespace nettButikkpls.Controllers
             bool OK = _customerBLL.saveCustomer(inCustomer);
             if (OK)
             {
-                return RedirectToAction("List");
+                return RedirectToAction("Login");
             }
             return View();
         }
@@ -67,9 +67,9 @@ namespace nettButikkpls.Controllers
             bool OK = _customerBLL.EditCustomer(inList);
             if(OK)
             {
-                return RedirectToAction("List");
+                return RedirectToAction("UserProfile");
             }
-            return RedirectToAction("List");
+            return RedirectToAction("UserProfile");
         }
         public Customer FindCustomerByEmail (string Email)
         {

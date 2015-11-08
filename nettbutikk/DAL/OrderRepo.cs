@@ -45,7 +45,7 @@ namespace nettButikkpls.DAL
                         customerid = c.CustomerId;
                         cart.customerid = customerid;
                     }
-                    // Debug.Print("Cart.CustomerID: " + cart.customerid);
+                    // Debug.Print("Cart.CustomerID: " + cart.customeri     d);
                     context.Session["Cart"] = cart;
                     for (int i = 0; i <= quantity; i++)
                     {

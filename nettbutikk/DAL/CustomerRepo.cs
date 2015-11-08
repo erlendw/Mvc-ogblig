@@ -77,11 +77,11 @@ namespace nettButikkpls.DAL
                     log.ChangedTime = (DateTime.Now).ToString("yyyyMMddHHmmss");
                     log.EventType = "Create";
                     log.NewValue = newCustomerRow.ToString();
-                    Customer changedby = (Customer)HttpContext.Current.Session["CurrentCustomer"]; ;
-                    Debug.Print("Navn: " + changedby.firstname);
+                    Customer changedby = new Customer(); // Hva skjer her? mads Endret fra changedby = HTTPCONTEXT:CURRENT:SESSION osv til new customer, pga if-test under
+                    //Debug.Print("Navn: " + changedby.firstname);
                     if (HttpContext.Current.Session["CurrentCustomer"] != null)
                     {
-                        changedby = (Customer)HttpContext.Current.Session["CurrentCustomer"];
+                        changedby = (Customer)HttpContext.Current.Session["CurrentCustomer"]; // ????
                         log.ChangedBy = changedby.firstname;
                     }
                     else
