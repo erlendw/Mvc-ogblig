@@ -91,6 +91,9 @@ namespace nettButikkpls.Controllers
         }
         public ActionResult OrderComplete()
         {
+            //If-statement for EnhetsTest
+            if (HttpContext.Session["Cart"] == null)
+                HttpContext.Session["Cart"] = (Cart)Session["Cart"];
             Cart c = _orderBLL.FormatCart((Cart)HttpContext.Session["Cart"]);
             return View(c);
         }

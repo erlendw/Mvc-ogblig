@@ -86,7 +86,8 @@ namespace nettButikkpls.DAL
 
         public Cart FormatCart(Cart cart)
         {
-            throw new NotImplementedException();
+            Cart c = new Cart();
+            return c;
         }
     }
 }
