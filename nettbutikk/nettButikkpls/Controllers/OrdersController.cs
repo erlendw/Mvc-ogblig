@@ -97,7 +97,9 @@ namespace nettButikkpls.Controllers
         }
         public ActionResult OrderComplete()
         {
-            return View();
+            var db = new OrderLogic();
+            Cart tiss = db.FormatCart((Cart)HttpContext.Session["Cart"]);
+            return View(tiss);
         }
         public int TotalPrice(List<int> pid)
         {
@@ -107,6 +109,12 @@ namespace nettButikkpls.Controllers
         {
             List<Order> orders = _orderBLL.ListAllOrders();
             return View(orders);
+        }
+        [HttpPost]
+        public ActionResult NullCart()
+        {
+            HttpContext.Session["Cart"] = null;
+            return RedirectToAction("ListProducts","Product");
         }
         public int CurrentCustomerId()
         {
