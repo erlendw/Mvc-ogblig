@@ -109,6 +109,9 @@ namespace nettButikkpls.Controllers
         [HttpPost]
         public ActionResult NullCart()
         {
+            //If-statement for EnhetsTest
+            if (HttpContext.Session["Cart"] == null)
+                HttpContext.Session["Cart"] = (Cart)Session["Cart"];
             HttpContext.Session["Cart"] = null;
             return RedirectToAction("ListProducts","Product");
         }

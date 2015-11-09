@@ -155,6 +155,10 @@ namespace EnhetsTest
         {
             //Arrange
             var controller = new OrdersController(new OrderLogic(new OrderRepoStub()));
+            var SessionMock = new TestControllerBuilder();
+            Cart c = new Cart();
+            SessionMock.InitializeController(controller);
+            controller.Session["Cart"] = c;
             //Act
             var result = (RedirectToRouteResult)controller.NullCart();
             //Assert

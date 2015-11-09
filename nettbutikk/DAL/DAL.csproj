@@ -84,6 +84,10 @@
     <Compile Include="IOrderRepo.cs" />
     <Compile Include="IProductRepo.cs" />
     <Compile Include="LogDAL.cs" />
+    <Compile Include="Migrations\201511082324322_Initial.cs" />
+    <Compile Include="Migrations\201511082324322_Initial.Designer.cs">
+      <DependentUpon>201511082324322_Initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OrderRepoStub.cs" />
     <Compile Include="OrderRepo.cs" />
@@ -101,6 +105,11 @@
       <Project>{5c098928-4dca-4110-9e83-24e538e8443a}</Project>
       <Name>Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201511082324322_Initial.resx">
+      <DependentUpon>201511082324322_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
